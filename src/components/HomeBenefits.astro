@@ -1,0 +1,76 @@
+---
+import type { Benefit } from "../data/site";
+
+interface Props {
+	items: Benefit[];
+}
+
+const { items } = Astro.props;
+---
+
+<section class="section" id="services">
+	<div class="container">
+		<h2>Discover Your Path with Awaken Discovery</h2>
+		<p class="section-lead">
+			Specialising in self-discovery, awareness and empowerment, therapy is tailored to help you
+			reclaim control of your life and rediscover your authentic self.
+		</p>
+		<div class="benefits-grid">
+			{
+				items.map((benefit) => (
+					<article class="benefit-card">
+						<h3>{benefit.title}</h3>
+						<p>{benefit.body}</p>
+					</article>
+				))
+			}
+		</div>
+	</div>
+</section>
+
+<style>
+	h2 {
+		margin: 0;
+		font-family: var(--font-serif);
+		font-size: clamp(1.5rem, 3vw, 2.15rem);
+		font-weight: 500;
+		line-height: 1.2;
+	}
+
+	.section-lead {
+		max-width: 75ch;
+		margin: 1rem 0 0;
+	}
+
+	.benefits-grid {
+		display: grid;
+		gap: 1rem;
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+		margin-top: 1.5rem;
+	}
+
+	.benefit-card {
+		padding: 1.2rem;
+		background: var(--color-white-smoke);
+		border-radius: 0.7rem;
+	}
+
+	.benefit-card h3 {
+		margin: 0;
+		font-family: var(--font-body);
+		font-size: 1rem;
+		font-weight: 700;
+		text-transform: capitalize;
+	}
+
+	.benefit-card p {
+		margin: 0.65rem 0 0;
+		font-size: 0.95rem;
+	}
+
+	@media (max-width: 1024px) {
+		.benefits-grid {
+			grid-template-columns: 1fr;
+		}
+	}
+</style>

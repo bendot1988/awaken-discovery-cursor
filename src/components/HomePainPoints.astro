@@ -1,0 +1,60 @@
+---
+interface Props {
+	items: string[];
+}
+
+const { items } = Astro.props;
+---
+
+<section class="section section-soft">
+	<div class="container">
+		<h2 class="script-title">Feeling overwhelmed by daily challenges?</h2>
+		<div class="question-grid">
+			{
+				items.map((item) => (
+					<article class="question-card">
+						<p>{item}</p>
+					</article>
+				))
+			}
+		</div>
+	</div>
+</section>
+
+<style>
+	.script-title {
+		margin: 0;
+		text-align: center;
+		color: var(--color-dark-slate-gray);
+		font-family: var(--font-script);
+		font-size: clamp(2.35rem, 8vw, 5rem);
+		line-height: 1;
+		font-weight: 400;
+	}
+
+	.question-grid {
+		display: grid;
+		gap: 1rem;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		margin-top: 1.5rem;
+	}
+
+	.question-card {
+		padding: 1.2rem;
+		background: var(--color-white);
+		border-left: 4px solid var(--color-dark-slate-gray);
+		border-radius: 0.5rem;
+		box-shadow: 0 8px 22px rgb(0 0 0 / 5%);
+	}
+
+	.question-card p {
+		margin: 0;
+		font-size: 1rem;
+	}
+
+	@media (max-width: 700px) {
+		.question-grid {
+			grid-template-columns: 1fr;
+		}
+	}
+</style>

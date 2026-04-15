@@ -1,0 +1,26 @@
+---
+import HomeBenefits from "../components/HomeBenefits.astro";
+import HomeContact from "../components/HomeContact.astro";
+import HomeHero from "../components/HomeHero.astro";
+import HomePainPoints from "../components/HomePainPoints.astro";
+import HomeQuote from "../components/HomeQuote.astro";
+import SiteFooter from "../components/SiteFooter.astro";
+import SiteHeader from "../components/SiteHeader.astro";
+import { benefits, locations, navItems, painPoints } from "../data/site";
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout
+	title="Awaken Discovery | Counselling and Psychotherapy"
+	description="Counselling and psychotherapy practitioner in Market Weighton, East Yorkshire."
+>
+	<SiteHeader navItems={navItems} />
+	<main>
+		<HomeHero />
+		<HomePainPoints items={painPoints} />
+		<HomeBenefits items={benefits} />
+		<HomeQuote />
+		<HomeContact />
+	</main>
+	<SiteFooter navItems={navItems} locations={locations} />
+</Layout>

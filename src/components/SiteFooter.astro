@@ -1,0 +1,132 @@
+---
+import type { NavItem } from "../data/site";
+
+interface Props {
+	navItems: NavItem[];
+	locations: string[];
+}
+
+const { navItems, locations } = Astro.props;
+---
+
+<footer class="site-footer">
+	<div class="container footer-main">
+		<a href="#" class="footer-brand">
+			<img src="/assets/logos/awaken-discovery-logo.png" alt="Awaken Discovery logo" />
+		</a>
+
+		<div class="footer-nav-wrap">
+			<ul class="footer-nav">
+				{
+					navItems.map((item) => (
+						<li><a href={item.href}>{item.label}</a></li>
+					))
+				}
+			</ul>
+			<ul class="footer-nav">
+				{
+					navItems.map((item) => (
+						<li><a href={item.href}>{item.label}</a></li>
+					))
+				}
+			</ul>
+		</div>
+
+		<section class="locations">
+			<h3>Find a Therapist Near You - Locations We Cover</h3>
+			<ul>
+				{
+					locations.map((location) => (
+						<li>{location}</li>
+					))
+				}
+			</ul>
+		</section>
+	</div>
+
+	<div class="footer-legal">
+		<div class="container legal-row">
+			<p>Privacy Policy | Terms & Conditions</p>
+			<p>All rights reserved. Web Design by dotwall</p>
+		</div>
+	</div>
+</footer>
+
+<style>
+	.site-footer {
+		background: var(--color-dark-gray);
+		color: var(--color-white);
+	}
+
+	.footer-main {
+		padding: 3rem 0 2rem;
+	}
+
+	.footer-brand img {
+		width: min(280px, 60vw);
+	}
+
+	.footer-nav-wrap {
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: 1rem;
+		margin-top: 1.5rem;
+	}
+
+	.footer-nav {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.55rem 1rem;
+		margin: 0;
+		padding: 0;
+		list-style: none;
+	}
+
+	.footer-nav a {
+		font-size: 0.82rem;
+		opacity: 0.94;
+	}
+
+	.locations {
+		margin-top: 2rem;
+		padding-top: 1.5rem;
+		border-top: 1px solid rgb(255 255 255 / 25%);
+	}
+
+	.locations h3 {
+		margin: 0;
+		font-size: 1rem;
+		font-weight: 500;
+	}
+
+	.locations ul {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.45rem 1.1rem;
+		margin: 1rem 0 0;
+		padding: 0;
+		list-style: none;
+	}
+
+	.locations li {
+		font-size: 0.86rem;
+	}
+
+	.footer-legal {
+		border-top: 1px solid rgb(255 255 255 / 20%);
+		padding-block: 0.75rem;
+	}
+
+	.legal-row {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.5rem 1rem;
+		justify-content: space-between;
+	}
+
+	.legal-row p {
+		margin: 0;
+		font-size: 0.78rem;
+		opacity: 0.92;
+	}
+</style>
