@@ -1,20 +1,27 @@
 <section class="hero section">
-	<div class="container hero-shell">
-		<p class="eyebrow">Transition Expert Support</p>
-		<h1>Expert Counselling for Life Transitions &amp; Career Burnout</h1>
-		<p class="subheadline">
-			Helping long-term professionals navigate the anxiety of midlife, rediscover their identity,
-			and find the courage for their "Great Escape."
-		</p>
-		<p class="body-copy">
-			You've spent decades building a career, but now you feel lost in the life you created.
-			Whether you need professional support for burnout or a soulful guide to help you transition
-			into your next chapter, I provide the clinical expertise and real-world experience to help
-			you bridge the gap between where you are and where you're meant to be.
-		</p>
-		<div class="cta-row">
-			<a class="cta hero-primary" href="#contact">Book a Discovery Call</a>
-			<a class="cta hero-ghost" href="#contact">Get the "Career Transition" Roadmap</a>
+	<div class="container hero-grid">
+		<div class="hero-shell">
+			<p class="eyebrow">Transition Expert Support</p>
+			<h1>Expert Counselling for Life Transitions &amp; Career Burnout</h1>
+			<p class="subheadline">
+				Helping long-term professionals navigate the anxiety of midlife, rediscover their
+				identity, and find the courage for their "Great Escape."
+			</p>
+			<ul class="body-points">
+				<li>Clinical support for burnout, anxiety, and major life transitions.</li>
+				<li>Identity-focused work for professionals who feel lost in success.</li>
+				<li>Practical and soulful guidance to bridge where you are and where you are meant to be.</li>
+			</ul>
+			<div class="cta-row">
+				<a class="cta hero-primary" href="#contact">Book a Discovery Call</a>
+				<div class="freebie-wrap">
+					<span class="freebie-pointer">Start here -&gt;</span>
+					<a class="cta hero-ghost cta-freebie" href="#contact">Get the "Career Transition" Roadmap</a>
+				</div>
+			</div>
+		</div>
+		<div class="hero-media">
+			<img src="/assets/images/hero-ally.jpeg" alt="Therapist portrait in a calm setting" />
 		</div>
 	</div>
 </section>
@@ -23,25 +30,25 @@
 	.hero {
 		--earth-tone: #b59a7a;
 		--earth-tone-deep: #9d8467;
-		padding-block: clamp(6rem, 14vh, 9.5rem);
-		min-height: 74vh;
-		background-image:
-			linear-gradient(90deg, rgb(255 255 255 / 95%) 0%, rgb(255 255 255 / 92%) 52%, rgb(255 255 255 / 72%) 100%),
-			url("/assets/images/hero-ally.jpeg");
-		background-size: cover;
-		background-position: center right;
-		display: flex;
+		padding-block: clamp(4.8rem, 11vh, 8rem);
+		background: linear-gradient(180deg, var(--color-white) 0%, #fafafa 100%);
+	}
+
+	.hero-grid {
+		display: grid;
+		grid-template-columns: 1.05fr 0.95fr;
+		gap: clamp(2rem, 4vw, 4rem);
 		align-items: center;
 	}
 
 	.hero-shell {
-		max-width: 760px;
+		max-width: 690px;
 	}
 
 	h1 {
 		margin: 0.7rem 0 1rem;
 		font-family: var(--font-serif);
-		font-size: clamp(2rem, 5.2vw, 3.8rem);
+		font-size: clamp(2rem, 4.9vw, 3.5rem);
 		font-weight: 500;
 		line-height: 1.12;
 		letter-spacing: 0.01em;
@@ -62,23 +69,30 @@
 		font-family: var(--font-body);
 		font-size: clamp(1.05rem, 2.4vw, 1.35rem);
 		font-weight: 400;
-		line-height: 1.65;
+		line-height: 1.7;
 		max-width: 62ch;
 	}
 
-	.body-copy {
-		max-width: 64ch;
-		margin: 1.15rem 0 0;
-		font-size: 1.02rem;
-		line-height: 1.95;
+	.body-points {
+		margin: 1.2rem 0 0;
+		padding-left: 1.1rem;
+		max-width: 62ch;
+		display: grid;
+		gap: 0.55rem;
+	}
+
+	.body-points li {
+		font-size: 1rem;
+		line-height: 1.7;
 		color: rgb(29 35 39 / 90%);
 	}
 
 	.cta-row {
 		display: flex;
 		flex-wrap: wrap;
-		gap: 0.85rem;
+		gap: 0.9rem 1.1rem;
 		margin-top: 2rem;
+		align-items: end;
 	}
 
 	.hero-primary {
@@ -101,15 +115,73 @@
 		transition: background-color 0.2s ease, color 0.2s ease;
 	}
 
+	.freebie-wrap {
+		display: grid;
+		gap: 0.35rem;
+	}
+
+	.freebie-pointer {
+		font-size: 0.78rem;
+		font-weight: 600;
+		letter-spacing: 0.03em;
+		text-transform: uppercase;
+		color: var(--earth-tone-deep);
+	}
+
+	.cta-freebie {
+		position: relative;
+		overflow: hidden;
+		border-color: var(--earth-tone-deep);
+	}
+
+	.cta-freebie::before {
+		content: "";
+		position: absolute;
+		inset: -30% auto -30% -45%;
+		width: 34%;
+		background: linear-gradient(90deg, transparent, rgb(181 154 122 / 30%), transparent);
+		transform: skewX(-20deg);
+		animation: shimmer 2.8s ease-in-out infinite;
+	}
+
 	.hero-ghost:hover,
 	.hero-ghost:focus-visible {
 		background: rgb(255 255 255 / 70%);
 	}
 
+	.hero-media img {
+		width: 100%;
+		aspect-ratio: 4 / 5;
+		object-fit: cover;
+		border-radius: 1rem;
+		box-shadow: 0 14px 35px rgb(29 35 39 / 14%);
+	}
+
+	@keyframes shimmer {
+		0% {
+			left: -45%;
+		}
+		65% {
+			left: 130%;
+		}
+		100% {
+			left: 130%;
+		}
+	}
+
 	@media (max-width: 1024px) {
-		.hero {
-			min-height: auto;
-			background-position: center;
+		.hero-grid {
+			grid-template-columns: 1fr;
+		}
+
+		.hero-media {
+			order: -1;
+		}
+	}
+
+	@media (max-width: 700px) {
+		.body-points {
+			padding-left: 1rem;
 		}
 	}
 </style>
