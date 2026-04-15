@@ -1,0 +1,22 @@
+<svg width="1200" height="900" viewBox="0 0 1200 900" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">Placeholder image</title>
+  <desc id="desc">Placeholder for internal struggle section image.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#eef5f1" />
+      <stop offset="100%" stop-color="#d7e7df" />
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="900" fill="url(#bg)" />
+  <g fill="none" stroke="#005e47" stroke-opacity="0.25">
+    <path d="M80 760 C 280 520, 520 580, 760 420 C 900 330, 1050 300, 1140 200" stroke-width="5" />
+    <path d="M80 820 C 320 640, 520 690, 760 560 C 930 470, 1040 430, 1140 340" stroke-width="3" />
+  </g>
+  <rect x="150" y="120" width="900" height="660" rx="18" fill="#ffffff" fill-opacity="0.78" />
+  <text x="600" y="430" text-anchor="middle" fill="#005e47" font-family="Poppins, Arial, sans-serif" font-size="44" font-weight="500">
+    Add section image here
+  </text>
+  <text x="600" y="485" text-anchor="middle" fill="#1d2327" font-family="Poppins, Arial, sans-serif" font-size="28">
+    e.g. calm office, horizon, or reflective portrait
+  </text>
+</svg>

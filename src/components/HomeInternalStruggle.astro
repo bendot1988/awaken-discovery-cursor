@@ -1,0 +1,153 @@
+<section class="section section-soft internal-struggle">
+	<div class="container struggle-grid">
+		<div class="struggle-copy">
+			<p class="section-kicker">The Internal Struggle</p>
+			<h2>The weight of a 20-year career shouldn't feel this heavy.</h2>
+			<p class="narrative">
+				You've spent decades building a life, but lately, the "success" feels like a cage.
+				You're not just tired; you're questioning who you are without the job title.
+			</p>
+
+			<div class="objections">
+				<p class="objections-title">Common questions we help you work through:</p>
+				<ul>
+					<li>"Is it too late for me to change?"</li>
+					<li>"Am I just ungrateful for a good job?"</li>
+					<li>"Will I lose everything if I pivot?"</li>
+				</ul>
+			</div>
+		</div>
+
+		<div class="struggle-media">
+			<img
+				src="/assets/images/internal-struggle-placeholder.svg"
+				alt="Placeholder image for internal struggle section"
+			/>
+		</div>
+	</div>
+
+	<div class="container pain-grid-wrap">
+		<h3>The pain points we address</h3>
+		<div class="pain-grid">
+			<article class="pain-card">
+				<p class="pain-title">The Burnout (General Therapy)</p>
+				<p>✕ Constant dread, "Sunday Scaries," and physical exhaustion that sleep won't fix.</p>
+			</article>
+			<article class="pain-card">
+				<p class="pain-title">The Identity Crisis (Specialised)</p>
+				<p>✕ Feeling like a ghost in your own life because your career no longer fits your soul.</p>
+			</article>
+			<article class="pain-card">
+				<p class="pain-title">The Transition Terror (The Niche)</p>
+				<p>✕ The paralyzing fear of quitting, even though staying is breaking your heart.</p>
+			</article>
+		</div>
+	</div>
+</section>
+
+<style>
+	.internal-struggle {
+		background: linear-gradient(180deg, #f8faf8 0%, var(--color-white-smoke) 100%);
+	}
+
+	.struggle-grid {
+		display: grid;
+		grid-template-columns: 1.1fr 0.9fr;
+		gap: clamp(1.6rem, 3vw, 3rem);
+		align-items: center;
+	}
+
+	.section-kicker {
+		margin: 0;
+		text-transform: uppercase;
+		letter-spacing: 0.08em;
+		font-size: 0.8rem;
+		font-weight: 600;
+		color: var(--color-dark-slate-gray);
+	}
+
+	h2 {
+		margin: 0.75rem 0 0;
+		font-family: var(--font-serif);
+		font-size: clamp(1.65rem, 3.3vw, 2.5rem);
+		line-height: 1.2;
+		font-weight: 500;
+	}
+
+	.narrative {
+		margin: 1rem 0 0;
+		max-width: 60ch;
+		font-size: 1.03rem;
+		line-height: 1.9;
+	}
+
+	.objections {
+		margin-top: 1.15rem;
+	}
+
+	.objections-title {
+		margin: 0;
+		font-weight: 600;
+	}
+
+	.objections ul {
+		margin: 0.7rem 0 0;
+		padding-left: 1.1rem;
+		display: grid;
+		gap: 0.45rem;
+	}
+
+	.objections li {
+		line-height: 1.7;
+	}
+
+	.struggle-media img {
+		width: 100%;
+		border-radius: 1rem;
+		object-fit: cover;
+		box-shadow: 0 12px 28px rgb(29 35 39 / 12%);
+	}
+
+	.pain-grid-wrap {
+		margin-top: 2.5rem;
+	}
+
+	h3 {
+		margin: 0;
+		font-family: var(--font-serif);
+		font-size: clamp(1.3rem, 2.4vw, 1.75rem);
+		font-weight: 500;
+	}
+
+	.pain-grid {
+		margin-top: 1rem;
+		display: grid;
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+		gap: 1rem;
+	}
+
+	.pain-card {
+		background: var(--color-white);
+		border: 1px solid rgb(0 94 71 / 16%);
+		border-radius: 0.75rem;
+		padding: 1rem;
+	}
+
+	.pain-title {
+		margin: 0;
+		font-weight: 700;
+		font-size: 0.98rem;
+	}
+
+	.pain-card p:last-child {
+		margin: 0.65rem 0 0;
+		line-height: 1.75;
+	}
+
+	@media (max-width: 1024px) {
+		.struggle-grid,
+		.pain-grid {
+			grid-template-columns: 1fr;
+		}
+	}
+</style>
