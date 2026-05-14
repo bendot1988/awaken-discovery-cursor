@@ -8,14 +8,17 @@ export type Benefit = {
 	body: string;
 };
 
+/** Use root paths so header/footer work from any route (e.g. sales landing pages). */
 export const navItems: NavItem[] = [
-	{ label: "Home", href: "#" },
-	{ label: "Pricing / Services", href: "#services" },
-	{ label: "Bulk sessions", href: "#bulk-sessions" },
-	{ label: "Blog", href: "#blog" },
-	{ label: "Wellbeing products", href: "#wellbeing-products" },
-	{ label: "Contact", href: "#contact" },
+	{ label: "Home", href: "/" },
+	{ label: "Pricing / Services", href: "/#services" },
+	{ label: "Bulk sessions", href: "/#bulk-sessions" },
+	{ label: "Blog", href: "/#blog" },
+	{ label: "Wellbeing products", href: "/#wellbeing-products" },
+	{ label: "Contact", href: "/#contact" },
 ];
+
+export const teacherGuideLandingPath = "/finding-calm-teachers";
 
 export const painPoints: string[] = [
 	"Do you often feel physical, mental or emotional pain daily?",

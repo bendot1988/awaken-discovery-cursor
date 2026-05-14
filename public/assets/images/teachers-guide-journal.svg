@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="650" viewBox="0 0 900 650" role="img" aria-labelledby="t4">
+  <title id="t4">Placeholder  journal product image</title>
+  <rect width="900" height="650" fill="#1d2327"/>
+  <rect x="220" y="120" width="460" height="410" rx="8" fill="#f1f1f1" stroke="#005e47" stroke-width="3"/>
+  <text x="450" y="330" text-anchor="middle" fill="#005e47" font-family="Georgia,serif" font-size="24">Journal cover placeholder</text>
+  <text x="450" y="365" text-anchor="middle" fill="#1d2327" font-family="system-ui,sans-serif" font-size="14">Product mockup</text>
+</svg>

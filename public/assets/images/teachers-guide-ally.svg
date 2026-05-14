@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="700" height="850" viewBox="0 0 700 850" role="img" aria-labelledby="t3">
+  <title id="t3">Placeholder  Ally / about image</title>
+  <defs>
+    <linearGradient id="a" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#ced8cf"/>
+    </linearGradient>
+  </defs>
+  <rect width="700" height="850" fill="url(#a)"/>
+  <text x="350" y="420" text-anchor="middle" fill="#005e47" font-family="Georgia,serif" font-size="24">Portrait placeholder</text>
+  <text x="350" y="455" text-anchor="middle" fill="#1d2327" font-family="system-ui,sans-serif" font-size="14">Professional headshot</text>
+</svg>

@@ -1,5 +1,5 @@
 ---
-import type { NavItem } from "../data/site";
+import { type NavItem, teacherGuideLandingPath } from "../data/site";
 
 interface Props {
 	navItems: NavItem[];
@@ -11,7 +11,7 @@ const { navItems, locations } = Astro.props;
 
 <footer class="site-footer">
 	<div class="container footer-main">
-		<a href="#" class="footer-brand">
+		<a href="/" class="footer-brand">
 			<img src="/assets/logos/awaken-discovery-logo.png" alt="Awaken Discovery logo" />
 		</a>
 
@@ -29,6 +29,15 @@ const { navItems, locations } = Astro.props;
 						<li><a href={item.href}>{item.label}</a></li>
 					))
 				}
+			</ul>
+		</div>
+
+		<div class="footer-resources">
+			<p class="footer-resources-label">Resources</p>
+			<ul class="footer-resources-list">
+				<li>
+					<a href={teacherGuideLandingPath}>Finding Calm in the Chaos — free teacher guide</a>
+				</li>
 			</ul>
 		</div>
 
@@ -85,6 +94,34 @@ const { navItems, locations } = Astro.props;
 	.footer-nav a {
 		font-size: 0.82rem;
 		opacity: 0.94;
+	}
+
+	.footer-resources {
+		margin-top: 1.75rem;
+		padding-top: 1.25rem;
+		border-top: 1px solid rgb(255 255 255 / 22%);
+	}
+
+	.footer-resources-label {
+		margin: 0;
+		font-size: 0.72rem;
+		font-weight: 600;
+		letter-spacing: 0.08em;
+		text-transform: uppercase;
+		opacity: 0.85;
+	}
+
+	.footer-resources-list {
+		margin: 0.55rem 0 0;
+		padding: 0;
+		list-style: none;
+	}
+
+	.footer-resources-list a {
+		font-size: 0.88rem;
+		text-decoration: underline;
+		text-underline-offset: 3px;
+		opacity: 0.96;
 	}
 
 	.locations {
