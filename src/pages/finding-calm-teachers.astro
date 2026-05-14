@@ -596,6 +596,29 @@ const faqs = [
 		--accent-tint-strong: rgb(0 94 71 / 14%);
 	}
 
+	/* Prevent horizontal scroll; safe horizontal inset on notched phones */
+	main.ldg {
+		max-width: 100%;
+		overflow-x: hidden;
+		box-sizing: border-box;
+	}
+
+	main.ldg .container {
+		width: 100%;
+		max-width: 1120px;
+		margin-inline: auto;
+		padding-inline: max(1rem, env(safe-area-inset-left, 0px))
+			max(1rem, env(safe-area-inset-right, 0px));
+		box-sizing: border-box;
+	}
+
+	main.ldg .ldg-hero-grid > *,
+	main.ldg .ldg-split > *,
+	main.ldg .ldg-guide-shell > *,
+	main.ldg .ldg-symptom-split > * {
+		min-width: 0;
+	}
+
 	.ldg-section {
 		padding: clamp(3.25rem, 8vw, 6rem) 0;
 		position: relative;
@@ -622,7 +645,7 @@ const faqs = [
 
 	.ldg-hero-grid {
 		display: grid;
-		grid-template-columns: 1.05fr 0.95fr;
+		grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
 		gap: clamp(1.5rem, 4vw, 3.5rem);
 		align-items: center;
 		position: relative;
@@ -702,6 +725,7 @@ const faqs = [
 
 	.ldg-hero-media {
 		position: relative;
+		width: 100%;
 	}
 
 	.ldg-hero-stamp {
@@ -737,6 +761,7 @@ const faqs = [
 	.ldg-placeholder {
 		position: relative;
 		width: 100%;
+		max-width: 100%;
 		min-height: 320px;
 		border-radius: 1rem;
 		background:
@@ -796,7 +821,7 @@ const faqs = [
 
 	.ldg-stat-grid {
 		display: grid;
-		grid-template-columns: repeat(3, 1fr);
+		grid-template-columns: repeat(3, minmax(0, 1fr));
 		gap: 1.5rem;
 		text-align: center;
 	}
@@ -860,6 +885,8 @@ const faqs = [
 	.ldg-narrow {
 		max-width: 720px;
 		margin-inline: auto;
+		width: 100%;
+		box-sizing: border-box;
 	}
 
 	.ldg-center-narrow { text-align: center; }
@@ -959,7 +986,7 @@ const faqs = [
 		padding: 0;
 		margin: 0;
 		display: grid;
-		grid-template-columns: repeat(2, 1fr);
+		grid-template-columns: repeat(2, minmax(0, 1fr));
 		gap: 0.85rem;
 	}
 
@@ -976,6 +1003,10 @@ const faqs = [
 		box-shadow: 0 4px 14px rgb(0 0 0 / 3%);
 	}
 
+	.ldg-symptom > span:last-child {
+		min-width: 0;
+	}
+
 	.ldg-symptom-check {
 		flex-shrink: 0;
 		width: 24px;
@@ -990,10 +1021,15 @@ const faqs = [
 		font-weight: 700;
 	}
 
+	.ldg-steps li > div:last-child {
+		min-width: 0;
+		flex: 1;
+	}
+
 	/* Split */
 	.ldg-split {
 		display: grid;
-		grid-template-columns: 1fr 1fr;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
 		gap: clamp(1.5rem, 4vw, 3rem);
 		align-items: center;
 	}
@@ -1023,6 +1059,13 @@ const faqs = [
 	.ldg-method-card:hover {
 		transform: translateY(-3px);
 		box-shadow: 0 12px 28px rgb(0 0 0 / 8%);
+	}
+
+	@media (hover: none) {
+		.ldg-method-card:hover {
+			transform: none;
+			box-shadow: 0 4px 16px rgb(0 0 0 / 3%);
+		}
 	}
 
 	.ldg-method-icon {
@@ -1068,6 +1111,11 @@ const faqs = [
 		gap: 1rem;
 		align-items: flex-start;
 		border: 1px solid var(--accent-tint-strong);
+	}
+
+	.ldg-quote > div:last-child {
+		min-width: 0;
+		flex: 1;
 	}
 
 	.ldg-quote-avatar {
@@ -1127,7 +1175,8 @@ const faqs = [
 	}
 
 	.ldg-guide-title {
-		max-width: 18ch;
+		max-width: min(22ch, 100%);
+		text-wrap: balance;
 	}
 
 	.ldg-guide-subtitle {
@@ -1140,7 +1189,7 @@ const faqs = [
 
 	.ldg-guide-shell {
 		display: grid;
-		grid-template-columns: 0.85fr 1.15fr;
+		grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
 		gap: clamp(1.5rem, 4vw, 3rem);
 		align-items: center;
 		max-width: 1040px;
@@ -1164,6 +1213,8 @@ const faqs = [
 		font-size: 0.98rem;
 		line-height: 1.6;
 		position: relative;
+		overflow-wrap: break-word;
+		word-wrap: break-word;
 	}
 
 	.ldg-bullet-grid li::before {
@@ -1345,11 +1396,18 @@ const faqs = [
 		cursor: pointer;
 		display: flex;
 		justify-content: space-between;
-		align-items: center;
+		align-items: flex-start;
+		gap: 0.75rem;
 		font-weight: 600;
 		font-family: var(--font-serif);
 		font-size: 1.05rem;
 		list-style: none;
+	}
+
+	.ldg-faq summary span:first-of-type {
+		flex: 1;
+		min-width: 0;
+		line-height: 1.45;
 	}
 
 	.ldg-faq summary::-webkit-details-marker { display: none; }
@@ -1587,8 +1645,8 @@ const faqs = [
 	}
 
 	.ldg-logo-ph {
-		flex: 0 0 auto;
-		min-width: 140px;
+		flex: 0 1 auto;
+		min-width: min(140px, 100%);
 		padding: 0.85rem 1.1rem;
 		border: 1px dashed rgb(255 255 255 / 45%);
 		border-radius: 0.5rem;
@@ -1596,12 +1654,13 @@ const faqs = [
 		color: rgb(255 255 255 / 75%);
 		text-align: center;
 		letter-spacing: 0.04em;
+		box-sizing: border-box;
 	}
 
 	/* Symptom split — intro on left, grid on right */
 	.ldg-symptom-split {
 		display: grid;
-		grid-template-columns: 0.85fr 1.15fr;
+		grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
 		gap: clamp(1.5rem, 4vw, 3rem);
 		align-items: start;
 	}
@@ -1653,8 +1712,90 @@ const faqs = [
 	}
 
 	@media (max-width: 720px) {
-		.ldg-sticky-cta { display: block; }
-		.ldg main { padding-bottom: 4.5rem; }
+		.ldg-sticky-cta {
+			display: block;
+			left: 0;
+			right: 0;
+			width: 100%;
+			max-width: 100%;
+			box-sizing: border-box;
+		}
+
+		main.ldg {
+			padding-bottom: calc(5.5rem + env(safe-area-inset-bottom, 0px));
+		}
+
+		main.ldg :is(p, li, blockquote, .ldg-sub) {
+			overflow-wrap: break-word;
+			word-wrap: break-word;
+		}
+
+		main.ldg :is(h1, h2, h3, .ldg-signoff-script) {
+			overflow-wrap: break-word;
+			hyphens: manual;
+		}
+
+		.ldg-eyebrow {
+			max-width: 100%;
+			white-space: normal;
+			line-height: 1.4;
+			letter-spacing: 0.07em;
+			font-size: 0.68rem;
+			box-sizing: border-box;
+		}
+
+		.ldg-h1 {
+			font-size: clamp(1.65rem, 8.5vw, 2.35rem);
+		}
+
+		.ldg-script-accent {
+			font-size: clamp(1.65rem, 7vw, 2.35rem);
+			line-height: 1.12;
+			padding-inline: 0.15rem;
+		}
+
+		.ldg-guide-title {
+			max-width: 100%;
+		}
+
+		.ldg-pull-quote {
+			padding: 1.25rem 1rem 1.25rem 2rem;
+		}
+
+		.ldg-pull-mark {
+			left: 0.5rem;
+			font-size: 2.75rem;
+		}
+
+		.ldg-faq summary {
+			font-size: 0.98rem;
+		}
+
+		.ldg-form-btn {
+			width: 100%;
+			justify-self: stretch;
+			box-sizing: border-box;
+		}
+
+		main.ldg .ldg-hero-cta-row .cta,
+		main.ldg .ldg-btn-row .cta {
+			width: 100%;
+			box-sizing: border-box;
+			text-align: center;
+		}
+
+		.ldg-quote {
+			flex-direction: column;
+			align-items: stretch;
+		}
+
+		.ldg-quote-avatar {
+			align-self: center;
+		}
+
+		.ldg-stat-figure {
+			font-size: clamp(1.65rem, 9vw, 2.25rem);
+		}
 	}
 
 	@media (max-width: 960px) {
@@ -1669,6 +1810,10 @@ const faqs = [
 			grid-template-columns: 1fr;
 		}
 
+		.ldg-hero-grid {
+			padding-bottom: 2.75rem;
+		}
+
 		.ldg-split-reverse .ldg-placeholder,
 		.ldg-split-reverse .ldg-bio-media { order: -1; }
 
@@ -1676,9 +1821,17 @@ const faqs = [
 			left: 50%;
 			transform: translateX(-50%);
 			bottom: -22px;
+			max-width: min(100%, 22rem);
+			box-sizing: border-box;
 		}
 
 		.ldg-stat-grid { gap: 1.75rem; }
 		.ldg-breathe { display: none; }
+	}
+
+	@media (max-width: 540px) {
+		.ldg-symptom-grid {
+			grid-template-columns: 1fr;
+		}
 	}
 </style>
