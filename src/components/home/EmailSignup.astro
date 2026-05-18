@@ -1,0 +1,195 @@
+---
+interface Props {
+	heading?: string;
+	body?: string;
+	guideName?: string;
+	guideDescription?: string;
+	buttonLabel?: string;
+}
+
+const {
+	heading = "Begin With Gentle Support",
+	body = "Download a free calming guide designed to help you better understand emotional overwhelm, reconnect with yourself and begin creating space to breathe again. You'll also receive gentle wellbeing insights, supportive resources and updates from Awaken Discovery.",
+	guideName = "When You've Been Holding Too Much for Too Long",
+	guideDescription = "A gentle guide to emotional overwhelm, self-reconnection and support.",
+	buttonLabel = "Discover Calm",
+} = Astro.props;
+---
+
+<section class="signup section section-soft" id="signup">
+	<div class="container signup-inner">
+		<div class="signup-copy">
+			<p class="section-kicker">Free Resource</p>
+			<h2>{heading}</h2>
+			<p>{body}</p>
+			<div class="signup-guide">
+				<p class="guide-name">{guideName}</p>
+				<p class="guide-desc">{guideDescription}</p>
+			</div>
+		</div>
+
+		<form
+			class="signup-form"
+			method="post"
+			action="#"
+			aria-describedby="signup-todo"
+			novalidate
+		>
+			<label class="signup-field">
+				<span>Email address</span>
+				<input
+					type="email"
+					name="email"
+					autocomplete="email"
+					required
+					placeholder="you@example.com"
+				/>
+			</label>
+
+			<label class="signup-consent">
+				<input type="checkbox" name="consent" required />
+				<span>
+					I'd like to receive supportive wellbeing emails, resources and updates from
+					Awaken Discovery. I understand I can unsubscribe at any time.
+				</span>
+			</label>
+
+			<button class="cta cta-solid signup-submit" type="submit">{buttonLabel}</button>
+
+			<p class="signup-privacy">
+				Your details are handled with care. See our <a href="/privacy">Privacy Policy</a>.
+			</p>
+			<p id="signup-todo" class="signup-todo">
+				{`{{TODO: connect to ESP — auto-send PDF + trigger nurture sequence. Privacy policy needs GDPR review.}}`}
+			</p>
+		</form>
+	</div>
+</section>
+
+<style>
+	.signup {
+		background: linear-gradient(180deg, var(--color-white-smoke) 0%, #eaf0ea 100%);
+	}
+
+	.signup-inner {
+		display: grid;
+		grid-template-columns: 1.05fr 0.95fr;
+		gap: clamp(2rem, 4vw, 3.5rem);
+		align-items: center;
+	}
+
+	.signup-copy {
+		max-width: 56ch;
+	}
+
+	.section-kicker {
+		margin: 0;
+		text-transform: uppercase;
+		letter-spacing: 0.08em;
+		font-size: 0.78rem;
+		font-weight: 600;
+		color: var(--color-dark-slate-gray);
+	}
+
+	h2 {
+		margin: 0.6rem 0 0.9rem;
+		font-family: var(--font-serif);
+		font-size: clamp(1.7rem, 3.3vw, 2.4rem);
+		font-weight: 500;
+	}
+
+	.signup-copy p {
+		line-height: 1.85;
+	}
+
+	.signup-guide {
+		margin-top: 1.2rem;
+		padding: 1rem 1.1rem;
+		background: var(--color-white);
+		border-radius: 0.75rem;
+		border: 1px solid rgb(0 94 71 / 18%);
+	}
+
+	.guide-name {
+		margin: 0;
+		font-family: var(--font-serif);
+		font-size: 1.1rem;
+		font-weight: 500;
+		color: var(--color-dark-slate-gray);
+	}
+
+	.guide-desc {
+		margin: 0.3rem 0 0;
+		font-size: 0.92rem;
+		line-height: 1.55;
+		opacity: 0.85;
+	}
+
+	.signup-form {
+		background: var(--color-white);
+		padding: 1.8rem 1.6rem;
+		border-radius: 1rem;
+		border: 1px solid rgb(0 94 71 / 18%);
+		box-shadow: 0 10px 28px rgb(29 35 39 / 8%);
+		display: grid;
+		gap: 1rem;
+	}
+
+	.signup-field {
+		display: grid;
+		gap: 0.4rem;
+		font-size: 0.85rem;
+	}
+
+	.signup-field input {
+		padding: 0.75rem 0.95rem;
+		border-radius: 0.6rem;
+		border: 1px solid var(--color-gainsboro);
+		font: inherit;
+	}
+
+	.signup-field input:focus-visible {
+		outline: none;
+		border-color: var(--color-dark-slate-gray);
+		box-shadow: 0 0 0 3px rgb(0 94 71 / 18%);
+	}
+
+	.signup-consent {
+		display: flex;
+		gap: 0.6rem;
+		font-size: 0.85rem;
+		line-height: 1.55;
+	}
+
+	.signup-consent input {
+		margin-top: 0.25rem;
+	}
+
+	.signup-submit {
+		justify-self: start;
+	}
+
+	.signup-privacy {
+		margin: 0;
+		font-size: 0.8rem;
+		opacity: 0.78;
+	}
+
+	.signup-privacy a {
+		text-decoration: underline;
+		text-underline-offset: 3px;
+	}
+
+	.signup-todo {
+		margin: 0;
+		font-size: 0.72rem;
+		font-style: italic;
+		opacity: 0.55;
+	}
+
+	@media (max-width: 900px) {
+		.signup-inner {
+			grid-template-columns: 1fr;
+		}
+	}
+</style>

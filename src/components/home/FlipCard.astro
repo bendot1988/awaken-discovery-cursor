@@ -1,0 +1,158 @@
+---
+interface Props {
+	title: string;
+	body: string;
+	supports: string;
+}
+
+const { title, body, supports } = Astro.props;
+---
+
+<button class="flip-card" type="button" aria-pressed="false">
+	<span class="flip-inner">
+		<span class="flip-face flip-front">
+			<span class="flip-icon" aria-hidden="true">
+				<svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+					<path d="M12 21s-7-4.35-9.5-9A5.5 5.5 0 0 1 12 6a5.5 5.5 0 0 1 9.5 6c-2.5 4.65-9.5 9-9.5 9z" />
+				</svg>
+			</span>
+			<span class="flip-title">{title}</span>
+			<span class="flip-hint">Tap to read</span>
+		</span>
+		<span class="flip-face flip-back">
+			<span class="flip-body">{body}</span>
+			<span class="flip-supports">
+				<span class="flip-supports-label">Support for</span>
+				<span>{supports}</span>
+			</span>
+		</span>
+	</span>
+</button>
+
+<script>
+	for (const card of document.querySelectorAll<HTMLButtonElement>(".flip-card")) {
+		card.addEventListener("click", () => {
+			const flipped = card.classList.toggle("is-flipped");
+			card.setAttribute("aria-pressed", flipped ? "true" : "false");
+		});
+		card.addEventListener("keydown", (event) => {
+			if (event.key === "Enter" || event.key === " ") {
+				event.preventDefault();
+				card.click();
+			}
+		});
+	}
+</script>
+
+<style>
+	.flip-card {
+		all: unset;
+		position: relative;
+		display: block;
+		width: 100%;
+		min-height: 230px;
+		cursor: pointer;
+		perspective: 1000px;
+		border-radius: 1rem;
+		outline: none;
+	}
+
+	.flip-card:focus-visible {
+		box-shadow: 0 0 0 3px rgb(0 94 71 / 35%);
+	}
+
+	.flip-inner {
+		position: relative;
+		display: block;
+		width: 100%;
+		height: 100%;
+		min-height: inherit;
+		transform-style: preserve-3d;
+		transition: transform 0.55s ease;
+	}
+
+	.flip-card.is-flipped .flip-inner {
+		transform: rotateY(180deg);
+	}
+
+	.flip-face {
+		position: absolute;
+		inset: 0;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		gap: 0.65rem;
+		padding: 1.4rem 1.3rem;
+		border-radius: 1rem;
+		backface-visibility: hidden;
+		border: 1px solid rgb(0 94 71 / 18%);
+		background: var(--color-white);
+		box-shadow: 0 6px 18px rgb(29 35 39 / 6%);
+	}
+
+	.flip-front {
+		text-align: left;
+	}
+
+	.flip-icon {
+		display: inline-flex;
+		width: 44px;
+		height: 44px;
+		align-items: center;
+		justify-content: center;
+		border-radius: 999px;
+		background: rgb(0 94 71 / 9%);
+		color: var(--color-dark-slate-gray);
+	}
+
+	.flip-title {
+		font-family: var(--font-serif);
+		font-size: 1.25rem;
+		font-weight: 500;
+		line-height: 1.25;
+		color: var(--color-dark-gray);
+	}
+
+	.flip-hint {
+		font-size: 0.75rem;
+		letter-spacing: 0.06em;
+		text-transform: uppercase;
+		color: var(--color-dark-slate-gray);
+		opacity: 0.75;
+	}
+
+	.flip-back {
+		transform: rotateY(180deg);
+		background: linear-gradient(160deg, #f6f8f6 0%, #e9efe9 100%);
+		gap: 0.85rem;
+	}
+
+	.flip-body {
+		font-size: 0.92rem;
+		line-height: 1.65;
+		color: var(--color-dark-gray);
+	}
+
+	.flip-supports {
+		display: block;
+		font-size: 0.78rem;
+		line-height: 1.55;
+		color: var(--color-dark-slate-gray);
+	}
+
+	.flip-supports-label {
+		display: block;
+		text-transform: uppercase;
+		letter-spacing: 0.08em;
+		font-weight: 600;
+		font-size: 0.68rem;
+		margin-bottom: 0.25rem;
+		opacity: 0.85;
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.flip-inner {
+			transition: none;
+		}
+	}
+</style>

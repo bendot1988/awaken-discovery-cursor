@@ -1,0 +1,28 @@
+---
+import Layout from "../layouts/Layout.astro";
+import SiteHeader from "../components/SiteHeader.astro";
+import SiteFooter from "../components/SiteFooter.astro";
+import ComingSoon from "../components/ComingSoon.astro";
+import { locations, navItems } from "../data/site";
+---
+
+<Layout
+	title="Contact · Awaken Discovery"
+	description="Book a free consultation or get in touch with Ally at Awaken Discovery."
+>
+	<SiteHeader navItems={navItems} />
+	<main>
+		<ComingSoon
+			eyebrow="Contact"
+			title="Contact — Coming Soon"
+			body="A full contact and booking page is in progress. In the meantime, please reach out by email and we will be in touch with availability for a free consultation."
+			notes={[
+				"Booking calendar for sessions and free consultations",
+				"Email enquiry form with GDPR-compliant handling",
+				"In-person and online session options",
+				"What to expect at your first session",
+			]}
+		/>
+	</main>
+	<SiteFooter navItems={navItems} locations={locations} />
+</Layout>

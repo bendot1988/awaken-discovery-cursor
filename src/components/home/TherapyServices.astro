@@ -1,0 +1,155 @@
+---
+import type { ServicePanel } from "../../data/site";
+
+interface Props {
+	therapy: ServicePanel[];
+	additional: ServicePanel[];
+}
+
+const { therapy, additional } = Astro.props;
+---
+
+<section class="services section section-soft" id="services">
+	<div class="container">
+		<header class="services-header">
+			<p class="section-kicker">Therapy Services</p>
+			<h2>Counselling &amp; Psychotherapy Support</h2>
+		</header>
+
+		<div class="services-grid">
+			{
+				therapy.map((panel) => (
+					<article class="service-card">
+						<h3>{panel.title}</h3>
+						<p>{panel.body}</p>
+						<a class="cta cta-outline" href={panel.cta.href}>
+							{panel.cta.label}
+						</a>
+					</article>
+				))
+			}
+		</div>
+
+		<div class="services-cta-row">
+			<a class="cta cta-solid" href="/contact">Begin Therapy</a>
+			<a class="cta cta-ghost" href="/about">Learn More About Therapy</a>
+			<span class="services-todo">
+				{`{{TODO: /about — "Learn More About Therapy" copy still to write}}`}
+			</span>
+		</div>
+
+		<header class="services-header services-header-sub">
+			<h3 class="services-subheading">Additional Support &amp; Wellbeing Resources</h3>
+		</header>
+
+		<div class="services-grid">
+			{
+				additional.map((panel) => (
+					<article class="service-card service-card-soft">
+						<h3>{panel.title}</h3>
+						<p>{panel.body}</p>
+						<a class="cta cta-outline" href={panel.cta.href}>
+							{panel.cta.label}
+						</a>
+					</article>
+				))
+			}
+		</div>
+	</div>
+</section>
+
+<style>
+	.services {
+		background: var(--color-white-smoke);
+	}
+
+	.services-header {
+		max-width: 60ch;
+		margin-bottom: 1.6rem;
+	}
+
+	.services-header-sub {
+		margin-top: 3rem;
+	}
+
+	.section-kicker {
+		margin: 0;
+		text-transform: uppercase;
+		letter-spacing: 0.08em;
+		font-size: 0.78rem;
+		font-weight: 600;
+		color: var(--color-dark-slate-gray);
+	}
+
+	h2 {
+		margin: 0.6rem 0 0;
+		font-family: var(--font-serif);
+		font-size: clamp(1.7rem, 3.3vw, 2.4rem);
+		font-weight: 500;
+	}
+
+	.services-subheading {
+		margin: 0;
+		font-family: var(--font-serif);
+		font-size: clamp(1.3rem, 2.4vw, 1.7rem);
+		font-weight: 500;
+	}
+
+	.services-grid {
+		display: grid;
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+		gap: 1rem;
+	}
+
+	.service-card {
+		background: var(--color-white);
+		border: 1px solid rgb(0 94 71 / 16%);
+		border-radius: 0.85rem;
+		padding: 1.4rem 1.3rem;
+		display: flex;
+		flex-direction: column;
+		gap: 0.85rem;
+	}
+
+	.service-card-soft {
+		background: rgb(255 255 255 / 70%);
+	}
+
+	.service-card h3 {
+		margin: 0;
+		font-family: var(--font-serif);
+		font-size: 1.2rem;
+		font-weight: 500;
+	}
+
+	.service-card p {
+		margin: 0;
+		line-height: 1.7;
+		font-size: 0.95rem;
+		flex: 1;
+	}
+
+	.service-card .cta {
+		align-self: flex-start;
+	}
+
+	.services-cta-row {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		gap: 0.7rem 1rem;
+		margin-top: 1.6rem;
+	}
+
+	.services-todo {
+		font-size: 0.75rem;
+		font-style: italic;
+		opacity: 0.55;
+	}
+
+	@media (max-width: 900px) {
+		.services-grid {
+			grid-template-columns: 1fr;
+		}
+	}
+</style>

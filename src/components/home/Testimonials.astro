@@ -1,0 +1,103 @@
+<section class="testimonials section section-soft" id="testimonials">
+	<div class="container">
+		<header class="t-header">
+			<p class="section-kicker">Testimonials</p>
+			<h2>Therapy Can Help You Feel Less Alone in What You Are Carrying</h2>
+			<p class="t-lede">
+				Many people come to therapy feeling emotionally exhausted, overwhelmed or unsure
+				where to begin. Over time, they often describe feeling calmer, more self-aware
+				and more able to navigate life with greater clarity and compassion towards
+				themselves.
+			</p>
+		</header>
+
+		<div class="t-grid" aria-label="Testimonials placeholder">
+			<article class="t-placeholder">
+				<p class="t-quote">"{`{{TODO: testimonial 1 — client to supply}}`}"</p>
+				<p class="t-attribution">— Client name, role</p>
+			</article>
+			<article class="t-placeholder">
+				<p class="t-quote">"{`{{TODO: testimonial 2 — client to supply}}`}"</p>
+				<p class="t-attribution">— Client name, role</p>
+			</article>
+			<article class="t-placeholder">
+				<p class="t-quote">"{`{{TODO: testimonial 3 — client to supply}}`}"</p>
+				<p class="t-attribution">— Client name, role</p>
+			</article>
+		</div>
+	</div>
+</section>
+
+<style>
+	.testimonials {
+		background: linear-gradient(180deg, var(--color-white-smoke) 0%, #f6f8f6 100%);
+	}
+
+	.t-header {
+		max-width: 65ch;
+		margin-bottom: 2rem;
+	}
+
+	.section-kicker {
+		margin: 0;
+		text-transform: uppercase;
+		letter-spacing: 0.08em;
+		font-size: 0.78rem;
+		font-weight: 600;
+		color: var(--color-dark-slate-gray);
+	}
+
+	h2 {
+		margin: 0.6rem 0 0.9rem;
+		font-family: var(--font-serif);
+		font-size: clamp(1.6rem, 3vw, 2.2rem);
+		line-height: 1.22;
+		font-weight: 500;
+		text-wrap: balance;
+	}
+
+	.t-lede {
+		margin: 0;
+		line-height: 1.85;
+	}
+
+	.t-grid {
+		display: grid;
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+		gap: 1rem;
+	}
+
+	.t-placeholder {
+		background: var(--color-white);
+		border: 1px dashed rgb(0 94 71 / 35%);
+		border-radius: 0.85rem;
+		padding: 1.4rem 1.3rem;
+		min-height: 180px;
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		gap: 0.8rem;
+	}
+
+	.t-quote {
+		margin: 0;
+		font-family: var(--font-serif);
+		font-style: italic;
+		font-size: 1.05rem;
+		line-height: 1.55;
+		color: var(--color-dark-gray);
+	}
+
+	.t-attribution {
+		margin: 0;
+		font-size: 0.82rem;
+		color: var(--color-dark-slate-gray);
+		opacity: 0.85;
+	}
+
+	@media (max-width: 900px) {
+		.t-grid {
+			grid-template-columns: 1fr;
+		}
+	}
+</style>

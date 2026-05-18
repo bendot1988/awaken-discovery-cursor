@@ -1,0 +1,29 @@
+---
+import Layout from "../layouts/Layout.astro";
+import SiteHeader from "../components/SiteHeader.astro";
+import SiteFooter from "../components/SiteFooter.astro";
+import ComingSoon from "../components/ComingSoon.astro";
+import { locations, navItems } from "../data/site";
+---
+
+<Layout
+	title="Wellbeing Products · Awaken Discovery"
+	description="Journals, audios, guides and emotional wellbeing tools — coming soon."
+>
+	<SiteHeader navItems={navItems} />
+	<main>
+		<ComingSoon
+			eyebrow="Wellbeing Products"
+			title="Wellbeing Products — Coming Soon"
+			body="Journals, audios, guides and emotional wellbeing tools designed to support you between sessions and beyond."
+			notes={[
+				"Anxiety Reflection Journal",
+				"Teacher decompression system",
+				"Teacher realignment system",
+				"Membership / Sunday Reset sessions",
+				"Product videos and walkthroughs",
+			]}
+		/>
+	</main>
+	<SiteFooter navItems={navItems} locations={locations} />
+</Layout>

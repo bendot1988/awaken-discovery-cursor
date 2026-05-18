@@ -1,0 +1,148 @@
+---
+import type { PricingTier } from "../../data/site";
+
+interface Props {
+	tiers: PricingTier[];
+}
+
+const { tiers } = Astro.props;
+---
+
+<section class="pricing section" id="pricing">
+	<div class="container">
+		<header class="pricing-header">
+			<p class="section-kicker">Pricing</p>
+			<h2>Transparent Support Without Pressure</h2>
+			<p class="pricing-lede">
+				Choosing therapy can feel like a big step. Sessions are designed to provide a
+				calm, supportive and confidential space where you can move at your own pace.
+			</p>
+		</header>
+
+		<div class="pricing-grid">
+			{
+				tiers.map((tier) => (
+					<article class="pricing-card">
+						<h3>{tier.name}</h3>
+						<p class="pricing-price">
+							<span class="price-amount">{tier.price}</span>
+							<span class="price-cadence">{tier.cadence}</span>
+						</p>
+						<p class="pricing-body">{tier.body}</p>
+						<div class="pricing-cta-row">
+							<a class="cta cta-solid" href={tier.primaryCta.href}>
+								{tier.primaryCta.label}
+							</a>
+							{tier.secondaryCta && (
+								<a class="cta cta-outline" href={tier.secondaryCta.href}>
+									{tier.secondaryCta.label}
+								</a>
+							)}
+						</div>
+						{tier.note && <p class="pricing-note">{tier.note}</p>}
+					</article>
+				))
+			}
+		</div>
+	</div>
+</section>
+
+<style>
+	.pricing {
+		background: var(--color-white);
+	}
+
+	.pricing-header {
+		max-width: 60ch;
+		margin-bottom: 1.8rem;
+	}
+
+	.section-kicker {
+		margin: 0;
+		text-transform: uppercase;
+		letter-spacing: 0.08em;
+		font-size: 0.78rem;
+		font-weight: 600;
+		color: var(--color-dark-slate-gray);
+	}
+
+	h2 {
+		margin: 0.6rem 0 0.9rem;
+		font-family: var(--font-serif);
+		font-size: clamp(1.7rem, 3.3vw, 2.4rem);
+		font-weight: 500;
+	}
+
+	.pricing-lede {
+		margin: 0;
+		line-height: 1.85;
+	}
+
+	.pricing-grid {
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: 1.2rem;
+	}
+
+	.pricing-card {
+		background: linear-gradient(160deg, #f6f8f6 0%, #eaf0ea 100%);
+		border: 1px solid rgb(0 94 71 / 18%);
+		border-radius: 1rem;
+		padding: 1.6rem 1.5rem;
+		display: flex;
+		flex-direction: column;
+		gap: 0.85rem;
+	}
+
+	.pricing-card h3 {
+		margin: 0;
+		font-family: var(--font-serif);
+		font-size: 1.35rem;
+		font-weight: 500;
+	}
+
+	.pricing-price {
+		margin: 0;
+		display: flex;
+		align-items: baseline;
+		gap: 0.5rem;
+	}
+
+	.price-amount {
+		font-family: var(--font-serif);
+		font-size: 2.2rem;
+		font-weight: 500;
+		color: var(--color-dark-slate-gray);
+	}
+
+	.price-cadence {
+		font-size: 0.9rem;
+		opacity: 0.75;
+	}
+
+	.pricing-body {
+		margin: 0;
+		line-height: 1.7;
+		font-size: 0.95rem;
+		flex: 1;
+	}
+
+	.pricing-cta-row {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.6rem;
+	}
+
+	.pricing-note {
+		margin: 0.2rem 0 0;
+		font-size: 0.75rem;
+		font-style: italic;
+		opacity: 0.6;
+	}
+
+	@media (max-width: 760px) {
+		.pricing-grid {
+			grid-template-columns: 1fr;
+		}
+	}
+</style>

@@ -1,15 +1,20 @@
 ---
 import "../styles/global.css";
+import { siteMeta } from "../data/site";
 
 interface Props {
 	title?: string;
 	description?: string;
+	canonicalPath?: string;
 }
 
 const {
-	title = "Awaken Discovery | Counselling and Psychotherapy",
-	description = "Counselling and psychotherapy in Market Weighton, East Yorkshire.",
+	title = siteMeta.title,
+	description = siteMeta.description,
+	canonicalPath = Astro.url.pathname,
 } = Astro.props;
+
+const canonical = `${siteMeta.canonicalOrigin}${canonicalPath}`;
 ---
 
 <!doctype html>
@@ -19,6 +24,7 @@ const {
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<link rel="icon" href="/favicon.ico" />
+		<link rel="canonical" href={canonical} />
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 		<link
@@ -27,6 +33,10 @@ const {
 		/>
 		<meta name="generator" content={Astro.generator} />
 		<meta name="description" content={description} />
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description} />
+		<meta property="og:url" content={canonical} />
+		<meta property="og:type" content="website" />
 		<title>{title}</title>
 	</head>
 	<body>

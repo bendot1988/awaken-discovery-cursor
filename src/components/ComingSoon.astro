@@ -1,0 +1,102 @@
+---
+interface Props {
+	eyebrow: string;
+	title: string;
+	body: string;
+	notes?: string[];
+}
+
+const { eyebrow, title, body, notes = [] } = Astro.props;
+---
+
+<section class="coming section">
+	<div class="container coming-inner">
+		<p class="eyebrow">{eyebrow}</p>
+		<h1>{title}</h1>
+		<p class="coming-body">{body}</p>
+
+		{
+			notes.length > 0 && (
+				<div class="coming-notes">
+					<p class="coming-notes-label">What this page will cover</p>
+					<ul>
+						{notes.map((note) => (
+							<li>{note}</li>
+						))}
+					</ul>
+				</div>
+			)
+		}
+
+		<div class="coming-cta-row">
+			<a class="cta cta-solid" href="/">Back to Home</a>
+			<a class="cta cta-outline" href="/contact">Get in touch</a>
+		</div>
+	</div>
+</section>
+
+<style>
+	.coming {
+		padding-block: clamp(4rem, 10vh, 7rem);
+		background: linear-gradient(180deg, var(--color-white) 0%, #f6f8f6 100%);
+	}
+
+	.coming-inner {
+		max-width: 70ch;
+	}
+
+	.eyebrow {
+		margin: 0;
+		color: var(--color-dark-slate-gray);
+		font-weight: 600;
+		letter-spacing: 0.08em;
+		font-size: 0.8rem;
+		text-transform: uppercase;
+	}
+
+	h1 {
+		margin: 0.6rem 0 1rem;
+		font-family: var(--font-serif);
+		font-size: clamp(2rem, 4.5vw, 3.2rem);
+		font-weight: 500;
+		line-height: 1.16;
+		text-wrap: balance;
+	}
+
+	.coming-body {
+		margin: 0;
+		font-size: 1.05rem;
+		line-height: 1.85;
+	}
+
+	.coming-notes {
+		margin-top: 1.8rem;
+		padding: 1.2rem 1.3rem;
+		background: var(--color-white);
+		border: 1px solid rgb(0 94 71 / 18%);
+		border-radius: 0.85rem;
+	}
+
+	.coming-notes-label {
+		margin: 0 0 0.6rem;
+		font-size: 0.75rem;
+		font-weight: 600;
+		letter-spacing: 0.08em;
+		text-transform: uppercase;
+		color: var(--color-dark-slate-gray);
+	}
+
+	.coming-notes ul {
+		margin: 0;
+		padding-left: 1.2rem;
+		display: grid;
+		gap: 0.45rem;
+	}
+
+	.coming-cta-row {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.7rem;
+		margin-top: 1.8rem;
+	}
+</style>

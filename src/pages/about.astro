@@ -1,0 +1,28 @@
+---
+import Layout from "../layouts/Layout.astro";
+import SiteHeader from "../components/SiteHeader.astro";
+import SiteFooter from "../components/SiteFooter.astro";
+import ComingSoon from "../components/ComingSoon.astro";
+import { locations, navItems } from "../data/site";
+---
+
+<Layout
+	title="About Ally · Awaken Discovery"
+	description="Learn more about Ally — counsellor, psychotherapist and founder of Awaken Discovery."
+>
+	<SiteHeader navItems={navItems} />
+	<main>
+		<ComingSoon
+			eyebrow="About Ally"
+			title="Learn More About Ally — Coming Soon"
+			body="A longer introduction to Ally's background, training and approach is being written. In the meantime, you'll find a shorter Meet Ally section on the Homepage, Teachers and Anxiety pages."
+			notes={[
+				"Full bio — twenty years in education, counselling training, accreditations",
+				"Therapeutic approach — integrative humanistic, nervous-system-aware",
+				"What working with Ally looks like in practice",
+				"How to begin — free consultation or booking",
+			]}
+		/>
+	</main>
+	<SiteFooter navItems={navItems} locations={locations} />
+</Layout>

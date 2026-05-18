@@ -1,0 +1,236 @@
+---
+import Layout from "../layouts/Layout.astro";
+import SiteHeader from "../components/SiteHeader.astro";
+import SiteFooter from "../components/SiteFooter.astro";
+import StubBanner from "../components/StubBanner.astro";
+import { locations, navItems } from "../data/site";
+---
+
+<Layout
+	title="Teacher Support · Awaken Discovery"
+	description="Compassionate, nervous-system-aware support for teachers navigating burnout, anxiety and emotional exhaustion."
+>
+	<SiteHeader navItems={navItems} />
+	<main>
+		<StubBanner message="Teachers page — Hero and Emotional Connection only for now. Full page (Free Guide · Meet Ally · Support Beyond Survival Mode · Final CTA) lands next session." />
+
+		<section class="teachers-hero section">
+			<div class="container hero-grid">
+				<div class="hero-shell">
+					<p class="eyebrow">For Teachers</p>
+					<h1>
+						Are You Constantly Exhausted by Teaching… Yet Still Telling Yourself to
+						"Push Through"?
+					</h1>
+					<p class="subheadline">
+						When the pressure of teaching begins affecting your wellbeing, confidence
+						and ability to switch off, it can become difficult to know where burnout
+						ends and survival mode begins. Awaken Discovery offers compassionate,
+						nervous-system-aware support for teachers navigating overwhelm, anxiety
+						and emotional exhaustion.
+					</p>
+					<div class="cta-row">
+						<a class="cta cta-solid" href="#guide">Download the Free Guide</a>
+						<a class="cta cta-outline" href="#support">Explore Teacher Support</a>
+					</div>
+					<ul class="trust-strip" aria-label="Credentials">
+						<li>✔ Ex-Teacher</li>
+						<li>✔ Counsellor &amp; Psychotherapist</li>
+						<li>✔ Nervous-System-Aware Support</li>
+					</ul>
+					<p class="hero-todo">{`{{TODO: brand imagery — cups, books, Ally writing}}`}</p>
+				</div>
+				<div class="hero-media">
+					<img
+						src="/assets/images/finding-calm-hero-ally.png"
+						alt="Ally working calmly at a desk with a warm cup of tea"
+						loading="eager"
+						decoding="async"
+					/>
+				</div>
+			</div>
+		</section>
+
+		<section class="emotional-connection section section-soft">
+			<div class="container">
+				<div class="ec-inner">
+					<p class="section-kicker">Emotional Connection</p>
+					<h2>When Teaching Begins to Cost You More Than You Expected</h2>
+					<p>
+						You may still care deeply about your students… …but quietly feel
+						emotionally exhausted by the pressure, responsibility and constant
+						expectation to keep going no matter how overwhelmed you feel.
+					</p>
+					<p>
+						The Sunday evening dread. The inability to switch off. The exhaustion
+						that sleep no longer fixes. The termly countdowns to the holidays. The
+						feeling that you are constantly giving while losing parts of yourself in
+						the process.
+					</p>
+					<p>
+						If this feels familiar, you are not weak — and you are certainly not
+						alone. Teaching asks so much of people emotionally, mentally and
+						physically. Sometimes the nervous system simply reaches a point where it
+						can no longer keep carrying everything unsupported.
+					</p>
+				</div>
+			</div>
+		</section>
+
+		<section class="coming-up section">
+			<div class="container">
+				<h2 class="cu-title">Coming on this page</h2>
+				<ul class="cu-list">
+					<li>Free Guide — <em>Finding Calm in the Chaos: Why You Can't Switch Off After Teaching</em></li>
+					<li>Meet Ally — teacher version</li>
+					<li>Support Beyond Survival Mode (4 cards)</li>
+					<li>Final CTA — book a session or free consultation</li>
+				</ul>
+				<p class="cu-note">Want to start now? <a href="/contact">Book a free consultation</a>.</p>
+			</div>
+		</section>
+	</main>
+	<SiteFooter
+		navItems={navItems}
+		locations={locations}
+		tagline="Helping overwhelmed teachers reconnect with themselves beyond survival mode."
+	/>
+</Layout>
+
+<style>
+	.teachers-hero {
+		padding-block: clamp(3.5rem, 8vh, 6rem);
+		background: linear-gradient(180deg, var(--color-white) 0%, #f6f8f6 100%);
+	}
+
+	.hero-grid {
+		display: grid;
+		grid-template-columns: 1.1fr 0.9fr;
+		gap: clamp(2rem, 4vw, 4rem);
+		align-items: center;
+	}
+
+	.eyebrow {
+		margin: 0;
+		color: var(--color-dark-slate-gray);
+		font-weight: 600;
+		letter-spacing: 0.08em;
+		font-size: 0.8rem;
+		text-transform: uppercase;
+	}
+
+	h1 {
+		margin: 0.7rem 0 1rem;
+		font-family: var(--font-serif);
+		font-size: clamp(1.9rem, 4.4vw, 3.1rem);
+		font-weight: 500;
+		line-height: 1.16;
+		text-wrap: balance;
+	}
+
+	.subheadline {
+		margin: 0;
+		font-size: clamp(1rem, 1.9vw, 1.2rem);
+		line-height: 1.75;
+		max-width: 60ch;
+	}
+
+	.cta-row {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.7rem;
+		margin-top: 1.6rem;
+	}
+
+	.trust-strip {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.4rem 1.2rem;
+		margin: 1.6rem 0 0;
+		padding: 0;
+		list-style: none;
+		font-size: 0.85rem;
+		opacity: 0.8;
+	}
+
+	.hero-todo {
+		margin: 0.6rem 0 0;
+		font-size: 0.74rem;
+		font-style: italic;
+		opacity: 0.55;
+	}
+
+	.hero-media img {
+		width: 100%;
+		aspect-ratio: 4 / 5;
+		object-fit: cover;
+		object-position: 50% 30%;
+		border-radius: 1rem;
+		box-shadow: 0 14px 35px rgb(29 35 39 / 14%);
+	}
+
+	.ec-inner {
+		max-width: 70ch;
+	}
+
+	.section-kicker {
+		margin: 0;
+		text-transform: uppercase;
+		letter-spacing: 0.08em;
+		font-size: 0.78rem;
+		font-weight: 600;
+		color: var(--color-dark-slate-gray);
+	}
+
+	h2 {
+		margin: 0.6rem 0 1rem;
+		font-family: var(--font-serif);
+		font-size: clamp(1.7rem, 3.3vw, 2.4rem);
+		font-weight: 500;
+		text-wrap: balance;
+	}
+
+	.ec-inner p {
+		margin: 0 0 1rem;
+		line-height: 1.9;
+	}
+
+	.coming-up {
+		background: var(--color-white);
+	}
+
+	.cu-title {
+		font-family: var(--font-serif);
+		font-size: 1.4rem;
+		font-weight: 500;
+		margin: 0 0 0.8rem;
+	}
+
+	.cu-list {
+		margin: 0;
+		padding-left: 1.2rem;
+		display: grid;
+		gap: 0.4rem;
+	}
+
+	.cu-note {
+		margin: 1.1rem 0 0;
+		font-size: 0.95rem;
+	}
+
+	.cu-note a {
+		color: var(--color-dark-slate-gray);
+		text-decoration: underline;
+		text-underline-offset: 3px;
+	}
+
+	@media (max-width: 1024px) {
+		.hero-grid {
+			grid-template-columns: 1fr;
+		}
+
+		.hero-media {
+			order: -1;
+		}
+	}
+</style>

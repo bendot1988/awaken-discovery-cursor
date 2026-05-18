@@ -1,0 +1,224 @@
+---
+import Layout from "../layouts/Layout.astro";
+import SiteHeader from "../components/SiteHeader.astro";
+import SiteFooter from "../components/SiteFooter.astro";
+import StubBanner from "../components/StubBanner.astro";
+import { locations, navItems } from "../data/site";
+---
+
+<Layout
+	title="Anxiety Support · Awaken Discovery"
+	description="Compassionate therapy and calming resources for anxiety, overthinking, emotional overwhelm and nervous system exhaustion."
+>
+	<SiteHeader navItems={navItems} />
+	<main>
+		<StubBanner message="Anxiety page — Hero and Emotional Connection only for now. Free Guide · Meet Ally · Continued Support · Final CTA arrive next session." />
+
+		<section class="anxiety-hero section">
+			<div class="hero-bg-placeholder" aria-hidden="true">
+				<span>{`{{TODO: calming background video — soft nature, breathing visuals}}`}</span>
+			</div>
+			<div class="container hero-shell">
+				<p class="eyebrow">Anxiety Support</p>
+				<h1>
+					When Your Mind Never Truly Slows Down, Life Can Start to Feel Emotionally
+					Exhausting
+				</h1>
+				<p class="subheadline">
+					Support for anxiety, overthinking, emotional overwhelm and nervous system
+					exhaustion through compassionate therapy, calming resources and gentle
+					emotional support.
+				</p>
+				<div class="cta-row">
+					<a class="cta cta-solid" href="#guide">Download the Free Guide — Finding Calm</a>
+					<a class="cta cta-outline" href="#support">Explore Anxiety Support</a>
+				</div>
+				<ul class="trust-strip" aria-label="Credentials">
+					<li>✔ Counsellor &amp; Psychotherapist</li>
+					<li>✔ Nervous-System-Aware Support</li>
+					<li>✔ Online &amp; In-Person Sessions</li>
+				</ul>
+			</div>
+		</section>
+
+		<section class="emotional-connection section section-soft">
+			<div class="container">
+				<div class="ec-inner">
+					<p class="section-kicker">Emotional Connection</p>
+					<h2>Anxiety Is More Than "Just Worrying"</h2>
+					<p>
+						Anxiety can feel exhausting in ways that are difficult to explain to
+						other people. The racing thoughts. The constant overthinking. The
+						inability to fully relax. The feeling that your mind and body are always
+						"on alert," even when you desperately want to switch off.
+					</p>
+					<p>
+						You may look like you are coping on the outside while quietly feeling
+						overwhelmed underneath it all. If this feels familiar, you are not broken
+						— and you are certainly not alone.
+					</p>
+					<p>
+						Sometimes anxiety is not a sign that something is wrong with you.
+						Sometimes it is the nervous system carrying too much for too long without
+						enough safety, support or rest.
+					</p>
+				</div>
+			</div>
+		</section>
+
+		<section class="coming-up section">
+			<div class="container">
+				<h2 class="cu-title">Coming on this page</h2>
+				<ul class="cu-list">
+					<li>Free Guide — <em>Finding Calm</em> with email signup</li>
+					<li>Meet Ally — anxiety version</li>
+					<li>Continued Support (Anxiety Reflection Journal · One-to-One Therapy)</li>
+					<li>Final CTA — Free Guide · Book a Session · Free Consultation</li>
+				</ul>
+				<p class="cu-note">Want to start now? <a href="/contact">Book a free consultation</a>.</p>
+			</div>
+		</section>
+	</main>
+	<SiteFooter
+		navItems={navItems}
+		locations={locations}
+		tagline="Helping people feel calmer, more connected and more like themselves again."
+	/>
+</Layout>
+
+<style>
+	.anxiety-hero {
+		position: relative;
+		padding-block: clamp(4rem, 9vh, 7rem);
+		overflow: hidden;
+		isolation: isolate;
+	}
+
+	.hero-bg-placeholder {
+		position: absolute;
+		inset: 0;
+		z-index: -1;
+		background:
+			radial-gradient(
+				ellipse at 70% 30%,
+				rgb(0 94 71 / 18%),
+				transparent 60%
+			),
+			linear-gradient(160deg, #eaf0ea 0%, #f6f8f6 60%, #f4ecea 100%);
+		display: flex;
+		align-items: flex-end;
+		justify-content: flex-end;
+		padding: 1rem;
+	}
+
+	.hero-bg-placeholder span {
+		font-size: 0.72rem;
+		font-style: italic;
+		color: var(--color-dark-slate-gray);
+		opacity: 0.55;
+		background: rgb(255 255 255 / 65%);
+		padding: 0.3rem 0.6rem;
+		border-radius: 999px;
+	}
+
+	.hero-shell {
+		max-width: 760px;
+	}
+
+	.eyebrow {
+		margin: 0;
+		color: var(--color-dark-slate-gray);
+		font-weight: 600;
+		letter-spacing: 0.08em;
+		font-size: 0.8rem;
+		text-transform: uppercase;
+	}
+
+	h1 {
+		margin: 0.7rem 0 1rem;
+		font-family: var(--font-serif);
+		font-size: clamp(2rem, 4.6vw, 3.3rem);
+		font-weight: 500;
+		line-height: 1.14;
+		text-wrap: balance;
+	}
+
+	.subheadline {
+		margin: 0;
+		font-size: clamp(1.05rem, 2vw, 1.25rem);
+		line-height: 1.7;
+		max-width: 60ch;
+	}
+
+	.cta-row {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.7rem;
+		margin-top: 1.6rem;
+	}
+
+	.trust-strip {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.4rem 1.2rem;
+		margin: 1.6rem 0 0;
+		padding: 0;
+		list-style: none;
+		font-size: 0.85rem;
+		opacity: 0.85;
+	}
+
+	.ec-inner {
+		max-width: 70ch;
+	}
+
+	.section-kicker {
+		margin: 0;
+		text-transform: uppercase;
+		letter-spacing: 0.08em;
+		font-size: 0.78rem;
+		font-weight: 600;
+		color: var(--color-dark-slate-gray);
+	}
+
+	h2 {
+		margin: 0.6rem 0 1rem;
+		font-family: var(--font-serif);
+		font-size: clamp(1.7rem, 3.3vw, 2.4rem);
+		font-weight: 500;
+		text-wrap: balance;
+	}
+
+	.ec-inner p {
+		margin: 0 0 1rem;
+		line-height: 1.9;
+	}
+
+	.coming-up {
+		background: var(--color-white);
+	}
+
+	.cu-title {
+		font-family: var(--font-serif);
+		font-size: 1.4rem;
+		font-weight: 500;
+		margin: 0 0 0.8rem;
+	}
+
+	.cu-list {
+		margin: 0;
+		padding-left: 1.2rem;
+		display: grid;
+		gap: 0.4rem;
+	}
+
+	.cu-note {
+		margin: 1.1rem 0 0;
+	}
+
+	.cu-note a {
+		color: var(--color-dark-slate-gray);
+		text-decoration: underline;
+		text-underline-offset: 3px;
+	}
+</style>

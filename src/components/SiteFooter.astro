@@ -1,21 +1,31 @@
 ---
-import { type NavItem, teacherGuideLandingPath } from "../data/site";
+import type { NavItem } from "../data/site";
 
 interface Props {
 	navItems: NavItem[];
 	locations: string[];
+	tagline?: string;
 }
 
-const { navItems, locations } = Astro.props;
+const {
+	navItems,
+	locations,
+	tagline = "Compassionate support for anxiety, overwhelm and emotional healing.",
+} = Astro.props;
+
+const year = new Date().getFullYear();
 ---
 
 <footer class="site-footer">
 	<div class="container footer-main">
-		<a href="/" class="footer-brand">
-			<img src="/assets/logos/awaken-discovery-logo.png" alt="Awaken Discovery logo" />
-		</a>
+		<div class="footer-top">
+			<a href="/" class="footer-brand" aria-label="Awaken Discovery home">
+				<img src="/assets/logos/awaken-discovery-logo.png" alt="Awaken Discovery logo" />
+			</a>
+			<p class="footer-tagline">{tagline}</p>
+		</div>
 
-		<div class="footer-nav-wrap">
+		<nav class="footer-nav-wrap" aria-label="Footer">
 			<ul class="footer-nav">
 				{
 					navItems.map((item) => (
@@ -23,26 +33,10 @@ const { navItems, locations } = Astro.props;
 					))
 				}
 			</ul>
-			<ul class="footer-nav">
-				{
-					navItems.map((item) => (
-						<li><a href={item.href}>{item.label}</a></li>
-					))
-				}
-			</ul>
-		</div>
+		</nav>
 
-		<div class="footer-resources">
-			<p class="footer-resources-label">Resources</p>
-			<ul class="footer-resources-list">
-				<li>
-					<a href={teacherGuideLandingPath}>Finding Calm in the Chaos — free teacher guide</a>
-				</li>
-			</ul>
-		</div>
-
-		<section class="locations">
-			<h3>Find a Therapist Near You - Locations We Cover</h3>
+		<section class="locations" aria-labelledby="locations-heading">
+			<h2 id="locations-heading">Locations we cover</h2>
 			<ul>
 				{
 					locations.map((location) => (
@@ -55,8 +49,10 @@ const { navItems, locations } = Astro.props;
 
 	<div class="footer-legal">
 		<div class="container legal-row">
-			<p>Privacy Policy | Terms & Conditions</p>
-			<p>All rights reserved. Web Design by dotwall</p>
+			<p>
+				<a href="/privacy">Privacy Policy</a> · <a href="/terms">Terms &amp; Conditions</a>
+			</p>
+			<p>© {year} Awaken Discovery · Web design by dotwall</p>
 		</div>
 	</div>
 </footer>
@@ -71,57 +67,51 @@ const { navItems, locations } = Astro.props;
 		padding: 3rem 0 2rem;
 	}
 
+	.footer-top {
+		display: grid;
+		gap: 1rem;
+		align-items: end;
+		grid-template-columns: auto 1fr;
+	}
+
 	.footer-brand img {
-		width: min(280px, 60vw);
+		width: min(260px, 55vw);
+	}
+
+	.footer-tagline {
+		margin: 0;
+		font-family: var(--font-serif);
+		font-size: clamp(1rem, 1.6vw, 1.2rem);
+		font-style: italic;
+		opacity: 0.92;
+		max-width: 50ch;
 	}
 
 	.footer-nav-wrap {
-		display: grid;
-		grid-template-columns: repeat(2, minmax(0, 1fr));
-		gap: 1rem;
-		margin-top: 1.5rem;
+		margin-top: 2rem;
+		padding-top: 1.25rem;
+		border-top: 1px solid rgb(255 255 255 / 22%);
 	}
 
 	.footer-nav {
 		display: flex;
 		flex-wrap: wrap;
-		gap: 0.55rem 1rem;
+		gap: 0.55rem 1.2rem;
 		margin: 0;
 		padding: 0;
 		list-style: none;
 	}
 
 	.footer-nav a {
-		font-size: 0.82rem;
-		opacity: 0.94;
-	}
-
-	.footer-resources {
-		margin-top: 1.75rem;
-		padding-top: 1.25rem;
-		border-top: 1px solid rgb(255 255 255 / 22%);
-	}
-
-	.footer-resources-label {
-		margin: 0;
-		font-size: 0.72rem;
-		font-weight: 600;
-		letter-spacing: 0.08em;
-		text-transform: uppercase;
-		opacity: 0.85;
-	}
-
-	.footer-resources-list {
-		margin: 0.55rem 0 0;
-		padding: 0;
-		list-style: none;
-	}
-
-	.footer-resources-list a {
 		font-size: 0.88rem;
+		opacity: 0.94;
+		text-decoration: none;
+	}
+
+	.footer-nav a:hover,
+	.footer-nav a:focus-visible {
 		text-decoration: underline;
 		text-underline-offset: 3px;
-		opacity: 0.96;
 	}
 
 	.locations {
@@ -130,17 +120,20 @@ const { navItems, locations } = Astro.props;
 		border-top: 1px solid rgb(255 255 255 / 25%);
 	}
 
-	.locations h3 {
+	.locations h2 {
 		margin: 0;
-		font-size: 1rem;
-		font-weight: 500;
+		font-size: 0.78rem;
+		font-weight: 600;
+		letter-spacing: 0.08em;
+		text-transform: uppercase;
+		opacity: 0.85;
 	}
 
 	.locations ul {
 		display: flex;
 		flex-wrap: wrap;
 		gap: 0.45rem 1.1rem;
-		margin: 1rem 0 0;
+		margin: 0.85rem 0 0;
 		padding: 0;
 		list-style: none;
 	}
@@ -165,5 +158,16 @@ const { navItems, locations } = Astro.props;
 		margin: 0;
 		font-size: 0.78rem;
 		opacity: 0.92;
+	}
+
+	.legal-row a:hover,
+	.legal-row a:focus-visible {
+		text-decoration: underline;
+	}
+
+	@media (max-width: 700px) {
+		.footer-top {
+			grid-template-columns: 1fr;
+		}
 	}
 </style>

@@ -1,0 +1,28 @@
+---
+import Layout from "../layouts/Layout.astro";
+import SiteHeader from "../components/SiteHeader.astro";
+import SiteFooter from "../components/SiteFooter.astro";
+import ComingSoon from "../components/ComingSoon.astro";
+import { locations, navItems } from "../data/site";
+---
+
+<Layout
+	title="Pricing · Awaken Discovery"
+	description="Transparent pricing for individual therapy sessions and support blocks."
+>
+	<SiteHeader navItems={navItems} />
+	<main>
+		<ComingSoon
+			eyebrow="Pricing"
+			title="Pricing Details — Coming Soon"
+			body="A dedicated pricing page is on its way. For now, individual sessions are £60 (60 minutes). Therapy support blocks of 6 or 10 sessions are available — block pricing to be confirmed against the existing live page."
+			notes={[
+				"Individual Therapy Session — £60 / 60 minutes",
+				"Therapy Support Block — 6 or 10 sessions (price TBC)",
+				"Terms & conditions for blocks",
+				"How to book and what to expect at your first session",
+			]}
+		/>
+	</main>
+	<SiteFooter navItems={navItems} locations={locations} />
+</Layout>

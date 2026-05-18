@@ -1,0 +1,93 @@
+---
+import type { SupportCard } from "../../data/site";
+import FlipCard from "./FlipCard.astro";
+
+interface Props {
+	cards: SupportCard[];
+}
+
+const { cards } = Astro.props;
+---
+
+<section class="support section section-soft" id="support">
+	<div class="container">
+		<div class="support-intro">
+			<p class="section-kicker">A Space to Be Heard</p>
+			<h2>A Space to Feel Heard, Supported and Understood</h2>
+			<p class="support-lede">
+				Therapy is not about having everything figured out. It is about creating space to
+				pause, reflect and begin understanding what your mind, body and emotions may have
+				been carrying for far too long. Whether you are struggling with anxiety, emotional
+				overwhelm, burnout, relationship difficulties or simply feeling disconnected from
+				yourself, therapy can offer support, clarity and space to breathe again.
+			</p>
+		</div>
+
+		<div class="support-grid">
+			{
+				cards.map((card) => (
+					<FlipCard title={card.title} body={card.body} supports={card.supports} />
+				))
+			}
+		</div>
+	</div>
+</section>
+
+<style>
+	.support {
+		background: linear-gradient(180deg, #f6f8f6 0%, var(--color-white-smoke) 100%);
+	}
+
+	.support-intro {
+		max-width: 70ch;
+		margin-bottom: 2.4rem;
+	}
+
+	.section-kicker {
+		margin: 0;
+		text-transform: uppercase;
+		letter-spacing: 0.08em;
+		font-size: 0.78rem;
+		font-weight: 600;
+		color: var(--color-dark-slate-gray);
+	}
+
+	h2 {
+		margin: 0.6rem 0 1rem;
+		font-family: var(--font-serif);
+		font-size: clamp(1.7rem, 3.3vw, 2.5rem);
+		line-height: 1.18;
+		font-weight: 500;
+		text-wrap: balance;
+	}
+
+	.support-lede {
+		margin: 0;
+		line-height: 1.85;
+		font-size: 1rem;
+	}
+
+	.support-grid {
+		display: grid;
+		grid-template-columns: repeat(4, minmax(0, 1fr));
+		gap: 1rem;
+	}
+
+	@media (max-width: 1100px) {
+		.support-grid {
+			grid-template-columns: repeat(3, minmax(0, 1fr));
+		}
+	}
+
+	@media (max-width: 820px) {
+		.support-grid {
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+		}
+	}
+
+	@media (max-width: 520px) {
+		.support-grid {
+			grid-template-columns: 1fr;
+		}
+	}
+</style>

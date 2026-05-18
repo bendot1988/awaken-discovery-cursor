@@ -1,26 +1,39 @@
 ---
-import HomeBenefits from "../components/HomeBenefits.astro";
-import HomeContact from "../components/HomeContact.astro";
-import HomeHero from "../components/HomeHero.astro";
-import HomeInternalStruggle from "../components/HomeInternalStruggle.astro";
-import HomeQuote from "../components/HomeQuote.astro";
-import SiteFooter from "../components/SiteFooter.astro";
 import SiteHeader from "../components/SiteHeader.astro";
-import { benefits, locations, navItems } from "../data/site";
+import SiteFooter from "../components/SiteFooter.astro";
+import Hero from "../components/home/Hero.astro";
+import MeetAlly from "../components/home/MeetAlly.astro";
+import SupportCardsGrid from "../components/home/SupportCardsGrid.astro";
+import AboutPanel from "../components/home/AboutPanel.astro";
+import TherapyServices from "../components/home/TherapyServices.astro";
+import JourneySteps from "../components/home/JourneySteps.astro";
+import Testimonials from "../components/home/Testimonials.astro";
+import Pricing from "../components/home/Pricing.astro";
+import EmailSignup from "../components/home/EmailSignup.astro";
 import Layout from "../layouts/Layout.astro";
+import {
+	additionalSupport,
+	journeySteps,
+	locations,
+	navItems,
+	pricingTiers,
+	supportCards,
+	therapyServices,
+} from "../data/site";
 ---
 
-<Layout
-	title="Awaken Discovery | Counselling and Psychotherapy"
-	description="Counselling and psychotherapy practitioner in Market Weighton, East Yorkshire."
->
+<Layout>
 	<SiteHeader navItems={navItems} />
 	<main>
-		<HomeHero />
-		<HomeInternalStruggle />
-		<HomeBenefits items={benefits} />
-		<HomeQuote />
-		<HomeContact />
+		<Hero />
+		<MeetAlly />
+		<SupportCardsGrid cards={supportCards} />
+		<AboutPanel />
+		<TherapyServices therapy={therapyServices} additional={additionalSupport} />
+		<JourneySteps steps={journeySteps} />
+		<Testimonials />
+		<Pricing tiers={pricingTiers} />
+		<EmailSignup />
 	</main>
 	<SiteFooter navItems={navItems} locations={locations} />
 </Layout>

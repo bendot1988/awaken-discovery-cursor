@@ -6,6 +6,12 @@ interface Props {
 }
 
 const { navItems } = Astro.props;
+const currentPath = Astro.url.pathname.replace(/\/$/, "") || "/";
+
+const isActive = (href: string) => {
+	const normalized = href.replace(/\/$/, "") || "/";
+	return normalized === currentPath;
+};
 ---
 
 <header class="site-header">
@@ -18,13 +24,20 @@ const { navItems } = Astro.props;
 			<ul class="nav-list">
 				{
 					navItems.map((item) => (
-						<li><a href={item.href}>{item.label}</a></li>
+						<li>
+							<a
+								href={item.href}
+								aria-current={isActive(item.href) ? "page" : undefined}
+							>
+								{item.label}
+							</a>
+						</li>
 					))
 				}
 			</ul>
 		</nav>
 
-		<a class="cta cta-solid header-cta" href="/#contact">Book Your Taster Session</a>
+		<a class="cta cta-solid header-cta" href="/contact">Book a Free Consultation</a>
 
 		<details class="mobile-menu">
 			<summary aria-label="Toggle menu">Menu</summary>
@@ -32,9 +45,17 @@ const { navItems } = Astro.props;
 				<ul>
 					{
 						navItems.map((item) => (
-							<li><a href={item.href}>{item.label}</a></li>
+							<li>
+								<a
+									href={item.href}
+									aria-current={isActive(item.href) ? "page" : undefined}
+								>
+									{item.label}
+								</a>
+							</li>
 						))
 					}
+					<li><a class="mobile-cta" href="/contact">Book a Free Consultation</a></li>
 				</ul>
 			</nav>
 		</details>
@@ -81,7 +102,9 @@ const { navItems } = Astro.props;
 
 	.nav-list a {
 		color: var(--color-dark-gray);
-		transition: color 0.2s ease;
+		padding-block: 0.3rem;
+		border-bottom: 1px solid transparent;
+		transition: color 0.2s ease, border-color 0.2s ease;
 	}
 
 	.nav-list a:hover,
@@ -89,9 +112,15 @@ const { navItems } = Astro.props;
 		color: var(--color-dark-slate-gray);
 	}
 
+	.nav-list a[aria-current="page"] {
+		color: var(--color-dark-slate-gray);
+		border-bottom-color: var(--color-dark-slate-gray);
+	}
+
 	.mobile-menu {
 		display: none;
 		justify-self: end;
+		position: relative;
 	}
 
 	.mobile-menu summary {
@@ -104,8 +133,8 @@ const { navItems } = Astro.props;
 
 	.mobile-menu nav {
 		position: absolute;
-		right: 1rem;
-		top: calc(100% - 0.2rem);
+		right: 0;
+		top: calc(100% + 0.5rem);
 		width: min(280px, 90vw);
 		padding: 1rem;
 		background: var(--color-white);
@@ -122,6 +151,21 @@ const { navItems } = Astro.props;
 
 	.mobile-menu li + li {
 		margin-top: 0.7rem;
+	}
+
+	.mobile-menu a[aria-current="page"] {
+		color: var(--color-dark-slate-gray);
+		font-weight: 600;
+	}
+
+	.mobile-cta {
+		display: inline-block;
+		margin-top: 0.5rem;
+		padding: 0.5rem 0.9rem;
+		border-radius: 999px;
+		background: var(--color-dark-slate-gray);
+		color: var(--color-white);
+		font-size: 0.85rem;
 	}
 
 	@media (max-width: 1024px) {

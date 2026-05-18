@@ -1,0 +1,101 @@
+<section class="meet-ally section">
+	<div class="container ally-grid">
+		<div class="ally-media">
+			<img
+				src="/assets/images/hero-ally.png"
+				alt="Ally — counsellor and psychotherapist at Awaken Discovery"
+				loading="lazy"
+				decoding="async"
+			/>
+		</div>
+		<div class="ally-copy">
+			<p class="section-kicker">Meet Ally</p>
+			<h2>Meet Ally — Your Guide to Discovery</h2>
+			<p>
+				After more than twenty years supporting people within education and emotional
+				wellbeing, I understand how easy it can become to lose yourself beneath pressure,
+				responsibility and the constant demands of everyday life.
+			</p>
+			<p>
+				Awaken Discovery was created to offer a compassionate, grounded space where you
+				can pause, feel heard and begin reconnecting with yourself again. Using an
+				integrative humanistic approach, I support individuals, couples and young people
+				navigating anxiety, burnout, emotional overwhelm, relationships, low self-worth
+				and life transitions.
+			</p>
+			<p class="ally-emphasis">
+				Therapy is not about being "fixed." It is about creating space to understand
+				yourself with greater compassion, clarity and emotional safety.
+			</p>
+			<a class="cta cta-outline" href="/about">Learn More About Ally</a>
+			<p class="ally-todo">
+				{`{{TODO: /about page copy — destination linked but not yet written}}`}
+			</p>
+		</div>
+	</div>
+</section>
+
+<style>
+	.meet-ally {
+		background: var(--color-white);
+	}
+
+	.ally-grid {
+		display: grid;
+		grid-template-columns: 0.85fr 1.15fr;
+		gap: clamp(1.6rem, 4vw, 3.5rem);
+		align-items: center;
+	}
+
+	.ally-media img {
+		width: 100%;
+		aspect-ratio: 4 / 5;
+		object-fit: cover;
+		object-position: 50% 25%;
+		border-radius: 1rem;
+		box-shadow: 0 12px 30px rgb(29 35 39 / 12%);
+	}
+
+	.section-kicker {
+		margin: 0;
+		text-transform: uppercase;
+		letter-spacing: 0.08em;
+		font-size: 0.78rem;
+		font-weight: 600;
+		color: var(--color-dark-slate-gray);
+	}
+
+	h2 {
+		margin: 0.6rem 0 1rem;
+		font-family: var(--font-serif);
+		font-size: clamp(1.7rem, 3.3vw, 2.5rem);
+		line-height: 1.18;
+		font-weight: 500;
+	}
+
+	p {
+		margin: 0 0 1rem;
+		line-height: 1.85;
+		max-width: 62ch;
+	}
+
+	.ally-emphasis {
+		font-family: var(--font-serif);
+		font-style: italic;
+		font-size: 1.1rem;
+		color: var(--color-dark-slate-gray);
+	}
+
+	.ally-todo {
+		margin: 0.7rem 0 0;
+		font-size: 0.75rem;
+		font-style: italic;
+		opacity: 0.55;
+	}
+
+	@media (max-width: 900px) {
+		.ally-grid {
+			grid-template-columns: 1fr;
+		}
+	}
+</style>
