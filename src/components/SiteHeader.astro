@@ -1,5 +1,5 @@
 ---
-import type { NavItem } from "../data/site";
+import { teacherGuidePath, type NavItem } from "../data/site";
 
 interface Props {
 	navItems: NavItem[];
@@ -37,7 +37,17 @@ const isActive = (href: string) => {
 			</ul>
 		</nav>
 
-		<a class="cta cta-solid header-cta" href="/contact">Book a Free Consultation</a>
+		<div class="header-actions">
+			<a
+				class="header-guide"
+				href={teacherGuidePath}
+				aria-current={isActive(teacherGuidePath) ? "page" : undefined}
+			>
+				<span class="header-guide-tag">Free</span>
+				<span>Teacher Guide</span>
+			</a>
+			<a class="cta cta-solid header-cta" href="/contact">Book a Free Consultation</a>
+		</div>
 
 		<details class="mobile-menu">
 			<summary aria-label="Toggle menu">Menu</summary>
@@ -55,6 +65,11 @@ const isActive = (href: string) => {
 							</li>
 						))
 					}
+					<li>
+						<a class="mobile-guide" href={teacherGuidePath}>
+							<span class="header-guide-tag">Free</span> Teacher Guide
+						</a>
+					</li>
 					<li><a class="mobile-cta" href="/contact">Book a Free Consultation</a></li>
 				</ul>
 			</nav>
@@ -117,9 +132,60 @@ const isActive = (href: string) => {
 		border-bottom-color: var(--color-dark-slate-gray);
 	}
 
+	.header-actions {
+		display: flex;
+		align-items: center;
+		gap: 0.7rem;
+		justify-self: end;
+	}
+
+	.header-guide {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.4rem;
+		padding: 0.4rem 0.85rem 0.4rem 0.4rem;
+		border-radius: 999px;
+		border: 1px solid rgb(0 94 71 / 30%);
+		background: rgb(0 94 71 / 5%);
+		font-size: 0.82rem;
+		font-weight: 500;
+		color: var(--color-dark-slate-gray);
+		transition: background-color 0.2s ease, border-color 0.2s ease;
+	}
+
+	.header-guide:hover,
+	.header-guide:focus-visible {
+		background: rgb(0 94 71 / 12%);
+		border-color: var(--color-dark-slate-gray);
+	}
+
+	.header-guide-tag {
+		display: inline-block;
+		padding: 0.18rem 0.55rem;
+		border-radius: 999px;
+		background: var(--color-dark-slate-gray);
+		color: var(--color-white);
+		font-size: 0.66rem;
+		font-weight: 700;
+		letter-spacing: 0.08em;
+		text-transform: uppercase;
+	}
+
+	.header-guide[aria-current="page"] {
+		border-color: var(--color-dark-slate-gray);
+		background: rgb(0 94 71 / 14%);
+	}
+
+	.mobile-guide {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.4rem;
+		font-weight: 500;
+		color: var(--color-dark-slate-gray);
+	}
+
 	.mobile-menu {
 		display: none;
-		justify-self: end;
 		position: relative;
 	}
 
@@ -170,12 +236,13 @@ const isActive = (href: string) => {
 
 	@media (max-width: 1024px) {
 		.desktop-nav,
-		.header-cta {
+		.header-actions {
 			display: none;
 		}
 
 		.mobile-menu {
 			display: block;
+			justify-self: end;
 		}
 
 		.header-inner {

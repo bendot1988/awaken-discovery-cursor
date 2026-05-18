@@ -1,5 +1,5 @@
 ---
-import type { NavItem } from "../data/site";
+import { teacherGuidePath, type NavItem } from "../data/site";
 
 interface Props {
 	navItems: NavItem[];
@@ -24,6 +24,18 @@ const year = new Date().getFullYear();
 			</a>
 			<p class="footer-tagline">{tagline}</p>
 		</div>
+
+		<section class="footer-resources" aria-labelledby="footer-resources-heading">
+			<h2 id="footer-resources-heading">Free resources</h2>
+			<ul>
+				<li>
+					<a class="footer-guide" href={teacherGuidePath}>
+						<span class="footer-guide-tag">Free</span>
+						<span>Finding Calm in the Chaos — a guide for overwhelmed teachers</span>
+					</a>
+				</li>
+			</ul>
+		</section>
 
 		<nav class="footer-nav-wrap" aria-label="Footer">
 			<ul class="footer-nav">
@@ -87,8 +99,59 @@ const year = new Date().getFullYear();
 		max-width: 50ch;
 	}
 
-	.footer-nav-wrap {
+	.footer-resources {
 		margin-top: 2rem;
+		padding-top: 1.5rem;
+		border-top: 1px solid rgb(255 255 255 / 22%);
+	}
+
+	.footer-resources h2 {
+		margin: 0 0 0.85rem;
+		font-size: 0.78rem;
+		font-weight: 600;
+		letter-spacing: 0.08em;
+		text-transform: uppercase;
+		opacity: 0.85;
+	}
+
+	.footer-resources ul {
+		margin: 0;
+		padding: 0;
+		list-style: none;
+	}
+
+	.footer-guide {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.6rem;
+		padding: 0.5rem 0.95rem 0.5rem 0.45rem;
+		border-radius: 999px;
+		background: rgb(255 255 255 / 8%);
+		border: 1px solid rgb(255 255 255 / 25%);
+		font-size: 0.88rem;
+		transition: background-color 0.2s ease, border-color 0.2s ease;
+	}
+
+	.footer-guide:hover,
+	.footer-guide:focus-visible {
+		background: rgb(255 255 255 / 14%);
+		border-color: rgb(255 255 255 / 55%);
+	}
+
+	.footer-guide-tag {
+		display: inline-block;
+		padding: 0.18rem 0.55rem;
+		border-radius: 999px;
+		background: var(--color-white);
+		color: var(--color-dark-slate-gray);
+		font-size: 0.66rem;
+		font-weight: 700;
+		letter-spacing: 0.08em;
+		text-transform: uppercase;
+	}
+
+	.footer-nav-wrap {
+		margin-top: 1.5rem;
 		padding-top: 1.25rem;
 		border-top: 1px solid rgb(255 255 255 / 22%);
 	}

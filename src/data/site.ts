@@ -38,6 +38,8 @@ export const siteMeta = {
 	canonicalOrigin: "https://awakendiscovery.co.uk",
 };
 
+export const teacherGuidePath = "/finding-calm-teachers";
+
 export const navItems: NavItem[] = [
 	{ label: "Home", href: "/" },
 	{ label: "Teachers", href: "/teachers" },
