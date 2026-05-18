@@ -3,6 +3,33 @@ import Layout from "../../layouts/Layout.astro";
 import SiteHeader from "../../components/SiteHeader.astro";
 import SiteFooter from "../../components/SiteFooter.astro";
 import { locations, navItems } from "../../data/site";
+
+const faqs = [
+	{
+		q: "Is the guide really free?",
+		a: "Yes — completely free. No card, no trial, no catch. Pop your email in, the guide lands in your inbox, and you can read it whenever you have a quiet five minutes.",
+	},
+	{
+		q: "How long does the guide take to read?",
+		a: "You can read it in one sitting in about 15 minutes, but it's built to dip in and out of. Each grounding technique inside takes under 60 seconds to actually do.",
+	},
+	{
+		q: "I've tried mindfulness apps and they didn't work. Why is this different?",
+		a: "Most apps assume you've got time and headspace to spare. You don't. This guide is built around what you can actually do between lessons, in the car, or in the staff toilet — when you're already running on empty.",
+	},
+	{
+		q: "Do I need to be in therapy already?",
+		a: "Not at all. The guide is for any teacher feeling overwhelmed. If you decide later that you'd like one-to-one support, that option is there — but there's zero pressure.",
+	},
+	{
+		q: "What if I'm thinking of leaving teaching — is this still for me?",
+		a: "Especially for you. The guide isn't trying to talk you into staying or pushing you to leave. It's about getting your nervous system steady enough that you can make that decision from clarity, not crisis.",
+	},
+	{
+		q: "Will I get spammed with daily emails?",
+		a: "No. After the guide arrives you'll get occasional gentle, supportive emails — written by a human, not a marketing funnel. Unsubscribe with one click any time.",
+	},
+];
 ---
 
 <Layout
@@ -10,24 +37,32 @@ import { locations, navItems } from "../../data/site";
 	description="A free guide for overwhelmed teachers — gentle, body-aware tools to ground yourself in under 60 seconds when you're already running on empty."
 >
 	<SiteHeader navItems={navItems} />
-	<main class="sales-page">
+	<main class="sl">
 		<!-- ============== HERO ============== -->
 		<section class="sl-hero">
-			<div class="container sl-hero-inner">
+			<div class="container sl-hero-grid">
 				<div class="sl-hero-copy">
 					<p class="sl-pre">Listen…</p>
 					<h1>
-						If You're Lying Awake at 3 AM Dreading Monday Morning… Crying in Your Car
-						Before You Walk Into School… or Fantasising About Quitting Teaching But
-						Terrified You Can't Afford To…
+						If You're Lying Awake at 3 AM Dreading Monday… Crying in Your Car Before
+						School… Or Quietly Fantasising About Quitting Teaching for Good —
 					</h1>
 					<p class="sl-promise">
-						Then My Free Guide Will Show You How to Survive the Rest of This Term
-						Without Completely Falling Apart.
+						This free guide will show you how to survive the rest of this term
+						without completely falling apart.
 					</p>
-					<a class="cta cta-solid sl-cta-primary" href="#claim">
-						Yes — Send Me the Free Guide
-					</a>
+					<div class="sl-hero-cta-row">
+						<a class="sl-cta sl-cta-primary" href="#claim">
+							Yes — Send Me the Free Guide
+						</a>
+						<span class="sl-cta-note">Free PDF · arrives in 2 minutes</span>
+					</div>
+					<ul class="sl-hero-trust">
+						<li>Ex-teacher</li>
+						<li>MBACP Registered Counsellor</li>
+						<li>20+ years in education</li>
+						<li>Online · phone · in-person</li>
+					</ul>
 				</div>
 				<figure class="sl-hero-figure">
 					<img
@@ -37,254 +72,297 @@ import { locations, navItems } from "../../data/site";
 						decoding="async"
 						fetchpriority="high"
 					/>
-					<figcaption class="sl-image-todo">
-						{`{{IMAGE PROMPT: Warm, candid portrait of Ally — ex-teacher, now counsellor — sitting in a calm sage-toned therapy room. Soft natural light, a warm mug nearby, gentle eye contact, hint of a smile. Should feel safe and like a friend, not clinical.}}`}
+					<figcaption class="sl-img-todo">
+						{`{{IMAGE PROMPT: Warm, candid portrait of Ally — ex-teacher, now counsellor. Sage-toned therapy room, soft natural light, warm mug nearby. Should feel like a kind friend, not clinical.}}`}
 					</figcaption>
 				</figure>
 			</div>
 		</section>
 
-		<!-- ============== TRUTH ============== -->
-		<section class="sl-band">
-			<div class="container sl-prose">
-				<p class="sl-lead">
-					Here's the truth nobody in the staffroom is saying out loud:
-				</p>
-				<p>
-					You're not "not cut out for this." You're not weak. And you're definitely
-					not the only one feeling this way.
-				</p>
-				<p>
-					What you <em>are</em> is carrying an impossible load that gets heavier every
-					single term… and your nervous system is screaming for relief.
-				</p>
-				<p class="sl-stack">
-					The Sunday night dread.<br />
-					The panic attacks in the stationery cupboard.<br />
-					The constant feeling that you're failing everyone — your students, your
-					colleagues, the parents, yourself.
-				</p>
-				<p class="sl-pull">Sound familiar?</p>
+		<!-- ============== STAT BAR ============== -->
+		<aside class="sl-stats" aria-label="At a glance">
+			<div class="container sl-stats-row">
+				<div><strong>20+</strong><span>years in education</span></div>
+				<div><strong>MBACP</strong><span>Registered Counsellor</span></div>
+				<div><strong>Nervous-system</strong><span>aware therapy</span></div>
+				<div><strong>UK-wide</strong><span>online &amp; in-person</span></div>
 			</div>
-		</section>
+		</aside>
 
-		<!-- ============== STAFFROOM IMAGE ============== -->
-		<section class="sl-image-band">
-			<div class="container">
-				<figure>
+		<!-- ============== EMPATHY CHECKLIST ============== -->
+		<section class="sl-band sl-check">
+			<div class="container sl-check-grid">
+				<div>
+					<p class="sl-eyebrow">Sound familiar?</p>
+					<h2>If you're nodding along to any of these…</h2>
+					<ul class="sl-check-list">
+						<li>The Sunday-night dread that starts mid-Saturday.</li>
+						<li>Panic rising in the stationery cupboard before period 4.</li>
+						<li>Crying in the car park before you've even walked in.</li>
+						<li>Working until 9pm and still feeling behind.</li>
+						<li>Snapping at people you love because there's nothing left.</li>
+						<li>Counting down the days to half-term, again.</li>
+						<li>Pretending you're fine when colleagues ask.</li>
+					</ul>
+					<p class="sl-check-foot">
+						You're not broken. You're not weak. And you're not the only one.
+					</p>
+				</div>
+				<figure class="sl-check-figure">
 					<img
 						src="/assets/images/staff-room-truth-section.png"
-						alt="A quiet moment alone in an empty staffroom"
+						alt="A quiet, weary moment in an empty staffroom"
 						loading="lazy"
 						decoding="async"
 					/>
-					<figcaption class="sl-image-todo">
-						{`{{IMAGE PROMPT: A teacher alone in a quiet moment — empty staffroom or empty classroom after hours, low warm light, a half-drunk mug of tea, exercise books closed on the desk. Should evoke "the end of a long day" not despair.}}`}
+					<figcaption class="sl-img-todo">
+						{`{{IMAGE PROMPT: A teacher alone in a quiet moment — empty classroom or staffroom after hours. Pile of exercise books, lukewarm mug, low warm light, soft focus. Conveys exhaustion, not despair.}}`}
 					</figcaption>
 				</figure>
 			</div>
 		</section>
 
-		<!-- ============== DIFFERENCE ============== -->
-		<section class="sl-band sl-band-soft">
+		<!-- ============== PULL QUOTE 1 ============== -->
+		<section class="sl-pull-band">
+			<div class="container">
+				<p class="sl-pullquote">
+					You're not "not cut out for this." <span>You're carrying an impossible load that gets heavier every single term.</span>
+				</p>
+			</div>
+		</section>
+
+		<!-- ============== WHY THIS IS DIFFERENT ============== -->
+		<section class="sl-band sl-band-cream">
 			<div class="container sl-prose">
-				<h2>What Makes This Different From Every Other "Teacher Wellbeing" Initiative</h2>
+				<p class="sl-eyebrow">Here's the thing nobody in the staffroom says</p>
+				<h2>Most "teacher wellbeing" programs are designed by people who've never taught.</h2>
 				<p>
-					Most wellbeing programs tell you to "practice self-care." To do yoga. To
-					set boundaries. To "just say no."
+					They tell you to do yoga. To "practice self-care." To "set boundaries." To
+					"just say no."
+				</p>
+				<p>
+					Which is lovely advice — if you have a spare hour, a quiet room, and a
+					nervous system that isn't already in the red.
 				</p>
 				<p class="sl-emphasis">
-					I'm going to show you how to actually <em>survive</em> the day when
-					you're already running on empty.
+					You don't. So we're going to do this differently.
 				</p>
-				<p>Because here's what I discovered after leaving teaching myself:</p>
-				<blockquote class="sl-quote">
-					The anxiety you're feeling isn't because you're doing something wrong. It's
-					because your body is trying to protect you from a system that's broken.
-				</blockquote>
 				<p>
-					And until you learn to work <em>with</em> your nervous system instead of
-					pushing through and ignoring it… no amount of bubble baths or mindfulness
-					apps will give you lasting relief.
+					I'm going to show you how to actually <em>survive</em> a difficult day —
+					between lessons, in the car park, in the loo — without anyone noticing,
+					without changing your timetable, and without adding one more thing to your
+					to-do list.
 				</p>
 			</div>
 		</section>
 
-		<!-- ============== STORY ============== -->
-		<section class="sl-band">
-			<div class="container sl-prose sl-story">
-				<h2>I Know This Because I Lived It</h2>
-				<p>I was you.</p>
-				<p>
-					The exhausted teacher who loved the kids but couldn't take one more data
-					meeting, one more observation, one more initiative that added to the
-					workload without taking anything away.
+		<!-- ============== PULL QUOTE 2 ============== -->
+		<section class="sl-pull-band sl-pull-band-deep">
+			<div class="container">
+				<p class="sl-pullquote sl-pullquote-light">
+					Your anxiety isn't a sign that something is wrong with you.
+					<span>It's your body trying to protect you from a system that's broken.</span>
 				</p>
-				<p>I left teaching because it was literally destroying my health.</p>
-				<p>
-					And in the years since, I've become a Counsellor and Psychotherapist
-					specialising in anxiety… and I've worked with dozens of teachers just like
-					you.
-				</p>
-				<ul class="sl-bullets">
-					<li>Teachers who are desperately trying to hold it together.</li>
-					<li>
-						Teachers who feel guilty for struggling when they "should" be grateful to
-						have a job.
-					</li>
-					<li>
-						Teachers who are terrified they're going to have a breakdown in front of
-						their Year 9s.
-					</li>
-				</ul>
-				<p>That's why I created this free guide specifically for teachers.</p>
 			</div>
 		</section>
 
-		<!-- ============== GUIDE OFFER ============== -->
+		<!-- ============== I WAS YOU ============== -->
+		<section class="sl-band sl-iwasyou">
+			<div class="container sl-iwasyou-grid">
+				<figure class="sl-iwasyou-figure">
+					<img
+						src="/assets/images/teachers-guide-ally.svg"
+						alt="Ally in her Market Weighton therapy room"
+						loading="lazy"
+						decoding="async"
+					/>
+					<figcaption class="sl-img-todo">
+						{`{{IMAGE PROMPT: Second portrait of Ally — softer, slightly more "professional." In her Market Weighton therapy room, books and plants in soft focus behind. Calm, warm, trustworthy. Could be writing in a notebook or sitting with a mug.}}`}
+					</figcaption>
+				</figure>
+				<div class="sl-iwasyou-copy">
+					<p class="sl-eyebrow">I know — because I lived it</p>
+					<h2>I was you.</h2>
+					<p>
+						The exhausted teacher who loved the kids but couldn't take one more data
+						meeting, one more observation, one more initiative that added work
+						without ever taking anything away.
+					</p>
+					<p>I left teaching because it was destroying my health. Honestly, probably worse than that.</p>
+					<p>
+						In the years since, I trained as a Counsellor and Psychotherapist
+						specialising in anxiety — and I've worked with dozens of teachers who
+						feel exactly the way you do right now.
+					</p>
+					<ul class="sl-iwasyou-list">
+						<li>Teachers desperately trying to hold it together.</li>
+						<li>Teachers who feel guilty for struggling when they "should" be grateful for a job.</li>
+						<li>Teachers terrified they're going to have a breakdown in front of their Year 9s.</li>
+					</ul>
+					<p class="sl-emphasis">That's exactly who I built this guide for.</p>
+				</div>
+			</div>
+		</section>
+
+		<!-- ============== THE OFFER ============== -->
 		<section class="sl-offer" id="offer">
 			<div class="container sl-offer-grid">
 				<figure class="sl-offer-mockup">
 					<img
 						src="/assets/images/teachers-guide-hero.svg"
-						alt="Mockup of the Finding Calm in the Chaos guide for teachers"
+						alt="Mockup of Finding Calm in the Chaos — a free guide for overwhelmed teachers"
 						loading="lazy"
 						decoding="async"
 					/>
-					<figcaption class="sl-image-todo">
-						{`{{IMAGE PROMPT: 3D mockup or flatlay of the "Finding Calm in the Chaos" PDF guide — sage-green cover with calligraphic title, gentle leaf motif, shown on a softly lit desk next to a notebook and a warm mug. Cosy, not corporate.}}`}
+					<figcaption class="sl-img-todo">
+						{`{{IMAGE PROMPT: 3D mockup or flatlay of the "Finding Calm in the Chaos" PDF. Sage-green cover with calligraphic title and gentle leaf motif. Soft desk styling — notebook, warm mug, single leaf. Cosy, not corporate.}}`}
 					</figcaption>
 				</figure>
 				<div class="sl-offer-copy">
-					<p class="sl-eyebrow">Grab Your Free Guide</p>
+					<p class="sl-eyebrow">Your free guide</p>
 					<h2>Finding Calm in the Chaos</h2>
 					<p class="sl-sub">
-						A Teacher's Guide to Grounding Yourself When You're Already Overwhelmed
+						A teacher's guide to grounding yourself — even when you're already
+						overwhelmed.
 					</p>
-					<p>Inside, you'll discover:</p>
 					<ul class="sl-inside">
 						<li>
-							<strong>How to gently ground yourself in under 60 seconds</strong> —
-							even between lessons when you've got 47 exercise books to mark and a
-							parent email that's making your stomach churn.
+							<strong>Ground yourself in under 60 seconds</strong> — between lessons,
+							with 47 books to mark and a parent email churning in your stomach.
 						</li>
 						<li>
-							<strong>Simple body-aware techniques</strong> you can use in the
-							classroom, the staffroom or your car without anyone noticing.
+							<strong>Body-aware techniques nobody can see you doing</strong> — in
+							the classroom, the staffroom, the car park.
 						</li>
 						<li>
-							<strong>Why your anxiety gets WORSE during the school holidays</strong>
-							— and what to do about it.
+							<strong>Why your anxiety gets WORSE in the holidays</strong> — and the
+							quiet reason it happens.
 						</li>
 						<li>
-							<strong>A gentle reflection space</strong> to notice what's actually
-							happening in your body when the pressure builds — so you can spot the
-							warning signs before you hit complete burnout.
+							<strong>How to spot burnout coming weeks before it lands</strong> — so
+							you can act on the warning signs instead of being floored by them.
 						</li>
 						<li>
-							<strong>Personal "anchors"</strong> you can return to when you're in
-							the middle of a challenging lesson, a difficult conversation, or
-							another pointless meeting that could have been an email.
+							<strong>Personal "anchors" you can return to mid-lesson</strong> —
+							when a difficult conversation or pointless meeting has tipped you over.
 						</li>
 					</ul>
 					<p class="sl-promise-small">
-						This isn't about "fixing" you or making you a "better teacher." This is
-						about helping you survive the system without sacrificing your mental
-						health.
+						Not about "fixing" you or making you a "better teacher." About surviving
+						the system without sacrificing your mental health.
 					</p>
-					<a class="cta cta-solid sl-cta-primary" href="#claim">
+					<a class="sl-cta sl-cta-primary" href="#claim">
 						Yes — Send Me the Free Guide
 					</a>
 				</div>
 			</div>
 		</section>
 
-		<!-- ============== AUTHORITY ============== -->
-		<section class="sl-band sl-band-soft">
-			<div class="container sl-authority">
-				<figure class="sl-authority-photo">
-					<img
-						src="/assets/images/teachers-guide-ally.svg"
-						alt="Ally — counsellor, psychotherapist and ex-teacher"
-						loading="lazy"
-						decoding="async"
-					/>
-					<figcaption class="sl-image-todo">
-						{`{{IMAGE PROMPT: Second portrait of Ally — slightly more "professional" feel than the hero shot. Sitting in her Market Weighton therapy room, plants and books in soft focus behind. Calm, warm, trustworthy.}}`}
-					</figcaption>
-				</figure>
-				<div class="sl-authority-copy">
-					<h2>Who Am I and Why Should You Listen?</h2>
-					<p>I'm Ally, and I'm a Counsellor, Psychotherapist and wellbeing educator.</p>
-					<p class="sl-emphasis">But more importantly? I'm an ex-teacher who gets it.</p>
-					<ul class="sl-bullets">
-						<li>I know what it's like to spend your lunch break photocopying instead of eating.</li>
-						<li>I know what it's like to work until 9 PM and still feel like you haven't done enough.</li>
-						<li>I know what it's like to love teaching but hate what it's doing to your body and mind.</li>
-					</ul>
-					<p>
-						I left the profession because the pressure and burnout was exhausting me.
-						Probably killing me, to be honest.
-					</p>
-					<p>
-						And now I help teachers like you understand your anxiety and find ways to
-						cope with the impossible demands… without leaving the profession (unless
-						that's what you want to do).
-					</p>
-					<p>
-						I work with individuals online, by telephone and face-to-face from my
-						peaceful therapy rooms in Market Weighton, East Yorkshire, England.
-					</p>
-					<p>
-						I've developed a gentle, body-aware approach that actually works when
-						you're already running on empty and don't have time for complicated
-						self-care routines.
-					</p>
+		<!-- ============== TESTIMONIAL ============== -->
+		<section class="sl-band sl-testimonials">
+			<div class="container">
+				<p class="sl-eyebrow sl-eyebrow-center">What teachers say</p>
+				<div class="sl-test-grid">
+					<blockquote class="sl-testimonial">
+						<p>
+							The counselling sessions have helped me untangle some of the emotions
+							I've been carrying.
+						</p>
+						<footer>— A current client</footer>
+					</blockquote>
+					<blockquote class="sl-testimonial sl-testimonial-big">
+						<p>
+							I couldn't recommend Ally more highly. She has a kind and caring
+							nature that means it's easy to talk to her. What makes her great is
+							her ability to help me really clarify my thoughts — so I can express
+							what I'm thinking and feeling.
+						</p>
+						<footer>— A current client</footer>
+					</blockquote>
 				</div>
+				<p class="sl-test-todo">
+					{`{{TODO: lift teacher-specific testimonials when available. Existing quotes are general counselling clients pulled from the live site.}}`}
+				</p>
+			</div>
+		</section>
+
+		<!-- ============== IS THIS FOR YOU? ============== -->
+		<section class="sl-band sl-band-cream">
+			<div class="container">
+				<header class="sl-section-head">
+					<p class="sl-eyebrow">Honest check</p>
+					<h2>Is this guide for you?</h2>
+				</header>
+				<div class="sl-fit-grid">
+					<div class="sl-fit-card sl-fit-yes">
+						<h3>Yes — if you're…</h3>
+						<ul>
+							<li>A teacher (any phase, any subject) feeling close to the edge.</li>
+							<li>Already trying "all the things" and quietly drowning anyway.</li>
+							<li>Worried about looking weak if you ask for help.</li>
+							<li>Not sure whether to stay, go, or just survive this term.</li>
+							<li>Open to gentle, body-aware tools rather than rigid advice.</li>
+						</ul>
+					</div>
+					<div class="sl-fit-card sl-fit-no">
+						<h3>Probably not — if you…</h3>
+						<ul>
+							<li>Want a quick-fix productivity hack.</li>
+							<li>Are looking for medical or clinical diagnosis.</li>
+							<li>Need urgent crisis support right now (please call 116 123 — Samaritans).</li>
+							<li>Don't like the idea of slowing down, even for 60 seconds.</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- ============== PULL QUOTE 3 ============== -->
+		<section class="sl-pull-band">
+			<div class="container">
+				<p class="sl-pullquote">
+					You can't pour from an empty cup.
+					<span>And no-one in the staffroom is going to fill it for you.</span>
+				</p>
 			</div>
 		</section>
 
 		<!-- ============== NEXT STEPS ============== -->
 		<section class="sl-band">
-			<div class="container sl-prose">
-				<h2>Here's What Happens Next</h2>
+			<div class="container">
+				<header class="sl-section-head">
+					<p class="sl-eyebrow">Here's what happens next</p>
+					<h2>Three steps. Less than five minutes.</h2>
+				</header>
 				<ol class="sl-steps">
 					<li>
 						<span class="sl-step-num">01</span>
-						<div>
-							<h3>Enter your email below</h3>
-							<p>And grab your free guide.</p>
-						</div>
+						<h3>Drop your email</h3>
+						<p>The guide lands in your inbox in the next two minutes.</p>
 					</li>
 					<li>
 						<span class="sl-step-num">02</span>
-						<div>
-							<h3>Try the techniques during your next difficult day</h3>
-							<p>They take less than 60 seconds each.</p>
-						</div>
+						<h3>Try one technique</h3>
+						<p>On your next hard day. Each one takes under 60 seconds.</p>
 					</li>
 					<li>
 						<span class="sl-step-num">03</span>
-						<div>
-							<h3>Notice what feels different</h3>
-							<p>
-								When you're not constantly fighting your own nervous system.
-							</p>
-						</div>
+						<h3>Notice the shift</h3>
+						<p>What it feels like when you stop fighting your own nervous system.</p>
 					</li>
 				</ol>
 			</div>
 		</section>
 
-		<!-- ============== CLAIM / FORM ============== -->
+		<!-- ============== CLAIM FORM ============== -->
 		<section class="sl-claim" id="claim">
-			<div class="container sl-claim-inner">
+			<div class="container sl-claim-grid">
 				<div class="sl-claim-copy">
-					<p class="sl-eyebrow">Yes — Send Me the Free Guide</p>
+					<p class="sl-eyebrow">Yes — send me the guide</p>
 					<h2>Finding Calm in the Chaos</h2>
 					<p>
-						Pop your email below and the guide will land in your inbox in the next
-						few minutes.
+						Pop your email below. The PDF lands in your inbox in the next couple of
+						minutes — read it whenever you next have a quiet five.
 					</p>
 				</div>
 				<form
@@ -307,45 +385,76 @@ import { locations, navItems } from "../../data/site";
 					<label class="sl-consent">
 						<input type="checkbox" name="consent" required />
 						<span>
-							Please send me the guide and supportive wellbeing emails. I can
-							unsubscribe at any time.
+							Send me the guide and supportive wellbeing emails. I can unsubscribe
+							any time.
 						</span>
 					</label>
-					<button class="cta cta-solid sl-submit" type="submit">
-						Yes — Send Me the Free Guide Now
+					<button class="sl-cta sl-cta-primary sl-submit" type="submit">
+						Send Me the Free Guide Now
 					</button>
 					<p class="sl-privacy">
-						We handle your details with care. See our
+						Your details are handled with care. See our
 						<a href="/privacy">Privacy Policy</a>.
 					</p>
-					<p id="sl-form-todo" class="sl-image-todo">
-						{`{{TODO: connect form to ESP — on submit, send PDF + trigger nurture sequence, then redirect to /finding-calm-teachers/thank-you}}`}
+					<p id="sl-form-todo" class="sl-img-todo">
+						{`{{TODO: wire to ESP — auto-send PDF, trigger nurture sequence, redirect to /finding-calm-teachers/thank-you}}`}
 					</p>
 				</form>
 			</div>
 		</section>
 
-		<!-- ============== CLOSING ============== -->
-		<section class="sl-band sl-closing">
-			<div class="container sl-prose">
-				<p class="sl-stack sl-big">
-					You don't need to keep white-knuckling your way through every term.<br />
-					You don't need to wait until half-term to breathe again.<br />
-					You don't need to choose between your career and your sanity.
-				</p>
-				<p>Download the guide. Give yourself this moment.</p>
-				<p class="sl-emphasis">
-					You deserve to feel calm again… even in the middle of the chaos.
-				</p>
-				<p class="sl-signoff">— Ally</p>
+		<!-- ============== FAQ ============== -->
+		<section class="sl-band sl-band-cream sl-faq">
+			<div class="container">
+				<header class="sl-section-head">
+					<p class="sl-eyebrow">FAQ</p>
+					<h2>Questions teachers ask first</h2>
+				</header>
+				<div class="sl-faq-list">
+					{
+						faqs.map((item) => (
+							<details class="sl-faq-item">
+								<summary>
+									<span>{item.q}</span>
+									<span class="sl-faq-icon" aria-hidden="true">+</span>
+								</summary>
+								<div class="sl-faq-body">
+									<p>{item.a}</p>
+								</div>
+							</details>
+						))
+					}
+				</div>
+			</div>
+		</section>
+
+		<!-- ============== CLOSING STACK ============== -->
+		<section class="sl-close">
+			<div class="container sl-close-inner">
+				<p class="sl-close-line">You don't need to keep white-knuckling every term.</p>
+				<p class="sl-close-line">You don't need to wait until half-term to breathe.</p>
+				<p class="sl-close-line">You don't need to choose between your career and your sanity.</p>
+				<p class="sl-close-meta">Download the guide. Give yourself this moment.</p>
+				<p class="sl-close-signoff">You deserve to feel calm again — even in the middle of the chaos.</p>
+				<p class="sl-signature">— Ally</p>
+				<a class="sl-cta sl-cta-primary sl-cta-final" href="#claim">
+					Yes — Send Me the Free Guide
+				</a>
+			</div>
+		</section>
+
+		<!-- ============== P.S. ============== -->
+		<section class="sl-band sl-ps-band">
+			<div class="container">
 				<aside class="sl-ps">
+					<p class="sl-ps-label">P.S.</p>
 					<p>
-						<strong>P.S.</strong> You became a teacher because you wanted to make a
-						difference. But you can't pour from an empty cup. Let me help you find
-						your way back to yourself… so you can keep doing the work you love
-						without it destroying you.
+						You became a teacher because you wanted to make a difference. But you
+						can't pour from an empty cup. Let me help you find your way back to
+						yourself — so you can keep doing the work you love without it destroying
+						you.
 					</p>
-					<a class="cta cta-outline" href="#claim">Send Me the Free Guide</a>
+					<a class="sl-cta sl-cta-outline" href="#claim">Send Me the Free Guide</a>
 				</aside>
 			</div>
 		</section>
@@ -358,73 +467,191 @@ import { locations, navItems } from "../../data/site";
 </Layout>
 
 <style>
-	.sales-page {
-		--ink: var(--color-dark-gray);
+	.sl {
+		--ink: #14201c;
+		--ink-soft: #485955;
 		--brand: var(--color-dark-slate-gray);
 		--brand-deep: #004836;
+		--brand-tint: rgb(0 94 71 / 8%);
 		--cream: #fbf9f5;
 		--cream-deep: #f3eee5;
-		font-size: 1.05rem;
-		line-height: 1.75;
+		--accent: #b6926a;
+		font-size: 1.1rem;
+		line-height: 1.8;
 		color: var(--ink);
 		background: var(--cream);
 	}
 
-	.sales-page :global(.cta) {
+	.sl p,
+	.sl li {
+		font-size: 1.075rem;
+	}
+
+	/* ---------- CTA system (scoped) ---------- */
+	.sl-cta {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		padding: 1rem 1.6rem;
+		border-radius: 999px;
+		font-family: var(--font-body);
+		font-weight: 600;
 		font-size: 1rem;
-		padding: 0.9rem 1.4rem;
+		letter-spacing: 0.01em;
+		line-height: 1.2;
+		text-align: center;
+		transition: transform 0.15s ease, background-color 0.2s ease,
+			border-color 0.2s ease, box-shadow 0.2s ease;
 	}
 
 	.sl-cta-primary {
 		background: var(--brand);
 		color: var(--color-white);
 		border: 1px solid var(--brand);
-		box-shadow: 0 8px 22px rgb(0 94 71 / 22%);
+		box-shadow: 0 10px 22px rgb(0 94 71 / 28%);
 	}
 
 	.sl-cta-primary:hover,
 	.sl-cta-primary:focus-visible {
 		background: var(--brand-deep);
 		border-color: var(--brand-deep);
+		transform: translateY(-1px);
+		box-shadow: 0 14px 28px rgb(0 94 71 / 34%);
 	}
 
-	/* HERO */
+	.sl-cta-outline {
+		background: transparent;
+		color: var(--brand);
+		border: 1px solid var(--brand);
+	}
+
+	.sl-cta-outline:hover,
+	.sl-cta-outline:focus-visible {
+		background: var(--brand-tint);
+	}
+
+	.sl-cta-final {
+		padding: 1.15rem 2rem;
+		font-size: 1.05rem;
+	}
+
+	/* ---------- Shared ---------- */
+	.sl-eyebrow {
+		margin: 0;
+		text-transform: uppercase;
+		letter-spacing: 0.14em;
+		font-size: 0.78rem;
+		font-weight: 700;
+		color: var(--brand);
+	}
+
+	.sl-eyebrow-center {
+		text-align: center;
+	}
+
+	.sl-section-head {
+		max-width: 60ch;
+		margin-bottom: 2rem;
+	}
+
+	.sl-emphasis {
+		font-weight: 600;
+		font-size: 1.15rem !important;
+		color: var(--brand-deep);
+	}
+
+	.sl-img-todo {
+		font-size: 0.7rem;
+		font-style: italic;
+		opacity: 0.55;
+		line-height: 1.45;
+		margin-top: 0.45rem;
+	}
+
+	/* ---------- HERO ---------- */
 	.sl-hero {
-		padding-block: clamp(3rem, 8vh, 6rem);
-		background: linear-gradient(180deg, var(--cream) 0%, var(--cream-deep) 100%);
+		padding-block: clamp(3.5rem, 9vh, 6.5rem);
+		background:
+			radial-gradient(
+				ellipse at 80% 20%,
+				rgb(0 94 71 / 10%),
+				transparent 60%
+			),
+			linear-gradient(180deg, var(--cream) 0%, var(--cream-deep) 100%);
 	}
 
-	.sl-hero-inner {
+	.sl-hero-grid {
 		display: grid;
 		grid-template-columns: 1.15fr 0.85fr;
-		gap: clamp(2rem, 4vw, 4rem);
+		gap: clamp(2rem, 5vw, 4rem);
 		align-items: center;
 	}
 
 	.sl-pre {
 		margin: 0;
 		font-family: var(--font-script);
-		font-size: clamp(2rem, 4vw, 3rem);
+		font-size: clamp(2.4rem, 5vw, 3.6rem);
 		color: var(--brand);
 		line-height: 1;
 	}
 
 	.sl-hero h1 {
-		margin: 0.6rem 0 1rem;
+		margin: 0.4rem 0 1.2rem;
 		font-family: var(--font-serif);
-		font-size: clamp(1.75rem, 3.8vw, 2.7rem);
+		font-size: clamp(2.2rem, 5.4vw, 4rem);
 		font-weight: 500;
-		line-height: 1.18;
+		line-height: 1.08;
+		letter-spacing: -0.005em;
 		text-wrap: balance;
+		color: var(--ink);
 	}
 
 	.sl-promise {
-		margin: 0 0 1.6rem;
+		margin: 0 0 1.8rem;
 		font-family: var(--font-serif);
 		font-style: italic;
-		font-size: clamp(1.1rem, 2vw, 1.4rem);
+		font-size: clamp(1.2rem, 2.2vw, 1.55rem);
 		color: var(--brand-deep);
-		max-width: 60ch;
+		max-width: 56ch;
+		line-height: 1.5;
+	}
+
+	.sl-hero-cta-row {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		gap: 0.8rem 1.2rem;
+	}
+
+	.sl-cta-note {
+		font-size: 0.88rem;
+		color: var(--ink-soft);
+		font-style: italic;
+	}
+
+	.sl-hero-trust {
+		margin: 2rem 0 0;
+		padding: 0;
+		list-style: none;
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.4rem 1.4rem;
+		font-size: 0.85rem;
+		color: var(--ink-soft);
+	}
+
+	.sl-hero-trust li {
+		position: relative;
+		padding-left: 1.1rem;
+	}
+
+	.sl-hero-trust li::before {
+		content: "✓";
+		position: absolute;
+		left: 0;
+		top: 0;
+		color: var(--brand);
+		font-weight: 700;
 	}
 
 	.sl-hero-figure {
@@ -436,16 +663,47 @@ import { locations, navItems } from "../../data/site";
 		aspect-ratio: 4 / 5;
 		object-fit: cover;
 		object-position: 50% 30%;
-		border-radius: 1rem;
-		box-shadow: 0 18px 40px rgb(29 35 39 / 16%);
+		border-radius: 1.2rem;
+		box-shadow: 0 22px 50px rgb(29 35 39 / 18%);
 	}
 
-	/* BANDS */
+	/* ---------- STAT BAR ---------- */
+	.sl-stats {
+		background: var(--brand);
+		color: var(--color-white);
+		padding-block: 1.4rem;
+	}
+
+	.sl-stats-row {
+		display: grid;
+		grid-template-columns: repeat(4, 1fr);
+		gap: 1rem;
+		text-align: center;
+	}
+
+	.sl-stats-row div {
+		display: grid;
+		gap: 0.15rem;
+	}
+
+	.sl-stats-row strong {
+		font-family: var(--font-serif);
+		font-size: clamp(1.2rem, 2vw, 1.6rem);
+		font-weight: 500;
+	}
+
+	.sl-stats-row span {
+		font-size: 0.82rem;
+		opacity: 0.85;
+		letter-spacing: 0.04em;
+	}
+
+	/* ---------- BANDS ---------- */
 	.sl-band {
-		padding-block: clamp(3rem, 7vh, 5rem);
+		padding-block: clamp(3.5rem, 8vh, 5.5rem);
 	}
 
-	.sl-band-soft {
+	.sl-band-cream {
 		background: var(--cream-deep);
 	}
 
@@ -453,12 +711,14 @@ import { locations, navItems } from "../../data/site";
 		max-width: 64ch;
 	}
 
-	.sl-prose h2 {
-		margin: 0 0 1.1rem;
+	.sl-prose h2,
+	.sl-section-head h2 {
+		margin: 0.55rem 0 1.1rem;
 		font-family: var(--font-serif);
-		font-size: clamp(1.6rem, 3vw, 2.2rem);
+		font-size: clamp(1.9rem, 4vw, 2.8rem);
 		font-weight: 500;
-		line-height: 1.2;
+		line-height: 1.16;
+		letter-spacing: -0.005em;
 		text-wrap: balance;
 	}
 
@@ -466,126 +726,197 @@ import { locations, navItems } from "../../data/site";
 		margin: 0 0 1.1rem;
 	}
 
-	.sl-lead {
+	/* ---------- EMPATHY CHECK ---------- */
+	.sl-check-grid {
+		display: grid;
+		grid-template-columns: 1.05fr 0.95fr;
+		gap: clamp(2rem, 5vw, 4rem);
+		align-items: center;
+	}
+
+	.sl-check h2 {
+		margin: 0.55rem 0 1.4rem;
 		font-family: var(--font-serif);
-		font-size: 1.25rem;
-		font-style: italic;
-		color: var(--brand-deep);
-	}
-
-	.sl-stack {
-		line-height: 1.9;
-	}
-
-	.sl-big {
-		font-size: 1.15rem;
-	}
-
-	.sl-pull {
-		font-family: var(--font-serif);
-		font-style: italic;
-		font-size: 1.4rem;
-		color: var(--brand);
-	}
-
-	.sl-emphasis {
+		font-size: clamp(1.9rem, 4vw, 2.8rem);
 		font-weight: 500;
-		font-size: 1.1rem;
+		line-height: 1.16;
+		text-wrap: balance;
 	}
 
-	.sl-quote {
-		margin: 1.5rem 0;
-		padding: 1.2rem 1.4rem;
-		border-left: 3px solid var(--brand);
-		background: rgb(0 94 71 / 6%);
+	.sl-check-list {
+		margin: 0;
+		padding: 0;
+		list-style: none;
+		display: grid;
+		gap: 0.75rem;
+	}
+
+	.sl-check-list li {
+		position: relative;
+		padding-left: 2.4rem;
+		font-size: 1.08rem;
+		line-height: 1.55;
+	}
+
+	.sl-check-list li::before {
+		content: "";
+		position: absolute;
+		left: 0;
+		top: 0.35rem;
+		width: 1.5rem;
+		height: 1.5rem;
+		border-radius: 0.35rem;
+		border: 1.5px solid var(--brand);
+		background: var(--color-white);
+	}
+
+	.sl-check-list li::after {
+		content: "✓";
+		position: absolute;
+		left: 0.32rem;
+		top: 0.25rem;
+		color: var(--brand);
+		font-weight: 700;
+		font-size: 1rem;
+	}
+
+	.sl-check-foot {
+		margin: 1.6rem 0 0;
 		font-family: var(--font-serif);
 		font-style: italic;
-		font-size: 1.15rem;
-		line-height: 1.55;
+		font-size: 1.25rem;
 		color: var(--brand-deep);
-		border-radius: 0 0.6rem 0.6rem 0;
+		line-height: 1.5;
+		max-width: 38ch;
 	}
 
-	.sl-bullets {
-		margin: 0 0 1.1rem;
-		padding-left: 1.2rem;
+	.sl-check-figure {
+		margin: 0;
+	}
+
+	.sl-check-figure img {
+		width: 100%;
+		aspect-ratio: 4 / 5;
+		object-fit: cover;
+		border-radius: 1.2rem;
+		box-shadow: 0 18px 38px rgb(29 35 39 / 14%);
+	}
+
+	/* ---------- PULL QUOTE BAND ---------- */
+	.sl-pull-band {
+		padding-block: clamp(3.5rem, 8vh, 6rem);
+		background: linear-gradient(180deg, #efe6d5 0%, var(--cream-deep) 100%);
+	}
+
+	.sl-pull-band-deep {
+		background: linear-gradient(160deg, var(--brand-deep) 0%, var(--brand) 100%);
+	}
+
+	.sl-pullquote {
+		margin: 0 auto;
+		max-width: 22ch;
+		font-family: var(--font-serif);
+		font-size: clamp(2rem, 5.2vw, 3.6rem);
+		font-weight: 500;
+		line-height: 1.1;
+		text-wrap: balance;
+		color: var(--ink);
+		text-align: center;
+		letter-spacing: -0.01em;
+	}
+
+	.sl-pullquote span {
+		display: block;
+		margin-top: 0.6rem;
+		font-family: var(--font-serif);
+		font-style: italic;
+		font-size: clamp(1.1rem, 2.2vw, 1.5rem);
+		font-weight: 400;
+		line-height: 1.45;
+		color: var(--ink-soft);
+		max-width: 36ch;
+		margin-inline: auto;
+	}
+
+	.sl-pullquote-light {
+		color: var(--color-white);
+	}
+
+	.sl-pullquote-light span {
+		color: rgb(255 255 255 / 78%);
+	}
+
+	/* ---------- I WAS YOU ---------- */
+	.sl-iwasyou-grid {
+		display: grid;
+		grid-template-columns: 0.85fr 1.15fr;
+		gap: clamp(2rem, 5vw, 4rem);
+		align-items: center;
+	}
+
+	.sl-iwasyou-figure {
+		margin: 0;
+	}
+
+	.sl-iwasyou-figure img {
+		width: 100%;
+		aspect-ratio: 4 / 5;
+		object-fit: cover;
+		border-radius: 1.2rem;
+		box-shadow: 0 18px 38px rgb(29 35 39 / 14%);
+	}
+
+	.sl-iwasyou h2 {
+		margin: 0.55rem 0 1rem;
+		font-family: var(--font-serif);
+		font-size: clamp(2.4rem, 5vw, 3.6rem);
+		font-weight: 500;
+		line-height: 1.05;
+		letter-spacing: -0.01em;
+	}
+
+	.sl-iwasyou-list {
+		margin: 1rem 0 1.2rem;
+		padding-left: 1.1rem;
 		display: grid;
 		gap: 0.55rem;
 	}
 
-	.sl-bullets li {
-		line-height: 1.7;
-	}
-
-	/* IMAGE BAND */
-	.sl-image-band {
-		padding-block: 1.5rem;
-		background: var(--cream);
-	}
-
-	.sl-image-band img {
-		width: 100%;
-		max-height: 420px;
-		object-fit: cover;
-		border-radius: 1rem;
-		box-shadow: 0 14px 30px rgb(29 35 39 / 12%);
-	}
-
-	.sl-image-band figcaption,
-	.sl-hero-figure figcaption {
-		margin-top: 0.45rem;
-	}
-
-	.sl-image-todo {
-		font-size: 0.72rem;
-		font-style: italic;
-		opacity: 0.55;
-		text-align: left;
-		line-height: 1.5;
-	}
-
-	/* OFFER */
+	/* ---------- OFFER ---------- */
 	.sl-offer {
-		padding-block: clamp(3rem, 7vh, 5rem);
+		padding-block: clamp(3.5rem, 8vh, 6rem);
 		background: linear-gradient(160deg, #eaf0ea 0%, var(--cream-deep) 100%);
 	}
 
 	.sl-offer-grid {
 		display: grid;
 		grid-template-columns: 0.85fr 1.15fr;
-		gap: clamp(2rem, 4vw, 4rem);
+		gap: clamp(2rem, 5vw, 4rem);
 		align-items: center;
 	}
 
 	.sl-offer-mockup img {
 		width: 100%;
-		max-width: 360px;
+		max-width: 380px;
 		margin-inline: auto;
-		filter: drop-shadow(0 18px 36px rgb(0 94 71 / 18%));
-	}
-
-	.sl-eyebrow {
-		margin: 0;
-		text-transform: uppercase;
-		letter-spacing: 0.1em;
-		font-size: 0.78rem;
-		font-weight: 600;
-		color: var(--brand);
+		filter: drop-shadow(0 22px 40px rgb(0 94 71 / 22%));
 	}
 
 	.sl-offer-copy h2 {
-		margin: 0.6rem 0 0.3rem;
+		margin: 0.55rem 0 0.3rem;
 		font-family: var(--font-serif);
-		font-size: clamp(1.7rem, 3.3vw, 2.4rem);
+		font-size: clamp(2rem, 4.2vw, 3rem);
 		font-weight: 500;
+		line-height: 1.1;
+		letter-spacing: -0.005em;
 	}
 
 	.sl-sub {
-		margin: 0 0 1.2rem;
+		margin: 0 0 1.4rem;
 		font-family: var(--font-serif);
 		font-style: italic;
 		color: var(--brand-deep);
-		font-size: 1.1rem;
+		font-size: clamp(1.1rem, 2vw, 1.3rem);
 	}
 
 	.sl-inside {
@@ -593,114 +924,185 @@ import { locations, navItems } from "../../data/site";
 		padding: 0;
 		margin: 0 0 1.4rem;
 		display: grid;
-		gap: 0.9rem;
+		gap: 1rem;
 	}
 
 	.sl-inside li {
 		position: relative;
-		padding-left: 2rem;
-		line-height: 1.65;
+		padding-left: 2.2rem;
+		line-height: 1.6;
 	}
 
 	.sl-inside li::before {
 		content: "✓";
 		position: absolute;
 		left: 0;
-		top: 0;
-		width: 1.4rem;
-		height: 1.4rem;
+		top: 0.05rem;
+		width: 1.55rem;
+		height: 1.55rem;
 		display: inline-flex;
 		align-items: center;
 		justify-content: center;
 		border-radius: 999px;
 		background: var(--brand);
 		color: var(--color-white);
-		font-size: 0.8rem;
+		font-size: 0.85rem;
 		font-weight: 700;
 	}
 
 	.sl-promise-small {
+		font-family: var(--font-serif);
 		font-style: italic;
 		color: var(--brand-deep);
 		margin-bottom: 1.4rem;
+		font-size: 1.08rem;
 	}
 
-	/* AUTHORITY */
-	.sl-authority {
+	/* ---------- TESTIMONIALS ---------- */
+	.sl-testimonials {
+		background: var(--cream);
+	}
+
+	.sl-test-grid {
+		margin-top: 1.2rem;
 		display: grid;
-		grid-template-columns: 0.85fr 1.15fr;
-		gap: clamp(2rem, 4vw, 4rem);
-		align-items: center;
+		grid-template-columns: 1fr 1.4fr;
+		gap: 1.2rem;
+		align-items: stretch;
 	}
 
-	.sl-authority-photo img {
-		width: 100%;
-		aspect-ratio: 4 / 5;
-		object-fit: cover;
+	.sl-testimonial {
+		margin: 0;
+		padding: 1.6rem 1.6rem;
+		background: var(--color-white);
+		border: 1px solid rgb(0 94 71 / 16%);
 		border-radius: 1rem;
-		box-shadow: 0 16px 32px rgb(29 35 39 / 14%);
+		box-shadow: 0 12px 28px rgb(29 35 39 / 8%);
+		display: flex;
+		flex-direction: column;
+		gap: 0.9rem;
 	}
 
-	.sl-authority-copy h2 {
-		margin: 0 0 1rem;
+	.sl-testimonial p {
+		margin: 0;
 		font-family: var(--font-serif);
-		font-size: clamp(1.6rem, 3vw, 2.2rem);
+		font-style: italic;
+		font-size: 1.15rem;
+		line-height: 1.55;
+		color: var(--ink);
+	}
+
+	.sl-testimonial-big p {
+		font-size: 1.3rem;
+	}
+
+	.sl-testimonial footer {
+		font-size: 0.85rem;
+		color: var(--brand);
+		font-weight: 600;
+		letter-spacing: 0.04em;
+	}
+
+	.sl-test-todo {
+		margin-top: 0.9rem;
+		font-size: 0.7rem;
+		font-style: italic;
+		opacity: 0.55;
+		text-align: center;
+	}
+
+	/* ---------- IS THIS FOR YOU ---------- */
+	.sl-fit-grid {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 1.2rem;
+	}
+
+	.sl-fit-card {
+		padding: 1.6rem 1.6rem;
+		border-radius: 1rem;
+		border: 1px solid rgb(0 94 71 / 18%);
+	}
+
+	.sl-fit-yes {
+		background: var(--color-white);
+	}
+
+	.sl-fit-no {
+		background: rgb(255 255 255 / 55%);
+	}
+
+	.sl-fit-card h3 {
+		margin: 0 0 0.9rem;
+		font-family: var(--font-serif);
+		font-size: 1.35rem;
 		font-weight: 500;
+		color: var(--brand-deep);
 	}
 
-	.sl-authority-copy p {
-		margin: 0 0 1rem;
-		max-width: 60ch;
+	.sl-fit-no h3 {
+		color: var(--ink-soft);
 	}
 
-	/* STEPS */
+	.sl-fit-card ul {
+		margin: 0;
+		padding-left: 1.2rem;
+		display: grid;
+		gap: 0.55rem;
+	}
+
+	.sl-fit-card li {
+		line-height: 1.55;
+	}
+
+	/* ---------- STEPS ---------- */
 	.sl-steps {
 		list-style: none;
 		padding: 0;
 		margin: 1rem 0 0;
 		display: grid;
-		gap: 1rem;
+		grid-template-columns: repeat(3, 1fr);
+		gap: 1.2rem;
 	}
 
 	.sl-steps li {
-		display: grid;
-		grid-template-columns: auto 1fr;
-		gap: 1.1rem;
-		align-items: start;
-		padding: 1.1rem 1.2rem;
+		padding: 1.6rem 1.5rem;
 		background: var(--color-white);
 		border: 1px solid rgb(0 94 71 / 16%);
-		border-radius: 0.85rem;
+		border-radius: 1rem;
+		display: grid;
+		gap: 0.4rem;
+		box-shadow: 0 10px 24px rgb(29 35 39 / 6%);
 	}
 
 	.sl-step-num {
 		font-family: var(--font-serif);
-		font-size: 1.6rem;
+		font-size: 2rem;
 		color: var(--brand);
 		font-weight: 500;
 		line-height: 1;
 	}
 
 	.sl-steps h3 {
-		margin: 0 0 0.2rem;
+		margin: 0.3rem 0 0.3rem;
 		font-family: var(--font-serif);
-		font-size: 1.2rem;
+		font-size: 1.3rem;
 		font-weight: 500;
 	}
 
 	.sl-steps p {
 		margin: 0;
 		font-size: 0.95rem;
-		opacity: 0.85;
+		color: var(--ink-soft);
 	}
 
-	/* CLAIM FORM */
+	/* ---------- CLAIM FORM ---------- */
 	.sl-claim {
-		padding-block: clamp(3rem, 7vh, 5rem);
+		padding-block: clamp(3.5rem, 8vh, 5.5rem);
 		background: linear-gradient(180deg, var(--cream-deep) 0%, #eaf0ea 100%);
 	}
 
-	.sl-claim-inner {
+	.sl-claim-grid {
 		display: grid;
 		grid-template-columns: 1fr 1fr;
 		gap: clamp(2rem, 4vw, 3.5rem);
@@ -708,33 +1110,36 @@ import { locations, navItems } from "../../data/site";
 	}
 
 	.sl-claim-copy h2 {
-		margin: 0.4rem 0 0.8rem;
+		margin: 0.5rem 0 0.9rem;
 		font-family: var(--font-serif);
-		font-size: clamp(1.8rem, 3.5vw, 2.5rem);
+		font-size: clamp(2rem, 4.2vw, 3rem);
 		font-weight: 500;
+		line-height: 1.1;
 	}
 
 	.sl-form {
 		background: var(--color-white);
-		padding: 1.8rem 1.6rem;
-		border-radius: 1rem;
+		padding: 2rem 1.8rem;
+		border-radius: 1.2rem;
 		border: 1px solid rgb(0 94 71 / 18%);
-		box-shadow: 0 12px 28px rgb(29 35 39 / 10%);
+		box-shadow: 0 18px 38px rgb(29 35 39 / 12%);
 		display: grid;
-		gap: 1rem;
+		gap: 1.1rem;
 	}
 
 	.sl-field {
 		display: grid;
-		gap: 0.35rem;
-		font-size: 0.85rem;
+		gap: 0.4rem;
+		font-size: 0.88rem;
+		font-weight: 600;
 	}
 
 	.sl-field input {
-		padding: 0.8rem 1rem;
-		border-radius: 0.6rem;
+		padding: 0.9rem 1.1rem;
+		border-radius: 0.7rem;
 		border: 1px solid var(--color-gainsboro);
 		font: inherit;
+		font-weight: 400;
 	}
 
 	.sl-field input:focus-visible {
@@ -746,23 +1151,22 @@ import { locations, navItems } from "../../data/site";
 	.sl-consent {
 		display: flex;
 		gap: 0.6rem;
-		font-size: 0.85rem;
+		font-size: 0.88rem;
 		line-height: 1.55;
 	}
 
 	.sl-consent input {
-		margin-top: 0.25rem;
+		margin-top: 0.3rem;
 	}
 
 	.sl-submit {
 		justify-self: stretch;
-		text-align: center;
 	}
 
 	.sl-privacy {
 		margin: 0;
-		font-size: 0.78rem;
-		opacity: 0.75;
+		font-size: 0.8rem;
+		color: var(--ink-soft);
 	}
 
 	.sl-privacy a {
@@ -770,42 +1174,202 @@ import { locations, navItems } from "../../data/site";
 		text-underline-offset: 3px;
 	}
 
-	/* CLOSING */
-	.sl-closing {
-		background: var(--cream);
+	/* ---------- FAQ ---------- */
+	.sl-faq-list {
+		margin-top: 0.5rem;
+		display: grid;
+		gap: 0.7rem;
+		max-width: 70ch;
 	}
 
-	.sl-signoff {
-		font-family: var(--font-script);
-		font-size: 2rem;
+	.sl-faq-item {
+		background: var(--color-white);
+		border: 1px solid rgb(0 94 71 / 16%);
+		border-radius: 0.85rem;
+		overflow: hidden;
+	}
+
+	.sl-faq-item[open] {
+		box-shadow: 0 12px 28px rgb(29 35 39 / 8%);
+	}
+
+	.sl-faq-item summary {
+		list-style: none;
+		cursor: pointer;
+		padding: 1.1rem 1.3rem;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		gap: 1rem;
+		font-family: var(--font-serif);
+		font-size: 1.15rem;
+		font-weight: 500;
+		color: var(--ink);
+	}
+
+	.sl-faq-item summary::-webkit-details-marker {
+		display: none;
+	}
+
+	.sl-faq-icon {
+		width: 2rem;
+		height: 2rem;
+		flex-shrink: 0;
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		border-radius: 999px;
+		background: var(--brand-tint);
 		color: var(--brand);
-		margin: 1rem 0;
+		font-size: 1.2rem;
+		font-weight: 600;
+		transition: transform 0.2s ease;
+	}
+
+	.sl-faq-item[open] .sl-faq-icon {
+		transform: rotate(45deg);
+	}
+
+	.sl-faq-body {
+		padding: 0 1.3rem 1.2rem;
+	}
+
+	.sl-faq-body p {
+		margin: 0;
+		color: var(--ink-soft);
+		line-height: 1.75;
+	}
+
+	/* ---------- CLOSING ---------- */
+	.sl-close {
+		padding-block: clamp(4rem, 9vh, 6.5rem);
+		background:
+			radial-gradient(
+				ellipse at 50% 0%,
+				rgb(0 94 71 / 8%),
+				transparent 60%
+			),
+			var(--cream);
+	}
+
+	.sl-close-inner {
+		max-width: 24ch;
+		text-align: center;
+		margin-inline: auto;
+	}
+
+	.sl-close-line {
+		margin: 0 0 0.7rem;
+		font-family: var(--font-serif);
+		font-size: clamp(1.6rem, 4vw, 2.6rem);
+		font-weight: 500;
+		line-height: 1.15;
+		color: var(--ink);
+		max-width: 22ch;
+		margin-inline: auto;
+		letter-spacing: -0.005em;
+	}
+
+	.sl-close-line + .sl-close-line {
+		margin-top: 0.2rem;
+	}
+
+	.sl-close-meta {
+		margin: 1.6rem auto 0.4rem;
+		font-size: 1.1rem;
+		max-width: 32ch;
+		color: var(--ink-soft);
+	}
+
+	.sl-close-signoff {
+		margin: 0 auto 1.4rem;
+		font-family: var(--font-serif);
+		font-style: italic;
+		font-size: clamp(1.2rem, 2.4vw, 1.55rem);
+		color: var(--brand-deep);
+		max-width: 36ch;
+	}
+
+	.sl-signature {
+		margin: 0 0 1.5rem;
+		font-family: var(--font-script);
+		font-size: 2.4rem;
+		color: var(--brand);
+		line-height: 1;
+	}
+
+	/* ---------- P.S. ---------- */
+	.sl-ps-band {
+		padding-block: 2rem clamp(3rem, 6vh, 4rem);
+		background: var(--cream-deep);
 	}
 
 	.sl-ps {
-		margin-top: 1.5rem;
-		padding: 1.4rem 1.5rem;
+		max-width: 60ch;
+		margin-inline: auto;
+		padding: 1.8rem 1.8rem;
 		background: var(--color-white);
-		border-left: 3px solid var(--brand);
-		border-radius: 0 0.85rem 0.85rem 0;
+		border-left: 4px solid var(--brand);
+		border-radius: 0 1rem 1rem 0;
+		display: grid;
+		gap: 0.9rem;
+		box-shadow: 0 12px 28px rgb(29 35 39 / 8%);
 	}
 
-	.sl-ps p {
-		margin: 0 0 0.9rem;
+	.sl-ps-label {
+		margin: 0;
+		font-family: var(--font-serif);
+		font-size: 1.5rem;
+		font-weight: 500;
+		color: var(--brand);
 	}
 
+	.sl-ps p:not(.sl-ps-label) {
+		margin: 0;
+		line-height: 1.75;
+	}
+
+	.sl-ps a {
+		justify-self: start;
+	}
+
+	/* ---------- Responsive ---------- */
 	@media (max-width: 1024px) {
-		.sl-hero-inner,
+		.sl-hero-grid,
+		.sl-check-grid,
+		.sl-iwasyou-grid,
 		.sl-offer-grid,
-		.sl-authority,
-		.sl-claim-inner {
+		.sl-claim-grid {
 			grid-template-columns: 1fr;
 		}
 
 		.sl-hero-figure,
-		.sl-authority-photo {
+		.sl-check-figure,
+		.sl-iwasyou-figure {
 			max-width: 480px;
 			margin-inline: auto;
+		}
+
+		.sl-stats-row {
+			grid-template-columns: repeat(2, 1fr);
+			gap: 1.2rem;
+		}
+
+		.sl-test-grid,
+		.sl-fit-grid,
+		.sl-steps {
+			grid-template-columns: 1fr;
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.sl-cta-primary:hover,
+		.sl-cta-primary:focus-visible {
+			transform: none;
+		}
+
+		.sl-faq-icon {
+			transition: none;
 		}
 	}
 </style>
