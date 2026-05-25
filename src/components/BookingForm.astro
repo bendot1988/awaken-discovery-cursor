@@ -1,0 +1,801 @@
+---
+export type BookingPackage = {
+	value: string;
+	label: string;
+	sublabel: string;
+	priceLabel: string;
+	priceAmount: number;
+	stripePriceId: string;
+};
+
+interface Props {
+	/** Section anchor id used for jump links (default: "book") */
+	anchorId?: string;
+	/** Eyebrow above the heading (default: "Next step") */
+	kicker?: string;
+	/** Section heading inside the form section */
+	title: string;
+	/** Intro paragraph below the heading */
+	lede: string;
+	/** Heading shown above the package list (e.g. "Choose your session") */
+	packageGroupLabel: string;
+	/** Question above the pay-now / enquire toggle */
+	payNowLegend: string;
+	/** Label inside the "pay now" radio (e.g. "Yes — take me to secure payment") */
+	payNowOption?: string;
+	/** Label inside the "enquire" radio */
+	enquireOption?: string;
+	/** Button text when pay-now is selected */
+	submitPayLabel?: string;
+	/** Button text when enquire is selected */
+	submitEnquireLabel?: string;
+	/** Anchor text for the terms link */
+	termsLinkLabel: string;
+	/** Href for the terms link */
+	termsHref?: string;
+	/** Packages to choose from in the booking summary */
+	packages: BookingPackage[];
+	/** Unique id for the form element (must be unique per page) */
+	formId?: string;
+	/** Optional integration note shown in a small box under the form */
+	todoNote?: string;
+	/** Section background variant */
+	variant?: "soft" | "plain";
+	/** Country options for the address select */
+	countryOptions?: string[];
+	/** Referral source options */
+	referralOptions?: string[];
+}
+
+const {
+	anchorId = "book",
+	kicker = "Next step",
+	title,
+	lede,
+	packageGroupLabel,
+	payNowLegend,
+	payNowOption = "Yes — take me to secure payment",
+	enquireOption = "No, I'd like to speak with you first",
+	submitPayLabel = "Make Payment",
+	submitEnquireLabel = "Send Booking Enquiry",
+	termsLinkLabel,
+	termsHref = "/terms",
+	packages,
+	formId = "booking-form",
+	todoNote,
+	variant = "soft",
+	countryOptions = ["United Kingdom", "Ireland", "Other"],
+	referralOptions = [
+		"Google search",
+		"Recommendation from a friend or family member",
+		"Recommendation from a healthcare professional",
+		"Instagram",
+		"Facebook",
+		"LinkedIn",
+		"Therapist directory",
+		"Other",
+	],
+} = Astro.props;
+---
+
+<section
+	class:list={["bf-book", "section", variant === "soft" && "section-soft"]}
+	id={anchorId}
+>
+	<div class="container">
+		<div class="bf-book-inner">
+			<p class="section-kicker">{kicker}</p>
+			<h2>{title}</h2>
+			<p class="bf-book-lede">{lede}</p>
+
+			<form
+				class="bf-form"
+				id={formId}
+				method="post"
+				action="#"
+				aria-describedby={todoNote ? `${formId}-todo` : undefined}
+				novalidate
+			>
+				<div class="bf-form-cols">
+					<div class="bf-form-main">
+						<!-- ===== YOUR DETAILS ===== -->
+						<fieldset class="bf-fieldset">
+							<legend class="bf-legend">Your details</legend>
+							<div class="bf-grid-2">
+								<label class="bf-field">
+									<span>First name <span class="bf-req">*</span></span>
+									<input
+										type="text"
+										name="first_name"
+										autocomplete="given-name"
+										required
+									/>
+								</label>
+								<label class="bf-field">
+									<span>Last name <span class="bf-req">*</span></span>
+									<input
+										type="text"
+										name="last_name"
+										autocomplete="family-name"
+										required
+									/>
+								</label>
+							</div>
+							<label class="bf-field">
+								<span>Email <span class="bf-req">*</span></span>
+								<input
+									type="email"
+									name="email"
+									autocomplete="email"
+									required
+								/>
+							</label>
+							<label class="bf-field">
+								<span>Phone / Mobile <span class="bf-req">*</span></span>
+								<input
+									type="tel"
+									name="phone"
+									autocomplete="tel"
+									required
+								/>
+							</label>
+
+							<fieldset class="bf-radio-group">
+								<legend>
+									Preferred method of contact <span class="bf-req">*</span>
+								</legend>
+								<label class="bf-radio">
+									<input
+										type="radio"
+										name="contact_pref"
+										value="email"
+										required
+										checked
+									/>
+									<span>Email</span>
+								</label>
+								<label class="bf-radio">
+									<input
+										type="radio"
+										name="contact_pref"
+										value="telephone"
+									/>
+									<span>Telephone</span>
+								</label>
+							</fieldset>
+						</fieldset>
+
+						<!-- ===== ADDRESS ===== -->
+						<fieldset class="bf-fieldset">
+							<legend class="bf-legend">Address</legend>
+							<div class="bf-grid-2">
+								<label class="bf-field">
+									<span>Address line 1 <span class="bf-req">*</span></span>
+									<input
+										type="text"
+										name="address_1"
+										autocomplete="address-line1"
+										required
+									/>
+								</label>
+								<label class="bf-field">
+									<span>Address line 2</span>
+									<input
+										type="text"
+										name="address_2"
+										autocomplete="address-line2"
+									/>
+								</label>
+								<label class="bf-field">
+									<span>City</span>
+									<input
+										type="text"
+										name="city"
+										autocomplete="address-level2"
+									/>
+								</label>
+								<label class="bf-field">
+									<span>County</span>
+									<input
+										type="text"
+										name="county"
+										autocomplete="address-level1"
+									/>
+								</label>
+								<label class="bf-field">
+									<span>Postcode <span class="bf-req">*</span></span>
+									<input
+										type="text"
+										name="postcode"
+										autocomplete="postal-code"
+										required
+									/>
+								</label>
+								<label class="bf-field">
+									<span>Country</span>
+									<select name="country" autocomplete="country">
+										{countryOptions.map((c) => <option value={c}>{c}</option>)}
+									</select>
+								</label>
+							</div>
+						</fieldset>
+
+						<!-- ===== ABOUT YOU ===== -->
+						<fieldset class="bf-fieldset">
+							<legend class="bf-legend">About you</legend>
+							<fieldset class="bf-radio-group">
+								<legend>
+									Are you a returning customer?
+									<span class="bf-req">*</span>
+								</legend>
+								<label class="bf-radio">
+									<input type="radio" name="returning" value="yes" required />
+									<span>Yes</span>
+								</label>
+								<label class="bf-radio">
+									<input type="radio" name="returning" value="no" />
+									<span>No</span>
+								</label>
+							</fieldset>
+
+							<label class="bf-checkbox">
+								<input type="checkbox" name="newsletter" />
+								<span>
+									Yes, I'd like to receive updates, newsletters and supportive
+									wellbeing emails from Awaken Discovery Counselling &amp;
+									Psychotherapy. I can unsubscribe at any time.
+								</span>
+							</label>
+
+							<label class="bf-checkbox">
+								<input type="checkbox" name="terms" required />
+								<span>
+									<span class="bf-req">*</span> I have read and agree to the
+									<a href={termsHref}>{termsLinkLabel}</a>.
+								</span>
+							</label>
+						</fieldset>
+					</div>
+
+					<aside class="bf-form-aside">
+						<!-- ===== YOUR BOOKING ===== -->
+						<fieldset class="bf-fieldset bf-fieldset-booking">
+							<legend class="bf-legend">Your booking</legend>
+
+							<fieldset class="bf-package-group" aria-required="true">
+								<legend>
+									{packageGroupLabel}
+									<span class="bf-req">*</span>
+								</legend>
+								<div class="bf-package-list">
+									{
+										packages.map((p) => (
+											<label
+												class="bf-package"
+												data-price={p.priceAmount}
+												data-stripe-price={p.stripePriceId}
+											>
+												<input
+													type="radio"
+													name="package"
+													value={p.value}
+													required
+												/>
+												<span class="bf-package-body">
+													<span class="bf-package-label">{p.label}</span>
+													<span class="bf-package-sub">{p.sublabel}</span>
+												</span>
+												<span class="bf-package-price">{p.priceLabel}</span>
+											</label>
+										))
+									}
+								</div>
+							</fieldset>
+
+							<label class="bf-field">
+								<span>Your comments (optional)</span>
+								<textarea
+									name="comments"
+									rows="4"
+									placeholder="Anything you'd like me to know before we begin?"
+								></textarea>
+							</label>
+
+							<div class="bf-summary" aria-live="polite">
+								<div class="bf-summary-row">
+									<span>Selected option</span>
+									<span class="bf-summary-package" data-empty="true">
+										No option selected yet
+									</span>
+								</div>
+								<div class="bf-summary-row bf-summary-total-row">
+									<span>Total</span>
+									<span class="bf-summary-total">£0.00</span>
+								</div>
+							</div>
+
+							<label class="bf-field">
+								<span>How did you hear about me?</span>
+								<select name="referral">
+									<option value="">— Select —</option>
+									{
+										referralOptions.map((opt) => (
+											<option value={opt}>{opt}</option>
+										))
+									}
+								</select>
+							</label>
+
+							<fieldset class="bf-radio-group">
+								<legend>
+									{payNowLegend} <span class="bf-req">*</span>
+								</legend>
+								<label class="bf-radio">
+									<input
+										type="radio"
+										name="pay_now"
+										value="yes"
+										required
+										checked
+									/>
+									<span>{payNowOption}</span>
+								</label>
+								<label class="bf-radio">
+									<input type="radio" name="pay_now" value="no" />
+									<span>{enquireOption}</span>
+								</label>
+							</fieldset>
+
+							<button class="cta cta-solid bf-submit" type="submit">
+								<span data-submit-pay>{submitPayLabel}</span>
+								<span data-submit-enquire hidden>{submitEnquireLabel}</span>
+							</button>
+
+							<label class="bf-checkbox">
+								<input type="checkbox" name="data_consent" required />
+								<span>
+									<span class="bf-req">*</span> I consent to Awaken Discovery
+									storing my submitted information so they can respond to my
+									booking and process my payment.
+								</span>
+							</label>
+						</fieldset>
+
+						{
+							todoNote && (
+								<p id={`${formId}-todo`} class="bf-book-todo">
+									{todoNote}
+								</p>
+							)
+						}
+					</aside>
+				</div>
+			</form>
+		</div>
+	</div>
+</section>
+
+<script is:inline define:vars={{ formId }}>
+	(function () {
+		const form = document.getElementById(formId);
+		if (!form) return;
+
+		const packageInputs = form.querySelectorAll('input[name="package"]');
+		const summaryPackage = form.querySelector(".bf-summary-package");
+		const summaryTotal = form.querySelector(".bf-summary-total");
+		const payNowInputs = form.querySelectorAll('input[name="pay_now"]');
+		const submitPay = form.querySelector("[data-submit-pay]");
+		const submitEnquire = form.querySelector("[data-submit-enquire]");
+
+		const updateSummary = () => {
+			const selected = form.querySelector('input[name="package"]:checked');
+			if (!selected) {
+				summaryPackage.textContent = "No option selected yet";
+				summaryPackage.setAttribute("data-empty", "true");
+				summaryTotal.textContent = "£0.00";
+				return;
+			}
+			const label = selected.closest(".bf-package");
+			const price = parseFloat(label.dataset.price);
+			const text = label.querySelector(".bf-package-label").textContent;
+			summaryPackage.textContent = text;
+			summaryPackage.removeAttribute("data-empty");
+			summaryTotal.textContent = "£" + price.toFixed(2);
+		};
+
+		const updateSubmitLabel = () => {
+			const checked = form.querySelector('input[name="pay_now"]:checked');
+			const payNow = checked && checked.value === "yes";
+			submitPay.hidden = !payNow;
+			submitEnquire.hidden = payNow;
+		};
+
+		packageInputs.forEach((input) =>
+			input.addEventListener("change", updateSummary)
+		);
+		payNowInputs.forEach((input) =>
+			input.addEventListener("change", updateSubmitLabel)
+		);
+
+		form.addEventListener("submit", (event) => {
+			event.preventDefault();
+			if (!form.reportValidity()) return;
+
+			const selected = form.querySelector('input[name="package"]:checked');
+			const stripePriceId = selected
+				?.closest(".bf-package")
+				?.getAttribute("data-stripe-price");
+			const checkedPayNow = form.querySelector(
+				'input[name="pay_now"]:checked'
+			);
+			const payNow = checkedPayNow && checkedPayNow.value;
+
+			alert(
+				"Form is not yet wired up.\n\nNext step: Stripe integration.\n\nSelected price ID: " +
+					stripePriceId +
+					"\nPay now: " +
+					payNow
+			);
+		});
+
+		updateSummary();
+		updateSubmitLabel();
+	})();
+</script>
+
+<style>
+	.bf-book {
+		--brand: var(--color-dark-slate-gray);
+		--brand-deep: #004836;
+		--brand-tint: rgb(0 94 71 / 8%);
+		--ink: var(--color-dark-gray);
+		--ink-soft: rgb(29 35 39 / 78%);
+		color: var(--ink);
+	}
+
+	.bf-book .section-kicker {
+		margin: 0;
+		text-transform: uppercase;
+		letter-spacing: 0.12em;
+		font-size: 0.78rem;
+		font-weight: 600;
+		color: var(--brand);
+	}
+
+	.bf-book h2 {
+		margin: 0.6rem 0 0.9rem;
+		font-family: var(--font-serif);
+		font-weight: 500;
+		text-wrap: balance;
+		color: var(--brand-deep);
+		font-size: clamp(1.7rem, 3.3vw, 2.4rem);
+		line-height: 1.2;
+	}
+
+	.bf-book-inner {
+		max-width: 100%;
+	}
+
+	.bf-book-lede {
+		margin: 0 0 1.6rem;
+		max-width: 70ch;
+		line-height: 1.75;
+		color: var(--ink-soft);
+	}
+
+	.bf-form {
+		display: block;
+	}
+
+	.bf-form-cols {
+		display: grid;
+		grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+		gap: 1.6rem;
+		align-items: start;
+	}
+
+	.bf-form-main {
+		display: grid;
+		gap: 1.6rem;
+		min-width: 0;
+	}
+
+	.bf-form-aside {
+		display: grid;
+		gap: 1rem;
+		min-width: 0;
+		position: sticky;
+		top: 6rem;
+	}
+
+	.bf-fieldset-booking {
+		background: linear-gradient(
+			170deg,
+			var(--color-white) 0%,
+			var(--brand-tint) 120%
+		);
+	}
+
+	.bf-fieldset {
+		padding: 1.6rem 1.8rem;
+		margin: 0;
+		background: var(--color-white);
+		border: 1px solid rgb(0 94 71 / 18%);
+		border-radius: 1rem;
+		display: grid;
+		gap: 1.1rem;
+	}
+
+	.bf-legend {
+		float: left;
+		width: 100%;
+		margin: 0 0 0.3rem;
+		padding: 0;
+		font-family: var(--font-serif);
+		font-size: 1.2rem;
+		font-weight: 500;
+		color: var(--brand-deep);
+	}
+
+	.bf-legend::after {
+		content: "";
+		display: block;
+		clear: both;
+	}
+
+	.bf-req {
+		color: #973a3a;
+		font-weight: 600;
+	}
+
+	.bf-grid-2 {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 1rem;
+	}
+
+	.bf-field {
+		display: grid;
+		gap: 0.35rem;
+		font-size: 0.88rem;
+	}
+
+	.bf-field > span:first-child {
+		font-weight: 500;
+		color: var(--ink);
+	}
+
+	.bf-field input,
+	.bf-field select,
+	.bf-field textarea {
+		font: inherit;
+		padding: 0.65rem 0.85rem;
+		border: 1px solid rgb(0 94 71 / 25%);
+		border-radius: 0.55rem;
+		background: var(--color-white);
+		color: var(--ink);
+	}
+
+	.bf-field textarea {
+		resize: vertical;
+		min-height: 90px;
+		line-height: 1.6;
+	}
+
+	.bf-field input:focus-visible,
+	.bf-field select:focus-visible,
+	.bf-field textarea:focus-visible {
+		outline: none;
+		border-color: var(--brand);
+		box-shadow: 0 0 0 3px rgb(0 94 71 / 18%);
+	}
+
+	.bf-radio-group {
+		margin: 0;
+		padding: 0;
+		border: 0;
+		display: grid;
+		gap: 0.5rem;
+	}
+
+	.bf-radio-group legend {
+		margin: 0 0 0.3rem;
+		padding: 0;
+		font-size: 0.88rem;
+		font-weight: 500;
+		color: var(--ink);
+	}
+
+	.bf-radio,
+	.bf-checkbox {
+		display: flex;
+		align-items: flex-start;
+		gap: 0.65rem;
+		font-size: 0.9rem;
+		line-height: 1.55;
+		color: var(--ink);
+		cursor: pointer;
+	}
+
+	.bf-radio input,
+	.bf-checkbox input {
+		margin-top: 0.2rem;
+		accent-color: var(--brand);
+		flex-shrink: 0;
+	}
+
+	.bf-checkbox a {
+		color: var(--brand);
+		text-decoration: underline;
+		text-underline-offset: 3px;
+	}
+
+	/* Package options */
+	.bf-package-group {
+		margin: 0;
+		padding: 0;
+		border: 0;
+	}
+
+	.bf-package-group legend {
+		margin: 0 0 0.6rem;
+		padding: 0;
+		font-size: 0.92rem;
+		font-weight: 500;
+		color: var(--ink);
+	}
+
+	.bf-package-list {
+		display: grid;
+		gap: 0.6rem;
+	}
+
+	.bf-package {
+		display: grid;
+		grid-template-columns: auto 1fr auto;
+		align-items: center;
+		gap: 1rem;
+		padding: 0.95rem 1.1rem;
+		background: var(--color-white);
+		border: 1px solid rgb(0 94 71 / 20%);
+		border-radius: 0.7rem;
+		cursor: pointer;
+		transition: border-color 0.15s ease, background-color 0.15s ease;
+	}
+
+	.bf-package:hover {
+		border-color: var(--brand);
+		background: var(--brand-tint);
+	}
+
+	.bf-package:has(input:checked) {
+		border-color: var(--brand);
+		background: var(--brand-tint);
+		box-shadow: 0 0 0 2px rgb(0 94 71 / 12%);
+	}
+
+	.bf-package input {
+		accent-color: var(--brand);
+	}
+
+	.bf-package-body {
+		display: flex;
+		flex-direction: column;
+		gap: 0.15rem;
+	}
+
+	.bf-package-label {
+		font-weight: 500;
+		color: var(--ink);
+		font-size: 0.92rem;
+	}
+
+	.bf-package-sub {
+		font-style: italic;
+		font-size: 0.82rem;
+		color: var(--ink-soft);
+	}
+
+	.bf-package-price {
+		font-family: var(--font-serif);
+		font-size: 1.25rem;
+		font-weight: 500;
+		color: var(--brand-deep);
+		white-space: nowrap;
+	}
+
+	/* Summary panel */
+	.bf-summary {
+		padding: 1rem 1.1rem;
+		background: var(--brand-tint);
+		border-radius: 0.7rem;
+		display: grid;
+		gap: 0.5rem;
+		border: 1px solid rgb(0 94 71 / 18%);
+	}
+
+	.bf-summary-row {
+		display: flex;
+		justify-content: space-between;
+		align-items: baseline;
+		gap: 1rem;
+		font-size: 0.92rem;
+		color: var(--ink-soft);
+	}
+
+	.bf-summary-package {
+		text-align: right;
+		font-weight: 500;
+		color: var(--ink);
+	}
+
+	.bf-summary-package[data-empty="true"] {
+		font-style: italic;
+		color: var(--ink-soft);
+		font-weight: 400;
+	}
+
+	.bf-summary-total-row {
+		padding-top: 0.5rem;
+		border-top: 1px solid rgb(0 94 71 / 18%);
+	}
+
+	.bf-summary-total {
+		font-family: var(--font-serif);
+		font-size: 1.5rem;
+		font-weight: 500;
+		color: var(--brand-deep);
+	}
+
+	.bf-submit {
+		justify-self: stretch;
+		padding: 0.95rem 1.4rem;
+		font-size: 1rem;
+		margin-top: 0.4rem;
+	}
+
+	.bf-book-todo {
+		margin: 0.6rem 0 0;
+		padding: 0.9rem 1rem;
+		background: rgb(0 94 71 / 5%);
+		border-left: 3px solid var(--brand);
+		border-radius: 0 0.5rem 0.5rem 0;
+		font-size: 0.72rem;
+		font-style: italic;
+		color: var(--ink-soft);
+		line-height: 1.6;
+		opacity: 0.85;
+		white-space: pre-line;
+	}
+
+	@media (max-width: 1024px) {
+		.bf-form-cols {
+			grid-template-columns: 1fr;
+		}
+
+		.bf-form-aside {
+			position: static;
+		}
+	}
+
+	@media (max-width: 900px) {
+		.bf-grid-2 {
+			grid-template-columns: 1fr;
+		}
+
+		.bf-fieldset {
+			padding: 1.3rem 1.4rem;
+		}
+	}
+
+	@media (max-width: 540px) {
+		.bf-package {
+			grid-template-columns: auto 1fr;
+		}
+
+		.bf-package-price {
+			grid-column: 1 / -1;
+			justify-self: end;
+		}
+	}
+</style>

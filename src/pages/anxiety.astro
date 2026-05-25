@@ -2,7 +2,6 @@
 import Layout from "../layouts/Layout.astro";
 import SiteHeader from "../components/SiteHeader.astro";
 import SiteFooter from "../components/SiteFooter.astro";
-import StubBanner from "../components/StubBanner.astro";
 import { anxietyGuidePath, locations, navItems } from "../data/site";
 ---
 
@@ -12,8 +11,6 @@ import { anxietyGuidePath, locations, navItems } from "../data/site";
 >
 	<SiteHeader navItems={navItems} />
 	<main>
-		<StubBanner message="Anxiety landing page — full guide funnel now lives at /finding-calm-anxiety. Meet Ally · Continued Support · Final CTA on this page still to come." />
-
 		<section class="anxiety-hero section">
 			<div class="hero-bg-placeholder" aria-hidden="true">
 				<span>{`{{TODO: calming background video — soft nature, breathing visuals}}`}</span>

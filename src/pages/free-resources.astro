@@ -1,0 +1,385 @@
+---
+import Layout from "../layouts/Layout.astro";
+import SiteHeader from "../components/SiteHeader.astro";
+import SiteFooter from "../components/SiteFooter.astro";
+import { freeResources, locations, navItems } from "../data/site";
+---
+
+<Layout
+	title="Free Resources · Awaken Discovery"
+	description="Gentle, body-aware guides from Awaken Discovery — for teachers, for anxiety and for anyone carrying too much. Free to download."
+>
+	<SiteHeader navItems={navItems} />
+	<main class="fr-page">
+		<!-- ============== HERO ============== -->
+		<section class="fr-hero section">
+			<div class="container fr-hero-inner">
+				<p class="fr-eyebrow">Free resources</p>
+				<h1>Gentle, body-aware guides — free to read at your own pace.</h1>
+				<p class="fr-lede">
+					Each guide is short, warm and practical. No quick fixes. Just calm,
+					compassionate support for whatever you've been carrying — whenever
+					you're ready to slow down enough to receive it.
+				</p>
+			</div>
+		</section>
+
+		<!-- ============== CARDS ============== -->
+		<section class="fr-cards section section-soft">
+			<div class="container">
+				<ul class="fr-grid">
+					{
+						freeResources.map((r, i) => (
+							<li>
+								<article class="fr-card">
+									<div class="fr-card-media">
+										{r.image ? (
+											<img
+												src={r.image}
+												alt={r.imageAlt ?? r.title}
+												loading={i === 0 ? "eager" : "lazy"}
+												decoding="async"
+											/>
+										) : (
+											<div class="fr-placeholder" aria-hidden="true">
+												<svg viewBox="0 0 60 60" aria-hidden="true">
+													<path
+														d="M30 5C42 14 50 25 50 36C50 46 42 54 30 55C18 54 10 46 10 36C10 25 18 14 30 5Z"
+														fill="currentColor"
+														opacity="0.18"
+													/>
+													<path
+														d="M30 10C30 25 30 40 30 55"
+														stroke="currentColor"
+														stroke-width="1"
+														opacity="0.5"
+														fill="none"
+													/>
+												</svg>
+												<span>Image</span>
+											</div>
+										)}
+										<span class="fr-card-tag">Free</span>
+									</div>
+									<div class="fr-card-body">
+										<p class="fr-audience">{r.audience}</p>
+										<h2 class="fr-card-title">{r.title}</h2>
+										<p class="fr-card-subtitle">{r.subtitle}</p>
+										<p class="fr-card-desc">{r.description}</p>
+										<ul class="fr-card-bullets">
+											{r.bullets.map((b) => (
+												<li>{b}</li>
+											))}
+										</ul>
+										<a class="cta cta-solid fr-card-cta" href={r.href}>
+											{r.ctaLabel}
+										</a>
+										{r.imagePrompt && (
+											<p class="fr-card-todo">
+												{`{{IMAGE PROMPT: ${r.imagePrompt}}}`}
+											</p>
+										)}
+									</div>
+								</article>
+							</li>
+						))
+					}
+				</ul>
+				<p class="fr-coming-soon">
+					{`{{TODO: more guides coming — drop new items into the freeResources array in src/data/site.ts and they'll appear here and in the footer automatically.}}`}
+				</p>
+			</div>
+		</section>
+
+		<!-- ============== CLOSING ============== -->
+		<section class="fr-close section">
+			<div class="container fr-close-inner">
+				<p class="fr-close-line">No spam. No hustle. No "5 spots left."</p>
+				<p class="fr-close-signoff">
+					Just gentle support, sent the way you'd want a friend to send it.
+				</p>
+				<p class="fr-signature">— Ally</p>
+				<a class="cta cta-outline" href="/contact">
+					Or book a free consultation
+				</a>
+			</div>
+		</section>
+	</main>
+	<SiteFooter locations={locations} />
+</Layout>
+
+<style>
+	.fr-page {
+		--brand: var(--color-dark-slate-gray);
+		--brand-deep: #004836;
+		--brand-tint: rgb(0 94 71 / 8%);
+		--ink: var(--color-dark-gray);
+		--ink-soft: rgb(29 35 39 / 78%);
+		color: var(--ink);
+	}
+
+	.fr-eyebrow {
+		margin: 0;
+		text-transform: uppercase;
+		letter-spacing: 0.12em;
+		font-size: 0.78rem;
+		font-weight: 600;
+		color: var(--brand);
+	}
+
+	/* ---------- HERO ---------- */
+	.fr-hero {
+		padding-block: clamp(3.5rem, 8vw, 5.5rem);
+		background: linear-gradient(180deg, var(--color-white) 0%, var(--brand-tint) 100%);
+	}
+
+	.fr-hero-inner {
+		max-width: 64ch;
+	}
+
+	.fr-page h1 {
+		margin: 0.6rem 0 1rem;
+		font-family: var(--font-serif);
+		font-size: clamp(2rem, 4.4vw, 3rem);
+		font-weight: 500;
+		line-height: 1.16;
+		color: var(--brand-deep);
+		text-wrap: balance;
+	}
+
+	.fr-lede {
+		margin: 0;
+		max-width: 60ch;
+		line-height: 1.75;
+		color: var(--ink-soft);
+		font-size: 1.05rem;
+	}
+
+	/* ---------- CARDS ---------- */
+	.fr-grid {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+		display: grid;
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+		gap: 1.4rem;
+	}
+
+	.fr-card {
+		display: flex;
+		flex-direction: column;
+		background: var(--color-white);
+		border: 1px solid rgb(0 94 71 / 14%);
+		border-radius: 1rem;
+		overflow: hidden;
+		height: 100%;
+		transition: transform 0.2s ease, box-shadow 0.2s ease;
+	}
+
+	.fr-card:hover {
+		transform: translateY(-3px);
+		box-shadow: 0 18px 36px rgb(0 94 71 / 14%);
+	}
+
+	.fr-card-media {
+		position: relative;
+		aspect-ratio: 4 / 3;
+		background: linear-gradient(160deg, #eaf0ea 0%, var(--brand-tint) 100%);
+		overflow: hidden;
+	}
+
+	.fr-card-media img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		object-position: center 30%;
+	}
+
+	.fr-placeholder {
+		position: absolute;
+		inset: 0;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		gap: 0.5rem;
+		color: var(--brand);
+		border: 1px dashed rgb(0 94 71 / 30%);
+	}
+
+	.fr-placeholder svg {
+		width: 56px;
+		height: 56px;
+	}
+
+	.fr-placeholder span {
+		font-size: 0.72rem;
+		text-transform: uppercase;
+		letter-spacing: 0.18em;
+		font-weight: 600;
+		color: var(--brand-deep);
+	}
+
+	.fr-card-tag {
+		position: absolute;
+		top: 0.85rem;
+		left: 0.85rem;
+		padding: 0.25rem 0.65rem;
+		border-radius: 999px;
+		background: var(--brand);
+		color: var(--color-white);
+		font-size: 0.66rem;
+		font-weight: 700;
+		letter-spacing: 0.12em;
+		text-transform: uppercase;
+	}
+
+	.fr-card-body {
+		padding: 1.3rem 1.4rem 1.5rem;
+		display: flex;
+		flex-direction: column;
+		gap: 0.6rem;
+		flex: 1;
+	}
+
+	.fr-audience {
+		margin: 0;
+		font-size: 0.72rem;
+		font-weight: 600;
+		letter-spacing: 0.1em;
+		text-transform: uppercase;
+		color: var(--brand);
+	}
+
+	.fr-card-title {
+		margin: 0;
+		font-family: var(--font-serif);
+		font-size: clamp(1.25rem, 2vw, 1.45rem);
+		font-weight: 500;
+		line-height: 1.2;
+		color: var(--brand-deep);
+		text-wrap: balance;
+	}
+
+	.fr-card-subtitle {
+		margin: 0;
+		font-family: var(--font-serif);
+		font-style: italic;
+		font-size: 0.95rem;
+		color: var(--ink-soft);
+		line-height: 1.45;
+	}
+
+	.fr-card-desc {
+		margin: 0;
+		font-size: 0.92rem;
+		line-height: 1.6;
+		color: var(--ink-soft);
+	}
+
+	.fr-card-bullets {
+		list-style: none;
+		padding: 0;
+		margin: 0;
+		display: grid;
+		gap: 0.45rem;
+	}
+
+	.fr-card-bullets li {
+		position: relative;
+		padding-left: 1.5rem;
+		font-size: 0.88rem;
+		line-height: 1.55;
+		color: var(--ink);
+	}
+
+	.fr-card-bullets li::before {
+		content: "✓";
+		position: absolute;
+		left: 0;
+		top: 0.05em;
+		width: 1.1rem;
+		height: 1.1rem;
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		border-radius: 999px;
+		background: var(--brand-tint);
+		color: var(--brand);
+		font-size: 0.7rem;
+		font-weight: 700;
+	}
+
+	.fr-card-cta {
+		margin-top: auto;
+		align-self: flex-start;
+		padding: 0.7rem 1.1rem;
+		font-size: 0.92rem;
+	}
+
+	.fr-card-todo {
+		margin: 0.4rem 0 0;
+		font-size: 0.7rem;
+		font-style: italic;
+		color: var(--ink-soft);
+		opacity: 0.6;
+		line-height: 1.5;
+	}
+
+	.fr-coming-soon {
+		margin: 2rem 0 0;
+		font-size: 0.78rem;
+		font-style: italic;
+		color: var(--ink-soft);
+		opacity: 0.65;
+	}
+
+	/* ---------- CLOSING ---------- */
+	.fr-close-inner {
+		max-width: 56ch;
+		margin-inline: auto;
+		text-align: center;
+	}
+
+	.fr-close-line {
+		margin: 0 0 0.5rem;
+		font-family: var(--font-serif);
+		font-size: clamp(1.2rem, 2.4vw, 1.5rem);
+		color: var(--brand-deep);
+	}
+
+	.fr-close-signoff {
+		margin: 0.6rem 0 0.4rem;
+		color: var(--ink-soft);
+	}
+
+	.fr-signature {
+		margin: 0 0 1.4rem;
+		font-family: var(--font-script);
+		font-size: 2rem;
+		color: var(--brand);
+	}
+
+	/* ---------- RESPONSIVE ---------- */
+	@media (max-width: 1100px) {
+		.fr-grid {
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+		}
+	}
+
+	@media (max-width: 700px) {
+		.fr-grid {
+			grid-template-columns: 1fr;
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.fr-card {
+			transition: none;
+		}
+
+		.fr-card:hover {
+			transform: none;
+		}
+	}
+</style>

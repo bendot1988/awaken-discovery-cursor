@@ -31,6 +31,17 @@ const { steps } = Astro.props;
 			<a class="cta cta-solid" href="/contact">Begin Your Journey</a>
 		</div>
 	</div>
+
+	<figure class="journey-divider" aria-hidden="true">
+		<img
+			src="/assets/images/fern-divider.jpg"
+			alt=""
+			width="2048"
+			height="408"
+			loading="lazy"
+			decoding="async"
+		/>
+	</figure>
 </section>
 
 <style>
@@ -102,9 +113,32 @@ const { steps } = Astro.props;
 		margin-top: 1.8rem;
 	}
 
+	.journey-divider {
+		margin: 3rem 0 -4rem;
+		padding: 0;
+		overflow: hidden;
+	}
+
+	.journey-divider img {
+		width: 100%;
+		height: clamp(120px, 18vw, 220px);
+		object-fit: cover;
+		display: block;
+	}
+
 	@media (max-width: 900px) {
 		.journey-grid {
 			grid-template-columns: 1fr;
+		}
+
+		.journey-divider {
+			margin-bottom: -3rem;
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.journey-divider img {
+			height: clamp(100px, 14vw, 180px);
 		}
 	}
 </style>

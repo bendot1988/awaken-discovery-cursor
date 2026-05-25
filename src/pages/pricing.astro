@@ -2,27 +2,1425 @@
 import Layout from "../layouts/Layout.astro";
 import SiteHeader from "../components/SiteHeader.astro";
 import SiteFooter from "../components/SiteFooter.astro";
-import ComingSoon from "../components/ComingSoon.astro";
 import { locations, navItems } from "../data/site";
+
+type BulkCard = {
+	type: "ind" | "cou";
+	sessions: number;
+	price: string;
+	headlinePrice: string;
+	headerVariant: "dark" | "sage";
+	popular: boolean;
+	bullets: string[];
+};
+
+const bulkCards: BulkCard[] = [
+	{
+		type: "ind",
+		sessions: 10,
+		price: "£540",
+		headlinePrice: "540",
+		headerVariant: "dark",
+		popular: true,
+		bullets: [
+			"Ideal for focused personal development",
+			"Extendable sessions to suit your needs",
+			"Recommended frequency: Weekly/Fortnightly",
+		],
+	},
+	{
+		type: "ind",
+		sessions: 6,
+		price: "£324",
+		headlinePrice: "324",
+		headerVariant: "sage",
+		popular: false,
+		bullets: [
+			"Ideal for focused personal development",
+			"Extendable sessions to suit your needs",
+			"Recommended frequency: Weekly/Fortnightly",
+		],
+	},
+	{
+		type: "cou",
+		sessions: 10,
+		price: "£810",
+		headlinePrice: "810",
+		headerVariant: "dark",
+		popular: true,
+		bullets: [
+			"Ideal for strengthening your relationship",
+			"Sessions tailored to your needs as a couple",
+			"Recommended frequency: Weekly/Fortnightly",
+		],
+	},
+	{
+		type: "cou",
+		sessions: 6,
+		price: "£486",
+		headlinePrice: "486",
+		headerVariant: "sage",
+		popular: false,
+		bullets: [
+			"Ideal for strengthening your relationship",
+			"Sessions tailored to your needs as a couple",
+			"Recommended frequency: Weekly/Fortnightly",
+		],
+	},
+];
+
+type Package = {
+	value: string;
+	label: string;
+	sublabel: string;
+	priceLabel: string;
+	priceAmount: number;
+	stripePriceId: string;
+};
+
+// Stripe price IDs — replace these placeholders with real `price_xxx` values
+// from your Stripe dashboard once the products are created.
+const packages: Package[] = [
+	{
+		value: "ind-10",
+		label: "Individual — 10 × 60 min sessions",
+		sublabel: "For the price of 9",
+		priceLabel: "£540.00",
+		priceAmount: 540,
+		stripePriceId: "{{STRIPE_PRICE_IND_10}}",
+	},
+	{
+		value: "ind-6",
+		label: "Individual — 6 × 60 min sessions",
+		sublabel: "For the price of 5",
+		priceLabel: "£324.00",
+		priceAmount: 324,
+		stripePriceId: "{{STRIPE_PRICE_IND_6}}",
+	},
+	{
+		value: "cou-10",
+		label: "Couples — 10 × 60 min sessions",
+		sublabel: "For the price of 9",
+		priceLabel: "£810.00",
+		priceAmount: 810,
+		stripePriceId: "{{STRIPE_PRICE_COU_10}}",
+	},
+	{
+		value: "cou-6",
+		label: "Couples — 6 × 60 min sessions",
+		sublabel: "For the price of 5",
+		priceLabel: "£486.00",
+		priceAmount: 486,
+		stripePriceId: "{{STRIPE_PRICE_COU_6}}",
+	},
+];
+
+const referralOptions = [
+	"Google search",
+	"Recommendation from a friend or family member",
+	"Recommendation from a healthcare professional",
+	"Instagram",
+	"Facebook",
+	"LinkedIn",
+	"Therapist directory",
+	"Other",
+];
+
+const countryOptions = [
+	"United Kingdom",
+	"Ireland",
+	"Other",
+];
+
+const finePrint =
+	"Contact us within 7 days of receipt to book. For gift options, specify at checkout for an extension. Expiry enforced from the date provided for gifts.";
 ---
 
 <Layout
 	title="Pricing · Awaken Discovery"
-	description="Transparent pricing for individual therapy sessions and support blocks."
+	description="Single-session and bulk session pricing for individuals and couples. Save 10% with our 6 or 10 session bulk packages."
 >
 	<SiteHeader navItems={navItems} />
-	<main>
-		<ComingSoon
-			eyebrow="Pricing"
-			title="Pricing Details — Coming Soon"
-			body="A dedicated pricing page is on its way. For now, individual sessions are £60 (60 minutes). Therapy support blocks of 6 or 10 sessions are available — block pricing to be confirmed against the existing live page."
-			notes={[
-				"Individual Therapy Session — £60 / 60 minutes",
-				"Therapy Support Block — 6 or 10 sessions (price TBC)",
-				"Terms & conditions for blocks",
-				"How to book and what to expect at your first session",
-			]}
-		/>
+	<main class="pr-page">
+		<!-- ============== HERO ============== -->
+		<section class="pr-hero section">
+			<div class="container">
+				<div class="pr-hero-inner">
+					<p class="section-kicker">Pricing</p>
+					<h1>Bulk Sessions</h1>
+					<p class="pr-lede">
+						Choose from our 10-session or 6-session packages, offering
+						savings tailored to your personal development journey.
+					</p>
+					<p class="pr-note">
+						We recommend scheduling sessions weekly or fortnightly for
+						consistency and progress. Please book within seven days of
+						receipt to secure your sessions.
+					</p>
+					<p class="pr-note">
+						<strong>Gift options available</strong> — specify at checkout
+						for an extended booking period.
+					</p>
+					<p class="pr-note pr-note-soft">
+						Discounted bundles are non-refundable but can be rescheduled
+						with 7 days' notice. <a href="/contact">Contact us</a> to find
+						out more.
+					</p>
+				</div>
+			</div>
+		</section>
+
+		<!-- ============== SINGLE SESSION (context) ============== -->
+		<section class="pr-single section section-soft">
+			<div class="container pr-single-inner">
+				<div class="pr-single-row">
+					<div>
+						<p class="section-kicker">Prefer single sessions?</p>
+						<h2>Start with one session at a time</h2>
+						<p class="pr-single-body">
+							Not ready for a bundle? Single sessions are available at standard
+							rates from £60. Useful for ongoing support without committing in
+							advance, or for trying therapy for the first time.
+						</p>
+						<p class="pr-single-body" style="margin-top: 0.8rem;">
+							<a class="cta cta-outline" href="/pricing/individual">
+								See Individual Session Pricing →
+							</a>
+						</p>
+					</div>
+					<dl class="pr-single-prices">
+						<div>
+							<dt>Individuals</dt>
+							<dd>
+								<span class="pr-single-price">£60</span>
+								<span class="pr-single-cadence">60 minutes</span>
+							</dd>
+						</div>
+						<div>
+							<dt>Couples</dt>
+							<dd>
+								<span class="pr-single-price">£90</span>
+								<span class="pr-single-cadence">60 minutes</span>
+							</dd>
+						</div>
+					</dl>
+				</div>
+			</div>
+		</section>
+
+		<!-- ============== BULK SESSIONS ============== -->
+		<section class="pr-bulk section" id="bulk">
+			<div class="container">
+				<header class="pr-bulk-head">
+					<p class="section-kicker">Bulk sessions</p>
+					<h2>Choose Individual or Couples</h2>
+					<p class="pr-bulk-lede">
+						Save 10% when you book in bundles. Pick the format below — pricing
+						and what's included updates accordingly.
+					</p>
+				</header>
+
+				<div class="pr-tabs">
+					<input
+						type="radio"
+						name="pr-tab"
+						id="pr-tab-ind"
+						class="pr-tab-input"
+						checked
+					/>
+					<input
+						type="radio"
+						name="pr-tab"
+						id="pr-tab-cou"
+						class="pr-tab-input"
+					/>
+
+					<div class="pr-tab-switch" role="tablist" aria-label="Pricing for">
+						<label for="pr-tab-ind" class="pr-tab-label">Individuals</label>
+						<label for="pr-tab-cou" class="pr-tab-label">Couples</label>
+					</div>
+
+					<div class="pr-tab-panels">
+						{
+							["ind", "cou"].map((group) => (
+								<div class={`pr-tab-panel pr-tab-panel-${group}`}>
+									<div class="pr-card-grid">
+										{bulkCards
+											.filter((c) => c.type === group)
+											.map((card) => (
+												<article
+													class={`pr-card pr-card-${card.headerVariant}`}
+												>
+													{card.popular && (
+														<span class="pr-popular" aria-hidden="true">
+															Popular
+														</span>
+													)}
+													<header class="pr-card-header">
+														<h3>
+															Bulk Sessions For{" "}
+															{card.type === "ind" ? "Individuals" : "Couples"}
+														</h3>
+														<p>
+															Save 10% by buying {card.sessions} sessions
+														</p>
+													</header>
+													<div class="pr-card-body">
+														<p class="pr-card-price">
+															<span class="pr-card-currency">£</span>
+															<span class="pr-card-amount">
+																{card.headlinePrice}
+															</span>
+														</p>
+														<p class="pr-card-save">Save 10%</p>
+														<ul class="pr-card-bullets">
+															{card.bullets.map((b) => (
+																<li>{b}</li>
+															))}
+														</ul>
+														<a class="cta cta-solid pr-card-cta" href="#book">
+															Book Now
+														</a>
+														<p class="pr-card-fineprint">{finePrint}</p>
+													</div>
+												</article>
+											))}
+									</div>
+								</div>
+							))
+						}
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- ============== BOOK FORM ============== -->
+		<section class="pr-book section section-soft" id="book">
+			<div class="container">
+				<div class="pr-book-inner">
+					<p class="section-kicker">Next step</p>
+					<h2>Book Your Bulk Sessions</h2>
+					<p class="pr-book-lede">
+						Fill in your details below and choose your package. If you'd like
+						to pay now, you'll be taken to a secure Stripe payment page. If
+						you'd rather have a chat first, leave the "pay now" option as no
+						and I'll be in touch within one working day.
+					</p>
+
+					<form
+						class="pr-form"
+						id="booking-form"
+						method="post"
+						action="#"
+						aria-describedby="pr-form-todo"
+						novalidate
+					>
+					<div class="pr-form-cols">
+						<div class="pr-form-main">
+						<!-- ===== YOUR DETAILS ===== -->
+						<fieldset class="pr-fieldset">
+							<legend class="pr-legend">Your details</legend>
+							<div class="pr-grid-2">
+								<label class="pr-field">
+									<span>
+										First name <span class="pr-req">*</span>
+									</span>
+									<input
+										type="text"
+										name="first_name"
+										autocomplete="given-name"
+										required
+									/>
+								</label>
+								<label class="pr-field">
+									<span>
+										Last name <span class="pr-req">*</span>
+									</span>
+									<input
+										type="text"
+										name="last_name"
+										autocomplete="family-name"
+										required
+									/>
+								</label>
+							</div>
+							<label class="pr-field">
+								<span>
+									Email <span class="pr-req">*</span>
+								</span>
+								<input
+									type="email"
+									name="email"
+									autocomplete="email"
+									required
+								/>
+							</label>
+							<label class="pr-field">
+								<span>
+									Phone / Mobile <span class="pr-req">*</span>
+								</span>
+								<input
+									type="tel"
+									name="phone"
+									autocomplete="tel"
+									required
+								/>
+							</label>
+
+							<fieldset class="pr-radio-group">
+								<legend>
+									Preferred method of contact <span class="pr-req">*</span>
+								</legend>
+								<label class="pr-radio">
+									<input
+										type="radio"
+										name="contact_pref"
+										value="email"
+										required
+										checked
+									/>
+									<span>Email</span>
+								</label>
+								<label class="pr-radio">
+									<input
+										type="radio"
+										name="contact_pref"
+										value="telephone"
+									/>
+									<span>Telephone</span>
+								</label>
+							</fieldset>
+						</fieldset>
+
+						<!-- ===== ADDRESS ===== -->
+						<fieldset class="pr-fieldset">
+							<legend class="pr-legend">Address</legend>
+							<div class="pr-grid-2">
+								<label class="pr-field">
+									<span>
+										Address line 1 <span class="pr-req">*</span>
+									</span>
+									<input
+										type="text"
+										name="address_1"
+										autocomplete="address-line1"
+										required
+									/>
+								</label>
+								<label class="pr-field">
+									<span>Address line 2</span>
+									<input
+										type="text"
+										name="address_2"
+										autocomplete="address-line2"
+									/>
+								</label>
+								<label class="pr-field">
+									<span>City</span>
+									<input
+										type="text"
+										name="city"
+										autocomplete="address-level2"
+									/>
+								</label>
+								<label class="pr-field">
+									<span>County</span>
+									<input
+										type="text"
+										name="county"
+										autocomplete="address-level1"
+									/>
+								</label>
+								<label class="pr-field">
+									<span>
+										Postcode <span class="pr-req">*</span>
+									</span>
+									<input
+										type="text"
+										name="postcode"
+										autocomplete="postal-code"
+										required
+									/>
+								</label>
+								<label class="pr-field">
+									<span>Country</span>
+									<select name="country" autocomplete="country">
+										{
+											countryOptions.map((c) => (
+												<option value={c}>{c}</option>
+											))
+										}
+									</select>
+								</label>
+							</div>
+						</fieldset>
+
+						<!-- ===== ABOUT YOU ===== -->
+						<fieldset class="pr-fieldset">
+							<legend class="pr-legend">About you</legend>
+							<fieldset class="pr-radio-group">
+								<legend>
+									Are you a returning customer?
+									<span class="pr-req">*</span>
+								</legend>
+								<label class="pr-radio">
+									<input type="radio" name="returning" value="yes" required />
+									<span>Yes</span>
+								</label>
+								<label class="pr-radio">
+									<input type="radio" name="returning" value="no" />
+									<span>No</span>
+								</label>
+							</fieldset>
+
+							<label class="pr-checkbox">
+								<input type="checkbox" name="newsletter" />
+								<span>
+									Yes, I'd like to receive updates, newsletters and supportive
+									wellbeing emails from Awaken Discovery Counselling &amp;
+									Psychotherapy. I can unsubscribe at any time.
+								</span>
+							</label>
+
+							<label class="pr-checkbox">
+								<input
+									type="checkbox"
+									name="terms"
+									required
+								/>
+								<span>
+									<span class="pr-req">*</span> I have read and agree to the
+									<a href="/terms">Bulk Pricing Terms &amp; Conditions</a>.
+								</span>
+							</label>
+						</fieldset>
+						</div>
+
+						<aside class="pr-form-aside">
+						<!-- ===== YOUR BOOKING ===== -->
+						<fieldset class="pr-fieldset pr-fieldset-booking">
+							<legend class="pr-legend">Your booking</legend>
+
+							<fieldset class="pr-package-group" aria-required="true">
+								<legend>
+									Choose how many sessions you would like
+									<span class="pr-req">*</span>
+								</legend>
+								<div class="pr-package-list">
+									{
+										packages.map((p) => (
+											<label
+												class="pr-package"
+												data-price={p.priceAmount}
+												data-stripe-price={p.stripePriceId}
+											>
+												<input
+													type="radio"
+													name="package"
+													value={p.value}
+													required
+												/>
+												<span class="pr-package-body">
+													<span class="pr-package-label">{p.label}</span>
+													<span class="pr-package-sub">{p.sublabel}</span>
+												</span>
+												<span class="pr-package-price">{p.priceLabel}</span>
+											</label>
+										))
+									}
+								</div>
+							</fieldset>
+
+							<label class="pr-field">
+								<span>Your comments (optional)</span>
+								<textarea
+									name="comments"
+									rows="4"
+									placeholder="Anything you'd like me to know before we begin?"
+								></textarea>
+							</label>
+
+							<div class="pr-summary" aria-live="polite">
+								<div class="pr-summary-row">
+									<span>Selected package</span>
+									<span class="pr-summary-package" data-empty="true">
+										No package selected yet
+									</span>
+								</div>
+								<div class="pr-summary-row pr-summary-total-row">
+									<span>Total</span>
+									<span class="pr-summary-total">£0.00</span>
+								</div>
+							</div>
+
+							<label class="pr-field">
+								<span>How did you hear about me?</span>
+								<select name="referral">
+									<option value="">— Select —</option>
+									{
+										referralOptions.map((opt) => (
+											<option value={opt}>{opt}</option>
+										))
+									}
+								</select>
+							</label>
+
+							<fieldset class="pr-radio-group">
+								<legend>
+									I'm happy to pay now for my bulk session block
+									<span class="pr-req">*</span>
+								</legend>
+								<label class="pr-radio">
+									<input
+										type="radio"
+										name="pay_now"
+										value="yes"
+										required
+										checked
+									/>
+									<span>Yes — take me to secure payment</span>
+								</label>
+								<label class="pr-radio">
+									<input type="radio" name="pay_now" value="no" />
+									<span>No, I'd like to speak with you first</span>
+								</label>
+							</fieldset>
+
+							<button class="cta cta-solid pr-submit" type="submit">
+								<span data-submit-pay>Make Payment</span>
+								<span data-submit-enquire hidden>Send Booking Enquiry</span>
+							</button>
+
+							<label class="pr-checkbox">
+								<input
+									type="checkbox"
+									name="data_consent"
+									required
+								/>
+								<span>
+									<span class="pr-req">*</span> I consent to Awaken Discovery
+									storing my submitted information so they can respond to my
+									booking and process my payment.
+								</span>
+							</label>
+
+						</fieldset>
+
+						<p id="pr-form-todo" class="pr-book-todo">
+							{`{{TODO: STRIPE INTEGRATION
+1. Create the four products in Stripe Dashboard (Individual 6/10, Couples 6/10) and replace {{STRIPE_PRICE_*}} placeholders in src/pages/pricing.astro with the real price_xxx IDs.
+2. Create a /api/create-checkout-session endpoint (Astro server route or Netlify function) that accepts the form payload, calls stripe.checkout.sessions.create() with the selected price_id + customer email + metadata, and returns { url }.
+3. In the script at the bottom of this page, replace the alert() with: fetch('/api/create-checkout-session', { method: 'POST', body: JSON.stringify(payload) }).then(r => r.json()).then(({url}) => window.location = url);
+4. If pay_now === 'no', POST the same payload to /api/booking-enquiry (sends email to Ally) and redirect to /pricing/thank-you.
+5. Add Stripe webhook handler for checkout.session.completed → write booking record + send confirmation email.
+6. Optional: switch to Stripe Elements (in-page card) instead of Checkout if you prefer not to redirect — uses stripe.confirmPayment() with a PaymentIntent created server-side.}}`}
+						</p>
+						</aside>
+					</div>
+					</form>
+				</div>
+			</div>
+		</section>
+
+		<script is:inline>
+			(function () {
+				const form = document.getElementById("booking-form");
+				if (!form) return;
+
+				const packageInputs = form.querySelectorAll('input[name="package"]');
+				const summaryPackage = form.querySelector(".pr-summary-package");
+				const summaryTotal = form.querySelector(".pr-summary-total");
+				const payNowInputs = form.querySelectorAll('input[name="pay_now"]');
+				const submitPay = form.querySelector("[data-submit-pay]");
+				const submitEnquire = form.querySelector("[data-submit-enquire]");
+
+				const updateSummary = () => {
+					const selected = form.querySelector(
+						'input[name="package"]:checked'
+					);
+					if (!selected) {
+						summaryPackage.textContent = "No package selected yet";
+						summaryPackage.setAttribute("data-empty", "true");
+						summaryTotal.textContent = "£0.00";
+						return;
+					}
+					const label = selected.closest(".pr-package");
+					const price = parseFloat(label.dataset.price);
+					const text = label.querySelector(".pr-package-label").textContent;
+					summaryPackage.textContent = text;
+					summaryPackage.removeAttribute("data-empty");
+					summaryTotal.textContent = `£${price.toFixed(2)}`;
+				};
+
+				const updateSubmitLabel = () => {
+					const payNow =
+						form.querySelector('input[name="pay_now"]:checked')?.value ===
+						"yes";
+					submitPay.hidden = !payNow;
+					submitEnquire.hidden = payNow;
+				};
+
+				packageInputs.forEach((input) =>
+					input.addEventListener("change", updateSummary)
+				);
+				payNowInputs.forEach((input) =>
+					input.addEventListener("change", updateSubmitLabel)
+				);
+
+				form.addEventListener("submit", (event) => {
+					event.preventDefault();
+					if (!form.reportValidity()) return;
+
+					const selected = form.querySelector(
+						'input[name="package"]:checked'
+					);
+					const stripePriceId = selected
+						?.closest(".pr-package")
+						?.getAttribute("data-stripe-price");
+					const payNow =
+						form.querySelector('input[name="pay_now"]:checked')?.value;
+
+					// TODO: Wire to Stripe Checkout / booking-enquiry endpoint.
+					// See {{TODO: STRIPE INTEGRATION ...}} note above for the
+					// exact contract.
+					alert(
+						"Form is not yet wired up.\n\nNext step: Stripe integration.\n\n" +
+							"Selected price ID: " +
+							stripePriceId +
+							"\nPay now: " +
+							payNow
+					);
+				});
+
+				updateSummary();
+				updateSubmitLabel();
+			})();
+		</script>
 	</main>
-	<SiteFooter locations={locations} />
+	<SiteFooter
+		locations={locations}
+		tagline="Calm, transparent pricing — book a bundle or a single session."
+	/>
 </Layout>
+
+<style>
+	.pr-page {
+		--brand: var(--color-dark-slate-gray);
+		--brand-deep: #004836;
+		--brand-tint: rgb(0 94 71 / 8%);
+		--ink: var(--color-dark-gray);
+		--ink-soft: rgb(29 35 39 / 78%);
+		color: var(--ink);
+	}
+
+	.pr-page .section-kicker {
+		margin: 0;
+		text-transform: uppercase;
+		letter-spacing: 0.12em;
+		font-size: 0.78rem;
+		font-weight: 600;
+		color: var(--brand);
+	}
+
+	.pr-page h1,
+	.pr-page h2 {
+		font-family: var(--font-serif);
+		font-weight: 500;
+		text-wrap: balance;
+	}
+
+	.pr-page h1 {
+		margin: 0.6rem 0 1rem;
+		font-size: clamp(2.2rem, 5vw, 3.2rem);
+		line-height: 1.12;
+		color: var(--brand-deep);
+	}
+
+	.pr-page h2 {
+		margin: 0.6rem 0 0.9rem;
+		font-size: clamp(1.7rem, 3.3vw, 2.4rem);
+		line-height: 1.2;
+	}
+
+	/* ---------- HERO ---------- */
+	.pr-hero {
+		background: linear-gradient(180deg, var(--color-white) 0%, var(--brand-tint) 100%);
+		padding-top: 4rem;
+	}
+
+	.pr-hero-inner {
+		max-width: 62ch;
+	}
+
+	.pr-lede {
+		margin: 0 0 1.2rem;
+		font-size: clamp(1.05rem, 1.8vw, 1.2rem);
+		line-height: 1.7;
+		color: var(--ink-soft);
+		max-width: 60ch;
+	}
+
+	.pr-note {
+		margin: 0 0 0.7rem;
+		line-height: 1.7;
+	}
+
+	.pr-note-soft {
+		font-size: 0.92rem;
+		color: var(--ink-soft);
+	}
+
+	.pr-note a {
+		color: var(--brand);
+		text-decoration: underline;
+		text-underline-offset: 3px;
+	}
+
+	/* ---------- SINGLE SESSION ---------- */
+	.pr-single-row {
+		display: grid;
+		grid-template-columns: 1.4fr 1fr;
+		gap: clamp(1.5rem, 4vw, 3rem);
+		align-items: center;
+	}
+
+	.pr-single-body {
+		margin: 0;
+		line-height: 1.75;
+		color: var(--ink-soft);
+		max-width: 56ch;
+	}
+
+	.pr-single-prices {
+		margin: 0;
+		display: grid;
+		gap: 0.9rem;
+	}
+
+	.pr-single-prices > div {
+		display: grid;
+		grid-template-columns: auto 1fr;
+		align-items: baseline;
+		gap: 0 1rem;
+		padding: 1rem 1.2rem;
+		background: var(--color-white);
+		border: 1px solid rgb(0 94 71 / 18%);
+		border-radius: 0.85rem;
+	}
+
+	.pr-single-prices dt {
+		font-weight: 600;
+		font-size: 0.95rem;
+		color: var(--brand-deep);
+	}
+
+	.pr-single-prices dd {
+		margin: 0;
+		display: flex;
+		align-items: baseline;
+		gap: 0.6rem;
+		justify-self: end;
+	}
+
+	.pr-single-price {
+		font-family: var(--font-serif);
+		font-size: clamp(1.7rem, 2.6vw, 2.1rem);
+		color: var(--brand);
+	}
+
+	.pr-single-cadence {
+		font-size: 0.85rem;
+		color: var(--ink-soft);
+	}
+
+	/* ---------- BULK / TABS ---------- */
+	.pr-bulk-head {
+		max-width: 60ch;
+		margin-bottom: 1.8rem;
+	}
+
+	.pr-bulk-lede {
+		margin: 0;
+		color: var(--ink-soft);
+		line-height: 1.75;
+	}
+
+	.pr-tabs {
+		position: relative;
+	}
+
+	.pr-tab-input {
+		position: absolute;
+		opacity: 0;
+		pointer-events: none;
+	}
+
+	.pr-tab-switch {
+		display: inline-flex;
+		padding: 0.3rem;
+		border-radius: 999px;
+		background: var(--brand-tint);
+		border: 1px solid rgb(0 94 71 / 18%);
+		margin: 0 auto 2rem;
+		gap: 0.3rem;
+	}
+
+	.pr-tab-switch {
+		display: flex;
+		justify-content: center;
+		max-width: max-content;
+		margin-inline: auto;
+	}
+
+	.pr-tab-label {
+		padding: 0.55rem 1.4rem;
+		border-radius: 999px;
+		font-size: 0.9rem;
+		font-weight: 500;
+		cursor: pointer;
+		color: var(--ink-soft);
+		transition: background-color 0.2s ease, color 0.2s ease;
+	}
+
+	.pr-tab-label:hover {
+		color: var(--brand-deep);
+	}
+
+	#pr-tab-ind:checked ~ .pr-tab-switch label[for="pr-tab-ind"],
+	#pr-tab-cou:checked ~ .pr-tab-switch label[for="pr-tab-cou"] {
+		background: var(--color-white);
+		color: var(--brand-deep);
+		box-shadow: 0 1px 4px rgb(0 94 71 / 18%);
+	}
+
+	.pr-tab-input:focus-visible ~ .pr-tab-switch label[for="pr-tab-ind"],
+	#pr-tab-ind:focus-visible ~ .pr-tab-switch label[for="pr-tab-ind"] {
+		outline: 2px solid var(--brand);
+		outline-offset: 2px;
+	}
+
+	#pr-tab-cou:focus-visible ~ .pr-tab-switch label[for="pr-tab-cou"] {
+		outline: 2px solid var(--brand);
+		outline-offset: 2px;
+	}
+
+	.pr-tab-panel {
+		display: none;
+	}
+
+	#pr-tab-ind:checked ~ .pr-tab-panels .pr-tab-panel-ind {
+		display: block;
+	}
+
+	#pr-tab-cou:checked ~ .pr-tab-panels .pr-tab-panel-cou {
+		display: block;
+	}
+
+	/* ---------- CARDS ---------- */
+	.pr-card-grid {
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: 1.4rem;
+	}
+
+	.pr-card {
+		position: relative;
+		display: flex;
+		flex-direction: column;
+		background: var(--color-white);
+		border: 1px solid rgb(0 94 71 / 16%);
+		border-radius: 1rem;
+		overflow: hidden;
+		box-shadow: 0 18px 36px rgb(0 94 71 / 14%);
+		transition: transform 0.2s ease, box-shadow 0.2s ease;
+	}
+
+	.pr-card:hover {
+		transform: translateY(-2px);
+		box-shadow: 0 22px 44px rgb(0 94 71 / 18%);
+	}
+
+	.pr-popular {
+		position: absolute;
+		top: 0;
+		right: 0;
+		transform: translate(28%, 38%) rotate(45deg);
+		transform-origin: center;
+		padding: 0.3rem 2.5rem;
+		background: var(--brand-deep);
+		color: var(--color-white);
+		font-family: var(--font-body);
+		font-size: 0.7rem;
+		font-weight: 600;
+		letter-spacing: 0.18em;
+		text-transform: uppercase;
+		box-shadow: 0 4px 10px rgb(0 94 71 / 28%);
+		z-index: 1;
+	}
+
+	.pr-card-header {
+		padding: 1.6rem 1.7rem;
+		color: var(--color-white);
+	}
+
+	.pr-card-dark .pr-card-header {
+		background: linear-gradient(160deg, #2a3035 0%, var(--color-dark-gray) 100%);
+	}
+
+	.pr-card-sage .pr-card-header {
+		background: linear-gradient(160deg, var(--brand) 0%, var(--brand-deep) 100%);
+	}
+
+	.pr-card-header h3 {
+		margin: 0 0 0.4rem;
+		font-family: var(--font-serif);
+		font-size: clamp(1.3rem, 2vw, 1.55rem);
+		font-weight: 500;
+		line-height: 1.2;
+		color: var(--color-white);
+	}
+
+	.pr-card-header p {
+		margin: 0;
+		font-family: var(--font-serif);
+		font-style: italic;
+		font-size: 0.98rem;
+		opacity: 0.92;
+	}
+
+	.pr-card-body {
+		padding: 1.8rem 1.8rem 1.7rem;
+		display: flex;
+		flex-direction: column;
+		gap: 1rem;
+		flex: 1;
+	}
+
+	.pr-card-price {
+		margin: 0;
+		display: flex;
+		align-items: flex-start;
+		gap: 0.2rem;
+		color: var(--brand-deep);
+	}
+
+	.pr-card-currency {
+		font-family: var(--font-serif);
+		font-size: 1.6rem;
+		font-weight: 500;
+		margin-top: 0.55rem;
+	}
+
+	.pr-card-amount {
+		font-family: var(--font-serif);
+		font-size: clamp(3.6rem, 6.4vw, 4.8rem);
+		font-weight: 500;
+		line-height: 1;
+	}
+
+	.pr-card-save {
+		margin: -0.4rem 0 0;
+		font-family: var(--font-serif);
+		font-style: italic;
+		font-size: 1rem;
+		color: var(--brand);
+		font-weight: 500;
+	}
+
+	.pr-card-bullets {
+		list-style: none;
+		padding: 0;
+		margin: 0.6rem 0;
+		display: grid;
+		gap: 0;
+		border-top: 1px solid rgb(0 94 71 / 14%);
+	}
+
+	.pr-card-bullets li {
+		padding: 0.9rem 0;
+		border-bottom: 1px solid rgb(0 94 71 / 14%);
+		font-size: 0.94rem;
+		line-height: 1.5;
+		color: var(--ink-soft);
+	}
+
+	.pr-card-cta {
+		margin-top: 0.4rem;
+		padding: 0.9rem 1.4rem;
+		text-align: center;
+		display: block;
+		transition: background-color 0.2s ease, border-color 0.2s ease;
+	}
+
+	.pr-card-cta:hover,
+	.pr-card-cta:focus-visible {
+		background: var(--brand-deep);
+		border-color: var(--brand-deep);
+	}
+
+	.pr-card-fineprint {
+		margin: 0;
+		font-size: 0.78rem;
+		line-height: 1.55;
+		color: var(--ink-soft);
+		text-align: center;
+	}
+
+	/* ---------- BOOK FORM ---------- */
+	.pr-book-inner {
+		max-width: 100%;
+	}
+
+	.pr-book-lede {
+		margin: 0 0 1.6rem;
+		max-width: 70ch;
+		line-height: 1.75;
+		color: var(--ink-soft);
+	}
+
+	.pr-form {
+		display: block;
+	}
+
+	.pr-form-cols {
+		display: grid;
+		grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+		gap: 1.6rem;
+		align-items: start;
+	}
+
+	.pr-form-main {
+		display: grid;
+		gap: 1.6rem;
+		min-width: 0;
+	}
+
+	.pr-form-aside {
+		display: grid;
+		gap: 1rem;
+		min-width: 0;
+		position: sticky;
+		top: 6rem;
+	}
+
+	.pr-fieldset-booking {
+		background: linear-gradient(170deg, var(--color-white) 0%, var(--brand-tint) 120%);
+	}
+
+	.pr-fieldset {
+		padding: 1.6rem 1.8rem;
+		margin: 0;
+		background: var(--color-white);
+		border: 1px solid rgb(0 94 71 / 18%);
+		border-radius: 1rem;
+		display: grid;
+		gap: 1.1rem;
+	}
+
+	.pr-legend {
+		float: left;
+		width: 100%;
+		margin: 0 0 0.3rem;
+		padding: 0;
+		font-family: var(--font-serif);
+		font-size: 1.2rem;
+		font-weight: 500;
+		color: var(--brand-deep);
+	}
+
+	.pr-legend::after {
+		content: "";
+		display: block;
+		clear: both;
+	}
+
+	.pr-req {
+		color: #973a3a;
+		font-weight: 600;
+	}
+
+	.pr-grid-2 {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 1rem;
+	}
+
+	.pr-field {
+		display: grid;
+		gap: 0.35rem;
+		font-size: 0.88rem;
+	}
+
+	.pr-field > span:first-child {
+		font-weight: 500;
+		color: var(--ink);
+	}
+
+	.pr-field input,
+	.pr-field select,
+	.pr-field textarea {
+		font: inherit;
+		padding: 0.65rem 0.85rem;
+		border: 1px solid rgb(0 94 71 / 25%);
+		border-radius: 0.55rem;
+		background: var(--color-white);
+		color: var(--ink);
+	}
+
+	.pr-field textarea {
+		resize: vertical;
+		min-height: 90px;
+		line-height: 1.6;
+	}
+
+	.pr-field input:focus-visible,
+	.pr-field select:focus-visible,
+	.pr-field textarea:focus-visible {
+		outline: none;
+		border-color: var(--brand);
+		box-shadow: 0 0 0 3px rgb(0 94 71 / 18%);
+	}
+
+	.pr-radio-group {
+		margin: 0;
+		padding: 0;
+		border: 0;
+		display: grid;
+		gap: 0.5rem;
+	}
+
+	.pr-radio-group legend {
+		margin: 0 0 0.3rem;
+		padding: 0;
+		font-size: 0.88rem;
+		font-weight: 500;
+		color: var(--ink);
+	}
+
+	.pr-radio,
+	.pr-checkbox {
+		display: flex;
+		align-items: flex-start;
+		gap: 0.65rem;
+		font-size: 0.9rem;
+		line-height: 1.55;
+		color: var(--ink);
+		cursor: pointer;
+	}
+
+	.pr-radio input,
+	.pr-checkbox input {
+		margin-top: 0.2rem;
+		accent-color: var(--brand);
+		flex-shrink: 0;
+	}
+
+	.pr-checkbox a {
+		color: var(--brand);
+		text-decoration: underline;
+		text-underline-offset: 3px;
+	}
+
+	/* Package options */
+	.pr-package-group {
+		margin: 0;
+		padding: 0;
+		border: 0;
+	}
+
+	.pr-package-group legend {
+		margin: 0 0 0.6rem;
+		padding: 0;
+		font-size: 0.92rem;
+		font-weight: 500;
+		color: var(--ink);
+	}
+
+	.pr-package-list {
+		display: grid;
+		gap: 0.6rem;
+	}
+
+	.pr-package {
+		display: grid;
+		grid-template-columns: auto 1fr auto;
+		align-items: center;
+		gap: 1rem;
+		padding: 0.95rem 1.1rem;
+		background: var(--color-white);
+		border: 1px solid rgb(0 94 71 / 20%);
+		border-radius: 0.7rem;
+		cursor: pointer;
+		transition: border-color 0.15s ease, background-color 0.15s ease;
+	}
+
+	.pr-package:hover {
+		border-color: var(--brand);
+		background: var(--brand-tint);
+	}
+
+	.pr-package:has(input:checked) {
+		border-color: var(--brand);
+		background: var(--brand-tint);
+		box-shadow: 0 0 0 2px rgb(0 94 71 / 12%);
+	}
+
+	.pr-package input {
+		accent-color: var(--brand);
+	}
+
+	.pr-package-body {
+		display: flex;
+		flex-direction: column;
+		gap: 0.15rem;
+	}
+
+	.pr-package-label {
+		font-weight: 500;
+		color: var(--ink);
+		font-size: 0.92rem;
+	}
+
+	.pr-package-sub {
+		font-style: italic;
+		font-size: 0.82rem;
+		color: var(--ink-soft);
+	}
+
+	.pr-package-price {
+		font-family: var(--font-serif);
+		font-size: 1.25rem;
+		font-weight: 500;
+		color: var(--brand-deep);
+		white-space: nowrap;
+	}
+
+	/* Summary panel */
+	.pr-summary {
+		padding: 1rem 1.1rem;
+		background: var(--brand-tint);
+		border-radius: 0.7rem;
+		display: grid;
+		gap: 0.5rem;
+		border: 1px solid rgb(0 94 71 / 18%);
+	}
+
+	.pr-summary-row {
+		display: flex;
+		justify-content: space-between;
+		align-items: baseline;
+		gap: 1rem;
+		font-size: 0.92rem;
+		color: var(--ink-soft);
+	}
+
+	.pr-summary-package {
+		text-align: right;
+		font-weight: 500;
+		color: var(--ink);
+	}
+
+	.pr-summary-package[data-empty="true"] {
+		font-style: italic;
+		color: var(--ink-soft);
+		font-weight: 400;
+	}
+
+	.pr-summary-total-row {
+		padding-top: 0.5rem;
+		border-top: 1px solid rgb(0 94 71 / 18%);
+	}
+
+	.pr-summary-total {
+		font-family: var(--font-serif);
+		font-size: 1.5rem;
+		font-weight: 500;
+		color: var(--brand-deep);
+	}
+
+	.pr-submit {
+		justify-self: stretch;
+		padding: 0.95rem 1.4rem;
+		font-size: 1rem;
+		margin-top: 0.4rem;
+	}
+
+	.pr-book-todo {
+		margin: 0.6rem 0 0;
+		padding: 0.9rem 1rem;
+		background: rgb(0 94 71 / 5%);
+		border-left: 3px solid var(--brand);
+		border-radius: 0 0.5rem 0.5rem 0;
+		font-size: 0.72rem;
+		font-style: italic;
+		color: var(--ink-soft);
+		line-height: 1.6;
+		opacity: 0.85;
+		white-space: pre-line;
+	}
+
+	/* ---------- RESPONSIVE ---------- */
+	@media (max-width: 1024px) {
+		.pr-form-cols {
+			grid-template-columns: 1fr;
+		}
+
+		.pr-form-aside {
+			position: static;
+		}
+	}
+
+	@media (max-width: 900px) {
+		.pr-single-row {
+			grid-template-columns: 1fr;
+		}
+
+		.pr-card-grid {
+			grid-template-columns: 1fr;
+		}
+
+		.pr-grid-2 {
+			grid-template-columns: 1fr;
+		}
+
+		.pr-fieldset {
+			padding: 1.3rem 1.4rem;
+		}
+	}
+
+	@media (max-width: 540px) {
+		.pr-tab-label {
+			padding: 0.5rem 1rem;
+			font-size: 0.85rem;
+		}
+
+		.pr-card-header {
+			padding: 1.2rem 1.3rem;
+		}
+
+		.pr-card-body {
+			padding: 1.4rem 1.4rem 1.3rem;
+		}
+
+		.pr-package {
+			grid-template-columns: auto 1fr;
+		}
+
+		.pr-package-price {
+			grid-column: 1 / -1;
+			justify-self: end;
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.pr-card,
+		.pr-tab-label,
+		.pr-card-cta {
+			transition: none;
+		}
+
+		.pr-card:hover {
+			transform: none;
+		}
+	}
+</style>

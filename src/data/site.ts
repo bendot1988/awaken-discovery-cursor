@@ -1,6 +1,7 @@
 export type NavItem = {
 	label: string;
 	href: string;
+	children?: NavItem[];
 };
 
 export type SupportCard = {
@@ -40,23 +41,105 @@ export const siteMeta = {
 
 export const teacherGuidePath = "/finding-calm-teachers";
 export const anxietyGuidePath = "/finding-calm-anxiety";
+export const freeResourcesPath = "/free-resources";
+
+export type FreeResource = {
+	title: string;
+	subtitle: string;
+	footerSubtitle: string;
+	description: string;
+	href: string;
+	ctaLabel: string;
+	bullets: string[];
+	image?: string;
+	imageAlt?: string;
+	imagePrompt?: string;
+	audience: string;
+};
+
+export const freeResources: FreeResource[] = [
+	{
+		title: "Finding Calm in the Chaos",
+		subtitle: "Why You Can't Switch Off After Teaching",
+		footerSubtitle:
+			"Why You Can't Switch Off After Teaching — a guide for overwhelmed teachers",
+		description:
+			"A teacher's guide to grounding yourself when you're already overwhelmed. Body-aware techniques you can use between lessons, in the staffroom or in the car park.",
+		href: teacherGuidePath,
+		ctaLabel: "Get the Teacher Guide",
+		audience: "For teachers",
+		bullets: [
+			"Ground yourself in under 60 seconds",
+			"Body-aware techniques nobody can see you doing",
+			"Spot burnout coming weeks before it lands",
+		],
+		image: "/assets/images/finding-calm-guide-mockup.png",
+		imageAlt:
+			"Finding Calm in the Chaos — free guide on a desk with notebook and mug",
+	},
+	{
+		title: "Finding Calm",
+		subtitle: "A Simple Guide to Grounding Yourself During Anxiety",
+		footerSubtitle: "A simple guide to grounding yourself during anxiety",
+		description:
+			"For anyone tired of fighting their own nervous system. Gentle, body-aware ways to pause, breathe and find your way back to yourself when anxiety rises.",
+		href: anxietyGuidePath,
+		ctaLabel: "Get the Anxiety Guide",
+		audience: "For anxiety & overwhelm",
+		bullets: [
+			"Listen to what your body is telling you",
+			"Personal anchors for overwhelming moments",
+			"How to notice patterns before they spiral",
+		],
+		imagePrompt:
+			"3D mockup or flatlay of the printed PDF — sage cover with calligraphic title, on a softly lit desk beside a warm mug or open notebook.",
+	},
+	{
+		title: "When You've Been Holding Too Much for Too Long",
+		subtitle: "A gentle guide to emotional overwhelm and reconnection",
+		footerSubtitle: "A gentle guide to emotional overwhelm and reconnection",
+		description:
+			"For when you've been holding everything together for everyone else and quietly forgetting yourself in the process. A short, gentle invitation back.",
+		href: "/#signup",
+		ctaLabel: "Receive the Guide",
+		audience: "For anyone carrying too much",
+		bullets: [
+			"Understand what emotional overwhelm really is",
+			"Permission to slow down without guilt",
+			"Small reconnection practices for daily life",
+		],
+		imagePrompt:
+			"Soft, calming flatlay or scene — open hands, warm light, a small leaf or stone. Conveys 'putting something down,' rest, release.",
+	},
+];
 
 export const navItems: NavItem[] = [
 	{ label: "Home", href: "/" },
+	{
+		label: "Therapy",
+		href: "/therapy",
+		children: [
+			{ label: "Therapy Overview", href: "/therapy" },
+			{ label: "Individual Pricing", href: "/pricing/individual" },
+			{ label: "Bulk Pricing", href: "/pricing" },
+		],
+	},
 	{ label: "Teachers", href: "/teachers" },
 	{ label: "Anxiety", href: "/anxiety" },
-	{ label: "Products", href: "/products" },
-	{ label: "Pricing", href: "/pricing" },
+	{ label: "Free Resources", href: "/free-resources" },
 	{ label: "Contact", href: "/contact" },
 ];
 
 export const footerNavItems: NavItem[] = [
 	{ label: "Home", href: "/" },
 	{ label: "About", href: "/about" },
+	{ label: "Therapy", href: "/therapy" },
 	{ label: "Teachers", href: "/teachers" },
 	{ label: "Anxiety", href: "/anxiety" },
+	{ label: "Free Resources", href: "/free-resources" },
 	{ label: "Products", href: "/products" },
-	{ label: "Pricing", href: "/pricing" },
+	{ label: "Individual Pricing", href: "/pricing/individual" },
+	{ label: "Bulk Pricing", href: "/pricing" },
 	{ label: "Blog", href: "/blog" },
 	{ label: "Contact", href: "/contact" },
 ];
@@ -113,12 +196,12 @@ export const therapyServices: ServicePanel[] = [
 	{
 		title: "Individual Therapy",
 		body: "For anxiety, overwhelm, self-esteem, emotional wellbeing and personal growth.",
-		cta: { label: "Begin Therapy", href: "/contact" },
+		cta: { label: "Explore Individual", href: "/therapy#choose" },
 	},
 	{
 		title: "Couples Counselling",
 		body: "Support for communication, connection, conflict and emotional understanding.",
-		cta: { label: "Begin Therapy", href: "/contact" },
+		cta: { label: "Explore Couples", href: "/therapy#choose" },
 	},
 	{
 		title: "Young People",

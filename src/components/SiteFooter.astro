@@ -1,5 +1,5 @@
 ---
-import { footerNavItems, teacherGuidePath } from "../data/site";
+import { footerNavItems, freeResources, freeResourcesPath } from "../data/site";
 
 interface Props {
 	locations: string[];
@@ -15,23 +15,37 @@ const year = new Date().getFullYear();
 ---
 
 <footer class="site-footer">
-	<div class="container footer-main">
-		<div class="footer-top">
+	<div class="footer-brand-stripe">
+		<div class="container footer-brand-inner">
 			<a href="/" class="footer-brand" aria-label="Awaken Discovery home">
 				<img src="/assets/logos/awaken-discovery-logo.png" alt="Awaken Discovery logo" />
 			</a>
 			<p class="footer-tagline">{tagline}</p>
 		</div>
+	</div>
 
+	<div class="container footer-main">
 		<section class="footer-resources" aria-labelledby="footer-resources-heading">
-			<h2 id="footer-resources-heading">Free resources</h2>
+			<h2 id="footer-resources-heading">
+				<span>Free resources</span>
+				<a class="footer-resources-link" href={freeResourcesPath}>
+					See all →
+				</a>
+			</h2>
 			<ul>
-				<li>
-					<a class="footer-guide" href={teacherGuidePath}>
-						<span class="footer-guide-tag">Free</span>
-						<span>Finding Calm in the Chaos — a guide for overwhelmed teachers</span>
-					</a>
-				</li>
+				{
+					freeResources.map((resource) => (
+						<li>
+							<a class="footer-guide" href={resource.href}>
+								<span class="footer-guide-tag">Free</span>
+								<span class="footer-guide-text">
+									<span class="footer-guide-title">{resource.title}</span>
+									<span class="footer-guide-sub">{resource.footerSubtitle}</span>
+								</span>
+							</a>
+						</li>
+					))
+				}
 			</ul>
 		</section>
 
@@ -74,33 +88,44 @@ const year = new Date().getFullYear();
 	}
 
 	.footer-main {
-		padding: 3rem 0 2rem;
+		padding: 2.5rem 0 2rem;
 	}
 
-	.footer-top {
-		display: grid;
-		gap: 1rem;
-		align-items: end;
-		grid-template-columns: auto 1fr;
+	.footer-brand-stripe {
+		background: var(--color-white);
+		color: var(--color-dark-gray);
+		padding: 2rem 0 1.6rem;
+	}
+
+	.footer-brand-inner {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 0.75rem;
+		text-align: center;
+	}
+
+	.footer-brand {
+		display: inline-flex;
 	}
 
 	.footer-brand img {
 		width: min(260px, 55vw);
+		display: block;
 	}
 
 	.footer-tagline {
 		margin: 0;
 		font-family: var(--font-serif);
-		font-size: clamp(1rem, 1.6vw, 1.2rem);
+		font-size: clamp(1.2rem, 2.2vw, 1.65rem);
 		font-style: italic;
-		opacity: 0.92;
-		max-width: 50ch;
+		line-height: 1.35;
+		color: var(--color-dark-gray);
+		white-space: nowrap;
 	}
 
 	.footer-resources {
-		margin-top: 2rem;
-		padding-top: 1.5rem;
-		border-top: 1px solid rgb(255 255 255 / 22%);
+		margin-top: 0;
 	}
 
 	.footer-resources h2 {
@@ -110,23 +135,44 @@ const year = new Date().getFullYear();
 		letter-spacing: 0.08em;
 		text-transform: uppercase;
 		opacity: 0.85;
+		display: flex;
+		align-items: baseline;
+		gap: 1rem;
+	}
+
+	.footer-resources-link {
+		font-size: 0.72rem;
+		font-weight: 500;
+		letter-spacing: 0.06em;
+		text-transform: none;
+		text-decoration: underline;
+		text-underline-offset: 3px;
+		opacity: 0.85;
+	}
+
+	.footer-resources-link:hover,
+	.footer-resources-link:focus-visible {
+		opacity: 1;
 	}
 
 	.footer-resources ul {
 		margin: 0;
 		padding: 0;
 		list-style: none;
+		display: grid;
+		gap: 0.6rem;
 	}
 
 	.footer-guide {
-		display: inline-flex;
+		display: flex;
 		align-items: center;
-		gap: 0.6rem;
-		padding: 0.5rem 0.95rem 0.5rem 0.45rem;
-		border-radius: 999px;
+		gap: 0.7rem;
+		padding: 0.6rem 1rem 0.6rem 0.55rem;
+		border-radius: 0.9rem;
 		background: rgb(255 255 255 / 8%);
 		border: 1px solid rgb(255 255 255 / 25%);
 		font-size: 0.88rem;
+		width: 100%;
 		transition: background-color 0.2s ease, border-color 0.2s ease;
 	}
 
@@ -146,6 +192,25 @@ const year = new Date().getFullYear();
 		font-weight: 700;
 		letter-spacing: 0.08em;
 		text-transform: uppercase;
+		flex-shrink: 0;
+	}
+
+	.footer-guide-text {
+		display: flex;
+		flex-direction: column;
+		gap: 0.1rem;
+		line-height: 1.35;
+	}
+
+	.footer-guide-title {
+		font-family: var(--font-serif);
+		font-size: 0.98rem;
+		font-weight: 500;
+	}
+
+	.footer-guide-sub {
+		font-size: 0.8rem;
+		opacity: 0.82;
 	}
 
 	.footer-nav-wrap {
@@ -227,8 +292,14 @@ const year = new Date().getFullYear();
 	}
 
 	@media (max-width: 700px) {
-		.footer-top {
-			grid-template-columns: 1fr;
+		.footer-brand-stripe {
+			padding: 1.6rem 0 1.3rem;
+		}
+
+		.footer-tagline {
+			white-space: normal;
+			max-width: 40ch;
+			text-wrap: balance;
 		}
 	}
 </style>
