@@ -42,6 +42,7 @@ export const teacherGuidePath = "/finding-calm-teachers";
 
 export const navItems: NavItem[] = [
 	{ label: "Home", href: "/" },
+	{ label: "About", href: "/about" },
 	{ label: "Teachers", href: "/teachers" },
 	{ label: "Anxiety", href: "/anxiety" },
 	{ label: "Products", href: "/products" },
