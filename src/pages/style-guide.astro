@@ -1,0 +1,1559 @@
+---
+import Layout from "../layouts/Layout.astro";
+import SiteHeader from "../components/SiteHeader.astro";
+import SiteFooter from "../components/SiteFooter.astro";
+import { locations, navItems } from "../data/site";
+
+const colours = [
+	{
+		name: "Brand · Dark Slate Green",
+		token: "--color-dark-slate-gray",
+		hex: "#005E47",
+		role: "Primary brand. Headings accent, CTAs, kickers, focus rings.",
+	},
+	{
+		name: "Brand · Deep",
+		token: "(local) --brand-deep",
+		hex: "#004836",
+		role: "Hover / depth variant of brand. Pull quotes, deep accents.",
+	},
+	{
+		name: "Brand · Tint",
+		token: "(local) --brand-tint",
+		hex: "rgb(0 94 71 / 8%)",
+		role: "Soft sage wash. Accordion icons, pricing card backgrounds.",
+	},
+	{
+		name: "Ink · Dark Gray",
+		token: "--color-dark-gray",
+		hex: "#1D2327",
+		role: "Body text. Pairs with the cream backgrounds.",
+	},
+	{
+		name: "Ink Soft",
+		token: "(local) --ink-soft",
+		hex: "rgb(29 35 39 / 78%)",
+		role: "Secondary text, captions, supporting paragraphs.",
+	},
+	{
+		name: "Light Gray (sage)",
+		token: "--color-light-gray",
+		hex: "#CED8CF",
+		role: "Subtle UI borders, dividers.",
+	},
+	{
+		name: "Gainsboro",
+		token: "--color-gainsboro",
+		hex: "#DDDDDD",
+		role: "Hairline borders, header underline.",
+	},
+	{
+		name: "White Smoke",
+		token: "--color-white-smoke",
+		hex: "#F1F1F1",
+		role: "section-soft band background.",
+	},
+	{
+		name: "Cream",
+		token: "(local) --cream",
+		hex: "#FBF9F5",
+		role: "Thank-you page background. Use for warm, intimate moments.",
+	},
+	{
+		name: "Cream Deep",
+		token: "(local) --cream-deep",
+		hex: "#F3EEE5",
+		role: "Cream band variant. Soft pivot blocks.",
+	},
+	{
+		name: "White",
+		token: "--color-white",
+		hex: "#FFFFFF",
+		role: "Cards, form surfaces, default canvas.",
+	},
+];
+
+const fonts = [
+	{
+		name: "Cormorant Garamond / Butler",
+		token: "--font-serif",
+		role: "Headings, pull quotes, mockup titles, italic emphasis.",
+		sample: "Healing begins not through pressure or perfection.",
+		cssFamily: "var(--font-serif)",
+	},
+	{
+		name: "Poppins",
+		token: "--font-body",
+		role: "Body copy, navigation, buttons, form controls.",
+		sample: "Body copy is set in Poppins at 1rem with a 1.6 line-height.",
+		cssFamily: "var(--font-body)",
+	},
+	{
+		name: "Bonheur Royale",
+		token: "--font-script",
+		role: "Signature, taglines, the \u201cListen…\u201d hero, decorative flourishes. Use sparingly.",
+		sample: "— Ally",
+		cssFamily: "var(--font-script)",
+	},
+];
+
+const doNots = [
+	{
+		good: "You're not broken. Your nervous system is carrying too much.",
+		bad: "You have a disorder. Here's how to fix yourself.",
+	},
+	{
+		good: "Take a moment for yourself. No rush.",
+		bad: "Act NOW or miss out forever!!!",
+	},
+	{
+		good: "Therapy is a space to slow down and be heard.",
+		bad: "Unlock your full potential and crush your goals.",
+	},
+	{
+		good: "This discount expires Friday — after that, the journal goes back to full price.",
+		bad: "Only 3 spots left! 24 hours only!",
+	},
+	{
+		good: "Pick one technique. Just one.",
+		bad: "Try all five techniques every day this week.",
+	},
+];
+
+const imageryPrompts = [
+	"Warm, candid portrait. Soft natural light, sage tones, warm mug nearby. Friendly, not clinical.",
+	"Calming detail shot — hands holding a mug, a window with plants, an open notebook. Sage and cream.",
+	"A meaningful landscape moment — sunrise, soft fields, dawn light. Used metaphorically (new beginnings, journey).",
+	"Therapy room context — comfortable seating, soft blankets, plants. Never sterile or fluorescent.",
+];
+---
+
+<Layout
+	title="Internal · Brand Style Guide · Awaken Discovery"
+	description="Internal reference for Awaken Discovery brand patterns. Not for public distribution."
+	noindex={true}
+>
+	<SiteHeader navItems={navItems} />
+	<main class="sg-page">
+		<!-- ============== HERO ============== -->
+		<section class="sg-hero section">
+			<div class="container">
+				<p class="sg-badge">Internal · Not indexed</p>
+				<h1>Awaken Discovery — Brand Style Guide</h1>
+				<p class="sg-lede">
+					A living reference for the tokens, type, components and voice used
+					across the Awaken Discovery site. This page is intentionally kept
+					out of the main navigation and marked <code>noindex</code> so it
+					stays internal.
+				</p>
+				<nav class="sg-toc" aria-label="On this page">
+					<a href="#voice">Voice</a>
+					<a href="#logo">Logo</a>
+					<a href="#colour">Colour</a>
+					<a href="#type">Typography</a>
+					<a href="#buttons">Buttons</a>
+					<a href="#sections">Sections</a>
+					<a href="#components">Components</a>
+					<a href="#imagery">Imagery</a>
+				</nav>
+			</div>
+		</section>
+
+		<!-- ============== VOICE ============== -->
+		<section class="sg-section" id="voice">
+			<div class="container">
+				<header class="sg-section-head">
+					<p class="sg-kicker">01 · Voice &amp; tone</p>
+					<h2>Compassionate, body-aware, never clinical.</h2>
+					<p class="sg-section-lede">
+						Awaken Discovery sounds like Ally on a quiet afternoon — warm,
+						unhurried, honest. The reader is usually tired, anxious or
+						quietly carrying too much. The voice meets them there.
+					</p>
+				</header>
+				<div class="sg-voice-grid">
+					<article class="sg-voice-card sg-voice-good">
+						<h3>Sounds like us</h3>
+						<ul>
+							<li>Soft, human, low-pressure.</li>
+							<li>Body-aware: "nervous system," "noticing," "anchor."</li>
+							<li>Permission, not prescription: "you may," "if it helps."</li>
+							<li>Em-dashes for breath. Ellipses for pause.</li>
+							<li>Honest urgency only — never manufactured.</li>
+						</ul>
+					</article>
+					<article class="sg-voice-card sg-voice-bad">
+						<h3>Sounds like someone else</h3>
+						<ul>
+							<li>Clinical jargon, diagnosis-led language.</li>
+							<li>Hype, hustle, productivity culture.</li>
+							<li>"Fix," "broken," "should," "must."</li>
+							<li>Manufactured scarcity ("3 spots left!").</li>
+							<li>Telling the reader how they feel.</li>
+						</ul>
+					</article>
+				</div>
+				<div class="sg-do-dont">
+					{
+						doNots.map((row) => (
+							<div class="sg-do-dont-row">
+								<div class="sg-do">
+									<span class="sg-do-tag">Yes</span>
+									<p>{row.good}</p>
+								</div>
+								<div class="sg-dont">
+									<span class="sg-dont-tag">Not us</span>
+									<p>{row.bad}</p>
+								</div>
+							</div>
+						))
+					}
+				</div>
+			</div>
+		</section>
+
+		<!-- ============== LOGO ============== -->
+		<section class="sg-section sg-section-soft" id="logo">
+			<div class="container">
+				<header class="sg-section-head">
+					<p class="sg-kicker">02 · Logo &amp; wordmark</p>
+					<h2>One name. One mark. Two acceptable presentations.</h2>
+					<p class="sg-section-lede">
+						The header currently uses the PNG mark. The About page proposes a
+						lighter, type-led wordmark with the discipline as a tagline
+						underneath — this is the direction we're leaning.
+					</p>
+				</header>
+				<div class="sg-logo-grid">
+					<figure class="sg-logo-card">
+						<div class="sg-logo-frame sg-logo-frame-light">
+							<img
+								src="/assets/logos/awaken-discovery-logo.png"
+								alt="Awaken Discovery — current header logo"
+							/>
+						</div>
+						<figcaption>
+							<strong>Current — PNG mark</strong>
+							<span>Live across the site header and footer.</span>
+						</figcaption>
+					</figure>
+					<figure class="sg-logo-card">
+						<div class="sg-logo-frame sg-logo-frame-light sg-logo-frame-wordmark">
+							<span class="sg-wordmark">Awaken Discovery</span>
+							<span class="sg-wordmark-tagline">Counselling &amp; Psychotherapy</span>
+						</div>
+						<figcaption>
+							<strong>Proposed — wordmark + tagline</strong>
+							<span>
+								Featured on the About page. Cleaner, sets the discipline as a
+								tagline rather than baking it into the mark.
+							</span>
+						</figcaption>
+					</figure>
+				</div>
+				<div class="sg-logo-grid">
+					<figure class="sg-logo-card">
+						<div class="sg-logo-frame sg-logo-frame-dark">
+							<img
+								src="/assets/logos/awaken-discovery-logo.png"
+								alt="Awaken Discovery logo on dark background"
+							/>
+						</div>
+						<figcaption>
+							<strong>On dark</strong>
+							<span>Footer background. Mark must read clearly on the deep gray.</span>
+						</figcaption>
+					</figure>
+					<figure class="sg-logo-card">
+						<div class="sg-logo-frame sg-logo-frame-dark sg-logo-frame-wordmark sg-wordmark-on-dark">
+							<span class="sg-wordmark">Awaken Discovery</span>
+							<span class="sg-wordmark-tagline">Counselling &amp; Psychotherapy</span>
+						</div>
+						<figcaption>
+							<strong>Wordmark on dark</strong>
+							<span>Use white serif + cream script tagline. Maintain hierarchy.</span>
+						</figcaption>
+					</figure>
+				</div>
+			</div>
+		</section>
+
+		<!-- ============== COLOUR ============== -->
+		<section class="sg-section" id="colour">
+			<div class="container">
+				<header class="sg-section-head">
+					<p class="sg-kicker">03 · Colour palette</p>
+					<h2>Sage greens, warm creams, calm grays.</h2>
+					<p class="sg-section-lede">
+						Sage is the brand. Cream is intimacy. Gray is the body text.
+						Anything outside this palette should feel like a guest, not a
+						resident.
+					</p>
+				</header>
+				<ul class="sg-colour-grid">
+					{
+						colours.map((c) => (
+							<li class="sg-colour-card">
+								<div
+									class="sg-colour-swatch"
+									style={`background:${c.hex}`}
+									aria-hidden="true"
+								/>
+								<div class="sg-colour-meta">
+									<strong>{c.name}</strong>
+									<code>{c.hex}</code>
+									<span class="sg-token">{c.token}</span>
+									<p>{c.role}</p>
+								</div>
+							</li>
+						))
+					}
+				</ul>
+			</div>
+		</section>
+
+		<!-- ============== TYPE ============== -->
+		<section class="sg-section sg-section-soft" id="type">
+			<div class="container">
+				<header class="sg-section-head">
+					<p class="sg-kicker">04 · Typography</p>
+					<h2>Three families. One voice.</h2>
+					<p class="sg-section-lede">
+						Each font earns its place. Serif carries weight and warmth.
+						Poppins keeps the body readable. Bonheur Royale is the sigh of
+						the brand — used sparingly so it stays meaningful.
+					</p>
+				</header>
+				<ul class="sg-type-list">
+					{
+						fonts.map((f) => (
+							<li class="sg-type-card">
+								<div class="sg-type-meta">
+									<strong>{f.name}</strong>
+									<span class="sg-token">{f.token}</span>
+									<p>{f.role}</p>
+								</div>
+								<div class="sg-type-sample" style={`font-family:${f.cssFamily}`}>
+									{f.sample}
+								</div>
+							</li>
+						))
+					}
+				</ul>
+				<div class="sg-type-scale">
+					<h3>Headings &amp; copy scale (as used in the wild)</h3>
+					<div class="sg-scale-row">
+						<span class="sg-scale-label">h1 hero</span>
+						<span class="sg-scale-sample sg-scale-h1">If you've been carrying too much</span>
+					</div>
+					<div class="sg-scale-row">
+						<span class="sg-scale-label">h2 section</span>
+						<span class="sg-scale-sample sg-scale-h2">Meet Ally — Your Guide to Discovery</span>
+					</div>
+					<div class="sg-scale-row">
+						<span class="sg-scale-label">h3 card</span>
+						<span class="sg-scale-sample sg-scale-h3">Integrative &amp; humanistic</span>
+					</div>
+					<div class="sg-scale-row">
+						<span class="sg-scale-label">body</span>
+						<span class="sg-scale-sample sg-scale-body">
+							Pop your email below. The PDF lands in your inbox in the
+							next couple of minutes — read it whenever you next have a
+							quiet five.
+						</span>
+					</div>
+					<div class="sg-scale-row">
+						<span class="sg-scale-label">kicker</span>
+						<span class="sg-scale-sample sg-scale-kicker">YOUR FREE GUIDE</span>
+					</div>
+					<div class="sg-scale-row">
+						<span class="sg-scale-label">script</span>
+						<span class="sg-scale-sample sg-scale-script">— Ally</span>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- ============== BUTTONS ============== -->
+		<section class="sg-section" id="buttons">
+			<div class="container">
+				<header class="sg-section-head">
+					<p class="sg-kicker">05 · Buttons &amp; CTAs</p>
+					<h2>Pill-shaped, generous padding, calm hierarchy.</h2>
+					<p class="sg-section-lede">
+						Solid for the primary action. Outline for a quieter alternative.
+						Composite for product-name CTAs that need a lead-in and an italic
+						title.
+					</p>
+				</header>
+				<div class="sg-button-row">
+					<a class="cta cta-solid" href="#buttons">Solid · Primary</a>
+					<a class="cta cta-outline" href="#buttons">Outline · Secondary</a>
+					<a class="cta cta-solid sg-cta-guide" href="#buttons">
+						<span class="sg-cta-lead">Download the Free Guide —</span>
+						<span class="sg-cta-name">Finding Calm in the Chaos</span>
+					</a>
+				</div>
+				<dl class="sg-button-notes">
+					<div>
+						<dt>Solid</dt>
+						<dd>
+							Brand background, white text. Use once per visible band — the
+							hierarchy collapses if every CTA is solid.
+						</dd>
+					</div>
+					<div>
+						<dt>Outline</dt>
+						<dd>
+							Brand border, transparent fill. The "quieter sibling." Often
+							sits next to a solid CTA as a no-pressure alternative.
+						</dd>
+					</div>
+					<div>
+						<dt>Composite (guide name)</dt>
+						<dd>
+							Body text label + italic serif title. Used when the CTA needs to
+							name a specific product (a guide, a journal, a session).
+						</dd>
+					</div>
+				</dl>
+			</div>
+		</section>
+
+		<!-- ============== SECTION PATTERN ============== -->
+		<section class="sg-section sg-section-soft" id="sections">
+			<div class="container">
+				<header class="sg-section-head">
+					<p class="sg-kicker">06 · Section pattern</p>
+					<h2>Kicker · h2 · body. In that order.</h2>
+					<p class="sg-section-lede">
+						Almost every section on the site uses this three-beat opening.
+						It's the rhythm that makes the page feel intentional.
+					</p>
+				</header>
+				<div class="sg-section-demo">
+					<p class="sg-kicker">Section kicker</p>
+					<h3 class="sg-demo-h2">A short, balanced heading.</h3>
+					<p class="sg-demo-body">
+						A sentence or two of body copy that gives the section its
+						purpose. Keep it under 60ch — readers should not have to track
+						across long lines on this site.
+					</p>
+				</div>
+			</div>
+		</section>
+
+		<!-- ============== COMPONENTS ============== -->
+		<section class="sg-section" id="components">
+			<div class="container">
+				<header class="sg-section-head">
+					<p class="sg-kicker">07 · Components</p>
+					<h2>Patterns that repeat across pages.</h2>
+					<p class="sg-section-lede">
+						If a pattern shows up in two or more places, it lives here. Treat
+						these as the starting point when building a new section.
+					</p>
+				</header>
+
+				<div class="sg-component">
+					<h3>Pillar card</h3>
+					<div class="sg-pillars">
+						<article class="sg-pillar">
+							<span class="sg-pillar-dot" aria-hidden="true" />
+							<h4>Integrative &amp; humanistic</h4>
+							<p>Therapy tailored to you as a whole person.</p>
+						</article>
+						<article class="sg-pillar">
+							<span class="sg-pillar-dot" aria-hidden="true" />
+							<h4>Nervous-system aware</h4>
+							<p>Holding the connection between mind and body.</p>
+						</article>
+					</div>
+				</div>
+
+				<div class="sg-component">
+					<h3>Testimonial</h3>
+					<blockquote class="sg-testimonial">
+						<p>
+							The counselling sessions have helped me untangle some of the
+							emotions I've been carrying.
+						</p>
+						<footer>
+							<span class="sg-test-name">Current client</span>
+							<span class="sg-test-meta">Anonymised at client's request</span>
+						</footer>
+					</blockquote>
+				</div>
+
+				<div class="sg-component">
+					<h3>Accordion (FAQ / chapters)</h3>
+					<details class="sg-faq">
+						<summary>
+							<span>What if I've tried therapy before and it didn't help?</span>
+							<span class="sg-faq-icon" aria-hidden="true">+</span>
+						</summary>
+						<div class="sg-faq-body">
+							<p>
+								Honestly — it depends on whether we're a fit. This is not a
+								diagnosis-led approach; it's a gentle, body-aware
+								conversation paced around you.
+							</p>
+						</div>
+					</details>
+				</div>
+
+				<div class="sg-component">
+					<h3>Step card (numbered process)</h3>
+					<ol class="sg-steps">
+						<li>
+							<span class="sg-step-num">01</span>
+							<h4>Drop your email</h4>
+							<p>The guide lands in your inbox in the next couple of minutes.</p>
+						</li>
+						<li>
+							<span class="sg-step-num">02</span>
+							<h4>Take a moment</h4>
+							<p>No rush. No pressure to do everything at once.</p>
+						</li>
+					</ol>
+				</div>
+
+				<div class="sg-component">
+					<h3>Pull quote</h3>
+					<figure class="sg-pullquote">
+						<blockquote>
+							<p>
+								Healing begins not through pressure or perfection, but through
+								feeling emotionally safe enough to be fully heard.
+							</p>
+						</blockquote>
+						<figcaption>— Ally</figcaption>
+					</figure>
+				</div>
+
+				<div class="sg-component">
+					<h3>Image placeholder</h3>
+					<p class="sg-component-note">
+						Used wherever a real photo is pending. Includes a TODO caption
+						describing the shot we want.
+					</p>
+					<figure class="sg-image-placeholder">
+						<div class="sg-image-frame">
+							<svg viewBox="0 0 60 60" aria-hidden="true">
+								<path
+									d="M30 5C42 14 50 25 50 36C50 46 42 54 30 55C18 54 10 46 10 36C10 25 18 14 30 5Z"
+									fill="currentColor"
+									opacity="0.18"
+								></path>
+								<path
+									d="M30 10C30 25 30 40 30 55"
+									stroke="currentColor"
+									stroke-width="1"
+									opacity="0.5"
+									fill="none"
+								></path>
+							</svg>
+							<span>Image</span>
+						</div>
+						<figcaption>
+							{`{{IMAGE PROMPT: describe the shot in the caption — subject, light, mood, where it sits on the page.}}`}
+						</figcaption>
+					</figure>
+				</div>
+
+				<div class="sg-component">
+					<h3>Symptom / feeling list</h3>
+					<p class="sg-component-note">
+						Used to break a dense paragraph into one-beat-per-line moments of
+						recognition.
+					</p>
+					<p class="sg-feelings-lead">Perhaps you've been feeling it too…</p>
+					<ul class="sg-feelings">
+						<li>The Sunday evening dread.</li>
+						<li>The inability to fully switch off.</li>
+						<li>The exhaustion that sleep no longer seems to fix.</li>
+					</ul>
+				</div>
+			</div>
+		</section>
+
+		<!-- ============== IMAGERY ============== -->
+		<section class="sg-section sg-section-soft" id="imagery">
+			<div class="container">
+				<header class="sg-section-head">
+					<p class="sg-kicker">08 · Imagery</p>
+					<h2>Soft natural light, sage tones, never clinical.</h2>
+					<p class="sg-section-lede">
+						Photography is part of the voice. The mood is "quiet afternoon,"
+						not "stock photo." Use these prompt phrases when commissioning or
+						generating new shots.
+					</p>
+				</header>
+				<ul class="sg-imagery-list">
+					{
+						imageryPrompts.map((p) => (
+							<li>"{p}"</li>
+						))
+					}
+				</ul>
+				<dl class="sg-imagery-rules">
+					<div>
+						<dt>Crop</dt>
+						<dd>Portraits at 4:5 with object-position 50% 25–30%. Closing-band photos at 3:4.</dd>
+					</div>
+					<div>
+						<dt>Treatment</dt>
+						<dd>Rounded corners (1rem). Soft sage drop-shadow: <code>0 18px 36px rgb(0 94 71 / 18%)</code>.</dd>
+					</div>
+					<div>
+						<dt>Alt text</dt>
+						<dd>Describe who, where, what they're doing — not "Image of Ally".</dd>
+					</div>
+				</dl>
+			</div>
+		</section>
+
+		<!-- ============== FOOTER NOTE ============== -->
+		<section class="sg-section">
+			<div class="container">
+				<p class="sg-footnote">
+					This page is intentionally hidden — not in the main nav, marked
+					<code>noindex</code>, and disallowed in <code>robots.txt</code>. It
+					lives at <code>/style-guide</code> for internal reference and
+					handover.
+				</p>
+			</div>
+		</section>
+	</main>
+	<SiteFooter navItems={navItems} locations={locations} />
+</Layout>
+
+<style>
+	.sg-page {
+		--brand: var(--color-dark-slate-gray);
+		--brand-deep: #004836;
+		--brand-tint: rgb(0 94 71 / 8%);
+		--cream: #fbf9f5;
+		--cream-deep: #f3eee5;
+		--ink: var(--color-dark-gray);
+		--ink-soft: rgb(29 35 39 / 78%);
+		font-size: 1rem;
+		line-height: 1.7;
+		color: var(--ink);
+	}
+
+	.sg-page code {
+		font-size: 0.85em;
+		padding: 0.1em 0.35em;
+		background: var(--brand-tint);
+		border-radius: 0.3rem;
+		color: var(--brand-deep);
+	}
+
+	.sg-kicker {
+		margin: 0;
+		text-transform: uppercase;
+		letter-spacing: 0.14em;
+		font-size: 0.75rem;
+		font-weight: 600;
+		color: var(--brand);
+	}
+
+	.sg-section {
+		padding: clamp(2.5rem, 6vw, 4.5rem) 0;
+	}
+
+	.sg-section-soft {
+		background: var(--cream);
+	}
+
+	.sg-section-head {
+		max-width: 60ch;
+		margin-bottom: 2rem;
+	}
+
+	.sg-section-head h2,
+	.sg-page h2 {
+		margin: 0.5rem 0 0.9rem;
+		font-family: var(--font-serif);
+		font-size: clamp(1.6rem, 3vw, 2.1rem);
+		font-weight: 500;
+		line-height: 1.2;
+		text-wrap: balance;
+	}
+
+	.sg-section-lede {
+		margin: 0;
+		color: var(--ink-soft);
+		line-height: 1.7;
+		max-width: 56ch;
+	}
+
+	/* ---------- HERO ---------- */
+	.sg-hero {
+		background: linear-gradient(180deg, var(--cream) 0%, var(--brand-tint) 100%);
+		padding: 5rem 0 3rem;
+	}
+
+	.sg-badge {
+		display: inline-block;
+		margin: 0;
+		padding: 0.3rem 0.8rem;
+		border-radius: 999px;
+		background: var(--brand);
+		color: var(--color-white);
+		font-size: 0.72rem;
+		font-weight: 600;
+		letter-spacing: 0.12em;
+		text-transform: uppercase;
+	}
+
+	.sg-page h1 {
+		margin: 0.7rem 0 0.9rem;
+		font-family: var(--font-serif);
+		font-size: clamp(2.2rem, 5vw, 3.4rem);
+		font-weight: 500;
+		line-height: 1.12;
+		color: var(--brand-deep);
+	}
+
+	.sg-lede {
+		max-width: 64ch;
+		margin: 0 0 1.4rem;
+		color: var(--ink-soft);
+		font-size: 1.05rem;
+	}
+
+	.sg-toc {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.5rem 0.7rem;
+	}
+
+	.sg-toc a {
+		padding: 0.4rem 0.85rem;
+		border-radius: 999px;
+		border: 1px solid rgb(0 94 71 / 30%);
+		background: var(--color-white);
+		font-size: 0.85rem;
+		color: var(--brand-deep);
+		transition: background-color 0.2s ease, border-color 0.2s ease;
+	}
+
+	.sg-toc a:hover,
+	.sg-toc a:focus-visible {
+		background: var(--brand-tint);
+		border-color: var(--brand);
+	}
+
+	/* ---------- VOICE ---------- */
+	.sg-voice-grid {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 1.2rem;
+		margin-bottom: 2rem;
+	}
+
+	.sg-voice-card {
+		padding: 1.6rem 1.5rem;
+		background: var(--color-white);
+		border: 1px solid rgb(0 94 71 / 16%);
+		border-radius: 0.95rem;
+	}
+
+	.sg-voice-card h3 {
+		margin: 0 0 0.8rem;
+		font-family: var(--font-serif);
+		font-size: 1.2rem;
+		font-weight: 500;
+	}
+
+	.sg-voice-good h3 {
+		color: var(--brand-deep);
+	}
+
+	.sg-voice-bad {
+		background: rgb(193 56 56 / 4%);
+		border-color: rgb(193 56 56 / 22%);
+	}
+
+	.sg-voice-bad h3 {
+		color: #973a3a;
+	}
+
+	.sg-voice-card ul {
+		margin: 0;
+		padding-left: 1.1rem;
+		display: grid;
+		gap: 0.5rem;
+		font-size: 0.95rem;
+		color: var(--ink-soft);
+	}
+
+	.sg-do-dont {
+		display: grid;
+		gap: 0.7rem;
+	}
+
+	.sg-do-dont-row {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 0.7rem;
+	}
+
+	.sg-do,
+	.sg-dont {
+		display: flex;
+		gap: 0.7rem;
+		padding: 0.9rem 1rem;
+		border-radius: 0.7rem;
+		font-size: 0.95rem;
+		align-items: flex-start;
+	}
+
+	.sg-do {
+		background: var(--brand-tint);
+		border-left: 3px solid var(--brand);
+	}
+
+	.sg-dont {
+		background: rgb(193 56 56 / 5%);
+		border-left: 3px solid rgb(193 56 56 / 55%);
+	}
+
+	.sg-do p,
+	.sg-dont p {
+		margin: 0;
+		line-height: 1.55;
+	}
+
+	.sg-do-tag,
+	.sg-dont-tag {
+		flex-shrink: 0;
+		padding: 0.18rem 0.55rem;
+		border-radius: 999px;
+		font-size: 0.66rem;
+		font-weight: 700;
+		letter-spacing: 0.08em;
+		text-transform: uppercase;
+	}
+
+	.sg-do-tag {
+		background: var(--brand);
+		color: var(--color-white);
+	}
+
+	.sg-dont-tag {
+		background: #973a3a;
+		color: var(--color-white);
+	}
+
+	/* ---------- LOGO ---------- */
+	.sg-logo-grid {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 1.2rem;
+		margin-bottom: 1.2rem;
+	}
+
+	.sg-logo-card {
+		margin: 0;
+		display: flex;
+		flex-direction: column;
+		gap: 0.8rem;
+	}
+
+	.sg-logo-frame {
+		padding: 2rem;
+		min-height: 180px;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		gap: 0.3rem;
+		border-radius: 0.95rem;
+	}
+
+	.sg-logo-frame-light {
+		background: var(--color-white);
+		border: 1px solid rgb(0 94 71 / 16%);
+	}
+
+	.sg-logo-frame-dark {
+		background: var(--color-dark-gray);
+	}
+
+	.sg-logo-frame img {
+		width: min(260px, 80%);
+	}
+
+	.sg-wordmark {
+		font-family: var(--font-serif);
+		font-size: clamp(1.7rem, 3.2vw, 2.4rem);
+		color: var(--brand-deep);
+		line-height: 1;
+		font-weight: 500;
+	}
+
+	.sg-wordmark-tagline {
+		font-family: var(--font-script);
+		font-size: clamp(1.1rem, 2.2vw, 1.5rem);
+		color: var(--brand);
+		line-height: 1;
+	}
+
+	.sg-wordmark-on-dark .sg-wordmark {
+		color: var(--color-white);
+	}
+
+	.sg-wordmark-on-dark .sg-wordmark-tagline {
+		color: var(--cream);
+	}
+
+	.sg-logo-card figcaption {
+		display: flex;
+		flex-direction: column;
+		gap: 0.2rem;
+		font-size: 0.88rem;
+		color: var(--ink-soft);
+	}
+
+	.sg-logo-card figcaption strong {
+		color: var(--ink);
+		font-weight: 600;
+	}
+
+	/* ---------- COLOUR ---------- */
+	.sg-colour-grid {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: 1rem;
+	}
+
+	.sg-colour-card {
+		background: var(--color-white);
+		border: 1px solid rgb(0 94 71 / 14%);
+		border-radius: 0.95rem;
+		overflow: hidden;
+		display: flex;
+		flex-direction: column;
+	}
+
+	.sg-colour-swatch {
+		height: 110px;
+		width: 100%;
+	}
+
+	.sg-colour-meta {
+		padding: 0.95rem 1.05rem 1.1rem;
+		display: flex;
+		flex-direction: column;
+		gap: 0.25rem;
+	}
+
+	.sg-colour-meta strong {
+		font-weight: 600;
+	}
+
+	.sg-colour-meta code {
+		font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+		font-size: 0.82rem;
+	}
+
+	.sg-token {
+		font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+		font-size: 0.74rem;
+		color: var(--ink-soft);
+	}
+
+	.sg-colour-meta p {
+		margin: 0.3rem 0 0;
+		font-size: 0.85rem;
+		color: var(--ink-soft);
+		line-height: 1.55;
+	}
+
+	/* ---------- TYPE ---------- */
+	.sg-type-list {
+		list-style: none;
+		margin: 0 0 2.5rem;
+		padding: 0;
+		display: grid;
+		gap: 1rem;
+	}
+
+	.sg-type-card {
+		padding: 1.4rem 1.5rem;
+		background: var(--color-white);
+		border: 1px solid rgb(0 94 71 / 14%);
+		border-radius: 0.95rem;
+		display: grid;
+		grid-template-columns: 0.85fr 1.15fr;
+		gap: 1.5rem;
+		align-items: center;
+	}
+
+	.sg-type-meta strong {
+		display: block;
+		font-weight: 600;
+		margin-bottom: 0.25rem;
+	}
+
+	.sg-type-meta p {
+		margin: 0.4rem 0 0;
+		font-size: 0.9rem;
+		color: var(--ink-soft);
+		line-height: 1.55;
+	}
+
+	.sg-type-sample {
+		font-size: clamp(1.4rem, 3vw, 2rem);
+		color: var(--brand-deep);
+		line-height: 1.3;
+	}
+
+	.sg-type-scale {
+		padding: 1.6rem 1.8rem;
+		background: var(--color-white);
+		border-radius: 0.95rem;
+		border: 1px solid rgb(0 94 71 / 14%);
+	}
+
+	.sg-type-scale h3 {
+		margin: 0 0 1rem;
+		font-family: var(--font-serif);
+		font-size: 1.2rem;
+		font-weight: 500;
+	}
+
+	.sg-scale-row {
+		display: grid;
+		grid-template-columns: 120px 1fr;
+		gap: 1rem;
+		padding: 0.7rem 0;
+		border-top: 1px solid var(--brand-tint);
+		align-items: baseline;
+	}
+
+	.sg-scale-row:first-of-type {
+		border-top: 0;
+	}
+
+	.sg-scale-label {
+		font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+		font-size: 0.78rem;
+		color: var(--ink-soft);
+		text-transform: uppercase;
+		letter-spacing: 0.08em;
+	}
+
+	.sg-scale-h1 {
+		font-family: var(--font-serif);
+		font-size: clamp(1.8rem, 4vw, 2.8rem);
+		font-weight: 500;
+		color: var(--brand-deep);
+		line-height: 1.1;
+	}
+
+	.sg-scale-h2 {
+		font-family: var(--font-serif);
+		font-size: clamp(1.5rem, 3vw, 2.1rem);
+		font-weight: 500;
+	}
+
+	.sg-scale-h3 {
+		font-family: var(--font-serif);
+		font-size: 1.2rem;
+		font-weight: 500;
+		color: var(--brand-deep);
+	}
+
+	.sg-scale-body {
+		font-size: 1rem;
+		color: var(--ink-soft);
+		line-height: 1.7;
+	}
+
+	.sg-scale-kicker {
+		font-size: 0.78rem;
+		font-weight: 600;
+		letter-spacing: 0.14em;
+		color: var(--brand);
+	}
+
+	.sg-scale-script {
+		font-family: var(--font-script);
+		font-size: 2rem;
+		color: var(--brand);
+		line-height: 1;
+	}
+
+	/* ---------- BUTTONS ---------- */
+	.sg-button-row {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.7rem;
+		margin-bottom: 1.6rem;
+	}
+
+	.sg-cta-guide {
+		display: inline-flex;
+		flex-wrap: wrap;
+		align-items: baseline;
+		gap: 0.35rem;
+		padding-block: 0.85rem;
+		line-height: 1.2;
+		text-align: left;
+	}
+
+	.sg-cta-name {
+		font-family: var(--font-serif);
+		font-style: italic;
+		font-weight: 500;
+	}
+
+	.sg-button-notes {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: 1rem;
+		margin: 0;
+	}
+
+	.sg-button-notes > div {
+		padding: 1rem 1.2rem;
+		background: var(--color-white);
+		border: 1px solid rgb(0 94 71 / 14%);
+		border-radius: 0.85rem;
+	}
+
+	.sg-button-notes dt {
+		font-weight: 600;
+		margin-bottom: 0.3rem;
+	}
+
+	.sg-button-notes dd {
+		margin: 0;
+		font-size: 0.9rem;
+		color: var(--ink-soft);
+		line-height: 1.55;
+	}
+
+	/* ---------- SECTION DEMO ---------- */
+	.sg-section-demo {
+		padding: 2rem 2rem;
+		background: var(--color-white);
+		border: 1px solid rgb(0 94 71 / 14%);
+		border-radius: 0.95rem;
+		max-width: 60ch;
+	}
+
+	.sg-demo-h2 {
+		margin: 0.5rem 0 0.7rem;
+		font-family: var(--font-serif);
+		font-size: clamp(1.4rem, 2.6vw, 1.8rem);
+		font-weight: 500;
+	}
+
+	.sg-demo-body {
+		margin: 0;
+		color: var(--ink-soft);
+		line-height: 1.7;
+	}
+
+	/* ---------- COMPONENTS ---------- */
+	.sg-component {
+		margin-bottom: 2.4rem;
+	}
+
+	.sg-component:last-child {
+		margin-bottom: 0;
+	}
+
+	.sg-component h3 {
+		margin: 0 0 0.6rem;
+		font-family: var(--font-serif);
+		font-size: 1.2rem;
+		font-weight: 500;
+	}
+
+	.sg-component-note {
+		margin: 0 0 0.9rem;
+		font-size: 0.9rem;
+		color: var(--ink-soft);
+		max-width: 56ch;
+	}
+
+	.sg-pillars {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 1rem;
+	}
+
+	.sg-pillar {
+		padding: 1.4rem 1.3rem;
+		background: var(--color-white);
+		border: 1px solid rgb(0 94 71 / 16%);
+		border-radius: 0.9rem;
+		display: flex;
+		flex-direction: column;
+		gap: 0.55rem;
+	}
+
+	.sg-pillar-dot {
+		width: 0.7rem;
+		height: 0.7rem;
+		border-radius: 999px;
+		background: var(--brand);
+	}
+
+	.sg-pillar h4 {
+		margin: 0;
+		font-family: var(--font-serif);
+		font-size: 1.15rem;
+		font-weight: 500;
+		color: var(--brand-deep);
+	}
+
+	.sg-pillar p {
+		margin: 0;
+		font-size: 0.92rem;
+		color: var(--ink-soft);
+		line-height: 1.6;
+	}
+
+	.sg-testimonial {
+		margin: 0;
+		padding: 1.4rem 1.4rem 1.2rem;
+		background: var(--color-white);
+		border-left: 4px solid var(--brand);
+		border-radius: 0 0.85rem 0.85rem 0;
+		max-width: 56ch;
+	}
+
+	.sg-testimonial p {
+		margin: 0 0 0.8rem;
+		font-family: var(--font-serif);
+		font-style: italic;
+		font-size: 1.05rem;
+		line-height: 1.55;
+	}
+
+	.sg-testimonial footer {
+		display: flex;
+		flex-direction: column;
+		gap: 0.15rem;
+	}
+
+	.sg-test-name {
+		font-weight: 600;
+		font-size: 0.92rem;
+		color: var(--brand-deep);
+	}
+
+	.sg-test-meta {
+		font-size: 0.82rem;
+		color: var(--ink-soft);
+	}
+
+	.sg-faq {
+		max-width: 64ch;
+		background: var(--color-white);
+		border: 1px solid rgb(0 94 71 / 16%);
+		border-radius: 0.85rem;
+		overflow: hidden;
+	}
+
+	.sg-faq[open] {
+		box-shadow: 0 10px 24px rgb(29 35 39 / 8%);
+	}
+
+	.sg-faq summary {
+		list-style: none;
+		cursor: pointer;
+		padding: 1rem 1.3rem;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		gap: 1rem;
+		font-family: var(--font-serif);
+		font-size: 1.1rem;
+		font-weight: 500;
+	}
+
+	.sg-faq summary::-webkit-details-marker {
+		display: none;
+	}
+
+	.sg-faq-icon {
+		width: 1.9rem;
+		height: 1.9rem;
+		flex-shrink: 0;
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		border-radius: 999px;
+		background: var(--brand-tint);
+		color: var(--brand);
+		font-size: 1.1rem;
+		font-weight: 600;
+		transition: transform 0.2s ease;
+	}
+
+	.sg-faq[open] .sg-faq-icon {
+		transform: rotate(45deg);
+	}
+
+	.sg-faq-body {
+		padding: 0 1.3rem 1.2rem;
+	}
+
+	.sg-faq-body p {
+		margin: 0;
+		color: var(--ink-soft);
+		line-height: 1.7;
+	}
+
+	.sg-steps {
+		list-style: none;
+		padding: 0;
+		margin: 0;
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 1rem;
+		max-width: 60ch;
+	}
+
+	.sg-steps li {
+		padding: 1.3rem 1.3rem;
+		background: var(--color-white);
+		border: 1px solid rgb(0 94 71 / 16%);
+		border-radius: 0.9rem;
+		display: flex;
+		flex-direction: column;
+		gap: 0.5rem;
+	}
+
+	.sg-step-num {
+		font-family: var(--font-serif);
+		font-style: italic;
+		font-size: 1.4rem;
+		color: var(--brand);
+	}
+
+	.sg-steps h4 {
+		margin: 0;
+		font-family: var(--font-serif);
+		font-size: 1.1rem;
+		font-weight: 500;
+	}
+
+	.sg-steps p {
+		margin: 0;
+		color: var(--ink-soft);
+		font-size: 0.92rem;
+		line-height: 1.6;
+	}
+
+	.sg-pullquote {
+		margin: 0;
+		max-width: 56ch;
+		text-align: center;
+		padding: 1.6rem 1rem;
+		border-top: 1px solid rgb(0 94 71 / 16%);
+		border-bottom: 1px solid rgb(0 94 71 / 16%);
+	}
+
+	.sg-pullquote blockquote {
+		margin: 0;
+	}
+
+	.sg-pullquote blockquote p {
+		margin: 0;
+		font-family: var(--font-serif);
+		font-style: italic;
+		font-size: clamp(1.15rem, 2vw, 1.5rem);
+		color: var(--brand-deep);
+		line-height: 1.45;
+	}
+
+	.sg-pullquote figcaption {
+		margin-top: 0.7rem;
+		font-family: var(--font-script);
+		font-size: 1.3rem;
+		color: var(--brand);
+	}
+
+	.sg-image-placeholder {
+		margin: 0;
+		max-width: 280px;
+	}
+
+	.sg-image-frame {
+		position: relative;
+		width: 100%;
+		aspect-ratio: 4 / 5;
+		border-radius: 0.95rem;
+		background: linear-gradient(160deg, rgb(0 94 71 / 8%) 0%, rgb(0 94 71 / 18%) 100%);
+		border: 1px dashed rgb(0 94 71 / 35%);
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		gap: 0.6rem;
+		color: var(--brand);
+	}
+
+	.sg-image-frame svg {
+		width: 48px;
+		height: 48px;
+	}
+
+	.sg-image-frame span {
+		font-size: 0.72rem;
+		text-transform: uppercase;
+		letter-spacing: 0.18em;
+		font-weight: 600;
+		color: var(--brand-deep);
+	}
+
+	.sg-image-placeholder figcaption {
+		margin-top: 0.55rem;
+		font-size: 0.72rem;
+		font-style: italic;
+		color: var(--ink-soft);
+		line-height: 1.5;
+	}
+
+	.sg-feelings-lead {
+		font-weight: 700;
+		font-family: var(--font-serif);
+		font-size: 1.15rem;
+		color: var(--brand);
+		margin: 0 0 0.7rem;
+	}
+
+	.sg-feelings {
+		list-style: none;
+		padding: 0;
+		margin: 0;
+		display: grid;
+		gap: 0.55rem;
+		max-width: 56ch;
+	}
+
+	.sg-feelings li {
+		position: relative;
+		padding-left: 1.4rem;
+		font-style: italic;
+		line-height: 1.6;
+	}
+
+	.sg-feelings li::before {
+		content: "";
+		position: absolute;
+		left: 0;
+		top: 0.7em;
+		width: 0.55rem;
+		height: 0.55rem;
+		border-radius: 999px;
+		background: var(--brand);
+		opacity: 0.55;
+	}
+
+	/* ---------- IMAGERY ---------- */
+	.sg-imagery-list {
+		list-style: none;
+		margin: 0 0 2rem;
+		padding: 0;
+		display: grid;
+		gap: 0.7rem;
+		max-width: 64ch;
+	}
+
+	.sg-imagery-list li {
+		padding: 0.9rem 1.1rem;
+		background: var(--color-white);
+		border-left: 3px solid var(--brand);
+		border-radius: 0 0.7rem 0.7rem 0;
+		font-style: italic;
+		color: var(--ink-soft);
+		line-height: 1.6;
+	}
+
+	.sg-imagery-rules {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: 1rem;
+		margin: 0;
+	}
+
+	.sg-imagery-rules > div {
+		padding: 1rem 1.2rem;
+		background: var(--color-white);
+		border: 1px solid rgb(0 94 71 / 14%);
+		border-radius: 0.85rem;
+	}
+
+	.sg-imagery-rules dt {
+		font-weight: 600;
+		margin-bottom: 0.3rem;
+	}
+
+	.sg-imagery-rules dd {
+		margin: 0;
+		font-size: 0.9rem;
+		color: var(--ink-soft);
+		line-height: 1.55;
+	}
+
+	/* ---------- FOOTNOTE ---------- */
+	.sg-footnote {
+		max-width: 64ch;
+		font-size: 0.88rem;
+		color: var(--ink-soft);
+		font-style: italic;
+		line-height: 1.7;
+		padding: 1.2rem 1.3rem;
+		background: var(--brand-tint);
+		border-radius: 0.85rem;
+	}
+
+	/* ---------- RESPONSIVE ---------- */
+	@media (max-width: 900px) {
+		.sg-voice-grid,
+		.sg-do-dont-row,
+		.sg-logo-grid,
+		.sg-pillars,
+		.sg-steps {
+			grid-template-columns: 1fr;
+		}
+
+		.sg-colour-grid {
+			grid-template-columns: repeat(2, 1fr);
+		}
+
+		.sg-button-notes,
+		.sg-imagery-rules {
+			grid-template-columns: 1fr;
+		}
+
+		.sg-type-card {
+			grid-template-columns: 1fr;
+			gap: 0.7rem;
+		}
+	}
+
+	@media (max-width: 540px) {
+		.sg-colour-grid {
+			grid-template-columns: 1fr;
+		}
+
+		.sg-scale-row {
+			grid-template-columns: 1fr;
+			gap: 0.25rem;
+		}
+	}
+</style>

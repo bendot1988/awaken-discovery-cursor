@@ -6,12 +6,14 @@ interface Props {
 	title?: string;
 	description?: string;
 	canonicalPath?: string;
+	noindex?: boolean;
 }
 
 const {
 	title = siteMeta.title,
 	description = siteMeta.description,
 	canonicalPath = Astro.url.pathname,
+	noindex = false,
 } = Astro.props;
 
 const canonical = `${siteMeta.canonicalOrigin}${canonicalPath}`;
@@ -25,6 +27,7 @@ const canonical = `${siteMeta.canonicalOrigin}${canonicalPath}`;
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<link rel="icon" href="/favicon.ico" />
 		<link rel="canonical" href={canonical} />
+		{noindex && <meta name="robots" content="noindex, nofollow" />}
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 		<link
