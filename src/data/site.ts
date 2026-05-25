@@ -43,6 +43,15 @@ export const anxietyGuidePath = "/finding-calm-anxiety";
 
 export const navItems: NavItem[] = [
 	{ label: "Home", href: "/" },
+	{ label: "Teachers", href: "/teachers" },
+	{ label: "Anxiety", href: "/anxiety" },
+	{ label: "Products", href: "/products" },
+	{ label: "Pricing", href: "/pricing" },
+	{ label: "Contact", href: "/contact" },
+];
+
+export const footerNavItems: NavItem[] = [
+	{ label: "Home", href: "/" },
 	{ label: "About", href: "/about" },
 	{ label: "Teachers", href: "/teachers" },
 	{ label: "Anxiety", href: "/anxiety" },
@@ -92,6 +101,11 @@ export const supportCards: SupportCard[] = [
 		title: "Life Transitions & Personal Growth",
 		body: "Support through periods of uncertainty, change and emotional reflection.",
 		supports: "change · grief · uncertainty · emotional growth · rediscovery",
+	},
+	{
+		title: "Emotional Healing & Reconnection",
+		body: "Creating space to slow down, reconnect with yourself and begin understanding your emotions with greater compassion and clarity.",
+		supports: "emotional healing · self-awareness · nervous system regulation · inner calm · reconnection with self",
 	},
 ];
 

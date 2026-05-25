@@ -1,14 +1,12 @@
 ---
-import { teacherGuidePath, type NavItem } from "../data/site";
+import { footerNavItems, teacherGuidePath } from "../data/site";
 
 interface Props {
-	navItems: NavItem[];
 	locations: string[];
 	tagline?: string;
 }
 
 const {
-	navItems,
 	locations,
 	tagline = "Compassionate support for anxiety, overwhelm and emotional healing.",
 } = Astro.props;
@@ -40,7 +38,7 @@ const year = new Date().getFullYear();
 		<nav class="footer-nav-wrap" aria-label="Footer">
 			<ul class="footer-nav">
 				{
-					navItems.map((item) => (
+					footerNavItems.map((item) => (
 						<li><a href={item.href}>{item.label}</a></li>
 					))
 				}
