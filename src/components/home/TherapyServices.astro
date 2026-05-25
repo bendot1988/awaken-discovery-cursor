@@ -118,8 +118,10 @@ const { therapy, additional } = Astro.props;
 	.service-card h3 {
 		margin: 0;
 		font-family: var(--font-serif);
-		font-size: 1.2rem;
-		font-weight: 500;
+		font-size: clamp(1.5rem, 2vw, 1.75rem);
+		font-weight: 600;
+		line-height: 1.2;
+		color: var(--color-dark-slate-gray);
 	}
 
 	.service-card p {
