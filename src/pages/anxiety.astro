@@ -3,7 +3,7 @@ import Layout from "../layouts/Layout.astro";
 import SiteHeader from "../components/SiteHeader.astro";
 import SiteFooter from "../components/SiteFooter.astro";
 import StubBanner from "../components/StubBanner.astro";
-import { locations, navItems } from "../data/site";
+import { anxietyGuidePath, locations, navItems } from "../data/site";
 ---
 
 <Layout
@@ -12,7 +12,7 @@ import { locations, navItems } from "../data/site";
 >
 	<SiteHeader navItems={navItems} />
 	<main>
-		<StubBanner message="Anxiety page — Hero and Emotional Connection only for now. Free Guide · Meet Ally · Continued Support · Final CTA arrive next session." />
+		<StubBanner message="Anxiety landing page — full guide funnel now lives at /finding-calm-anxiety. Meet Ally · Continued Support · Final CTA on this page still to come." />
 
 		<section class="anxiety-hero section">
 			<div class="hero-bg-placeholder" aria-hidden="true">
@@ -30,7 +30,10 @@ import { locations, navItems } from "../data/site";
 					emotional support.
 				</p>
 				<div class="cta-row">
-					<a class="cta cta-solid" href="#guide">Download the Free Guide — Finding Calm</a>
+					<a class="cta cta-solid cta-guide" href={anxietyGuidePath}>
+						<span class="cta-guide-lead">Download the Free Guide —</span>
+						<span class="cta-guide-name">Finding Calm</span>
+					</a>
 					<a class="cta cta-outline" href="#support">Explore Anxiety Support</a>
 				</div>
 				<ul class="trust-strip" aria-label="Credentials">
@@ -70,12 +73,19 @@ import { locations, navItems } from "../data/site";
 			<div class="container">
 				<h2 class="cu-title">Coming on this page</h2>
 				<ul class="cu-list">
-					<li>Free Guide — <em>Finding Calm</em> with email signup</li>
+					<li>
+						Free Guide — <em>Finding Calm</em> with email signup —
+						<a href={anxietyGuidePath}>live now</a>
+					</li>
 					<li>Meet Ally — anxiety version</li>
 					<li>Continued Support (Anxiety Reflection Journal · One-to-One Therapy)</li>
 					<li>Final CTA — Free Guide · Book a Session · Free Consultation</li>
 				</ul>
-				<p class="cu-note">Want to start now? <a href="/contact">Book a free consultation</a>.</p>
+				<p class="cu-note">
+					Want to start now?
+					<a href={anxietyGuidePath}>Grab the free guide</a> or
+					<a href="/contact">book a free consultation</a>.
+				</p>
 			</div>
 		</section>
 	</main>
@@ -155,6 +165,22 @@ import { locations, navItems } from "../data/site";
 		flex-wrap: wrap;
 		gap: 0.7rem;
 		margin-top: 1.6rem;
+	}
+
+	.cta-guide {
+		display: inline-flex;
+		flex-wrap: wrap;
+		align-items: baseline;
+		gap: 0.35rem;
+		padding-block: 0.85rem;
+		line-height: 1.2;
+		text-align: left;
+	}
+
+	.cta-guide-name {
+		font-family: var(--font-serif);
+		font-style: italic;
+		font-weight: 500;
 	}
 
 	.trust-strip {

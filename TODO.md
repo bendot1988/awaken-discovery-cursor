@@ -6,7 +6,7 @@ Everything below is blocked on input, copy, assets or a product decision from Al
 
 - [ ] **Testimonials** — at least 3 to fill `Testimonials.astro` placeholders on the Homepage.
 - [ ] **Accreditation / trust strip logos** — MBACP and any other badges to drop into the Homepage hero trust strip.
-- [ ] **"Learn More About Ally" page copy** — `/about` currently renders a Coming Soon shell. Linked from Homepage, Teachers and Anxiety. Brief flags this as outstanding.
+- [x] **"Learn More About Ally" page copy** — `/about` now live with brand intro, Meet Ally, approach pillars, accordion chapters, qualifications placeholders and closing CTA. Real photos for portrait + chapters + closing band. Qualifications block has TODOs waiting on credentials from the live site.
 - [ ] **Hero / Anxiety background video** — stock or client-supplied calming footage. Placeholder block on `/anxiety` hero; static image in Homepage hero with an overlay note.
 - [ ] **Brand imagery for Teachers page** — cups, books, Ally writing. Client has some already.
 - [ ] **Product videos** — for the Wellbeing Products section once built.
@@ -14,7 +14,7 @@ Everything below is blocked on input, copy, assets or a product decision from Al
 ## Pricing & products (waiting on confirmation)
 
 - [ ] **Therapy block pricing** — confirm against the existing live page before committing a number. `pricingTiers` in [src/data/site.ts](src/data/site.ts) currently shows `{{TODO: price}}`.
-- [ ] **Anxiety Reflection Journal URL** — product nearly done; need link to drop into Teachers + Anxiety pages.
+- [ ] **Anxiety Reflection Journal URL + pricing** — product nearly done. Need: full price, discount price, discount %, deadline (replace `{{PRICE}} / {{DISCOUNTED_PRICE}} / {{X}} / {{DEADLINE}}` on `/finding-calm-anxiety/thank-you` and in Emails 5 + 7 of [docs/email-sequence-anxiety.md](docs/email-sequence-anxiety.md)). Also need link to drop into Teachers + Anxiety pages.
 - [ ] **Sunday Reset destination** — undecided whether monthly or weekly; need a page/booking URL.
 - [ ] **Teacher decompression / realignment / membership systems** — still in development; will live under `/products`.
 
@@ -33,7 +33,8 @@ Everything below is blocked on input, copy, assets or a product decision from Al
 ## Page builds (planned next sessions)
 
 - [ ] **Teachers** — full page (currently Hero + Emotional Connection only). Needs Free Guide section, Meet Ally (teacher version), Support Beyond Survival Mode 4-card grid, Final CTA.
-- [ ] **Anxiety** — full page (currently Hero + Emotional Connection only). Needs Free Guide section, Meet Ally (anxiety version), Continued Support 2-card grid, Final CTA.
+- [ ] **Anxiety** — `/anxiety` hub page still Hero + Emotional Connection only. Meet Ally / Continued Support / Final CTA still to add.
+- [x] **Finding Calm anxiety guide funnel** — full sales page at `/finding-calm-anxiety` and journal-upsell thank-you at `/finding-calm-anxiety/thank-you`. Email opt-in form + nurture sequence stubbed; ESP wire-up TODOs flagged on the page. 7-email sequence copy lives in [docs/email-sequence-anxiety.md](docs/email-sequence-anxiety.md).
 - [ ] **About** — replace Coming Soon with full bio + therapeutic approach.
 - [ ] **Products** — replace Coming Soon with product grid once items are live.
 - [ ] **Pricing** — replace Coming Soon with full pricing breakdown.

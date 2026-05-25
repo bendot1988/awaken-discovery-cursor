@@ -3,7 +3,7 @@ import Layout from "../layouts/Layout.astro";
 import SiteHeader from "../components/SiteHeader.astro";
 import SiteFooter from "../components/SiteFooter.astro";
 import StubBanner from "../components/StubBanner.astro";
-import { locations, navItems } from "../data/site";
+import { locations, navItems, teacherGuidePath } from "../data/site";
 ---
 
 <Layout
@@ -30,7 +30,10 @@ import { locations, navItems } from "../data/site";
 						and emotional exhaustion.
 					</p>
 					<div class="cta-row">
-						<a class="cta cta-solid" href="#guide">Download the Free Guide</a>
+						<a class="cta cta-solid cta-guide" href={teacherGuidePath}>
+							<span class="cta-guide-lead">Download the Free Guide —</span>
+							<span class="cta-guide-name">Why You Can't Switch Off After Teaching</span>
+						</a>
 						<a class="cta cta-outline" href="#support">Explore Teacher Support</a>
 					</div>
 					<ul class="trust-strip" aria-label="Credentials">
@@ -61,12 +64,14 @@ import { locations, navItems } from "../data/site";
 						emotionally exhausted by the pressure, responsibility and constant
 						expectation to keep going no matter how overwhelmed you feel.
 					</p>
-					<p>
-						The Sunday evening dread. The inability to switch off. The exhaustion
-						that sleep no longer fixes. The termly countdowns to the holidays. The
-						feeling that you are constantly giving while losing parts of yourself in
-						the process.
-					</p>
+					<p class="ec-lead-in">Perhaps you've been feeling it too…</p>
+					<ul class="ec-feelings">
+						<li>The Sunday evening dread.</li>
+						<li>The inability to fully switch off.</li>
+						<li>The exhaustion that sleep no longer seems to fix.</li>
+						<li>Counting down the weeks until the next holiday just to recover.</li>
+						<li>Constantly giving to everyone else… while quietly losing parts of yourself in the process.</li>
+					</ul>
 					<p>
 						If this feels familiar, you are not weak — and you are certainly not
 						alone. Teaching asks so much of people emotionally, mentally and
@@ -142,6 +147,22 @@ import { locations, navItems } from "../data/site";
 		margin-top: 1.6rem;
 	}
 
+	.cta-guide {
+		display: inline-flex;
+		flex-wrap: wrap;
+		align-items: baseline;
+		gap: 0.35rem;
+		padding-block: 0.85rem;
+		line-height: 1.2;
+		text-align: left;
+	}
+
+	.cta-guide-name {
+		font-family: var(--font-serif);
+		font-style: italic;
+		font-weight: 500;
+	}
+
 	.trust-strip {
 		display: flex;
 		flex-wrap: wrap;
@@ -193,6 +214,42 @@ import { locations, navItems } from "../data/site";
 	.ec-inner p {
 		margin: 0 0 1rem;
 		line-height: 1.9;
+	}
+
+	.ec-lead-in {
+		margin-top: 1.4rem;
+		font-weight: 700;
+		font-family: var(--font-serif);
+		font-size: 1.15rem;
+		color: var(--color-dark-slate-gray);
+	}
+
+	.ec-feelings {
+		list-style: none;
+		padding: 0;
+		margin: 0 0 1.6rem;
+		display: grid;
+		gap: 0.65rem;
+	}
+
+	.ec-feelings li {
+		position: relative;
+		padding-left: 1.4rem;
+		line-height: 1.65;
+		font-style: italic;
+		color: var(--color-dark-gray);
+	}
+
+	.ec-feelings li::before {
+		content: "";
+		position: absolute;
+		left: 0;
+		top: 0.7em;
+		width: 0.55rem;
+		height: 0.55rem;
+		border-radius: 999px;
+		background: var(--color-dark-slate-gray);
+		opacity: 0.55;
 	}
 
 	.coming-up {

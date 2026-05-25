@@ -39,6 +39,7 @@ export const siteMeta = {
 };
 
 export const teacherGuidePath = "/finding-calm-teachers";
+export const anxietyGuidePath = "/finding-calm-anxiety";
 
 export const navItems: NavItem[] = [
 	{ label: "Home", href: "/" },

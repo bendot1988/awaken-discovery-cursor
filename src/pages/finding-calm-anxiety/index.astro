@@ -1,0 +1,1127 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import SiteHeader from "../../components/SiteHeader.astro";
+import SiteFooter from "../../components/SiteFooter.astro";
+import { locations, navItems } from "../../data/site";
+
+const insideBullets = [
+	"How to gently slow things down and begin listening to what your body is trying to communicate — without judgment or pressure.",
+	"Simple body-aware techniques to help you pause, breathe and find your way back to yourself when anxiety rises.",
+	"A gentle reflection space to notice what's present for you right now — patterns in your body, thoughts and emotions.",
+	"Personal \u201canchors\u201d you can return to — something solid, something moving, something breathing — that help you feel steadier even in the middle of an overwhelming day.",
+	"Why simply noticing the contact between your hand and your body can remind you that you're here, in this moment, supported.",
+];
+
+const symptoms = [
+	"The racing heart.",
+	"The 3 AM panic.",
+	"The constant feeling that something bad is about to happen — even when everything's technically \u201cfine.\u201d",
+];
+
+const steps = [
+	{
+		num: "01",
+		title: "Drop your email",
+		body: "The guide lands in your inbox in the next couple of minutes.",
+	},
+	{
+		num: "02",
+		title: "Take a few moments for yourself",
+		body: "No rush, no pressure to do everything at once.",
+	},
+	{
+		num: "03",
+		title: "Notice what feels different",
+		body: "What it's like when you gently return attention to your body.",
+	},
+];
+
+const faqs = [
+	{
+		q: "I've tried therapy / meditation / breathing apps before and they didn't help. Will this be different?",
+		a: "Honestly — it depends on whether you try it. This guide isn't trying to replace therapy or medication. It's an invitation to notice what's already happening in your body rather than push it away. Most people who say \u201cnothing has worked\u201d have been told for years to manage or fight their anxiety. This is a different door in.",
+	},
+	{
+		q: "I'm not in crisis — is this still for me?",
+		a: "Yes. The guide is for anyone whose nervous system has been carrying too much for too long — whether that shows up as 3 AM panic, low-grade dread, overthinking, or just being permanently tired. You don't have to be at breaking point to deserve relief.",
+	},
+	{
+		q: "How long does it take to read?",
+		a: "About twenty minutes. The techniques inside take under sixty seconds each. You can read it on your phone in the car park, on a tea break, or curled up on the sofa.",
+	},
+	{
+		q: "What if I'm in crisis right now?",
+		a: "This guide isn't a substitute for urgent support. If you need to speak to someone tonight, please call the Samaritans on 116 123 — they're there, free, any time. The guide will still be here tomorrow.",
+	},
+	{
+		q: "Is my email safe? Will I get spammed?",
+		a: "Your email is handled with care. You'll get the guide, then occasional supportive notes from me. You can unsubscribe in one click at any time.",
+	},
+];
+---
+
+<Layout
+	title="Finding Calm — A Free Guide to Grounding Yourself During Anxiety · Awaken Discovery"
+	description="A free guide for anyone tired of fighting their own nervous system. Body-aware techniques to help you pause, breathe and find your way back to yourself when anxiety rises."
+>
+	<SiteHeader navItems={navItems} />
+	<main class="anx-page">
+		<!-- ============== HERO ============== -->
+		<section class="anx-hero section">
+			<div class="container anx-hero-inner">
+				<p class="anx-listen">Listen…</p>
+				<h1>
+					If You're Tired of Waking Up Every Morning <em>Already</em> Exhausted
+					by the Weight of Your Own Thoughts…
+				</h1>
+				<p class="anx-subhead">
+					And you're sick of pretending you're <em>"fine"</em> when you're
+					barely holding it together…
+				</p>
+				<p class="anx-promise">
+					Then this free guide will show you how to finally quiet the noise in
+					your head <span>— without years of therapy or expensive medication.</span>
+				</p>
+				<div class="anx-cta-row">
+					<a class="cta cta-solid anx-cta" href="#claim">
+						Yes — Send Me the Free Guide
+					</a>
+					<a class="cta cta-outline" href="#inside">See what's inside</a>
+				</div>
+				<ul class="anx-trust" aria-label="Credentials">
+					<li>✔ Counsellor &amp; Psychotherapist</li>
+					<li>✔ Body-aware, nervous-system informed</li>
+					<li>✔ Gentle, no-pressure approach</li>
+				</ul>
+			</div>
+		</section>
+
+		<!-- ============== TRUTH ============== -->
+		<section class="anx-truth section section-soft">
+			<div class="container anx-prose">
+				<p class="section-kicker">Here's the truth nobody's telling you</p>
+				<h2>
+					You're not "too sensitive." You're not "overthinking it." And you're
+					definitely not broken.
+				</h2>
+				<p>
+					What you <em>are</em> is carrying an invisible load that's gotten
+					heavier every single day… and your nervous system is screaming for
+					relief.
+				</p>
+				<ul class="anx-symptoms">
+					{
+						symptoms.map((s) => (
+							<li>{s}</li>
+						))
+					}
+				</ul>
+				<p class="anx-recognise">Sound familiar?</p>
+			</div>
+		</section>
+
+		<!-- ============== DIFFERENTIATOR (Ally portrait + copy) ============== -->
+		<section class="anx-different section">
+			<div class="container anx-different-grid">
+				<figure class="anx-different-figure">
+					<img
+						src="/assets/images/hero-ally.png"
+						alt="Ally — counsellor and psychotherapist, founder of Awaken Discovery"
+						loading="lazy"
+						decoding="async"
+					/>
+					<figcaption class="anx-img-todo">
+						{`{{IMAGE PROMPT: Warm portrait of Ally — soft natural light, sage tones, calm and approachable. Reuses hero-ally.png until a dedicated anxiety-page shot is available.}}`}
+					</figcaption>
+				</figure>
+				<div class="anx-different-copy">
+					<p class="section-kicker">Here's what makes this different</p>
+					<h2>Most therapists will tell you to "manage" your anxiety. I'd like to show you something else.</h2>
+					<p>
+						Most therapists will tell you to manage it. To cope with it. To
+						learn to live with it.
+					</p>
+					<p class="anx-emphasis">
+						I'd like to show you how to actually <em>listen</em> to what your
+						body is trying to tell you.
+					</p>
+					<p>
+						Because here's what I've discovered after years of working with
+						people just like you: anxiety isn't something to fight. It's your
+						body's way of communicating.
+					</p>
+					<p>
+						And until you learn to gently notice what's happening in your
+						body, no amount of positive thinking will give you lasting relief.
+					</p>
+					<p class="anx-emphasis">That's why I created this free guide.</p>
+				</div>
+			</div>
+		</section>
+
+		<!-- ============== THE OFFER (copy LEFT, mockup RIGHT) ============== -->
+		<section class="anx-offer section section-soft" id="inside">
+			<div class="container anx-offer-grid">
+				<div class="anx-offer-copy">
+					<p class="section-kicker">Your free guide</p>
+					<h2>Finding Calm — A Simple Guide to Grounding Yourself During Anxiety</h2>
+					<p class="anx-sub">
+						An invitation to gently slow things down. To notice. To return
+						to yourself.
+					</p>
+					<ul class="anx-inside">
+						{
+							insideBullets.map((b) => (
+								<li>{b}</li>
+							))
+						}
+					</ul>
+					<p class="anx-promise-small">
+						This isn't about fixing you or getting rid of anxiety completely.
+						It's about gently coming home to your body.
+					</p>
+					<a class="cta cta-solid anx-cta" href="#claim">
+						Yes — Send Me the Free Guide
+					</a>
+				</div>
+
+				<figure class="anx-mockup-wrap">
+					<div class="anx-mockup" aria-hidden="true">
+						<div class="anx-mockup-cover">
+							<span class="anx-mockup-eyebrow">A free guide</span>
+							<span class="anx-mockup-title">Finding Calm</span>
+							<span class="anx-mockup-sub">
+								A simple guide to grounding yourself during anxiety
+							</span>
+							<span class="anx-mockup-author">Ally · Awaken Discovery</span>
+							<svg class="anx-mockup-leaf" viewBox="0 0 60 60" aria-hidden="true">
+								<path
+									d="M30 5C42 14 50 25 50 36C50 46 42 54 30 55C18 54 10 46 10 36C10 25 18 14 30 5Z"
+									fill="currentColor"
+									opacity="0.18"
+								></path>
+								<path
+									d="M30 10C30 25 30 40 30 55"
+									stroke="currentColor"
+									stroke-width="1"
+									opacity="0.5"
+									fill="none"
+								></path>
+							</svg>
+						</div>
+					</div>
+					<figcaption class="anx-img-todo">
+						{`{{IMAGE PROMPT: 3D mockup or flatlay of the printed PDF — sage cover with calligraphic title, on a softly lit desk beside a warm mug or open notebook. Replaces the CSS-painted placeholder when ready.}}`}
+					</figcaption>
+				</figure>
+			</div>
+		</section>
+
+		<!-- ============== MEET ALLY ============== -->
+		<section class="anx-meet section">
+			<div class="container anx-meet-grid">
+				<div class="anx-meet-copy">
+					<p class="section-kicker">Who am I and why should you listen?</p>
+					<h2>Hi — I'm Ally.</h2>
+					<p>
+						I'm a counsellor, psychotherapist and wellbeing educator based in
+						Market Weighton, East Yorkshire. But more importantly, I've spent
+						years helping people just like you understand their anxiety and
+						reconnect with themselves — so they can feel more emotionally
+						balanced in everyday life.
+					</p>
+					<p>
+						Over time I've developed a gentle, body-aware approach that helps
+						you notice what's happening without trying to change it all at
+						once.
+					</p>
+					<p class="anx-emphasis">
+						Because you don't need to do this perfectly. You don't need to do
+						everything at once. Simply being here, taking a moment for
+						yourself, is already enough.
+					</p>
+					<a class="cta cta-outline" href="/about">Read more about Ally</a>
+				</div>
+				<figure class="anx-meet-figure">
+					<img
+						src="/assets/images/ally-in-session.png"
+						alt="Ally in session with a client in her Market Weighton therapy room"
+						loading="lazy"
+						decoding="async"
+					/>
+					<figcaption class="anx-img-todo">
+						{`{{IMAGE PROMPT: A softer, slightly more candid portrait of Ally. Could be reading, holding a mug, mid-conversation. Sage tones, natural light, warm and trustworthy.}}`}
+					</figcaption>
+				</figure>
+			</div>
+		</section>
+
+		<!-- ============== TESTIMONIALS ============== -->
+		<section class="anx-testimonials section section-soft">
+			<div class="container">
+				<header class="anx-section-head">
+					<p class="section-kicker">What clients say</p>
+					<h2>You're not the first to feel this way — and you don't have to figure it out alone.</h2>
+				</header>
+				<div class="anx-test-grid">
+					<blockquote class="anx-testimonial">
+						<p>
+							The counselling sessions have helped me untangle some of the
+							emotions I've been carrying.
+						</p>
+						<footer>
+							<span class="anx-test-name">Current client</span>
+							<span class="anx-test-meta">Anonymised at client's request</span>
+						</footer>
+					</blockquote>
+					<blockquote class="anx-testimonial">
+						<p>
+							What makes Ally great is her ability to help me really clarify
+							my thoughts — so I can express what I'm thinking and feeling.
+						</p>
+						<footer>
+							<span class="anx-test-name">Current client</span>
+							<span class="anx-test-meta">Anonymised at client's request</span>
+						</footer>
+					</blockquote>
+				</div>
+				<p class="anx-img-todo">
+					{`{{TODO: lift anxiety-specific testimonials when available. Current quotes are general counselling clients from the live site.}}`}
+				</p>
+			</div>
+		</section>
+
+		<!-- ============== STEPS ============== -->
+		<section class="anx-steps-band section">
+			<div class="container">
+				<header class="anx-section-head">
+					<p class="section-kicker">Here's what happens next</p>
+					<h2>Three steps. No rush. No pressure to do everything at once.</h2>
+				</header>
+				<ol class="anx-steps">
+					{
+						steps.map((s) => (
+							<li>
+								<span class="anx-step-num">{s.num}</span>
+								<h3>{s.title}</h3>
+								<p>{s.body}</p>
+							</li>
+						))
+					}
+				</ol>
+			</div>
+		</section>
+
+		<!-- ============== CLAIM FORM ============== -->
+		<section class="anx-claim section" id="claim">
+			<div class="container anx-claim-grid">
+				<figure class="anx-claim-figure">
+					<img
+						src="/assets/images/ally-therapy-room.png"
+						alt="Ally — counsellor and psychotherapist"
+						loading="lazy"
+						decoding="async"
+					/>
+					<figcaption class="anx-img-todo">
+						{`{{IMAGE PROMPT: A small, warm portrait of Ally with a gentle, encouraging smile. Could reuse a softer companion shot.}}`}
+					</figcaption>
+				</figure>
+
+				<div class="anx-claim-copy">
+					<p class="section-kicker">Yes — send me the guide</p>
+					<h2>Finding Calm — A Simple Guide to Grounding Yourself During Anxiety</h2>
+					<p>
+						Pop your email below. The PDF lands in your inbox in the next
+						couple of minutes — read it whenever you next have a quiet five.
+					</p>
+
+					<form
+						class="anx-form"
+						method="post"
+						action="#"
+						aria-describedby="anx-form-todo"
+						novalidate
+					>
+						<label class="anx-field">
+							<span>Your first name</span>
+							<input
+								type="text"
+								name="first_name"
+								autocomplete="given-name"
+								placeholder="First name"
+							/>
+						</label>
+						<label class="anx-field">
+							<span>Your email</span>
+							<input
+								type="email"
+								name="email"
+								autocomplete="email"
+								required
+								placeholder="you@example.com"
+							/>
+						</label>
+						<label class="anx-consent">
+							<input type="checkbox" name="consent" required />
+							<span>
+								Send me the guide and supportive wellbeing emails. I can
+								unsubscribe any time.
+							</span>
+						</label>
+						<button class="cta cta-solid anx-submit" type="submit">
+							Yes — Send Me the Free Guide Now
+						</button>
+						<p class="anx-privacy">
+							Your details are handled with care. See our
+							<a href="/privacy">Privacy Policy</a>.
+						</p>
+						<p id="anx-form-todo" class="anx-img-todo">
+							{`{{TODO: wire to ESP — auto-send PDF, trigger nurture sequence (see /docs/email-sequence-anxiety.md), redirect to /finding-calm-anxiety/thank-you}}`}
+						</p>
+					</form>
+				</div>
+			</div>
+		</section>
+
+		<!-- ============== FAQ ============== -->
+		<section class="anx-faq section section-soft">
+			<div class="container">
+				<header class="anx-section-head">
+					<p class="section-kicker">FAQ</p>
+					<h2>Questions people often ask first</h2>
+				</header>
+				<div class="anx-faq-list">
+					{
+						faqs.map((item) => (
+							<details class="anx-faq-item">
+								<summary>
+									<span>{item.q}</span>
+									<span class="anx-faq-icon" aria-hidden="true">+</span>
+								</summary>
+								<div class="anx-faq-body">
+									<p>{item.a}</p>
+								</div>
+							</details>
+						))
+					}
+				</div>
+			</div>
+		</section>
+
+		<!-- ============== CLOSING ============== -->
+		<section class="anx-close section">
+			<div class="container anx-close-inner">
+				<p class="anx-close-line">
+					You don't need to keep struggling alone.
+				</p>
+				<p class="anx-close-line">
+					You don't need to white-knuckle your way through every day.
+				</p>
+				<p class="anx-close-line">
+					You don't need to wait until it gets worse to take a breath.
+				</p>
+				<p class="anx-close-signoff">
+					Download the guide. Give yourself this moment. You deserve to feel
+					calm again.
+				</p>
+				<p class="anx-signature">— Ally</p>
+				<a class="cta cta-solid anx-cta" href="#claim">
+					Yes — Send Me the Free Guide
+				</a>
+			</div>
+		</section>
+	</main>
+	<SiteFooter
+		navItems={navItems}
+		locations={locations}
+		tagline="Gentle, body-aware support for anxiety, overthinking and emotional overwhelm."
+	/>
+</Layout>
+
+<style>
+	.anx-page {
+		--brand: var(--color-dark-slate-gray);
+		--brand-deep: #004836;
+		--brand-tint: rgb(0 94 71 / 8%);
+		--ink: var(--color-dark-gray);
+		--ink-soft: rgb(29 35 39 / 78%);
+		font-size: 1.05rem;
+		line-height: 1.75;
+		color: var(--ink);
+	}
+
+	.anx-page .section-kicker {
+		margin: 0;
+		text-transform: uppercase;
+		letter-spacing: 0.12em;
+		font-size: 0.78rem;
+		font-weight: 600;
+		color: var(--brand);
+	}
+
+	.anx-page h2 {
+		margin: 0.6rem 0 1rem;
+		font-family: var(--font-serif);
+		font-size: clamp(1.7rem, 3.3vw, 2.4rem);
+		line-height: 1.2;
+		font-weight: 500;
+		text-wrap: balance;
+	}
+
+	.anx-page h3 {
+		margin: 0;
+		font-family: var(--font-serif);
+		font-size: 1.2rem;
+		font-weight: 500;
+		color: var(--brand-deep);
+	}
+
+	.anx-section-head {
+		max-width: 60ch;
+		margin-bottom: 2rem;
+	}
+
+	.anx-img-todo {
+		margin: 0.7rem 0 0;
+		font-size: 0.72rem;
+		font-style: italic;
+		color: var(--ink-soft);
+		opacity: 0.65;
+		line-height: 1.55;
+		max-width: 44ch;
+	}
+
+	/* ---------- HERO ---------- */
+	.anx-hero {
+		padding-block: clamp(4rem, 9vh, 6.5rem);
+		background:
+			radial-gradient(ellipse at 80% 20%, rgb(0 94 71 / 14%), transparent 60%),
+			linear-gradient(160deg, #eaf0ea 0%, #f6f8f6 60%, #f4ecea 100%);
+	}
+
+	.anx-hero-inner {
+		max-width: 780px;
+	}
+
+	.anx-listen {
+		margin: 0 0 0.4rem;
+		font-family: var(--font-script);
+		font-size: clamp(1.7rem, 3vw, 2.4rem);
+		line-height: 1;
+		color: var(--brand);
+	}
+
+	.anx-hero h1 {
+		margin: 0.4rem 0 1.1rem;
+		font-family: var(--font-serif);
+		font-size: clamp(2rem, 4.6vw, 3.3rem);
+		font-weight: 500;
+		line-height: 1.14;
+		color: var(--brand-deep);
+		text-wrap: balance;
+	}
+
+	.anx-hero h1 em {
+		font-style: italic;
+		color: var(--brand);
+	}
+
+	.anx-subhead {
+		margin: 0 0 1.4rem;
+		font-size: clamp(1.05rem, 2vw, 1.25rem);
+		line-height: 1.6;
+		max-width: 60ch;
+	}
+
+	.anx-subhead em {
+		font-style: italic;
+		color: var(--brand-deep);
+	}
+
+	.anx-promise {
+		margin: 0 0 1.6rem;
+		font-family: var(--font-serif);
+		font-style: italic;
+		font-size: clamp(1.2rem, 2.4vw, 1.55rem);
+		line-height: 1.45;
+		color: var(--brand-deep);
+		max-width: 56ch;
+	}
+
+	.anx-promise span {
+		display: inline;
+		opacity: 0.85;
+	}
+
+	.anx-cta-row {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.7rem;
+		margin-bottom: 1.6rem;
+	}
+
+	.anx-cta {
+		padding: 0.9rem 1.4rem;
+		font-size: 1rem;
+	}
+
+	.anx-trust {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.4rem 1.4rem;
+		margin: 0;
+		padding: 0;
+		list-style: none;
+		font-size: 0.88rem;
+		color: var(--ink-soft);
+	}
+
+	/* ---------- TRUTH ---------- */
+	.anx-truth {
+		padding-block: clamp(3rem, 7vh, 5rem);
+	}
+
+	.anx-prose {
+		max-width: 64ch;
+	}
+
+	.anx-prose p {
+		margin: 0 0 1rem;
+	}
+
+	.anx-symptoms {
+		list-style: none;
+		margin: 1.4rem 0;
+		padding: 0;
+		display: grid;
+		gap: 0.65rem;
+	}
+
+	.anx-symptoms li {
+		position: relative;
+		padding-left: 1.4rem;
+		font-style: italic;
+		line-height: 1.6;
+	}
+
+	.anx-symptoms li::before {
+		content: "";
+		position: absolute;
+		left: 0;
+		top: 0.65em;
+		width: 0.55rem;
+		height: 0.55rem;
+		border-radius: 999px;
+		background: var(--brand);
+		opacity: 0.55;
+	}
+
+	.anx-recognise {
+		margin: 1.2rem 0 0;
+		font-family: var(--font-serif);
+		font-style: italic;
+		font-size: 1.3rem;
+		color: var(--brand);
+	}
+
+	/* ---------- DIFFERENTIATOR ---------- */
+	.anx-different-grid {
+		display: grid;
+		grid-template-columns: 0.85fr 1.15fr;
+		gap: clamp(1.6rem, 4vw, 3.5rem);
+		align-items: center;
+	}
+
+	.anx-different-figure {
+		margin: 0;
+	}
+
+	.anx-different-figure img {
+		width: 100%;
+		aspect-ratio: 4 / 5;
+		object-fit: cover;
+		object-position: 50% 25%;
+		border-radius: 1rem;
+		box-shadow: 0 18px 36px rgb(0 94 71 / 18%);
+	}
+
+	.anx-different-copy p {
+		margin: 0 0 1rem;
+		max-width: 58ch;
+	}
+
+	.anx-emphasis {
+		font-family: var(--font-serif);
+		font-style: italic;
+		font-size: 1.15rem;
+		color: var(--brand-deep);
+	}
+
+	.anx-emphasis em {
+		font-style: italic;
+		color: var(--brand);
+		font-weight: 600;
+	}
+
+	/* ---------- OFFER ---------- */
+	.anx-offer-grid {
+		display: grid;
+		grid-template-columns: 1.15fr 0.85fr;
+		gap: clamp(1.6rem, 4vw, 3.5rem);
+		align-items: center;
+	}
+
+	.anx-offer-copy h2 {
+		margin: 0.5rem 0 0.8rem;
+	}
+
+	.anx-sub {
+		font-family: var(--font-serif);
+		font-style: italic;
+		color: var(--brand-deep);
+		font-size: 1.1rem;
+		margin-bottom: 1.3rem;
+	}
+
+	.anx-inside {
+		list-style: none;
+		padding: 0;
+		margin: 0 0 1.5rem;
+		display: grid;
+		gap: 0.85rem;
+	}
+
+	.anx-inside li {
+		position: relative;
+		padding-left: 2rem;
+		line-height: 1.65;
+	}
+
+	.anx-inside li::before {
+		content: "✓";
+		position: absolute;
+		left: 0;
+		top: 0;
+		width: 1.4rem;
+		height: 1.4rem;
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		border-radius: 999px;
+		background: var(--brand);
+		color: var(--color-white);
+		font-size: 0.78rem;
+		font-weight: 700;
+	}
+
+	.anx-promise-small {
+		font-family: var(--font-serif);
+		font-style: italic;
+		color: var(--brand-deep);
+		margin-bottom: 1.3rem;
+		font-size: 1.05rem;
+	}
+
+	/* ---------- MOCKUP (CSS-painted placeholder) ---------- */
+	.anx-mockup-wrap {
+		margin: 0;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 0.6rem;
+	}
+
+	.anx-mockup {
+		position: relative;
+		width: 100%;
+		max-width: 360px;
+		aspect-ratio: 3 / 4;
+		transform: perspective(1200px) rotateY(-6deg) rotateX(2deg);
+		filter: drop-shadow(0 22px 40px rgb(0 94 71 / 25%));
+	}
+
+	.anx-mockup-cover {
+		position: relative;
+		width: 100%;
+		height: 100%;
+		background: linear-gradient(160deg, #4f8a72 0%, var(--brand) 60%, var(--brand-deep) 100%);
+		border-radius: 0.6rem 1rem 1rem 0.6rem;
+		padding: 2rem 1.8rem;
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		color: var(--color-white);
+		overflow: hidden;
+	}
+
+	.anx-mockup-cover::before {
+		content: "";
+		position: absolute;
+		inset: 0;
+		background: linear-gradient(
+			90deg,
+			rgb(0 0 0 / 18%) 0%,
+			rgb(0 0 0 / 0%) 8%,
+			rgb(0 0 0 / 0%) 92%,
+			rgb(255 255 255 / 14%) 100%
+		);
+		pointer-events: none;
+	}
+
+	.anx-mockup-eyebrow {
+		font-size: 0.7rem;
+		text-transform: uppercase;
+		letter-spacing: 0.18em;
+		font-weight: 600;
+		opacity: 0.78;
+	}
+
+	.anx-mockup-title {
+		font-family: var(--font-serif);
+		font-size: clamp(2rem, 3.2vw, 2.5rem);
+		font-weight: 500;
+		line-height: 1;
+	}
+
+	.anx-mockup-sub {
+		font-family: var(--font-serif);
+		font-style: italic;
+		font-size: 0.95rem;
+		line-height: 1.4;
+		max-width: 26ch;
+		opacity: 0.86;
+	}
+
+	.anx-mockup-author {
+		font-family: var(--font-script);
+		font-size: 1.4rem;
+		line-height: 1;
+		opacity: 0.95;
+	}
+
+	.anx-mockup-leaf {
+		position: absolute;
+		top: 1.4rem;
+		right: 1.4rem;
+		width: 48px;
+		height: 48px;
+		color: var(--color-white);
+	}
+
+	/* ---------- MEET ALLY ---------- */
+	.anx-meet-grid {
+		display: grid;
+		grid-template-columns: 1.1fr 0.9fr;
+		gap: clamp(1.6rem, 4vw, 3.5rem);
+		align-items: center;
+	}
+
+	.anx-meet-copy p {
+		margin: 0 0 1rem;
+		max-width: 60ch;
+	}
+
+	.anx-meet-figure {
+		margin: 0;
+	}
+
+	.anx-meet-figure img {
+		width: 100%;
+		aspect-ratio: 4 / 5;
+		object-fit: cover;
+		object-position: 50% 30%;
+		border-radius: 1rem;
+		box-shadow: 0 18px 36px rgb(0 94 71 / 18%);
+	}
+
+	/* ---------- TESTIMONIALS ---------- */
+	.anx-test-grid {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 1.2rem;
+	}
+
+	.anx-testimonial {
+		margin: 0;
+		padding: 1.4rem 1.4rem 1.2rem;
+		background: var(--color-white);
+		border-left: 4px solid var(--brand);
+		border-radius: 0 0.85rem 0.85rem 0;
+	}
+
+	.anx-testimonial p {
+		margin: 0 0 0.8rem;
+		font-family: var(--font-serif);
+		font-style: italic;
+		font-size: 1.05rem;
+		line-height: 1.55;
+		color: var(--ink);
+	}
+
+	.anx-testimonial footer {
+		display: flex;
+		flex-direction: column;
+		gap: 0.15rem;
+	}
+
+	.anx-test-name {
+		font-weight: 600;
+		font-size: 0.92rem;
+		color: var(--brand-deep);
+	}
+
+	.anx-test-meta {
+		font-size: 0.82rem;
+		color: var(--ink-soft);
+	}
+
+	/* ---------- STEPS ---------- */
+	.anx-steps {
+		list-style: none;
+		padding: 0;
+		margin: 0;
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: 1rem;
+		counter-reset: step;
+	}
+
+	.anx-steps li {
+		padding: 1.5rem 1.4rem;
+		background: var(--color-white);
+		border: 1px solid rgb(0 94 71 / 16%);
+		border-radius: 0.9rem;
+		display: flex;
+		flex-direction: column;
+		gap: 0.5rem;
+	}
+
+	.anx-step-num {
+		font-family: var(--font-serif);
+		font-style: italic;
+		font-size: 1.4rem;
+		color: var(--brand);
+	}
+
+	.anx-steps p {
+		margin: 0;
+		color: var(--ink-soft);
+		line-height: 1.6;
+	}
+
+	/* ---------- CLAIM FORM ---------- */
+	.anx-claim {
+		background: linear-gradient(160deg, #eaf0ea 0%, #f6f8f6 100%);
+	}
+
+	.anx-claim-grid {
+		display: grid;
+		grid-template-columns: 0.85fr 1.15fr;
+		gap: clamp(1.6rem, 4vw, 3.5rem);
+		align-items: center;
+	}
+
+	.anx-claim-figure {
+		margin: 0;
+	}
+
+	.anx-claim-figure img {
+		width: 100%;
+		aspect-ratio: 4 / 5;
+		object-fit: cover;
+		object-position: 50% 30%;
+		border-radius: 1rem;
+		box-shadow: 0 18px 36px rgb(0 94 71 / 18%);
+	}
+
+	.anx-claim-copy h2 {
+		margin: 0.4rem 0 0.9rem;
+	}
+
+	.anx-form {
+		margin-top: 1.2rem;
+		padding: 1.6rem;
+		background: var(--color-white);
+		border-radius: 1rem;
+		border: 1px solid rgb(0 94 71 / 16%);
+		display: grid;
+		gap: 0.9rem;
+	}
+
+	.anx-field {
+		display: grid;
+		gap: 0.35rem;
+		font-size: 0.9rem;
+		font-weight: 500;
+	}
+
+	.anx-field input {
+		font: inherit;
+		padding: 0.7rem 0.85rem;
+		border: 1px solid rgb(0 94 71 / 25%);
+		border-radius: 0.6rem;
+		background: var(--color-white);
+	}
+
+	.anx-field input:focus-visible {
+		outline: 2px solid var(--brand);
+		outline-offset: 1px;
+	}
+
+	.anx-consent {
+		display: flex;
+		gap: 0.6rem;
+		align-items: flex-start;
+		font-size: 0.85rem;
+		line-height: 1.5;
+		color: var(--ink-soft);
+	}
+
+	.anx-consent input {
+		margin-top: 0.25rem;
+	}
+
+	.anx-submit {
+		justify-self: stretch;
+	}
+
+	.anx-privacy {
+		margin: 0;
+		font-size: 0.8rem;
+		color: var(--ink-soft);
+	}
+
+	.anx-privacy a {
+		text-decoration: underline;
+		text-underline-offset: 3px;
+	}
+
+	/* ---------- FAQ ---------- */
+	.anx-faq-list {
+		display: grid;
+		gap: 0.7rem;
+		max-width: 72ch;
+	}
+
+	.anx-faq-item {
+		background: var(--color-white);
+		border: 1px solid rgb(0 94 71 / 16%);
+		border-radius: 0.85rem;
+		overflow: hidden;
+		transition: box-shadow 0.2s ease;
+	}
+
+	.anx-faq-item[open] {
+		box-shadow: 0 10px 24px rgb(29 35 39 / 8%);
+	}
+
+	.anx-faq-item summary {
+		list-style: none;
+		cursor: pointer;
+		padding: 1.05rem 1.3rem;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		gap: 1rem;
+		font-family: var(--font-serif);
+		font-size: 1.1rem;
+		font-weight: 500;
+		color: var(--ink);
+	}
+
+	.anx-faq-item summary::-webkit-details-marker {
+		display: none;
+	}
+
+	.anx-faq-icon {
+		width: 1.9rem;
+		height: 1.9rem;
+		flex-shrink: 0;
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		border-radius: 999px;
+		background: var(--brand-tint);
+		color: var(--brand);
+		font-size: 1.1rem;
+		font-weight: 600;
+		transition: transform 0.2s ease;
+	}
+
+	.anx-faq-item[open] .anx-faq-icon {
+		transform: rotate(45deg);
+	}
+
+	.anx-faq-body {
+		padding: 0 1.3rem 1.2rem;
+	}
+
+	.anx-faq-body p {
+		margin: 0;
+		color: var(--ink-soft);
+		line-height: 1.7;
+	}
+
+	/* ---------- CLOSING ---------- */
+	.anx-close-inner {
+		max-width: 60ch;
+		margin-inline: auto;
+		text-align: center;
+	}
+
+	.anx-close-line {
+		margin: 0 0 0.6rem;
+		font-family: var(--font-serif);
+		font-size: clamp(1.2rem, 2.4vw, 1.6rem);
+		line-height: 1.35;
+		color: var(--brand-deep);
+	}
+
+	.anx-close-signoff {
+		margin: 1.3rem 0 0.6rem;
+		font-size: 1.05rem;
+		color: var(--ink-soft);
+	}
+
+	.anx-signature {
+		margin: 0 0 1.4rem;
+		font-family: var(--font-script);
+		font-size: 2rem;
+		color: var(--brand);
+	}
+
+	/* ---------- RESPONSIVE ---------- */
+	@media (max-width: 1024px) {
+		.anx-different-grid,
+		.anx-offer-grid,
+		.anx-meet-grid,
+		.anx-claim-grid {
+			grid-template-columns: 1fr;
+		}
+
+		.anx-different-figure,
+		.anx-meet-figure,
+		.anx-claim-figure {
+			max-width: 420px;
+			margin-inline: auto;
+		}
+
+		.anx-mockup {
+			transform: none;
+		}
+	}
+
+	@media (max-width: 720px) {
+		.anx-test-grid,
+		.anx-steps {
+			grid-template-columns: 1fr;
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.anx-cta,
+		.anx-faq-icon {
+			transition: none;
+		}
+	}
+</style>

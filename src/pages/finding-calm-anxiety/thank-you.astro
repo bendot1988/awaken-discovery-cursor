@@ -1,0 +1,487 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import SiteHeader from "../../components/SiteHeader.astro";
+import SiteFooter from "../../components/SiteFooter.astro";
+import { locations, navItems } from "../../data/site";
+---
+
+<Layout
+	title="Your Guide is on its Way · Awaken Discovery"
+	description="Your free Finding Calm guide is on its way — plus a special offer on the Anxiety Reflection Journal."
+>
+	<SiteHeader navItems={navItems} />
+	<main class="ty-page">
+		<!-- ============== CONFIRMATION ============== -->
+		<section class="ty-hero">
+			<div class="container ty-hero-inner">
+				<p class="ty-eyebrow">Thank you</p>
+				<h1>Your Guide is on its Way…</h1>
+				<p class="ty-lede">
+					Check your email in the next few minutes for
+					<em>Finding Calm — A Simple Guide to Grounding Yourself During Anxiety.</em>
+				</p>
+				<p class="ty-aside">
+					(If you don't see it, check your spam folder and mark it as "not
+					spam" so you don't miss future messages from me.)
+				</p>
+			</div>
+		</section>
+
+		<!-- ============== HONEST PIVOT ============== -->
+		<section class="ty-band">
+			<div class="container ty-prose">
+				<h2>But Before You Go…</h2>
+				<p>Can I be honest with you for a second?</p>
+				<p>
+					That guide you just downloaded? It's going to help. It really is.
+				</p>
+				<p>
+					But here's what I've noticed after working with hundreds of people
+					struggling with anxiety:
+				</p>
+				<p class="ty-emphasis">
+					The ones who get the <em>best</em> results — the ones who actually
+					feel different six months from now instead of still stuck in the
+					same cycle — they do one thing differently.
+				</p>
+				<blockquote class="ty-quote">
+					They track what's happening. Not obsessively. Not perfectly. Just…
+					consistently.
+				</blockquote>
+			</div>
+		</section>
+
+		<!-- ============== PATTERN ============== -->
+		<section class="ty-band ty-band-soft">
+			<div class="container ty-prose">
+				<h2>Because Here's the Thing About Anxiety</h2>
+				<p>
+					When you're in the middle of an anxiety spiral, it feels like it
+					came out of nowhere, right?
+				</p>
+				<p>
+					Like you were fine one minute and then <em>bam</em> — your chest is
+					tight, your thoughts are racing, and you can't remember what
+					"calm" even feels like.
+				</p>
+				<p class="ty-emphasis">But it didn't come out of nowhere.</p>
+				<p>There were signs. Patterns. Triggers.</p>
+				<p>You just didn't notice them in the moment.</p>
+				<p class="ty-pull">You can't work with what you can't see.</p>
+			</div>
+		</section>
+
+		<!-- ============== JOURNAL OFFER ============== -->
+		<section class="ty-offer">
+			<div class="container ty-offer-grid">
+				<figure class="ty-offer-mockup">
+					<img
+						src="/assets/images/teachers-guide-journal.svg"
+						alt="Mockup of the Anxiety Reflection Journal"
+						loading="lazy"
+						decoding="async"
+					/>
+					<figcaption class="ty-image-todo">
+						{`{{IMAGE PROMPT: 3D mockup or top-down photograph of the Anxiety Reflection Journal — soft sage cover with calligraphic title, lying open to show interior reflection prompts. A pen, a warm mug, soft natural light. Calm and personal.}}`}
+					</figcaption>
+				</figure>
+				<div class="ty-offer-copy">
+					<p class="ty-eyebrow">For people who download the guide</p>
+					<h2>The Anxiety Reflection Journal</h2>
+					<p>
+						Think of it as your early warning system. A gentle space to
+						notice what's present for you, track the patterns, and build a
+						personal toolkit that actually works for <em>your</em> specific
+						anxiety — not some generic one-size-fits-all approach.
+					</p>
+					<p>Inside the journal, you'll get:</p>
+					<ul class="ty-inside">
+						<li>
+							<strong>Guided reflection prompts</strong> that help you spot
+							anxiety patterns <em>before</em> they spiral out of control.
+						</li>
+						<li>
+							<strong>Space to track what's happening</strong> in your body,
+							thoughts and emotions over time — so you can see what actually
+							helps and what doesn't.
+						</li>
+						<li>
+							<strong>Tools to build your own personalised "calm toolkit"</strong>
+							based on what works specifically for you.
+						</li>
+						<li>
+							<strong>Weekly check-ins</strong> that help you notice progress
+							you might otherwise miss.
+						</li>
+						<li>
+							<strong>A structured way to explore your anxiety more deeply</strong>
+							— between therapy sessions, or instead of therapy if you're not
+							ready for that yet.
+						</li>
+					</ul>
+				</div>
+			</div>
+		</section>
+
+		<!-- ============== HONESTY ============== -->
+		<section class="ty-band">
+			<div class="container ty-prose">
+				<h2>This Isn't Just Another Journal</h2>
+				<p>
+					This isn't blank pages and vague prompts about gratitude. It's a
+					complete system for understanding <em>your</em> anxiety — in
+					<em>your</em> body — so you can finally feel more emotionally
+					balanced in everyday life.
+				</p>
+			</div>
+		</section>
+
+		<!-- ============== DISCOUNT CTA ============== -->
+		<section class="ty-discount">
+			<div class="container ty-discount-inner">
+				<p class="ty-eyebrow">And here's the best part</p>
+				<h2>A New-Reader Discount</h2>
+				<p>
+					Because you just downloaded the free guide, I want to make this a
+					no-brainer for you.
+				</p>
+
+				<div class="ty-price-card">
+					<p class="ty-price-row">
+						<span class="ty-price-was">
+							Normally <s>{`{{PRICE}}`}</s>
+						</span>
+						<span class="ty-price-now">{`{{DISCOUNTED_PRICE}}`}</span>
+					</p>
+					<p class="ty-price-note">
+						{`{{X}}`}% off — but only if you claim it before {`{{DEADLINE}}`}.
+					</p>
+					<a class="cta cta-solid ty-cta" href="#claim-journal">
+						Yes — I Want the Anxiety Reflection Journal
+					</a>
+					<p class="ty-todo">
+						{`{{TODO: wire CTA to checkout when journal is ready; replace {{PRICE}}, {{DISCOUNTED_PRICE}}, {{X}}, {{DEADLINE}} placeholders}}`}
+					</p>
+				</div>
+
+				<div class="ty-prose ty-imagine">
+					<p>Think about it:</p>
+					<ul class="ty-questions">
+						<li>What would it be worth to actually <em>understand</em> your anxiety instead of feeling ambushed by it?</li>
+						<li>To have a system that helps you feel steadier… more grounded… more like yourself again?</li>
+						<li>To stop white-knuckling your way through every day hoping you don't fall apart?</li>
+					</ul>
+					<p>The journal gives you that.</p>
+					<p>And there's no rush — you can take this work at your own pace.</p>
+					<a class="cta cta-outline" href="#claim-journal">
+						Claim Your Journal — {`{{X}}`}% Off
+					</a>
+				</div>
+			</div>
+		</section>
+
+		<!-- ============== SOFT CLOSE ============== -->
+		<section class="ty-band ty-band-soft">
+			<div class="container ty-prose">
+				<p>Or, if you're not ready yet, that's okay too.</p>
+				<p>You've got the free guide. Start there.</p>
+				<p>I'll be in your inbox soon with more support.</p>
+				<p class="ty-emphasis">Take care of yourself.</p>
+				<p class="ty-signoff">— Ally</p>
+
+				<aside class="ty-ps">
+					<p>
+						<strong>P.S.</strong> This discount expires {`{{DEADLINE}}`}.
+						After that, the journal goes back to full price. If you think you
+						might want it, grab it now while it's {`{{X}}`}% off.
+					</p>
+					<a class="cta cta-solid" href="#claim-journal">
+						Get the Journal — {`{{X}}`}% Off Today Only
+					</a>
+				</aside>
+			</div>
+		</section>
+	</main>
+	<SiteFooter
+		navItems={navItems}
+		locations={locations}
+		tagline="Gentle, body-aware support for anxiety, overthinking and emotional overwhelm."
+	/>
+</Layout>
+
+<style>
+	.ty-page {
+		--ink: var(--color-dark-gray);
+		--brand: var(--color-dark-slate-gray);
+		--brand-deep: #004836;
+		--cream: #fbf9f5;
+		--cream-deep: #f3eee5;
+		font-size: 1.05rem;
+		line-height: 1.75;
+		color: var(--ink);
+		background: var(--cream);
+	}
+
+	.ty-page :global(.cta) {
+		font-size: 1rem;
+		padding: 0.9rem 1.4rem;
+	}
+
+	.ty-hero {
+		padding-block: clamp(3rem, 8vh, 6rem);
+		background: linear-gradient(180deg, var(--cream) 0%, var(--cream-deep) 100%);
+	}
+
+	.ty-hero-inner {
+		max-width: 60ch;
+	}
+
+	.ty-eyebrow {
+		margin: 0;
+		text-transform: uppercase;
+		letter-spacing: 0.1em;
+		font-size: 0.78rem;
+		font-weight: 600;
+		color: var(--brand);
+	}
+
+	.ty-hero h1 {
+		margin: 0.55rem 0 0.9rem;
+		font-family: var(--font-serif);
+		font-size: clamp(2rem, 4.4vw, 3.1rem);
+		font-weight: 500;
+		line-height: 1.16;
+	}
+
+	.ty-lede {
+		margin: 0 0 0.7rem;
+		font-size: 1.1rem;
+	}
+
+	.ty-aside {
+		margin: 0;
+		font-style: italic;
+		opacity: 0.75;
+		font-size: 0.95rem;
+	}
+
+	.ty-band {
+		padding-block: clamp(2.4rem, 6vh, 4rem);
+	}
+
+	.ty-band-soft {
+		background: var(--cream-deep);
+	}
+
+	.ty-prose {
+		max-width: 64ch;
+	}
+
+	.ty-prose h2 {
+		margin: 0 0 1rem;
+		font-family: var(--font-serif);
+		font-size: clamp(1.5rem, 2.8vw, 2rem);
+		font-weight: 500;
+		line-height: 1.22;
+	}
+
+	.ty-prose p {
+		margin: 0 0 1rem;
+	}
+
+	.ty-emphasis {
+		font-weight: 500;
+		font-size: 1.08rem;
+	}
+
+	.ty-pull {
+		font-family: var(--font-serif);
+		font-style: italic;
+		font-size: 1.35rem;
+		color: var(--brand);
+		margin-top: 0.5rem;
+	}
+
+	.ty-quote {
+		margin: 1.2rem 0;
+		padding: 1.1rem 1.3rem;
+		border-left: 3px solid var(--brand);
+		background: rgb(0 94 71 / 6%);
+		font-family: var(--font-serif);
+		font-style: italic;
+		font-size: 1.15rem;
+		color: var(--brand-deep);
+		border-radius: 0 0.6rem 0.6rem 0;
+	}
+
+	.ty-questions {
+		margin: 0 0 1.1rem;
+		padding-left: 1.2rem;
+		display: grid;
+		gap: 0.5rem;
+	}
+
+	/* OFFER */
+	.ty-offer {
+		padding-block: clamp(3rem, 7vh, 5rem);
+		background: linear-gradient(160deg, #eaf0ea 0%, var(--cream-deep) 100%);
+	}
+
+	.ty-offer-grid {
+		display: grid;
+		grid-template-columns: 0.85fr 1.15fr;
+		gap: clamp(2rem, 4vw, 4rem);
+		align-items: center;
+	}
+
+	.ty-offer-mockup img {
+		width: 100%;
+		max-width: 360px;
+		margin-inline: auto;
+		filter: drop-shadow(0 18px 36px rgb(0 94 71 / 18%));
+	}
+
+	.ty-offer-copy h2 {
+		margin: 0.5rem 0 1rem;
+		font-family: var(--font-serif);
+		font-size: clamp(1.7rem, 3.3vw, 2.3rem);
+		font-weight: 500;
+	}
+
+	.ty-inside {
+		list-style: none;
+		padding: 0;
+		margin: 0;
+		display: grid;
+		gap: 0.85rem;
+	}
+
+	.ty-inside li {
+		position: relative;
+		padding-left: 2rem;
+		line-height: 1.65;
+	}
+
+	.ty-inside li::before {
+		content: "✓";
+		position: absolute;
+		left: 0;
+		top: 0;
+		width: 1.4rem;
+		height: 1.4rem;
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		border-radius: 999px;
+		background: var(--brand);
+		color: var(--color-white);
+		font-size: 0.8rem;
+		font-weight: 700;
+	}
+
+	/* DISCOUNT */
+	.ty-discount {
+		padding-block: clamp(3rem, 7vh, 5rem);
+		background: var(--cream);
+	}
+
+	.ty-discount-inner {
+		max-width: 64ch;
+	}
+
+	.ty-discount h2 {
+		margin: 0.5rem 0 0.8rem;
+		font-family: var(--font-serif);
+		font-size: clamp(1.8rem, 3.5vw, 2.4rem);
+		font-weight: 500;
+	}
+
+	.ty-price-card {
+		margin: 1.4rem 0 2rem;
+		padding: 1.6rem 1.6rem;
+		background: linear-gradient(160deg, #f6f8f6 0%, #eaf0ea 100%);
+		border: 1px solid rgb(0 94 71 / 22%);
+		border-radius: 1rem;
+		display: grid;
+		gap: 0.9rem;
+	}
+
+	.ty-price-row {
+		margin: 0;
+		display: flex;
+		flex-wrap: wrap;
+		align-items: baseline;
+		gap: 0.7rem 1rem;
+	}
+
+	.ty-price-was {
+		font-size: 0.95rem;
+		opacity: 0.75;
+	}
+
+	.ty-price-now {
+		font-family: var(--font-serif);
+		font-size: 2.2rem;
+		color: var(--brand);
+		font-weight: 500;
+	}
+
+	.ty-price-note {
+		margin: 0;
+		font-size: 0.95rem;
+		font-style: italic;
+		color: var(--brand-deep);
+	}
+
+	.ty-cta {
+		justify-self: start;
+	}
+
+	.ty-todo {
+		margin: 0;
+		font-size: 0.72rem;
+		font-style: italic;
+		opacity: 0.55;
+	}
+
+	.ty-imagine p {
+		margin: 0 0 1rem;
+	}
+
+	.ty-imagine .cta {
+		margin-top: 0.5rem;
+	}
+
+	.ty-signoff {
+		font-family: var(--font-script);
+		font-size: 2rem;
+		color: var(--brand);
+		margin: 1rem 0;
+	}
+
+	.ty-ps {
+		margin-top: 1.5rem;
+		padding: 1.4rem 1.5rem;
+		background: var(--color-white);
+		border-left: 3px solid var(--brand);
+		border-radius: 0 0.85rem 0.85rem 0;
+	}
+
+	.ty-ps p {
+		margin: 0 0 0.9rem;
+	}
+
+	.ty-image-todo {
+		margin-top: 0.45rem;
+		font-size: 0.72rem;
+		font-style: italic;
+		opacity: 0.55;
+		line-height: 1.5;
+	}
+
+	@media (max-width: 1024px) {
+		.ty-offer-grid {
+			grid-template-columns: 1fr;
+		}
+	}
+</style>
