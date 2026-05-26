@@ -2,6 +2,8 @@ export type NavItem = {
 	label: string;
 	href: string;
 	children?: NavItem[];
+	/** When true, render a thin divider line in the dropdown after this item. */
+	dividerAfter?: boolean;
 };
 
 export type SupportCard = {
@@ -120,12 +122,12 @@ export const navItems: NavItem[] = [
 		href: "/therapy",
 		children: [
 			{ label: "Therapy Overview", href: "/therapy" },
+			{ label: "For Teachers", href: "/teachers" },
+			{ label: "For Anxiety", href: "/anxiety", dividerAfter: true },
 			{ label: "Individual Pricing", href: "/pricing/individual" },
 			{ label: "Bulk Pricing", href: "/pricing" },
 		],
 	},
-	{ label: "Teachers", href: "/teachers" },
-	{ label: "Anxiety", href: "/anxiety" },
 	{ label: "Free Resources", href: "/free-resources" },
 	{ label: "Contact", href: "/contact" },
 ];

@@ -63,16 +63,27 @@ const isBranchActive = (item: NavItem) => {
 								</a>
 								<ul class="nav-submenu" role="menu">
 									{item.children.map((child) => (
-										<li role="none">
-											<a
-												href={child.href}
-												role="menuitem"
-												class="nav-submenu-link"
-												aria-current={isActive(child.href) ? "page" : undefined}
-											>
-												{child.label}
-											</a>
-										</li>
+										<>
+											<li role="none">
+												<a
+													href={child.href}
+													role="menuitem"
+													class="nav-submenu-link"
+													aria-current={
+														isActive(child.href) ? "page" : undefined
+													}
+												>
+													{child.label}
+												</a>
+											</li>
+											{child.dividerAfter && (
+												<li
+													class="nav-submenu-divider"
+													role="separator"
+													aria-hidden="true"
+												/>
+											)}
+										</>
 									))}
 								</ul>
 							</li>
@@ -117,14 +128,25 @@ const isBranchActive = (item: NavItem) => {
 								{item.children && item.children.length > 0 && (
 									<ul class="mobile-submenu">
 										{item.children.map((child) => (
-											<li>
-												<a
-													href={child.href}
-													aria-current={isActive(child.href) ? "page" : undefined}
-												>
-													{child.label}
-												</a>
-											</li>
+											<>
+												<li>
+													<a
+														href={child.href}
+														aria-current={
+															isActive(child.href) ? "page" : undefined
+														}
+													>
+														{child.label}
+													</a>
+												</li>
+												{child.dividerAfter && (
+													<li
+														class="mobile-submenu-divider"
+														role="separator"
+														aria-hidden="true"
+													/>
+												)}
+											</>
 										))}
 									</ul>
 								)}
@@ -224,7 +246,7 @@ const isBranchActive = (item: NavItem) => {
 		top: 100%;
 		left: 50%;
 		transform: translateX(-50%) translateY(0.4rem);
-		min-width: 220px;
+		min-width: 240px;
 		margin: 0;
 		padding: 0.4rem;
 		list-style: none;
@@ -237,6 +259,12 @@ const isBranchActive = (item: NavItem) => {
 		pointer-events: none;
 		transition: opacity 0.18s ease, transform 0.18s ease, visibility 0.18s ease;
 		z-index: 21;
+	}
+
+	.nav-submenu-divider {
+		height: 1px;
+		margin: 0.35rem 0.55rem;
+		background: rgb(0 94 71 / 14%);
 	}
 
 	.has-submenu:hover .nav-submenu,
@@ -346,6 +374,13 @@ const isBranchActive = (item: NavItem) => {
 	.mobile-submenu a {
 		font-size: 0.9rem;
 		color: rgb(29 35 39 / 78%);
+	}
+
+	.mobile-submenu-divider {
+		height: 1px;
+		margin: 0.5rem 0 !important;
+		background: rgb(0 94 71 / 18%);
+		list-style: none;
 	}
 
 	.mobile-menu a[aria-current="page"] {
