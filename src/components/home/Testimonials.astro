@@ -1,7 +1,7 @@
 <section class="testimonials section section-soft" id="testimonials">
 	<div class="container">
 		<header class="t-header">
-			<p class="section-kicker">Testimonials</p>
+			<p class="section-kicker">What others say</p>
 			<h2>Therapy Can Help You Feel Less Alone in What You Are Carrying</h2>
 			<p class="t-lede">
 				Many people come to therapy feeling emotionally exhausted, overwhelmed or unsure
@@ -11,18 +11,49 @@
 			</p>
 		</header>
 
-		<div class="t-grid" aria-label="Testimonials placeholder">
-			<article class="t-placeholder">
-				<p class="t-quote">"{`{{TODO: testimonial 1 — client to supply}}`}"</p>
-				<p class="t-attribution">— Client name, role</p>
+		<div class="t-grid">
+			<article class="t-card">
+				<p class="t-quote">
+					When I first met Allyson, I felt totally at ease with her — she
+					made me feel so comfortable, and straight away I was able to
+					share my situation. She helped me address things in my past and
+					present which I had never thought about before, and gave me
+					positive ways to deal with it, including my anxiety and wine
+					intake. I have now learnt how to listen to myself and follow her
+					professional advice, which has put me back in to such a happy
+					place thanks to Allyson. I will continue to see her on a monthly
+					basis as I feel she is good for my wellbeing. Thank you,
+					Allyson — may it continue.
+				</p>
+				<p class="t-attribution">— Counselling client</p>
 			</article>
-			<article class="t-placeholder">
-				<p class="t-quote">"{`{{TODO: testimonial 2 — client to supply}}`}"</p>
-				<p class="t-attribution">— Client name, role</p>
+
+			<article class="t-card">
+				<p class="t-quote">
+					I couldn't recommend Allyson any more highly. She has a kind and
+					caring nature that means it is easy to talk with her. What makes
+					her great is her ability to get me to really clarify my thoughts
+					so that I can express how I am thinking and feeling. Thank you,
+					Allyson, for all the help you have given me!
+				</p>
+				<p class="t-attribution">— Counselling client</p>
 			</article>
-			<article class="t-placeholder">
-				<p class="t-quote">"{`{{TODO: testimonial 3 — client to supply}}`}"</p>
-				<p class="t-attribution">— Client name, role</p>
+
+			<article class="t-card">
+				<p class="t-quote">
+					Very easy to speak to about anything, always put me at ease and
+					helped put things into perspective. Felt a lot lighter after
+					speaking with her and more able to face life's challenges.
+				</p>
+				<p class="t-attribution">— Counselling client</p>
+			</article>
+
+			<article class="t-card">
+				<p class="t-quote">
+					The counselling sessions have helped me untangle some of the
+					emotions I have regarding my family.
+				</p>
+				<p class="t-attribution">— Counselling client</p>
 			</article>
 		</div>
 	</div>
@@ -35,7 +66,7 @@
 
 	.t-header {
 		max-width: 65ch;
-		margin-bottom: 2rem;
+		margin-bottom: 2.5rem;
 	}
 
 	.section-kicker {
@@ -61,22 +92,23 @@
 		line-height: 1.85;
 	}
 
+	/* ---------- 2x2 quadrant of white cards ---------- */
 	.t-grid {
 		display: grid;
-		grid-template-columns: repeat(3, minmax(0, 1fr));
-		gap: 1rem;
+		grid-template-columns: 1fr 1fr;
+		gap: 1.5rem;
 	}
 
-	.t-placeholder {
+	.t-card {
 		background: var(--color-white);
-		border: 1px dashed rgb(0 94 71 / 35%);
-		border-radius: 0.85rem;
-		padding: 1.4rem 1.3rem;
-		min-height: 180px;
+		border-radius: 1rem;
+		padding: clamp(1.5rem, 2.4vw, 2rem);
 		display: flex;
 		flex-direction: column;
 		justify-content: space-between;
-		gap: 0.8rem;
+		gap: 1.2rem;
+		box-shadow: 0 6px 18px rgb(29 35 39 / 6%);
+		border: 1px solid rgb(0 94 71 / 8%);
 	}
 
 	.t-quote {
@@ -84,18 +116,21 @@
 		font-family: var(--font-serif);
 		font-style: italic;
 		font-size: 1.05rem;
-		line-height: 1.55;
+		line-height: 1.6;
 		color: var(--color-dark-gray);
 	}
 
 	.t-attribution {
 		margin: 0;
-		font-size: 0.82rem;
+		font-size: 0.78rem;
+		font-weight: 600;
+		letter-spacing: 0.1em;
+		text-transform: uppercase;
 		color: var(--color-dark-slate-gray);
 		opacity: 0.85;
 	}
 
-	@media (max-width: 900px) {
+	@media (max-width: 720px) {
 		.t-grid {
 			grid-template-columns: 1fr;
 		}

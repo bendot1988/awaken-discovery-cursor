@@ -1,4 +1,6 @@
 ---
+import { freeResources, freeResourcesPath } from "../../data/site";
+
 interface Props {
 	videoSrc?: string;
 	posterSrc?: string;
@@ -30,8 +32,51 @@ const { videoSrc, posterSrc = "/assets/images/hero-ally.png" } = Astro.props;
 			<div class="cta-row">
 				<a class="cta cta-solid" href="/contact">Begin Therapy — Book a Session</a>
 				<a class="cta cta-outline" href="/contact">Book a Free Consultation</a>
-				<a class="cta cta-ghost" href="/teachers">Support for Teachers</a>
-				<a class="cta cta-ghost" href="/anxiety">Anxiety Support</a>
+				<div class="cta-dropdown">
+					<a
+						class="cta cta-ghost cta-dropdown-trigger"
+						href={freeResourcesPath}
+						aria-haspopup="menu"
+					>
+						Free Resources
+						<svg
+							class="cta-dropdown-caret"
+							viewBox="0 0 12 12"
+							width="12"
+							height="12"
+							aria-hidden="true"
+							focusable="false"
+						>
+							<path
+								d="M2 4l4 4 4-4"
+								fill="none"
+								stroke="currentColor"
+								stroke-width="1.6"
+								stroke-linecap="round"
+								stroke-linejoin="round"
+							></path>
+						</svg>
+					</a>
+					<div class="cta-dropdown-menu" role="menu">
+						{freeResources.map((resource) => (
+							<a
+								class="cta-dropdown-item"
+								href={resource.href}
+								role="menuitem"
+							>
+								<span class="cta-dropdown-eyebrow">{resource.audience}</span>
+								<span class="cta-dropdown-title">{resource.title}</span>
+							</a>
+						))}
+						<a
+							class="cta-dropdown-item cta-dropdown-item-all"
+							href={freeResourcesPath}
+							role="menuitem"
+						>
+							View all free resources →
+						</a>
+					</div>
+				</div>
 			</div>
 
 			<ul class="trust-strip" aria-label="Credentials">
@@ -148,6 +193,105 @@ const { videoSrc, posterSrc = "/assets/images/hero-ally.png" } = Astro.props;
 		border: 1px solid transparent;
 		text-decoration: underline;
 		text-underline-offset: 4px;
+	}
+
+	/* ---------- Free Resources hover dropdown ---------- */
+	.cta-dropdown {
+		position: relative;
+	}
+
+	.cta-dropdown-trigger {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.4rem;
+	}
+
+	.cta-dropdown-caret {
+		transition: transform 0.2s ease;
+		flex-shrink: 0;
+	}
+
+	.cta-dropdown:hover .cta-dropdown-caret,
+	.cta-dropdown:focus-within .cta-dropdown-caret {
+		transform: rotate(180deg);
+	}
+
+	.cta-dropdown-menu {
+		position: absolute;
+		top: calc(100% + 0.5rem);
+		left: 0;
+		min-width: 280px;
+		padding: 0.5rem;
+		background: var(--color-white);
+		border-radius: 0.85rem;
+		box-shadow: 0 14px 40px rgb(29 35 39 / 16%), 0 1px 0 rgb(0 0 0 / 4%);
+		opacity: 0;
+		visibility: hidden;
+		transform: translateY(6px);
+		transition:
+			opacity 0.18s ease,
+			transform 0.18s ease,
+			visibility 0.18s ease;
+		z-index: 20;
+	}
+
+	.cta-dropdown:hover .cta-dropdown-menu,
+	.cta-dropdown:focus-within .cta-dropdown-menu {
+		opacity: 1;
+		visibility: visible;
+		transform: translateY(0);
+	}
+
+	/* Invisible bridge so the menu doesn't snap shut between trigger and menu */
+	.cta-dropdown::after {
+		content: "";
+		position: absolute;
+		left: 0;
+		right: 0;
+		top: 100%;
+		height: 0.5rem;
+	}
+
+	.cta-dropdown-item {
+		display: flex;
+		flex-direction: column;
+		gap: 0.1rem;
+		padding: 0.65rem 0.85rem;
+		border-radius: 0.6rem;
+		color: var(--color-dark-gray);
+		text-decoration: none;
+		transition: background-color 0.15s ease;
+	}
+
+	.cta-dropdown-item:hover,
+	.cta-dropdown-item:focus-visible {
+		background: #f6f8f6;
+		outline: none;
+	}
+
+	.cta-dropdown-eyebrow {
+		font-size: 0.72rem;
+		font-weight: 500;
+		letter-spacing: 0.08em;
+		text-transform: uppercase;
+		color: var(--brand-green);
+	}
+
+	.cta-dropdown-title {
+		font-family: var(--font-serif);
+		font-size: 1rem;
+		font-weight: 500;
+		line-height: 1.3;
+	}
+
+	.cta-dropdown-item-all {
+		margin-top: 0.25rem;
+		padding-top: 0.75rem;
+		border-top: 1px solid #e5ebe6;
+		border-radius: 0.4rem 0.4rem 0.6rem 0.6rem;
+		font-size: 0.85rem;
+		font-weight: 500;
+		color: var(--brand-green);
 	}
 
 	.trust-strip {
