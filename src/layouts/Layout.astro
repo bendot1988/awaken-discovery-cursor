@@ -1,6 +1,7 @@
 ---
 import "../styles/global.css";
 import { siteMeta } from "../data/site";
+import CookieBanner from "../components/CookieBanner.astro";
 
 interface Props {
 	title?: string;
@@ -44,5 +45,6 @@ const canonical = `${siteMeta.canonicalOrigin}${canonicalPath}`;
 	</head>
 	<body>
 		<slot />
+		<CookieBanner />
 	</body>
 </html>

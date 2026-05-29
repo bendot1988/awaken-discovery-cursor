@@ -1,0 +1,731 @@
+---
+import Layout from "../layouts/Layout.astro";
+import SiteHeader from "../components/SiteHeader.astro";
+import SiteFooter from "../components/SiteFooter.astro";
+import { locations, navItems } from "../data/site";
+
+const lastUpdated = "29 May 2026";
+
+const toc = [
+	{ id: "scope", label: "Introduction & Scope" },
+	{ id: "counselling-disclaimer", label: "General Information & Counselling Disclaimer" },
+	{ id: "safeguarding", label: "Safeguarding & Crisis Limitation" },
+	{ id: "products", label: "Books, Products, Courses & Affiliate Links" },
+	{ id: "social-media", label: "Social Media & Online Groups" },
+	{ id: "intellectual-property", label: "Intellectual Property" },
+	{ id: "user-content", label: "User Comments & Contributions" },
+	{ id: "cookies", label: "Cookies & Tracking" },
+	{ id: "external-links", label: "External Links & Third-Party Content" },
+	{ id: "liability", label: "Limitation of Liability & Legal Compliance" },
+	{ id: "governing-law", label: "Governing Law & Jurisdiction" },
+	{ id: "amendments", label: "Reservation of Rights & Amendments" },
+];
+---
+
+<Layout
+	title="Terms & Conditions · Awaken Discovery"
+	description="Terms and Conditions for Awaken Discovery — covering use of the website, content, products, online groups, intellectual property and the website disclaimer."
+>
+	<SiteHeader navItems={navItems} />
+	<main class="legal-page">
+		<!-- ============== HERO ============== -->
+		<section class="legal-hero section">
+			<div class="container legal-hero-inner">
+				<p class="section-kicker">Legal</p>
+				<h1>Terms &amp; Conditions</h1>
+				<p class="legal-subtitle">Awaken Discovery Counselling &amp; Psychotherapy</p>
+				<p class="legal-meta">
+					<span>Last updated</span>
+					<time datetime="2026-05-29">{lastUpdated}</time>
+				</p>
+			</div>
+		</section>
+
+		<!-- ============== BODY ============== -->
+		<section class="legal-body section">
+			<div class="container legal-body-inner">
+				<!-- TOC -->
+				<aside class="legal-toc" aria-label="Terms and conditions sections">
+					<p class="legal-toc-title">Contents</p>
+					<ol class="legal-toc-list">
+						{
+							toc.map((item, i) => (
+								<li>
+									<a href={`#${item.id}`}>
+										<span class="legal-toc-num">
+											{String(i).padStart(2, "0")}
+										</span>
+										<span>{item.label}</span>
+									</a>
+								</li>
+							))
+						}
+					</ol>
+				</aside>
+
+				<!-- Article -->
+				<article class="legal-article">
+					<blockquote class="legal-epigraph">
+						<p>
+							"This website is also subject to our Website Disclaimer, which
+							forms part of these Terms and Conditions."
+						</p>
+					</blockquote>
+
+					<section aria-labelledby="scope" id="scope">
+						<h2><span class="legal-section-num">00</span>Introduction &amp; Scope</h2>
+						<p>
+							These Terms and Conditions and Disclaimer apply to all content,
+							services, products and online platforms associated with Awaken
+							Discovery, including but not limited to:
+						</p>
+						<ul>
+							<li>The website: <strong>awakendiscovery.co.uk</strong></li>
+							<li>Blogs, articles, reflections and other written or educational content</li>
+							<li>Books (digital or physical), courses, downloads and other products</li>
+							<li>Affiliate links and recommendations</li>
+							<li>Social media channels, including Facebook, Instagram and other platforms</li>
+							<li>
+								Private or public online groups, including the Awaken Discovery
+								Holistic Health &amp; Wellbeing Facebook Group
+							</li>
+						</ul>
+						<div class="legal-callout">
+							<p>
+								By accessing, using, purchasing from or participating in any of
+								the above, you confirm that you have read, understood and agree
+								to these Terms and Conditions. <strong>If you do not agree,
+								you must not use the website, products, services or online spaces.</strong>
+							</p>
+						</div>
+					</section>
+
+					<section aria-labelledby="counselling-disclaimer" id="counselling-disclaimer">
+						<h2>
+							<span class="legal-section-num">01</span>
+							General Information &amp; Counselling Disclaimer
+						</h2>
+						<p>
+							All content provided by Awaken Discovery is offered for
+							<strong>general informational, educational and reflective purposes only</strong>.
+							It is not intended to constitute, and must not be relied upon as:
+						</p>
+						<ul>
+							<li>Counselling or psychotherapy</li>
+							<li>Psychological, psychiatric or medical advice</li>
+							<li>Diagnosis, treatment or crisis intervention</li>
+						</ul>
+						<p>
+							Accessing or engaging with any content does not create a
+							counselling or therapeutic relationship. A therapeutic
+							relationship is formed only following:
+						</p>
+						<ul>
+							<li>A formal assessment and intake details</li>
+							<li>Mutual agreement</li>
+							<li>A signed counselling contract</li>
+						</ul>
+						<p>
+							Counselling and psychotherapy services are provided in accordance
+							with the <strong>BACP and NCPS Ethical Frameworks</strong>,
+							including confidentiality, professional boundaries, safeguarding
+							responsibilities, competence and informed consent.
+						</p>
+					</section>
+
+					<section aria-labelledby="safeguarding" id="safeguarding">
+						<h2>
+							<span class="legal-section-num">02</span>
+							Safeguarding &amp; Crisis Limitation
+						</h2>
+						<div class="legal-callout legal-callout--warning">
+							<p class="legal-callout-title">Important — crisis support</p>
+							<p>
+								Awaken Discovery's website, content, social media platforms and
+								online groups are <strong>not suitable for crisis support</strong>.
+							</p>
+							<p>
+								If you are experiencing significant distress, risk of harm to
+								yourself or others, or a mental health emergency, you must seek
+								appropriate professional or emergency support through local services.
+							</p>
+							<p>
+								Awaken Discovery is not responsible for responding to crisis
+								disclosures made via website content, comments, emails, social
+								media or online groups.
+							</p>
+						</div>
+					</section>
+
+					<section aria-labelledby="products" id="products">
+						<h2>
+							<span class="legal-section-num">03</span>
+							Books, Products, Courses &amp; Affiliate Links
+						</h2>
+						<p>
+							Any books, products, courses, downloads or resources offered or
+							promoted through Awaken Discovery are provided for informational
+							and educational purposes only.
+						</p>
+						<p>
+							No guarantees are made regarding outcomes, results or benefits.
+							You are solely responsible for how you use or apply any
+							information or products purchased or accessed.
+						</p>
+						<p>
+							Some links may be <strong>affiliate links</strong>, meaning
+							Awaken Discovery may receive a small commission at no additional
+							cost to you. This does not constitute endorsement, professional
+							recommendation or guarantee.
+						</p>
+					</section>
+
+					<section aria-labelledby="social-media" id="social-media">
+						<h2>
+							<span class="legal-section-num">04</span>
+							Social Media &amp; Online Groups
+						</h2>
+						<p>
+							Participation in social media channels or private or public online
+							groups does not create a counselling or therapeutic relationship.
+						</p>
+						<p>Discussions within groups or comment sections are:</p>
+						<ul>
+							<li>General, supportive and informational</li>
+							<li>Not therapeutic interventions</li>
+							<li>Not a substitute for professional support</li>
+						</ul>
+						<p>
+							Awaken Discovery does not monitor all user-generated content and
+							is not responsible for content posted by users, except where
+							required by law or where content is removed for breaching these
+							Terms.
+						</p>
+						<p>Users agree not to post content that is:</p>
+						<ul>
+							<li>Unlawful or defamatory</li>
+							<li>Offensive, abusive or sexually explicit</li>
+							<li>Promotional or commercial</li>
+							<li>Misleading or presented as professional advice</li>
+						</ul>
+						<p>
+							Awaken Discovery reserves the right to remove content or restrict
+							access at its discretion.
+						</p>
+					</section>
+
+					<section aria-labelledby="intellectual-property" id="intellectual-property">
+						<h2>
+							<span class="legal-section-num">05</span>
+							Intellectual Property
+						</h2>
+						<p>
+							All content across the website, blogs, social media platforms and
+							online groups (including text, images, logos, graphics, videos,
+							downloads and branding) is owned by Awaken Discovery or its
+							licensors.
+						</p>
+						<p>
+							You may view and use content for <strong>personal, non-commercial
+							purposes only</strong>.
+						</p>
+						<p>You must not:</p>
+						<ul>
+							<li>Republish, duplicate, copy, sell or redistribute content</li>
+							<li>Frame, manipulate or alter content without written permission</li>
+							<li>Misrepresent or imply endorsement, partnership or affiliation</li>
+						</ul>
+					</section>
+
+					<section aria-labelledby="user-content" id="user-content">
+						<h2>
+							<span class="legal-section-num">06</span>
+							User Comments &amp; Contributions
+						</h2>
+						<p>Where users are permitted to post comments or content, you confirm that:</p>
+						<ul>
+							<li>You have the legal right and necessary consent to post the content</li>
+							<li>The content does not infringe third-party rights</li>
+							<li>The content is lawful and appropriate</li>
+						</ul>
+						<p>
+							By posting, you grant Awaken Discovery a non-exclusive,
+							royalty-free licence to use, reproduce, edit and publish such
+							content across its platforms.
+						</p>
+						<p>
+							Awaken Discovery may remove comments or contributions at its sole
+							discretion.
+						</p>
+					</section>
+
+					<section aria-labelledby="cookies" id="cookies">
+						<h2><span class="legal-section-num">07</span>Cookies &amp; Tracking</h2>
+						<p>
+							Awaken Discovery uses cookies to enhance website functionality and
+							user experience. Third-party services, analytics providers and
+							affiliates may also use cookies or similar tracking technologies.
+						</p>
+						<p>
+							By using the website, you consent to the use of cookies in
+							accordance with the <a href="/privacy">Privacy Policy</a>.
+						</p>
+						<p>
+							<button
+								type="button"
+								class="legal-inline-btn"
+								data-cookie-action="open"
+							>
+								Manage your cookie preferences
+							</button>
+						</p>
+					</section>
+
+					<section aria-labelledby="external-links" id="external-links">
+						<h2>
+							<span class="legal-section-num">08</span>
+							External Links &amp; Third-Party Content
+						</h2>
+						<p>
+							External links may be provided for convenience and information only.
+						</p>
+						<p>
+							Awaken Discovery does not control, endorse or accept
+							responsibility for the content, accuracy, availability or
+							reliability of third-party websites, products or services.
+						</p>
+						<p>You access third-party resources entirely at your own risk.</p>
+					</section>
+
+					<section aria-labelledby="liability" id="liability">
+						<h2>
+							<span class="legal-section-num">09</span>
+							Limitation of Liability &amp; Legal Compliance
+						</h2>
+						<p>
+							While reasonable care is taken to ensure accuracy, no
+							representations or warranties are made that content will always
+							be complete, accurate, current or suitable for your purposes.
+						</p>
+						<p>
+							To the maximum extent permitted by UK law, Awaken Discovery
+							excludes all warranties, representations and conditions relating
+							to its website, content, products, services, social media
+							platforms and online groups.
+						</p>
+						<p>Nothing in these Terms will:</p>
+						<ul>
+							<li>Limit or exclude liability for death or personal injury caused by negligence</li>
+							<li>Limit or exclude liability for fraud or fraudulent misrepresentation</li>
+							<li>Limit any liability that cannot be lawfully excluded</li>
+						</ul>
+						<p>Awaken Discovery will not be liable for:</p>
+						<ul>
+							<li>Loss or damage arising from reliance on content or products</li>
+							<li>User actions, interpretations or decisions</li>
+							<li>User-generated content</li>
+							<li>Third-party platforms, links or services</li>
+						</ul>
+						<p>
+							These Terms do not affect your rights or responsibilities under a
+							formal counselling contract once therapy has commenced.
+						</p>
+					</section>
+
+					<section aria-labelledby="governing-law" id="governing-law">
+						<h2>
+							<span class="legal-section-num">10</span>
+							Governing Law &amp; Jurisdiction
+						</h2>
+						<p>
+							These Terms and Conditions are governed by and construed in
+							accordance with the laws of <strong>England and Wales</strong>.
+						</p>
+						<p>
+							Any disputes arising in connection with these Terms shall be
+							subject to the exclusive jurisdiction of the courts of England
+							and Wales.
+						</p>
+					</section>
+
+					<section aria-labelledby="amendments" id="amendments">
+						<h2>
+							<span class="legal-section-num">11</span>
+							Reservation of Rights &amp; Amendments
+						</h2>
+						<p>Awaken Discovery reserves the right to:</p>
+						<ul>
+							<li>Modify, update or remove content, products or services at any time</li>
+							<li>Remove user content or links deemed inappropriate or in breach of these Terms</li>
+							<li>Amend these Terms and Conditions at any time</li>
+						</ul>
+						<p>
+							Continued use of the website, products, services, social media
+							platforms or online groups constitutes acceptance of the revised
+							Terms.
+						</p>
+					</section>
+
+					<p class="legal-footnote">
+						<em>
+							This document should be read alongside the Awaken Discovery
+							<a href="/privacy">Privacy Policy</a>.
+						</em>
+					</p>
+				</article>
+			</div>
+		</section>
+	</main>
+	<SiteFooter locations={locations} />
+</Layout>
+
+<style>
+	.legal-page {
+		--brand: var(--color-dark-slate-gray);
+		--brand-deep: #004836;
+		--brand-tint: rgb(0 94 71 / 8%);
+		--ink: var(--color-dark-gray);
+		--ink-soft: rgb(29 35 39 / 78%);
+	}
+
+	/* ---------- HERO ---------- */
+	.legal-hero {
+		background: linear-gradient(180deg, var(--color-white) 0%, var(--brand-tint) 100%);
+		padding-top: clamp(3rem, 6vw, 5rem);
+		padding-bottom: clamp(2rem, 4vw, 3.5rem);
+		border-bottom: 1px solid rgb(0 94 71 / 12%);
+	}
+
+	.legal-hero-inner {
+		max-width: 70ch;
+	}
+
+	.section-kicker {
+		margin: 0;
+		text-transform: uppercase;
+		letter-spacing: 0.14em;
+		font-size: 0.74rem;
+		font-weight: 600;
+		color: var(--brand);
+	}
+
+	.legal-page h1 {
+		margin: 0.7rem 0 0.3rem;
+		font-family: var(--font-serif);
+		font-size: clamp(2.2rem, 5vw, 3.2rem);
+		font-weight: 500;
+		line-height: 1.1;
+		color: var(--brand-deep);
+		letter-spacing: -0.01em;
+	}
+
+	.legal-subtitle {
+		margin: 0;
+		font-family: var(--font-serif);
+		font-style: italic;
+		font-size: clamp(1.05rem, 1.6vw, 1.25rem);
+		color: var(--ink-soft);
+	}
+
+	.legal-meta {
+		margin: 1.4rem 0 0;
+		display: inline-flex;
+		align-items: baseline;
+		gap: 0.45rem;
+		padding: 0.35rem 0.8rem;
+		background: var(--color-white);
+		border: 1px solid rgb(0 94 71 / 18%);
+		border-radius: 999px;
+		font-size: 0.78rem;
+		color: var(--ink-soft);
+	}
+
+	.legal-meta span {
+		text-transform: uppercase;
+		letter-spacing: 0.12em;
+		font-weight: 600;
+		color: var(--brand);
+	}
+
+	/* ---------- LAYOUT ---------- */
+	.legal-body {
+		padding-top: clamp(2.5rem, 5vw, 4rem);
+	}
+
+	.legal-body-inner {
+		display: grid;
+		grid-template-columns: 260px minmax(0, 1fr);
+		gap: clamp(2rem, 4vw, 4rem);
+		align-items: start;
+	}
+
+	/* ---------- TOC ---------- */
+	.legal-toc {
+		position: sticky;
+		top: 6.5rem;
+		max-height: calc(100vh - 8rem);
+		overflow-y: auto;
+		padding-right: 0.5rem;
+	}
+
+	.legal-toc-title {
+		margin: 0 0 0.9rem;
+		font-family: var(--font-serif);
+		font-size: 0.95rem;
+		font-weight: 500;
+		text-transform: uppercase;
+		letter-spacing: 0.14em;
+		color: var(--brand);
+	}
+
+	.legal-toc-list {
+		list-style: none;
+		padding: 0;
+		margin: 0;
+		display: grid;
+		gap: 0.05rem;
+		border-left: 1px solid rgb(0 94 71 / 18%);
+	}
+
+	.legal-toc-list a {
+		display: grid;
+		grid-template-columns: 2rem 1fr;
+		gap: 0.3rem;
+		padding: 0.45rem 0.9rem;
+		font-size: 0.85rem;
+		line-height: 1.4;
+		color: var(--ink-soft);
+		text-decoration: none;
+		border-left: 2px solid transparent;
+		margin-left: -1px;
+		transition: color 0.18s ease, border-color 0.18s ease, background-color 0.18s ease;
+	}
+
+	.legal-toc-list a:hover,
+	.legal-toc-list a:focus-visible {
+		color: var(--brand-deep);
+		background: var(--brand-tint);
+		border-left-color: var(--brand);
+		outline: none;
+	}
+
+	.legal-toc-num {
+		font-family: var(--font-serif);
+		font-style: italic;
+		color: var(--brand);
+		opacity: 0.7;
+	}
+
+	/* ---------- ARTICLE ---------- */
+	.legal-article {
+		max-width: 70ch;
+	}
+
+	.legal-article h2 {
+		margin: 2.8rem 0 1.1rem;
+		font-family: var(--font-serif);
+		font-size: clamp(1.45rem, 2.6vw, 1.85rem);
+		font-weight: 500;
+		line-height: 1.25;
+		color: var(--brand-deep);
+		scroll-margin-top: 6.5rem;
+		display: flex;
+		align-items: baseline;
+		gap: 0.7rem;
+		text-wrap: balance;
+		flex-wrap: wrap;
+	}
+
+	.legal-article > section:first-of-type > h2 {
+		margin-top: 1.6rem;
+	}
+
+	.legal-section-num {
+		font-family: var(--font-serif);
+		font-style: italic;
+		font-size: 1.05rem;
+		color: var(--brand);
+		opacity: 0.7;
+		flex-shrink: 0;
+	}
+
+	.legal-article p {
+		margin: 0 0 1rem;
+		line-height: 1.85;
+		color: var(--ink);
+	}
+
+	.legal-article ul {
+		margin: 0 0 1.2rem;
+		padding-left: 1.3rem;
+		display: grid;
+		gap: 0.5rem;
+	}
+
+	.legal-article li {
+		line-height: 1.7;
+		color: var(--ink);
+	}
+
+	.legal-article li::marker {
+		color: var(--brand);
+	}
+
+	.legal-article strong {
+		color: var(--brand-deep);
+		font-weight: 600;
+	}
+
+	.legal-article a {
+		color: var(--brand-deep);
+		text-decoration: underline;
+		text-underline-offset: 3px;
+		text-decoration-thickness: 1px;
+	}
+
+	.legal-article a:hover {
+		text-decoration-thickness: 2px;
+	}
+
+	/* ---------- EPIGRAPH ---------- */
+	.legal-epigraph {
+		margin: 0 0 2rem;
+		padding: 1.3rem 1.5rem;
+		border-left: 3px solid var(--brand);
+		background: var(--brand-tint);
+		border-radius: 0 0.5rem 0.5rem 0;
+	}
+
+	.legal-epigraph p {
+		margin: 0;
+		font-family: var(--font-serif);
+		font-style: italic;
+		font-size: 1.1rem;
+		line-height: 1.55;
+		color: var(--brand-deep);
+		text-wrap: balance;
+	}
+
+	/* ---------- CALLOUT BOXES ---------- */
+	.legal-callout {
+		margin: 1.5rem 0 1.8rem;
+		padding: 1.2rem 1.3rem;
+		background: var(--brand-tint);
+		border-left: 4px solid var(--brand);
+		border-radius: 0.7rem;
+	}
+
+	.legal-callout-title {
+		margin: 0 0 0.55rem !important;
+		font-family: var(--font-serif);
+		font-weight: 600;
+		color: var(--brand-deep);
+		font-size: 1.02rem;
+	}
+
+	.legal-callout p:last-child {
+		margin-bottom: 0;
+	}
+
+	.legal-callout--warning {
+		background: linear-gradient(180deg, rgb(253 246 240) 0%, rgb(250 235 224) 100%);
+		border-left-color: #b54a1e;
+	}
+
+	.legal-callout--warning .legal-callout-title {
+		color: #7a2f12;
+	}
+
+	.legal-callout--warning strong {
+		color: #7a2f12;
+	}
+
+	/* ---------- INLINE BUTTON ---------- */
+	.legal-inline-btn {
+		font: inherit;
+		font-size: 0.92rem;
+		font-weight: 500;
+		padding: 0.55rem 1.05rem;
+		border-radius: 999px;
+		border: 1px solid var(--brand);
+		background: var(--color-white);
+		color: var(--brand);
+		cursor: pointer;
+		transition: background-color 0.18s ease, color 0.18s ease;
+	}
+
+	.legal-inline-btn:hover,
+	.legal-inline-btn:focus-visible {
+		background: var(--brand);
+		color: var(--color-white);
+		outline: none;
+	}
+
+	/* ---------- FOOTNOTE ---------- */
+	.legal-footnote {
+		margin-top: 3.5rem !important;
+		padding-top: 1.5rem;
+		border-top: 1px solid rgb(0 94 71 / 18%);
+		font-size: 0.92rem;
+		color: var(--ink-soft);
+		text-align: center;
+	}
+
+	/* ---------- RESPONSIVE ---------- */
+	@media (max-width: 960px) {
+		.legal-body-inner {
+			grid-template-columns: 1fr;
+		}
+
+		.legal-toc {
+			position: static;
+			max-height: none;
+			padding-right: 0;
+			padding: 1rem 1.2rem;
+			background: var(--brand-tint);
+			border-radius: 0.85rem;
+			margin-bottom: 0.5rem;
+		}
+
+		.legal-toc-list {
+			border-left: none;
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+			gap: 0;
+		}
+
+		.legal-toc-list a {
+			border-left: none;
+			padding: 0.4rem 0.5rem;
+		}
+	}
+
+	@media (max-width: 540px) {
+		.legal-toc-list {
+			grid-template-columns: 1fr;
+		}
+
+		.legal-article h2 {
+			font-size: 1.3rem;
+		}
+
+		.legal-section-num {
+			font-size: 0.95rem;
+		}
+	}
+
+	/* ---------- TARGET HIGHLIGHT ---------- */
+	@media (prefers-reduced-motion: no-preference) {
+		.legal-article section:target h2 {
+			animation: legal-target-pulse 1.6s ease-out 1;
+		}
+
+		@keyframes legal-target-pulse {
+			0% {
+				background-color: rgb(0 94 71 / 12%);
+			}
+			100% {
+				background-color: transparent;
+			}
+		}
+	}
+</style>

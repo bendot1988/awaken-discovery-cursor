@@ -1,0 +1,760 @@
+---
+import Layout from "../layouts/Layout.astro";
+import SiteHeader from "../components/SiteHeader.astro";
+import SiteFooter from "../components/SiteFooter.astro";
+import { locations, navItems } from "../data/site";
+
+const lastUpdated = "29 May 2026";
+
+const toc = [
+	{ id: "data-controller", label: "Data Controller" },
+	{ id: "personal-information", label: "Personal Information I Collect" },
+	{ id: "lawful-basis", label: "Lawful Basis for Processing" },
+	{ id: "how-i-use-information", label: "How I Use Your Information" },
+	{ id: "email-marketing", label: "Email Communications and Marketing" },
+	{ id: "disclosure", label: "Disclosure and Sharing of Information" },
+	{ id: "international-transfers", label: "Transfers Outside the UK" },
+	{ id: "security", label: "Data Security and Storage" },
+	{ id: "retention", label: "Data Retention" },
+	{ id: "your-rights", label: "Your Data Protection Rights" },
+	{ id: "international-users", label: "International Users" },
+	{ id: "cookies", label: "Cookies and Website Data" },
+	{ id: "breaches", label: "Data Breaches" },
+	{ id: "changes", label: "Changes to This Privacy Policy" },
+	{ id: "contact", label: "Contact" },
+];
+---
+
+<Layout
+	title="Privacy Policy · Awaken Discovery"
+	description="How Awaken Discovery collects, uses, stores and protects your personal data — in line with UK GDPR and the Data Protection Act 2018."
+>
+	<SiteHeader navItems={navItems} />
+	<main class="legal-page">
+		<!-- ============== HERO ============== -->
+		<section class="legal-hero section">
+			<div class="container legal-hero-inner">
+				<p class="section-kicker">Legal</p>
+				<h1>Privacy Policy</h1>
+				<p class="legal-subtitle">Awaken Discovery Counselling &amp; Psychotherapy</p>
+				<p class="legal-meta">
+					<span>Last updated</span>
+					<time datetime="2026-05-29">{lastUpdated}</time>
+				</p>
+			</div>
+		</section>
+
+		<!-- ============== BODY ============== -->
+		<section class="legal-body section">
+			<div class="container legal-body-inner">
+				<!-- TOC (sticky on desktop) -->
+				<aside class="legal-toc" aria-label="Privacy policy sections">
+					<p class="legal-toc-title">Contents</p>
+					<ol class="legal-toc-list">
+						{
+							toc.map((item, i) => (
+								<li>
+									<a href={`#${item.id}`}>
+										<span class="legal-toc-num">
+											{String(i + 1).padStart(2, "0")}
+										</span>
+										<span>{item.label}</span>
+									</a>
+								</li>
+							))
+						}
+					</ol>
+				</aside>
+
+				<!-- Article -->
+				<article class="legal-article">
+					<p class="legal-lede">
+						At Awaken Discovery, I am committed to protecting your privacy and
+						safeguarding your personal information. Whether you are exploring
+						therapy, accessing a resource or engaging with my services, your
+						information is treated with care, respect and transparency.
+					</p>
+
+					<p>
+						This Privacy Policy explains how I collect, use, store, share and
+						protect your personal data in accordance with the
+						<strong>UK General Data Protection Regulation (UK GDPR)</strong>,
+						the <strong>Data Protection Act 2018</strong> and, where
+						applicable, international data protection laws.
+					</p>
+
+					<div class="legal-callout">
+						<p class="legal-callout-title">This policy applies to:</p>
+						<ul>
+							<li>Clients and prospective clients</li>
+							<li>Website visitors</li>
+							<li>Individuals engaging with my content, services, products or online spaces</li>
+						</ul>
+					</div>
+
+					<section aria-labelledby="data-controller" id="data-controller">
+						<h2><span class="legal-section-num">01</span>Data Controller</h2>
+						<p>
+							Awaken Discovery is operated by Allyson Donoghue, who is the
+							Data Controller responsible for your personal data.
+						</p>
+						<p>
+							Email:
+							<a href="mailto:awakendiscoverytherapy@gmail.com">
+								awakendiscoverytherapy@gmail.com
+							</a>
+						</p>
+					</section>
+
+					<section aria-labelledby="personal-information" id="personal-information">
+						<h2><span class="legal-section-num">02</span>Personal Information I Collect</h2>
+						<p>
+							I only collect information that is necessary to provide safe,
+							ethical and effective services. This may include:
+						</p>
+						<ul>
+							<li>Name, email address, telephone number</li>
+							<li>Emergency contact details or next of kin information</li>
+							<li>GP or healthcare provider contact details</li>
+							<li>Relevant health, medical and wellbeing information</li>
+							<li>Counselling and psychotherapy notes, assessments and correspondence</li>
+							<li>Session records and professional observations</li>
+							<li>Payment and invoicing details, where applicable</li>
+						</ul>
+						<p>
+							Some of this information is classified as
+							<strong>special category data</strong> under UK GDPR (for example,
+							health and medical information). Because this data is particularly
+							sensitive, it is subject to enhanced legal protection.
+						</p>
+						<p>
+							I take additional care to ensure it is processed lawfully,
+							confidentially and securely, and only where necessary for the
+							provision of care.
+						</p>
+					</section>
+
+					<section aria-labelledby="lawful-basis" id="lawful-basis">
+						<h2><span class="legal-section-num">03</span>Lawful Basis for Processing</h2>
+						<p>Under UK GDPR, I rely on the following lawful bases:</p>
+						<ul>
+							<li>
+								<strong>Contract</strong> — to provide counselling and
+								psychotherapy services agreed with you.
+							</li>
+							<li>
+								<strong>Consent</strong> — for processing certain sensitive
+								information and for sending non-essential communications or
+								marketing materials (explicit opt-in only).
+							</li>
+							<li>
+								<strong>Legal obligation</strong> — to meet safeguarding duties,
+								insurance requirements or professional record-keeping obligations.
+							</li>
+							<li>
+								<strong>Vital interests</strong> — where processing is necessary
+								to protect your life or the life of another person in an emergency.
+							</li>
+							<li>
+								<strong>Legitimate interests</strong> — for managing, maintaining
+								and improving my services, where this does not override your rights.
+							</li>
+						</ul>
+						<p>
+							Personal data is generally processed under <strong>Article 6(1)(b) UK GDPR</strong>
+							(performance of a contract).
+						</p>
+						<p>
+							Special category data (including health-related information) is
+							processed under <strong>Article 9(2)(h) UK GDPR</strong> (provision
+							of health or social care), in line with professional ethical
+							frameworks, and/or explicit consent where required.
+						</p>
+					</section>
+
+					<section aria-labelledby="how-i-use-information" id="how-i-use-information">
+						<h2><span class="legal-section-num">04</span>How I Use Your Information</h2>
+						<p>Your personal data is used to:</p>
+						<ul>
+							<li>Provide safe, ethical and effective counselling and psychotherapy services</li>
+							<li>Communicate with you regarding appointments, changes or relevant information</li>
+							<li>Maintain accurate, lawful and confidential client records</li>
+							<li>Meet professional, ethical and insurance requirements</li>
+							<li>Monitor and improve my services</li>
+							<li>
+								Share service updates, resources, events or promotions
+								<strong>only where you have explicitly opted in</strong>
+							</li>
+						</ul>
+						<div class="legal-callout legal-callout--note">
+							<p class="legal-callout-title">Important</p>
+							<p>
+								Accessing a service or downloading a resource does
+								<strong>not automatically subscribe you to marketing
+								communications</strong>. You will only receive these where you
+								have provided clear, explicit consent.
+							</p>
+							<p>You may withdraw consent for non-essential communications at any time.</p>
+						</div>
+					</section>
+
+					<section aria-labelledby="email-marketing" id="email-marketing">
+						<h2><span class="legal-section-num">05</span>Email Communications and Marketing</h2>
+						<p>Where you choose to receive emails:</p>
+						<ul>
+							<li>You will be asked for <strong>clear, explicit consent (no pre-ticked boxes)</strong></li>
+							<li>Your consent is recorded and stored securely</li>
+							<li>You can unsubscribe at any time via the link provided in every email</li>
+						</ul>
+						<p>Emails may include:</p>
+						<ul>
+							<li>Reflections and wellbeing resources</li>
+							<li>Service updates</li>
+							<li>Events, offers or relevant content</li>
+						</ul>
+					</section>
+
+					<section aria-labelledby="disclosure" id="disclosure">
+						<h2><span class="legal-section-num">06</span>Disclosure and Sharing of Information</h2>
+						<p>I do not sell your personal data.</p>
+						<p>Your information may be shared only:</p>
+						<ul>
+							<li>With your explicit consent</li>
+							<li>Where required by law (e.g. safeguarding concerns or court orders)</li>
+							<li>Where there is a risk of serious harm to you or others</li>
+							<li>
+								With professional advisors, insurers, supervisors or secure
+								service providers (such as email, booking or record-keeping
+								platforms), strictly for the purpose of delivering services
+							</li>
+						</ul>
+						<p>
+							All third parties are required to handle your data lawfully,
+							securely and in line with data protection obligations.
+						</p>
+					</section>
+
+					<section aria-labelledby="international-transfers" id="international-transfers">
+						<h2><span class="legal-section-num">07</span>Transfers Outside the UK</h2>
+						<p>
+							Some systems I use (including cloud storage, email platforms or
+							booking systems — for example Microsoft and Google) may store or
+							process data outside the UK.
+						</p>
+						<p>
+							Where data is transferred internationally, appropriate safeguards
+							are in place, such as <strong>Standard Contractual Clauses (SCCs)</strong>
+							or equivalent protections, to ensure your data remains protected.
+						</p>
+					</section>
+
+					<section aria-labelledby="security" id="security">
+						<h2><span class="legal-section-num">08</span>Data Security and Storage</h2>
+						<p>
+							I take appropriate technical and organisational measures to
+							protect your personal data against loss, misuse, unauthorised
+							access, disclosure or destruction, with support from OnTech.
+						</p>
+						<p>Data is stored:</p>
+						<ul>
+							<li>
+								Electronically on secure, password-protected systems with
+								encryption and, where available, two-factor authentication
+							</li>
+							<li>In paper format within locked and secure storage</li>
+						</ul>
+					</section>
+
+					<section aria-labelledby="retention" id="retention">
+						<h2><span class="legal-section-num">09</span>Data Retention</h2>
+						<p>In line with professional and insurance guidance:</p>
+						<ul>
+							<li>Adult client records are retained for <strong>7 years</strong> after the end of therapy</li>
+							<li>For clients under 18, records are retained until their <strong>25th birthday</strong></li>
+						</ul>
+						<p>
+							Data is only kept for as long as necessary and is securely
+							destroyed when no longer required.
+						</p>
+					</section>
+
+					<section aria-labelledby="your-rights" id="your-rights">
+						<h2><span class="legal-section-num">10</span>Your Data Protection Rights</h2>
+						<p>Under UK GDPR, you have the right to:</p>
+						<ul>
+							<li>Access a copy of your personal data</li>
+							<li>Request correction of inaccurate or incomplete data</li>
+							<li>Request erasure of your data (in certain circumstances)</li>
+							<li>Request restriction of processing</li>
+							<li>Object to processing, where applicable</li>
+							<li>Request data portability (where relevant)</li>
+							<li>Withdraw consent at any time</li>
+						</ul>
+						<p>
+							You also have the right to lodge a complaint with the
+							<strong>Information Commissioner's Office</strong>.
+						</p>
+						<div class="legal-callout legal-callout--ico">
+							<p>
+								Website:
+								<a href="https://www.ico.org.uk" target="_blank" rel="noopener noreferrer">
+									www.ico.org.uk
+								</a>
+							</p>
+							<p>
+								Telephone:
+								<a href="tel:+443031231113">0303 123 1113</a>
+							</p>
+						</div>
+					</section>
+
+					<section aria-labelledby="international-users" id="international-users">
+						<h2><span class="legal-section-num">11</span>International Users</h2>
+						<p>
+							If you are accessing services from outside the UK, you may have
+							additional rights under your local data protection laws. These
+							rights will be respected where applicable.
+						</p>
+					</section>
+
+					<section aria-labelledby="cookies" id="cookies">
+						<h2><span class="legal-section-num">12</span>Cookies and Website Data</h2>
+						<p>
+							This website uses cookies to support functionality and improve
+							user experience.
+						</p>
+						<p>Cookies may include:</p>
+						<ul>
+							<li>Essential cookies (required for the website to function)</li>
+							<li>Analytics cookies (to understand how the site is used)</li>
+							<li>Marketing cookies (where applicable)</li>
+						</ul>
+						<p>
+							Non-essential cookies are only used <strong>with your consent</strong>,
+							which can be accepted or declined via the cookie banner.
+						</p>
+						<p>
+							<button
+								type="button"
+								class="legal-inline-btn"
+								data-cookie-action="open"
+							>
+								Manage your cookie preferences
+							</button>
+						</p>
+					</section>
+
+					<section aria-labelledby="breaches" id="breaches">
+						<h2><span class="legal-section-num">13</span>Data Breaches</h2>
+						<p>
+							In the unlikely event of a data breach, appropriate steps will be
+							taken to assess, contain and resolve the issue.
+						</p>
+						<p>
+							Where required, this will be reported to relevant authorities and
+							affected individuals in line with legal obligations.
+						</p>
+					</section>
+
+					<section aria-labelledby="changes" id="changes">
+						<h2><span class="legal-section-num">14</span>Changes to This Privacy Policy</h2>
+						<p>
+							I may update this Privacy Policy to reflect legal, professional
+							or operational changes. Any significant updates will be published
+							on my website.
+						</p>
+					</section>
+
+					<section aria-labelledby="contact" id="contact">
+						<h2><span class="legal-section-num">15</span>Contact</h2>
+						<p>
+							If you have any questions, concerns or requests regarding this
+							Privacy Policy or your personal data, please contact:
+						</p>
+						<p>
+							Email:
+							<a href="mailto:awakendiscoverytherapy@gmail.com">
+								awakendiscoverytherapy@gmail.com
+							</a>
+						</p>
+					</section>
+
+					<p class="legal-footnote">
+						<em>
+							This Privacy Policy should be read alongside the Awaken Discovery
+							<a href="/terms">Terms &amp; Conditions</a> and Disclaimer.
+						</em>
+					</p>
+				</article>
+			</div>
+		</section>
+	</main>
+	<SiteFooter locations={locations} />
+</Layout>
+
+<style>
+	.legal-page {
+		--brand: var(--color-dark-slate-gray);
+		--brand-deep: #004836;
+		--brand-tint: rgb(0 94 71 / 8%);
+		--ink: var(--color-dark-gray);
+		--ink-soft: rgb(29 35 39 / 78%);
+	}
+
+	/* ---------- HERO ---------- */
+	.legal-hero {
+		background: linear-gradient(180deg, var(--color-white) 0%, var(--brand-tint) 100%);
+		padding-top: clamp(3rem, 6vw, 5rem);
+		padding-bottom: clamp(2rem, 4vw, 3.5rem);
+		border-bottom: 1px solid rgb(0 94 71 / 12%);
+	}
+
+	.legal-hero-inner {
+		max-width: 70ch;
+	}
+
+	.section-kicker {
+		margin: 0;
+		text-transform: uppercase;
+		letter-spacing: 0.14em;
+		font-size: 0.74rem;
+		font-weight: 600;
+		color: var(--brand);
+	}
+
+	.legal-page h1 {
+		margin: 0.7rem 0 0.3rem;
+		font-family: var(--font-serif);
+		font-size: clamp(2.2rem, 5vw, 3.2rem);
+		font-weight: 500;
+		line-height: 1.1;
+		color: var(--brand-deep);
+		letter-spacing: -0.01em;
+	}
+
+	.legal-subtitle {
+		margin: 0;
+		font-family: var(--font-serif);
+		font-style: italic;
+		font-size: clamp(1.05rem, 1.6vw, 1.25rem);
+		color: var(--ink-soft);
+	}
+
+	.legal-meta {
+		margin: 1.4rem 0 0;
+		display: inline-flex;
+		align-items: baseline;
+		gap: 0.45rem;
+		padding: 0.35rem 0.8rem;
+		background: var(--color-white);
+		border: 1px solid rgb(0 94 71 / 18%);
+		border-radius: 999px;
+		font-size: 0.78rem;
+		color: var(--ink-soft);
+	}
+
+	.legal-meta span {
+		text-transform: uppercase;
+		letter-spacing: 0.12em;
+		font-weight: 600;
+		color: var(--brand);
+	}
+
+	/* ---------- LAYOUT ---------- */
+	.legal-body {
+		padding-top: clamp(2.5rem, 5vw, 4rem);
+	}
+
+	.legal-body-inner {
+		display: grid;
+		grid-template-columns: 260px minmax(0, 1fr);
+		gap: clamp(2rem, 4vw, 4rem);
+		align-items: start;
+	}
+
+	/* ---------- TOC ---------- */
+	.legal-toc {
+		position: sticky;
+		top: 6.5rem;
+		max-height: calc(100vh - 8rem);
+		overflow-y: auto;
+		padding-right: 0.5rem;
+	}
+
+	.legal-toc-title {
+		margin: 0 0 0.9rem;
+		font-family: var(--font-serif);
+		font-size: 0.95rem;
+		font-weight: 500;
+		text-transform: uppercase;
+		letter-spacing: 0.14em;
+		color: var(--brand);
+	}
+
+	.legal-toc-list {
+		list-style: none;
+		padding: 0;
+		margin: 0;
+		display: grid;
+		gap: 0.05rem;
+		border-left: 1px solid rgb(0 94 71 / 18%);
+	}
+
+	.legal-toc-list a {
+		display: grid;
+		grid-template-columns: 2rem 1fr;
+		gap: 0.3rem;
+		padding: 0.45rem 0.9rem;
+		font-size: 0.85rem;
+		line-height: 1.4;
+		color: var(--ink-soft);
+		text-decoration: none;
+		border-left: 2px solid transparent;
+		margin-left: -1px;
+		transition: color 0.18s ease, border-color 0.18s ease, background-color 0.18s ease;
+	}
+
+	.legal-toc-list a:hover,
+	.legal-toc-list a:focus-visible {
+		color: var(--brand-deep);
+		background: var(--brand-tint);
+		border-left-color: var(--brand);
+		outline: none;
+	}
+
+	.legal-toc-num {
+		font-family: var(--font-serif);
+		font-style: italic;
+		color: var(--brand);
+		opacity: 0.7;
+	}
+
+	/* ---------- ARTICLE ---------- */
+	.legal-article {
+		max-width: 70ch;
+	}
+
+	.legal-article :global(h2),
+	.legal-article h2 {
+		margin: 2.8rem 0 1.1rem;
+		font-family: var(--font-serif);
+		font-size: clamp(1.45rem, 2.6vw, 1.85rem);
+		font-weight: 500;
+		line-height: 1.25;
+		color: var(--brand-deep);
+		scroll-margin-top: 6.5rem;
+		display: flex;
+		align-items: baseline;
+		gap: 0.7rem;
+		text-wrap: balance;
+	}
+
+	.legal-article > section:first-of-type > h2 {
+		margin-top: 1.6rem;
+	}
+
+	.legal-section-num {
+		font-family: var(--font-serif);
+		font-style: italic;
+		font-size: 1.05rem;
+		color: var(--brand);
+		opacity: 0.7;
+		flex-shrink: 0;
+	}
+
+	.legal-article p {
+		margin: 0 0 1rem;
+		line-height: 1.85;
+		color: var(--ink);
+	}
+
+	.legal-article ul {
+		margin: 0 0 1.2rem;
+		padding-left: 1.3rem;
+		display: grid;
+		gap: 0.5rem;
+	}
+
+	.legal-article li {
+		line-height: 1.7;
+		color: var(--ink);
+	}
+
+	.legal-article li::marker {
+		color: var(--brand);
+	}
+
+	.legal-article strong {
+		color: var(--brand-deep);
+		font-weight: 600;
+	}
+
+	.legal-article a {
+		color: var(--brand-deep);
+		text-decoration: underline;
+		text-underline-offset: 3px;
+		text-decoration-thickness: 1px;
+	}
+
+	.legal-article a:hover {
+		text-decoration-thickness: 2px;
+	}
+
+	.legal-inline-btn {
+		font: inherit;
+		font-size: 0.92rem;
+		font-weight: 500;
+		padding: 0.55rem 1.05rem;
+		border-radius: 999px;
+		border: 1px solid var(--brand);
+		background: var(--color-white);
+		color: var(--brand);
+		cursor: pointer;
+		transition: background-color 0.18s ease, color 0.18s ease;
+	}
+
+	.legal-inline-btn:hover,
+	.legal-inline-btn:focus-visible {
+		background: var(--brand);
+		color: var(--color-white);
+		outline: none;
+	}
+
+	.legal-lede {
+		font-family: var(--font-serif);
+		font-size: clamp(1.15rem, 1.7vw, 1.3rem);
+		font-style: italic;
+		line-height: 1.6;
+		color: var(--brand-deep);
+		margin-bottom: 1.5rem !important;
+		text-wrap: balance;
+	}
+
+	/* ---------- CALLOUT BOXES ---------- */
+	.legal-callout {
+		margin: 1.5rem 0 1.8rem;
+		padding: 1.2rem 1.3rem;
+		background: var(--brand-tint);
+		border-left: 4px solid var(--brand);
+		border-radius: 0.7rem;
+	}
+
+	.legal-callout-title {
+		margin: 0 0 0.55rem !important;
+		font-family: var(--font-serif);
+		font-weight: 600;
+		color: var(--brand-deep);
+		font-size: 1.02rem;
+	}
+
+	.legal-callout ul {
+		margin-bottom: 0;
+	}
+
+	.legal-callout p:last-child {
+		margin-bottom: 0;
+	}
+
+	.legal-callout--note {
+		background: linear-gradient(180deg, rgb(255 253 240) 0%, rgb(252 247 224) 100%);
+		border-left-color: #b88a2c;
+	}
+
+	.legal-callout--note .legal-callout-title {
+		color: #6e5012;
+	}
+
+	.legal-callout--ico {
+		background: var(--color-white);
+		border-left-color: var(--brand);
+	}
+
+	.legal-callout--ico p {
+		margin: 0;
+		font-size: 0.95rem;
+	}
+
+	.legal-callout--ico p + p {
+		margin-top: 0.35rem;
+	}
+
+	/* ---------- FOOTNOTE ---------- */
+	.legal-footnote {
+		margin-top: 3.5rem !important;
+		padding-top: 1.5rem;
+		border-top: 1px solid rgb(0 94 71 / 18%);
+		font-size: 0.92rem;
+		color: var(--ink-soft);
+		text-align: center;
+	}
+
+	/* ---------- RESPONSIVE ---------- */
+	@media (max-width: 960px) {
+		.legal-body-inner {
+			grid-template-columns: 1fr;
+		}
+
+		.legal-toc {
+			position: static;
+			max-height: none;
+			padding-right: 0;
+			padding: 1rem 1.2rem;
+			background: var(--brand-tint);
+			border-radius: 0.85rem;
+			margin-bottom: 0.5rem;
+		}
+
+		.legal-toc-list {
+			border-left: none;
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+			gap: 0;
+		}
+
+		.legal-toc-list a {
+			border-left: none;
+			padding: 0.4rem 0.5rem;
+		}
+	}
+
+	@media (max-width: 540px) {
+		.legal-toc-list {
+			grid-template-columns: 1fr;
+		}
+
+		.legal-article h2 {
+			font-size: 1.3rem;
+			flex-wrap: wrap;
+			gap: 0.5rem;
+		}
+
+		.legal-section-num {
+			font-size: 0.95rem;
+		}
+	}
+
+	/* ---------- TARGET HIGHLIGHT ---------- */
+	@media (prefers-reduced-motion: no-preference) {
+		.legal-article section:target h2 {
+			animation: legal-target-pulse 1.6s ease-out 1;
+		}
+
+		@keyframes legal-target-pulse {
+			0% {
+				background-color: rgb(0 94 71 / 12%);
+			}
+			100% {
+				background-color: transparent;
+			}
+		}
+	}
+
+	html {
+		scroll-behavior: smooth;
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		html {
+			scroll-behavior: auto;
+		}
+	}
+</style>

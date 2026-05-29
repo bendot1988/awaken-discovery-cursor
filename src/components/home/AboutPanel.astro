@@ -1,51 +1,456 @@
+---
+import { Image } from "astro:assets";
+import handOnFerns from "../../assets/about/hand-on-ferns.jpg";
+import candleInHands from "../../assets/about/candle-in-hands.jpg";
+
+const videoPoster = "/assets/videos/about-loop-poster.webp";
+const videoMp4 = "/assets/videos/about-loop.mp4";
+---
+
 <section class="about section" id="about">
 	<div class="container about-inner">
-		<p class="section-kicker">About Awaken Discovery</p>
-		<h2>Therapy That Meets You With Compassion, Not Judgment</h2>
-		<p>
-			Healing is not simply about coping. It is about understanding yourself more deeply,
-			reconnecting with your emotional needs and creating space to breathe again beneath
-			the pressures of daily life.
-		</p>
-		<p>
-			Awaken Discovery was created to offer calm, compassionate support for individuals
-			navigating anxiety, burnout, emotional overwhelm, grief, relationship difficulties
-			and life transitions. With a background in both education and counselling, the
-			approach combines professional therapeutic support with genuine human understanding
-			— creating a space where you do not have to carry everything alone.
-		</p>
+		<div class="about-copy">
+			<p class="section-kicker">
+				<span class="about-kicker-rule" aria-hidden="true"></span>
+				About Awaken Discovery
+			</p>
+			<h2>
+				Therapy That Meets You With
+				<em>Compassion,</em> Not Judgment
+			</h2>
+			<p>
+				Healing is not simply about coping. It is about understanding yourself
+				more deeply, reconnecting with your emotional needs and creating space
+				to breathe again beneath the pressures of daily life.
+			</p>
+			<p>
+				Awaken Discovery was created to offer calm, compassionate support for
+				individuals navigating anxiety, burnout, emotional overwhelm, grief,
+				relationship difficulties and life transitions — a space where you do
+				not have to carry everything alone.
+			</p>
+			<a class="cta cta-outline about-cta" href="/about">Learn more about Ally</a>
+		</div>
+
+		<div class="about-stage" aria-hidden="false">
+			<svg
+				class="about-blob"
+				viewBox="0 0 600 600"
+				preserveAspectRatio="none"
+				aria-hidden="true"
+			>
+				<path
+					d="M421 78c66 41 122 110 132 184 9 74-29 153-88 207-58 54-138 83-217 73-79-10-156-58-194-128C16 343 16 251 56 178 96 105 175 50 261 39c87-12 181 12 244 79z"
+					fill="currentColor"
+				></path>
+			</svg>
+
+			<svg
+				class="about-leaf"
+				viewBox="0 0 80 100"
+				aria-hidden="true"
+			>
+				<path
+					d="M40 6C18 22 8 46 14 70c4 17 17 25 26 24M40 6c22 16 32 40 26 64-4 17-17 25-26 24M40 30v68"
+					fill="none"
+					stroke="currentColor"
+					stroke-width="1.5"
+					stroke-linecap="round"
+				></path>
+			</svg>
+
+			<figure class="about-card about-card--video">
+				<div class="about-card-inner">
+					<video
+						class="about-video"
+						data-lazy-video
+						poster={videoPoster}
+						muted
+						loop
+						playsinline
+						preload="none"
+						width="960"
+						height="540"
+						aria-label="A quiet moment — gentle lifestyle footage evoking calm and presence"
+					>
+						<source data-src={videoMp4} type="video/mp4" />
+					</video>
+					<noscript>
+						<video
+							class="about-video"
+							poster={videoPoster}
+							src={videoMp4}
+							muted
+							loop
+							playsinline
+							preload="metadata"
+							width="960"
+							height="540"></video>
+					</noscript>
+				</div>
+			</figure>
+
+			<figure class="about-card about-card--ferns">
+				<div class="about-card-inner">
+					<Image
+						src={handOnFerns}
+						alt="A hand resting gently against fresh green ferns in a woodland — touch, nature, grounding"
+						widths={[240, 360, 540]}
+						sizes="(max-width: 720px) 60vw, 260px"
+						loading="lazy"
+						decoding="async"
+						format="webp"
+						quality={78}
+					/>
+				</div>
+			</figure>
+
+			<figure class="about-card about-card--candle">
+				<div class="about-card-inner">
+					<Image
+						src={candleInHands}
+						alt="Two hands cradling a softly lit candle on the lap — warmth, ritual, calm"
+						widths={[320, 480, 720]}
+						sizes="(max-width: 720px) 70vw, 360px"
+						loading="lazy"
+						decoding="async"
+						format="webp"
+						quality={78}
+					/>
+				</div>
+				<figcaption class="about-card-caption">A space to breathe.</figcaption>
+			</figure>
+		</div>
 	</div>
 </section>
+
+<script>
+	type LazyVideo = HTMLVideoElement & { dataset: DOMStringMap };
+
+	const init = () => {
+		const videos = document.querySelectorAll<LazyVideo>("video[data-lazy-video]");
+		if (!videos.length) return;
+
+		const prefersReducedMotion = window.matchMedia(
+			"(prefers-reduced-motion: reduce)",
+		).matches;
+
+		const hydrateSources = (video: LazyVideo) => {
+			if (video.dataset.hydrated === "true") return;
+			const sources = video.querySelectorAll<HTMLSourceElement>("source[data-src]");
+			sources.forEach((src) => {
+				const url = src.getAttribute("data-src");
+				if (url) src.setAttribute("src", url);
+			});
+			video.dataset.hydrated = "true";
+			video.load();
+		};
+
+		if (prefersReducedMotion) return;
+
+		const supportsIO = typeof IntersectionObserver !== "undefined";
+		if (!supportsIO) {
+			videos.forEach((v) => {
+				hydrateSources(v);
+				v.play().catch(() => {});
+			});
+			return;
+		}
+
+		const io = new IntersectionObserver(
+			(entries) => {
+				entries.forEach((entry) => {
+					const video = entry.target as LazyVideo;
+					if (entry.isIntersecting) {
+						hydrateSources(video);
+						const tryPlay = () => video.play().catch(() => {});
+						if (video.readyState >= 2) tryPlay();
+						else video.addEventListener("loadeddata", tryPlay, { once: true });
+					} else {
+						video.pause();
+					}
+				});
+			},
+			{ rootMargin: "200px 0px", threshold: 0.15 },
+		);
+
+		videos.forEach((v) => io.observe(v));
+	};
+
+	if (document.readyState === "loading") {
+		document.addEventListener("DOMContentLoaded", init, { once: true });
+	} else {
+		init();
+	}
+</script>
 
 <style>
 	.about {
 		background: var(--color-white);
+		overflow: clip;
+		padding-block: clamp(4rem, 8vw, 7rem);
 	}
 
 	.about-inner {
-		max-width: 70ch;
+		display: grid;
+		grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+		gap: clamp(2rem, 6vw, 5rem);
+		align-items: center;
+	}
+
+	/* ---------- COPY ---------- */
+	.about-copy {
+		max-width: 46ch;
 	}
 
 	.section-kicker {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.7rem;
 		margin: 0;
 		text-transform: uppercase;
-		letter-spacing: 0.08em;
-		font-size: 0.78rem;
+		letter-spacing: 0.14em;
+		font-size: 0.74rem;
 		font-weight: 600;
 		color: var(--color-dark-slate-gray);
 	}
 
-	h2 {
-		margin: 0.6rem 0 1.1rem;
+	.about-kicker-rule {
+		display: inline-block;
+		width: 2rem;
+		height: 1px;
+		background: currentcolor;
+		opacity: 0.55;
+	}
+
+	.about-copy h2 {
+		margin: 1.1rem 0 1.4rem;
 		font-family: var(--font-serif);
-		font-size: clamp(1.7rem, 3.3vw, 2.4rem);
-		line-height: 1.2;
+		font-size: clamp(1.9rem, 3.6vw, 2.7rem);
+		line-height: 1.15;
 		font-weight: 500;
+		letter-spacing: -0.005em;
 		text-wrap: balance;
 	}
 
-	p {
+	.about-copy h2 em {
+		font-style: italic;
+		color: var(--color-dark-slate-gray);
+	}
+
+	.about-copy p {
 		margin: 0 0 1rem;
 		line-height: 1.9;
+		color: rgb(29 35 39 / 86%);
+	}
+
+	.about-cta {
+		margin-top: 0.6rem;
+	}
+
+	/* ---------- STAGE ---------- */
+	.about-stage {
+		position: relative;
+		isolation: isolate;
+		min-height: clamp(420px, 48vw, 620px);
+	}
+
+	/* Decorative organic blob behind the video */
+	.about-blob {
+		position: absolute;
+		inset: -6% -8% auto auto;
+		width: 78%;
+		max-width: 540px;
+		aspect-ratio: 1 / 1;
+		color: var(--color-dark-slate-gray);
+		opacity: 0.09;
+		z-index: 0;
+		pointer-events: none;
+	}
+
+	/* Tiny editorial ornament */
+	.about-leaf {
+		position: absolute;
+		left: -2.2rem;
+		top: -1.5rem;
+		width: 46px;
+		height: auto;
+		color: var(--color-dark-slate-gray);
+		opacity: 0.55;
+		z-index: 4;
+		pointer-events: none;
+	}
+
+	/* ---------- CARDS (the 3 media items) ---------- */
+	.about-card {
+		position: absolute;
+		margin: 0;
+		filter: drop-shadow(0 18px 36px rgb(0 94 71 / 18%));
+		transition: transform 0.5s cubic-bezier(0.2, 0.7, 0.2, 1);
+	}
+
+	.about-card-inner {
+		background: var(--color-white);
+		padding: 0.55rem 0.55rem 0.7rem;
+		border-radius: 0.35rem;
+		overflow: hidden;
+	}
+
+	.about-card :global(img),
+	.about-card video {
+		display: block;
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		border-radius: 0.15rem;
+	}
+
+	/* ---------- VIDEO CARD ---------- */
+	.about-card--video {
+		top: 4%;
+		right: -2%;
+		width: 72%;
+		max-width: 560px;
+		z-index: 2;
+		transform: rotate(0.6deg);
+	}
+
+	.about-card--video .about-card-inner {
+		padding: 0.45rem;
+	}
+
+	.about-card--video video {
+		aspect-ratio: 16 / 9;
+		border-radius: 0.2rem;
+	}
+
+	/* ---------- FERNS CARD (vertical, tucked behind/over the video) ---------- */
+	.about-card--ferns {
+		left: -4%;
+		top: 38%;
+		width: 38%;
+		max-width: 270px;
+		z-index: 3;
+		transform: rotate(-2.4deg);
+	}
+
+	.about-card--ferns :global(img) {
+		aspect-ratio: 3 / 4;
+	}
+
+	/* ---------- CANDLE CARD (horizontal, anchors bottom right) ---------- */
+	.about-card--candle {
+		right: 4%;
+		bottom: -4%;
+		width: 56%;
+		max-width: 400px;
+		z-index: 4;
+		transform: rotate(1.6deg);
+	}
+
+	.about-card--candle :global(img) {
+		aspect-ratio: 4 / 3;
+	}
+
+	.about-card-caption {
+		margin: 0.55rem 0.25rem 0;
+		font-family: var(--font-serif);
+		font-style: italic;
+		font-size: 0.92rem;
+		color: var(--color-dark-slate-gray);
+		text-align: center;
+		letter-spacing: 0.01em;
+	}
+
+	/* Hover: tiny "lift" — gives the collage some life on pointer devices */
+	@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+		.about-stage:hover .about-card--video {
+			transform: rotate(0deg) translateY(-4px);
+		}
+		.about-stage:hover .about-card--ferns {
+			transform: rotate(-1.4deg) translate(4px, -4px);
+		}
+		.about-stage:hover .about-card--candle {
+			transform: rotate(0.6deg) translate(-4px, -4px);
+		}
+	}
+
+	/* ---------- RESPONSIVE ---------- */
+	@media (max-width: 960px) {
+		.about-inner {
+			grid-template-columns: 1fr;
+			gap: clamp(2.5rem, 6vw, 3.5rem);
+		}
+
+		.about-copy {
+			max-width: 62ch;
+		}
+
+		.about-stage {
+			min-height: clamp(380px, 70vw, 560px);
+			margin-inline: 0.5rem;
+		}
+
+		.about-leaf {
+			left: -0.5rem;
+			top: -1rem;
+		}
+	}
+
+	@media (max-width: 540px) {
+		.about-stage {
+			min-height: 0;
+			display: grid;
+			grid-template-columns: repeat(6, 1fr);
+			grid-auto-rows: minmax(20px, auto);
+			gap: 0.4rem;
+		}
+
+		.about-blob {
+			inset: 8% -10% auto auto;
+			width: 70%;
+		}
+
+		.about-leaf {
+			left: 0;
+			top: -1.2rem;
+		}
+
+		.about-card {
+			position: relative;
+			top: auto;
+			right: auto;
+			bottom: auto;
+			left: auto;
+			width: 100%;
+			max-width: none;
+		}
+
+		.about-card--video {
+			grid-column: 1 / span 6;
+			transform: rotate(0.6deg);
+		}
+
+		.about-card--ferns {
+			grid-column: 1 / span 3;
+			margin-top: -1.5rem;
+			transform: rotate(-2.4deg);
+		}
+
+		.about-card--candle {
+			grid-column: 3 / span 4;
+			margin-top: -2rem;
+			transform: rotate(1.6deg);
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.about-card,
+		.about-card--video,
+		.about-card--ferns,
+		.about-card--candle {
+			transform: none !important;
+			transition: none;
+		}
 	}
 </style>

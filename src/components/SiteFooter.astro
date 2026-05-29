@@ -74,7 +74,10 @@ const year = new Date().getFullYear();
 	<div class="footer-legal">
 		<div class="container legal-row">
 			<p>
-				<a href="/privacy">Privacy Policy</a> · <a href="/terms">Terms &amp; Conditions</a>
+				<a href="/privacy">Privacy Policy</a> · <a href="/terms">Terms &amp; Conditions</a> ·
+				<button type="button" class="legal-cookie-btn" data-cookie-action="open">
+					Manage cookies
+				</button>
 			</p>
 			<p>© {year} Awaken Discovery · Web design by dotwall</p>
 		</div>
@@ -289,6 +292,26 @@ const year = new Date().getFullYear();
 	.legal-row a:hover,
 	.legal-row a:focus-visible {
 		text-decoration: underline;
+	}
+
+	.legal-cookie-btn {
+		font: inherit;
+		font-size: 0.78rem;
+		background: none;
+		border: 0;
+		padding: 0;
+		margin: 0;
+		color: inherit;
+		opacity: 0.92;
+		cursor: pointer;
+		text-decoration: none;
+	}
+
+	.legal-cookie-btn:hover,
+	.legal-cookie-btn:focus-visible {
+		text-decoration: underline;
+		text-underline-offset: 3px;
+		outline: none;
 	}
 
 	@media (max-width: 700px) {
