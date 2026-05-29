@@ -122,6 +122,7 @@ export const navItems: NavItem[] = [
 		href: "/therapy",
 		children: [
 			{ label: "Therapy Overview", href: "/therapy" },
+			{ label: "About Therapy", href: "/about-therapy", dividerAfter: true },
 			{ label: "For Teachers", href: "/teachers" },
 			{ label: "For Anxiety", href: "/anxiety", dividerAfter: true },
 			{ label: "Individual Pricing", href: "/pricing/individual" },
@@ -136,6 +137,7 @@ export const footerNavItems: NavItem[] = [
 	{ label: "Home", href: "/" },
 	{ label: "About", href: "/about" },
 	{ label: "Therapy", href: "/therapy" },
+	{ label: "About Therapy", href: "/about-therapy" },
 	{ label: "Teachers", href: "/teachers" },
 	{ label: "Anxiety", href: "/anxiety" },
 	{ label: "Free Resources", href: "/free-resources" },
