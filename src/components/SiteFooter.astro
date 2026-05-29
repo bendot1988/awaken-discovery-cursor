@@ -72,14 +72,22 @@ const year = new Date().getFullYear();
 	</div>
 
 	<div class="footer-legal">
-		<div class="container legal-row">
-			<p>
-				<a href="/privacy">Privacy Policy</a> · <a href="/terms">Terms &amp; Conditions</a> ·
-				<button type="button" class="legal-cookie-btn" data-cookie-action="open">
-					Manage cookies
-				</button>
+		<div class="container">
+			<p class="footer-disclaimer" role="note">
+				<span class="footer-disclaimer-tag">Disclaimer</span>
+				Awaken Discovery content is intended for educational and wellbeing
+				purposes only and does not replace professional medical, mental health
+				or crisis support.
 			</p>
-			<p>© {year} Awaken Discovery · Web design by dotwall</p>
+			<div class="legal-row">
+				<p>
+					<a href="/privacy">Privacy Policy</a> · <a href="/terms">Terms &amp; Conditions</a> ·
+					<button type="button" class="legal-cookie-btn" data-cookie-action="open">
+						Manage cookies
+					</button>
+				</p>
+				<p>© {year} Awaken Discovery · Web design by dotwall</p>
+			</div>
 		</div>
 	</div>
 </footer>
@@ -273,7 +281,31 @@ const year = new Date().getFullYear();
 
 	.footer-legal {
 		border-top: 1px solid rgb(255 255 255 / 20%);
-		padding-block: 0.75rem;
+		padding-block: 1rem;
+	}
+
+	.footer-disclaimer {
+		margin: 0 0 0.75rem;
+		padding: 0 0 0.75rem;
+		border-bottom: 1px solid rgb(255 255 255 / 12%);
+		font-size: 0.74rem;
+		line-height: 1.55;
+		color: rgb(255 255 255 / 72%);
+		max-width: 90ch;
+	}
+
+	.footer-disclaimer-tag {
+		display: inline-block;
+		margin-right: 0.5rem;
+		padding: 0.1rem 0.5rem;
+		border-radius: 999px;
+		background: rgb(255 255 255 / 12%);
+		color: var(--color-white);
+		font-size: 0.62rem;
+		font-weight: 700;
+		letter-spacing: 0.1em;
+		text-transform: uppercase;
+		vertical-align: middle;
 	}
 
 	.legal-row {

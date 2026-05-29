@@ -1,8 +1,11 @@
 ---
+import { Image } from "astro:assets";
 import Layout from "../layouts/Layout.astro";
 import SiteHeader from "../components/SiteHeader.astro";
 import SiteFooter from "../components/SiteFooter.astro";
 import { locations, navItems, teacherGuidePath } from "../data/site";
+import handPickingBook from "../assets/teachers/hand-picking-book.jpg";
+import stoolInClearing from "../assets/teachers/stool-in-clearing.jpg";
 ---
 
 <Layout
@@ -38,9 +41,8 @@ import { locations, navItems, teacherGuidePath } from "../data/site";
 						<li>✔ Counsellor &amp; Psychotherapist</li>
 						<li>✔ Nervous-System-Aware Support</li>
 					</ul>
-					<p class="hero-todo">{`{{TODO: brand imagery — cups, books, Ally writing}}`}</p>
 				</div>
-				<div class="hero-media">
+				<figure class="hero-media">
 					<img
 						src="/assets/images/ally-writing-journal.jpg"
 						alt="Ally — counsellor and ex-teacher — writing reflectively in a journal at her desk"
@@ -49,12 +51,28 @@ import { locations, navItems, teacherGuidePath } from "../data/site";
 						loading="eager"
 						decoding="async"
 					/>
-				</div>
+				</figure>
 			</div>
 		</section>
 
 		<section class="emotional-connection section section-soft">
-			<div class="container">
+			<div class="container ec-grid">
+				<figure class="ec-media">
+					<Image
+						src={handPickingBook}
+						alt="A hand gently lifting a hard-backed book from a stack on a wooden stool in a quiet woodland — choosing what to carry, what to put down"
+						widths={[360, 540, 720]}
+						sizes="(max-width: 960px) 80vw, 380px"
+						loading="lazy"
+						decoding="async"
+						format="webp"
+						quality={80}
+					/>
+					<figcaption>
+						Some of it isn't yours to carry.
+					</figcaption>
+				</figure>
+
 				<div class="ec-inner">
 					<p class="section-kicker">Emotional Connection</p>
 					<h2>When Teaching Begins to Cost You More Than You Expected</h2>
@@ -81,16 +99,225 @@ import { locations, navItems, teacherGuidePath } from "../data/site";
 			</div>
 		</section>
 
-		<section class="coming-up section">
+		<!-- ============== FREE GUIDE — FINDING CALM IN THE CHAOS ============== -->
+		<section class="free-guide section" id="free-guide">
+			<div class="container fg-grid">
+				<div class="fg-copy">
+					<p class="section-kicker">A Free Guide for Overwhelmed Teachers</p>
+					<h2>Finding Calm in the Chaos</h2>
+					<p class="fg-subtitle">Why you can't switch off after teaching.</p>
+					<p>
+						A gentle, body-aware guide designed to help teachers better
+						understand emotional overwhelm, calm the nervous system and begin
+						reconnecting with themselves again.
+					</p>
+					<p class="fg-inside-title">What's inside</p>
+					<ul class="fg-inside">
+						<li>Grounding tools for difficult days</li>
+						<li>Nervous system calming techniques</li>
+						<li>Emotional burnout awareness</li>
+						<li>Reflection prompts</li>
+						<li>Gentle support strategies</li>
+						<li>Understanding anxiety within teaching</li>
+					</ul>
+				</div>
+
+				<form
+					class="fg-form"
+					method="post"
+					action="#"
+					novalidate
+					aria-describedby="fg-todo"
+				>
+					<p class="fg-form-kicker">Email signup</p>
+					<h3 class="fg-form-title">Send Me the Free Guide</h3>
+					<label class="fg-field">
+						<span>Email address</span>
+						<input
+							type="email"
+							name="email"
+							autocomplete="email"
+							required
+							placeholder="you@example.com"
+						/>
+					</label>
+
+					<label class="fg-consent">
+						<input type="checkbox" name="consent" required />
+						<span>
+							I'd like to receive supportive wellbeing emails, resources and
+							updates from Awaken Discovery. I understand I can unsubscribe at
+							any time.
+						</span>
+					</label>
+
+					<button type="submit" class="cta cta-solid fg-submit">
+						Send Me the Free Guide
+					</button>
+
+					<p class="fg-privacy">
+						Your information will always be treated with care and never shared
+						with third parties. See our <a href="/privacy">Privacy Policy</a>.
+					</p>
+
+					<p id="fg-todo" class="fg-todo">
+						{`{{TODO: connect to ESP — auto-send Teacher Guide PDF + trigger nurture sequence.}}`}
+					</p>
+				</form>
+			</div>
+		</section>
+
+		<!-- ============== MEET ALLY — TEACHER VERSION ============== -->
+		<section
+			class="meet-ally-teacher section section-soft"
+			id="meet-ally-teacher"
+		>
+			<div class="container mat-inner">
+				<p class="section-kicker">Meet Ally</p>
+				<h2>From Teacher Burnout to Emotional Healing</h2>
+				<div class="mat-copy">
+					<p>
+						Before becoming a Counsellor and Psychotherapist, I spent over
+						twenty years working within education.
+					</p>
+					<p>
+						I understand the emotional pressure, overstimulation and
+						exhaustion that teaching can quietly create beneath the surface.
+					</p>
+					<p>
+						Awaken Discovery, Teachers was created to offer teachers a calmer,
+						more compassionate space to pause, breathe and reconnect with
+						themselves again — whether through therapy, emotional wellbeing
+						support or practical nervous system awareness tools.
+					</p>
+					<p class="mat-emphasis">
+						You do not need to keep carrying everything alone.
+					</p>
+				</div>
+				<a class="cta cta-outline mat-cta" href="/about">Learn More About Ally</a>
+			</div>
+		</section>
+
+		<!-- ============== SUPPORT BEYOND SURVIVAL MODE — 4 CARDS ============== -->
+		<section class="support-beyond section" id="support">
 			<div class="container">
-				<h2 class="cu-title">Coming on this page</h2>
-				<ul class="cu-list">
-					<li>Free Guide — <em>Finding Calm in the Chaos: Why You Can't Switch Off After Teaching</em></li>
-					<li>Meet Ally — teacher version</li>
-					<li>Support Beyond Survival Mode (4 cards)</li>
-					<li>Final CTA — book a session or free consultation</li>
-				</ul>
-				<p class="cu-note">Want to start now? <a href="/contact">Book a free consultation</a>.</p>
+				<header class="sb-head">
+					<p class="section-kicker">Resources &amp; Support</p>
+					<h2>Support Beyond Survival Mode</h2>
+					<p class="sb-intro">
+						Whether you need immediate calming tools, deeper emotional
+						reflection or ongoing support, Awaken Discovery, Teacher offers
+						gentle resources designed specifically for overwhelmed teachers.
+					</p>
+				</header>
+
+				<div class="sb-grid">
+					<article class="sb-card sb-card--featured">
+						<p class="sb-tag">Free Teacher Guide</p>
+						<h3>Why You Can't Switch Off After Teaching</h3>
+						<p>
+							A calming guide to understanding emotional overload, nervous
+							system exhaustion and why teaching can become so difficult to
+							mentally leave behind at the end of the day.
+						</p>
+						<a class="sb-link" href={teacherGuidePath}>
+							Download the Free Guide
+							<span aria-hidden="true">→</span>
+						</a>
+					</article>
+
+					<article class="sb-card">
+						<p class="sb-tag">Guided Journal</p>
+						<h3>Teacher Anxiety Reflection Journal</h3>
+						<p>
+							A supportive guided journal designed to help teachers recognise
+							emotional patterns, process overwhelm and reconnect with
+							themselves beyond survival mode.
+						</p>
+						<a class="sb-link" href="/products">
+							Explore the Journal
+							<span aria-hidden="true">→</span>
+						</a>
+						<p class="sb-todo">{`{{TODO: link to Teacher Decompression / Realignment / Membership product page once built. Available via wellbeing product section.}}`}</p>
+					</article>
+
+					<article class="sb-card">
+						<p class="sb-tag">Group Wellbeing Session</p>
+						<h3>Sunday Reset for Teachers</h3>
+						<p>
+							Gentle online wellbeing sessions created to help teachers
+							emotionally decompress, regulate the nervous system and prepare
+							for the week ahead with greater calm.
+						</p>
+						<a class="sb-link" href="/contact">
+							Learn About the Reset
+							<span aria-hidden="true">→</span>
+						</a>
+						<p class="sb-todo">{`{{TODO: confirm cadence (monthly vs weekly) + final landing URL.}}`}</p>
+					</article>
+
+					<article class="sb-card">
+						<p class="sb-tag">1-to-1 Therapy</p>
+						<h3>One-to-One Therapy Support</h3>
+						<p>
+							A compassionate space to explore anxiety, burnout, overwhelm and
+							life beyond constantly pushing through.
+						</p>
+						<a class="sb-link" href="/contact">
+							Begin Therapy Support
+							<span aria-hidden="true">→</span>
+						</a>
+					</article>
+				</div>
+
+				<aside class="sb-more">
+					<div class="sb-more-copy">
+						<p class="section-kicker">In the works</p>
+						<h3>More Teacher Wellbeing Resources Are Currently Being Developed</h3>
+						<p>
+							Awaken Discovery is continuing to create supportive tools, guided
+							audios and wellbeing resources for teachers navigating anxiety,
+							overwhelm and emotional exhaustion.
+						</p>
+					</div>
+					<a class="cta cta-outline sb-more-cta" href="#free-guide">
+						Join the email community
+					</a>
+				</aside>
+			</div>
+		</section>
+
+		<!-- ============== FINAL CTA — BREAKING POINT ============== -->
+		<section class="cta-final section" id="begin">
+			<div class="container cf-grid">
+				<div class="cf-copy">
+					<p class="section-kicker">Begin when you're ready</p>
+					<h2>You Do Not Need to Reach Breaking Point Before Seeking Support</h2>
+					<p>
+						Whether you are trying to survive the term, questioning your future
+						in teaching or simply feeling emotionally exhausted beneath the
+						pressure of holding everything together, support is available.
+					</p>
+					<div class="cf-buttons">
+						<a class="cta cta-solid" href={teacherGuidePath}>
+							Download the Free Guide
+						</a>
+						<a class="cta cta-outline" href="/contact">Book a session</a>
+						<a class="cta cta-outline" href="/contact">Book a Free Consultation</a>
+					</div>
+				</div>
+				<figure class="cf-media">
+					<Image
+						src={stoolInClearing}
+						alt="A wooden stool with a small stack of books sits in a quiet woodland clearing — a place to set things down"
+						widths={[420, 640, 860]}
+						sizes="(max-width: 960px) 80vw, 440px"
+						loading="lazy"
+						decoding="async"
+						format="webp"
+						quality={80}
+					/>
+				</figure>
 			</div>
 		</section>
 	</main>
@@ -172,24 +399,56 @@ import { locations, navItems, teacherGuidePath } from "../data/site";
 		opacity: 0.8;
 	}
 
-	.hero-todo {
-		margin: 0.6rem 0 0;
-		font-size: 0.74rem;
-		font-style: italic;
-		opacity: 0.55;
+	.hero-media {
+		margin: 0;
 	}
 
-	.hero-media img {
+	.hero-media :global(img) {
 		width: 100%;
 		aspect-ratio: 4 / 5;
 		object-fit: cover;
-		object-position: 50% 30%;
+		object-position: 50% 40%;
 		border-radius: 1rem;
 		box-shadow: 0 14px 35px rgb(29 35 39 / 14%);
 	}
 
+	/* ---------- EMOTIONAL CONNECTION (image left, text right) ---------- */
+	.ec-grid {
+		display: grid;
+		grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+		gap: clamp(2rem, 5vw, 4rem);
+		align-items: start;
+	}
+
 	.ec-inner {
-		max-width: 70ch;
+		max-width: 60ch;
+	}
+
+	.ec-media {
+		margin: 0;
+		position: sticky;
+		top: 6rem;
+		display: flex;
+		flex-direction: column;
+		gap: 0.7rem;
+	}
+
+	.ec-media :global(img) {
+		width: 100%;
+		aspect-ratio: 3 / 4;
+		object-fit: cover;
+		border-radius: 1rem;
+		box-shadow: 0 18px 36px rgb(0 94 71 / 14%);
+	}
+
+	.ec-media figcaption {
+		font-family: var(--font-serif);
+		font-style: italic;
+		font-size: 0.95rem;
+		line-height: 1.45;
+		color: var(--color-dark-slate-gray);
+		text-align: center;
+		text-wrap: balance;
 	}
 
 	.section-kicker {
@@ -250,33 +509,379 @@ import { locations, navItems, teacherGuidePath } from "../data/site";
 		opacity: 0.55;
 	}
 
-	.coming-up {
+	/* ---------- FREE GUIDE ---------- */
+	.free-guide {
 		background: var(--color-white);
 	}
 
-	.cu-title {
-		font-family: var(--font-serif);
-		font-size: 1.4rem;
-		font-weight: 500;
-		margin: 0 0 0.8rem;
+	.fg-grid {
+		display: grid;
+		grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+		gap: clamp(2rem, 5vw, 4rem);
+		align-items: start;
 	}
 
-	.cu-list {
+	.fg-copy {
+		max-width: 56ch;
+	}
+
+	.fg-subtitle {
+		margin: -0.4rem 0 1.2rem;
+		font-family: var(--font-serif);
+		font-style: italic;
+		font-size: clamp(1.1rem, 1.8vw, 1.3rem);
+		color: var(--color-dark-slate-gray);
+	}
+
+	.fg-copy p {
+		margin: 0 0 1rem;
+		line-height: 1.85;
+	}
+
+	.fg-inside-title {
+		margin: 1.6rem 0 0.9rem !important;
+		font-family: var(--font-serif);
+		font-size: 1rem;
+		font-weight: 600;
+		text-transform: uppercase;
+		letter-spacing: 0.12em;
+		color: var(--color-dark-slate-gray);
+	}
+
+	.fg-inside {
+		list-style: none;
+		padding: 0;
 		margin: 0;
-		padding-left: 1.2rem;
+		display: grid;
+		gap: 0.55rem;
+	}
+
+	.fg-inside li {
+		position: relative;
+		padding-left: 1.8rem;
+		line-height: 1.55;
+	}
+
+	.fg-inside li::before {
+		content: "";
+		position: absolute;
+		left: 0;
+		top: 0.45em;
+		width: 1.05rem;
+		height: 1.05rem;
+		border-radius: 999px;
+		background: rgb(0 94 71 / 12%);
+		border: 1px solid rgb(0 94 71 / 28%);
+	}
+
+	.fg-inside li::after {
+		content: "";
+		position: absolute;
+		left: 0.32rem;
+		top: 0.78em;
+		width: 0.32rem;
+		height: 0.18rem;
+		border-left: 1.6px solid var(--color-dark-slate-gray);
+		border-bottom: 1.6px solid var(--color-dark-slate-gray);
+		transform: rotate(-45deg);
+	}
+
+	.fg-form {
+		background: linear-gradient(180deg, #f6f8f6 0%, #eaf0ea 100%);
+		padding: 1.8rem 1.6rem;
+		border-radius: 1rem;
+		border: 1px solid rgb(0 94 71 / 18%);
+		box-shadow: 0 14px 32px rgb(0 94 71 / 10%);
+		display: grid;
+		gap: 0.95rem;
+		position: sticky;
+		top: 6rem;
+	}
+
+	.fg-form-kicker {
+		margin: 0;
+		text-transform: uppercase;
+		letter-spacing: 0.12em;
+		font-size: 0.72rem;
+		font-weight: 600;
+		color: var(--color-dark-slate-gray);
+	}
+
+	.fg-form-title {
+		margin: 0 0 0.4rem;
+		font-family: var(--font-serif);
+		font-size: 1.35rem;
+		font-weight: 500;
+		color: var(--color-dark-slate-gray);
+	}
+
+	.fg-field {
 		display: grid;
 		gap: 0.4rem;
+		font-size: 0.85rem;
 	}
 
-	.cu-note {
-		margin: 1.1rem 0 0;
-		font-size: 0.95rem;
+	.fg-field input {
+		padding: 0.78rem 1rem;
+		border-radius: 0.65rem;
+		border: 1px solid var(--color-gainsboro);
+		font: inherit;
+		background: var(--color-white);
 	}
 
-	.cu-note a {
+	.fg-field input:focus-visible {
+		outline: none;
+		border-color: var(--color-dark-slate-gray);
+		box-shadow: 0 0 0 3px rgb(0 94 71 / 18%);
+	}
+
+	.fg-consent {
+		display: flex;
+		gap: 0.6rem;
+		font-size: 0.82rem;
+		line-height: 1.55;
+	}
+
+	.fg-consent input {
+		margin-top: 0.25rem;
+		flex-shrink: 0;
+	}
+
+	.fg-submit {
+		justify-self: stretch;
+	}
+
+	.fg-privacy {
+		margin: 0;
+		font-size: 0.78rem;
+		opacity: 0.8;
+		line-height: 1.5;
+	}
+
+	.fg-privacy a {
 		color: var(--color-dark-slate-gray);
 		text-decoration: underline;
 		text-underline-offset: 3px;
+	}
+
+	.fg-todo {
+		margin: 0;
+		font-size: 0.72rem;
+		font-style: italic;
+		opacity: 0.55;
+	}
+
+	/* ---------- MEET ALLY (TEACHER) ---------- */
+	.mat-inner {
+		max-width: 64ch;
+		text-align: left;
+	}
+
+	.mat-inner h2 {
+		max-width: 24ch;
+		margin-bottom: 1.4rem;
+	}
+
+	.mat-copy p {
+		margin: 0 0 1rem;
+		line-height: 1.9;
+	}
+
+	.mat-emphasis {
+		font-family: var(--font-serif);
+		font-style: italic;
+		font-size: 1.2rem !important;
+		color: var(--color-dark-slate-gray);
+		margin-top: 1.4rem !important;
+	}
+
+	.mat-cta {
+		margin-top: 1.3rem;
+	}
+
+	/* ---------- SUPPORT BEYOND SURVIVAL MODE ---------- */
+	.support-beyond {
+		background: var(--color-white);
+	}
+
+	.sb-head {
+		max-width: 60ch;
+		margin-bottom: 2.2rem;
+	}
+
+	.sb-intro {
+		margin: 0;
+		line-height: 1.85;
+	}
+
+	.sb-grid {
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: clamp(1rem, 2vw, 1.4rem);
+	}
+
+	.sb-card {
+		background: var(--color-white);
+		border: 1px solid rgb(0 94 71 / 18%);
+		border-radius: 1rem;
+		padding: 1.5rem 1.5rem 1.7rem;
+		display: flex;
+		flex-direction: column;
+		gap: 0.7rem;
+		transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+	}
+
+	.sb-card:hover {
+		transform: translateY(-3px);
+		box-shadow: 0 16px 32px rgb(0 94 71 / 12%);
+		border-color: rgb(0 94 71 / 35%);
+	}
+
+	.sb-card--featured {
+		background: linear-gradient(160deg, #f6f8f6 0%, #eaf0ea 100%);
+		border-color: rgb(0 94 71 / 30%);
+	}
+
+	.sb-tag {
+		display: inline-block;
+		align-self: flex-start;
+		flex: 0 0 auto;
+		width: fit-content;
+		max-width: 100%;
+		padding: 0.28rem 0.75rem;
+		border-radius: 999px;
+		background: rgb(0 94 71 / 10%);
+		color: var(--color-dark-slate-gray);
+		font-size: 0.7rem;
+		font-weight: 600;
+		letter-spacing: 0.08em;
+		text-transform: uppercase;
+		white-space: nowrap;
+		margin: 0;
+	}
+
+	.sb-card--featured .sb-tag {
+		background: var(--color-dark-slate-gray);
+		color: var(--color-white);
+	}
+
+	.sb-card h3 {
+		margin: 0;
+		font-family: var(--font-serif);
+		font-size: 1.25rem;
+		font-weight: 500;
+		line-height: 1.3;
+		color: var(--color-dark-slate-gray);
+	}
+
+	.sb-card p:not(.sb-tag):not(.sb-todo) {
+		margin: 0;
+		font-size: 0.92rem;
+		line-height: 1.65;
+		flex: 1;
+	}
+
+	.sb-link {
+		margin-top: 0.4rem;
+		display: inline-flex;
+		align-items: center;
+		gap: 0.35rem;
+		font-weight: 600;
+		font-size: 0.92rem;
+		color: var(--color-dark-slate-gray);
+		text-decoration: none;
+		width: fit-content;
+		transition: gap 0.2s ease;
+	}
+
+	.sb-link:hover,
+	.sb-link:focus-visible {
+		gap: 0.6rem;
+		text-decoration: underline;
+		text-underline-offset: 3px;
+	}
+
+	.sb-todo {
+		margin: 0;
+		font-size: 0.7rem !important;
+		font-style: italic;
+		opacity: 0.5;
+		line-height: 1.4 !important;
+	}
+
+	.sb-more {
+		margin-top: 1.6rem;
+		padding: 1.4rem 1.5rem;
+		border-radius: 1rem;
+		background: linear-gradient(180deg, var(--color-white) 0%, #f6f8f6 100%);
+		border: 1px dashed rgb(0 94 71 / 35%);
+		display: grid;
+		grid-template-columns: minmax(0, 1fr) auto;
+		gap: 1.2rem;
+		align-items: center;
+	}
+
+	.sb-more-copy h3 {
+		margin: 0.4rem 0 0.5rem;
+		font-family: var(--font-serif);
+		font-size: 1.15rem;
+		font-weight: 500;
+		color: var(--color-dark-slate-gray);
+		line-height: 1.3;
+	}
+
+	.sb-more-copy p {
+		margin: 0;
+		font-size: 0.92rem;
+		line-height: 1.6;
+		max-width: 60ch;
+	}
+
+	.sb-more-cta {
+		flex-shrink: 0;
+	}
+
+	/* ---------- FINAL CTA — BREAKING POINT ---------- */
+	.cta-final {
+		background: linear-gradient(180deg, var(--color-white) 0%, #eaf0ea 100%);
+		padding-block: clamp(3.5rem, 7vw, 5.5rem);
+	}
+
+	.cf-grid {
+		display: grid;
+		grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+		gap: clamp(2rem, 5vw, 4rem);
+		align-items: center;
+	}
+
+	.cf-copy h2 {
+		max-width: 22ch;
+	}
+
+	.cf-copy p {
+		margin: 0 0 1.4rem;
+		line-height: 1.85;
+		max-width: 56ch;
+	}
+
+	.cf-buttons {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.7rem;
+	}
+
+	.cf-media {
+		margin: 0;
+	}
+
+	.cf-media :global(img) {
+		width: 100%;
+		aspect-ratio: 3 / 4;
+		max-height: 580px;
+		object-fit: cover;
+		object-position: 50% 60%;
+		border-radius: 1rem;
+		box-shadow: 0 18px 36px rgb(0 94 71 / 18%);
 	}
 
 	@media (max-width: 1024px) {
@@ -286,6 +891,48 @@ import { locations, navItems, teacherGuidePath } from "../data/site";
 
 		.hero-media {
 			order: -1;
+			max-width: 480px;
+			margin-inline: auto;
+		}
+	}
+
+	@media (max-width: 960px) {
+		.ec-grid,
+		.fg-grid,
+		.cf-grid {
+			grid-template-columns: 1fr;
+		}
+
+		.ec-media {
+			position: static;
+			max-width: 420px;
+			margin-inline: auto;
+		}
+
+		.fg-form {
+			position: static;
+		}
+
+		.cf-media {
+			max-width: 480px;
+			margin-inline: auto;
+		}
+
+		.cf-grid {
+			gap: clamp(2rem, 5vw, 3rem);
+		}
+
+		.sb-grid {
+			grid-template-columns: 1fr;
+		}
+
+		.sb-more {
+			grid-template-columns: 1fr;
+			text-align: left;
+		}
+
+		.sb-more-cta {
+			justify-self: start;
 		}
 	}
 </style>
