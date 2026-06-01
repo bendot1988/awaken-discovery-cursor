@@ -1,9 +1,14 @@
 ---
+import { Image } from "astro:assets";
 import Layout from "../layouts/Layout.astro";
 import SiteHeader from "../components/SiteHeader.astro";
 import SiteFooter from "../components/SiteFooter.astro";
 import { locations, navItems } from "../data/site";
 import { calendlyLinks } from "../data/calendly";
+import allyStoolGarden from "../assets/therapy/ally-stool-garden.jpg";
+import roomCouplesChairs from "../assets/therapy/room-couples-chairs.jpg";
+import roomIndividualChair from "../assets/therapy/room-individual-chair.jpg";
+import allyWithDog from "../assets/therapy/ally-with-dog.jpg";
 
 type SessionFormat = {
 	id: string;
@@ -99,18 +104,18 @@ const couplesBenefits = [
 ---
 
 <Layout
-	title="Therapy with Allyson — Individual & Couples Counselling | Awaken Discovery"
-	description="Compassionate individual and couples therapy with Allyson. 60 or 90 minute sessions, face to face, online or by phone. Tailored support for personal wellbeing and stronger relationships."
+	title="Therapy with Ally — Individual & Couples Counselling | Awaken Discovery"
+	description="Compassionate individual and couples therapy with Ally. 60 or 90 minute sessions, face to face, online or by phone. Tailored support for personal wellbeing and stronger relationships."
 >
 	<SiteHeader navItems={navItems} />
 
 	<main class="th-page">
 		<!-- ============== HERO ============== -->
 		<section class="th-hero section">
-			<div class="container">
+			<div class="container th-hero-grid">
 				<div class="th-hero-inner">
 					<p class="section-kicker">How I can help</p>
-					<h1>Therapy with Allyson</h1>
+					<h1>Therapy with Ally</h1>
 					<p class="th-lede">
 						A calm, unhurried space to be heard — whether you're working
 						through something on your own or alongside your partner. Choose the
@@ -118,9 +123,21 @@ const couplesBenefits = [
 					</p>
 					<div class="th-hero-actions">
 						<a class="cta cta-solid" href="#choose">Choose Therapy</a>
-						<a class="cta cta-outline" href="/about">Meet Allyson</a>
+						<a class="cta cta-outline" href="/about">Meet Ally</a>
 					</div>
 				</div>
+				<figure class="th-hero-figure">
+					<Image
+						src={allyStoolGarden}
+						alt="Ally seated on a wooden stool in her garden, in a soft beige jacket — smiling warmly to camera"
+						widths={[420, 640, 860]}
+						sizes="(max-width: 960px) 70vw, 420px"
+						loading="eager"
+						decoding="async"
+						format="webp"
+						quality={82}
+					/>
+				</figure>
 			</div>
 		</section>
 
@@ -174,33 +191,47 @@ const couplesBenefits = [
 								<h3 class="th-script">Individual Therapy</h3>
 								<p class="th-banner">
 									<span aria-hidden="true">✦</span>
-									Embark on your journey to personal wellbeing with Allyson's
+									Embark on your journey to personal wellbeing with Ally's
 									individual therapy sessions
 									<span aria-hidden="true">✦</span>
 								</p>
 
-								<div class="th-narrative">
-									<p>
-										Hello, I'm Allyson, and I'm delighted to welcome you to your
-										personal sanctuary for growth and self-exploration. With
-										over a decade of experience in guiding individuals through
-										their most challenging moments, I've crafted these
-										one-on-one sessions to be a safe haven for your mental and
-										emotional wellbeing. Whether you're seeking clarity, coping
-										strategies, or simply a compassionate ear, our individual
-										therapy is tailored to illuminate and nurture your unique
-										path to inner peace.
-									</p>
-									<p>
-										In our 60 or 90-minute sessions, we will embark on a journey
-										together to uncover the layers of your story and address the
-										core of your concerns. It's a collaborative space where your
-										voice is heard and your feelings are validated. We'll work
-										at a pace that feels comfortable to you, ensuring each step
-										we take is one closer to the serenity and understanding you
-										deserve. Let's begin this transformative voyage towards a
-										brighter, more balanced you.
-									</p>
+								<div class="th-narrative-grid">
+									<div class="th-narrative">
+										<p>
+											Hello, I'm Ally, and I'm delighted to welcome you to your
+											personal sanctuary for growth and self-exploration. With
+											over a decade of experience in guiding individuals through
+											their most challenging moments, I've crafted these
+											one-on-one sessions to be a safe haven for your mental and
+											emotional wellbeing. Whether you're seeking clarity, coping
+											strategies, or simply a compassionate ear, our individual
+											therapy is tailored to illuminate and nurture your unique
+											path to inner peace.
+										</p>
+										<p>
+											In our 60 or 90-minute sessions, we will embark on a journey
+											together to uncover the layers of your story and address the
+											core of your concerns. It's a collaborative space where your
+											voice is heard and your feelings are validated. We'll work
+											at a pace that feels comfortable to you, ensuring each step
+											we take is one closer to the serenity and understanding you
+											deserve. Let's begin this transformative voyage towards a
+											brighter, more balanced you.
+										</p>
+									</div>
+									<figure class="th-narrative-figure">
+										<Image
+											src={roomIndividualChair}
+											alt="A soft mustard armchair against a sage-green wall in Ally's therapy room, with framed landscape photographs above and a leafy plant alongside — the individual session space"
+											widths={[360, 540, 720]}
+											sizes="(max-width: 900px) 80vw, 360px"
+											loading="lazy"
+											decoding="async"
+											format="webp"
+											quality={80}
+										/>
+									</figure>
 								</div>
 
 								<ul class="th-benefits" aria-label="What individual therapy offers">
@@ -302,29 +333,43 @@ const couplesBenefits = [
 									<span aria-hidden="true">✦</span>
 								</p>
 
-								<div class="th-narrative">
-									<p>
-										Hello, I'm Allyson, and I'm here to help you and your
-										partner find harmony and connection within your
-										relationship. In our 60 or 90-minute couples therapy
-										sessions, we'll create a space that nurtures open
-										communication and mutual understanding. Relationships can
-										be complex, and every couple has their unique rhythm. My
-										role is to help you both tune into each other's frequencies,
-										discovering new ways to sync harmoniously and reaffirm the
-										bond that brought you together.
-									</p>
-									<p>
-										As we journey through your shared experiences, we will
-										identify and address the underlying patterns that may be
-										causing distress. It's about building a stronger foundation
-										together — one that is resilient in the face of life's ebb
-										and flow. Whether you are navigating a particular challenge
-										or simply wish to deepen your connection, our sessions are a
-										stepping stone to a more fulfilling partnership. Let's
-										collaborate to reignite the spark and weave intimacy and
-										respect back into the fabric of your relationship.
-									</p>
+								<div class="th-narrative-grid">
+									<div class="th-narrative">
+										<p>
+											Hello, I'm Ally, and I'm here to help you and your
+											partner find harmony and connection within your
+											relationship. In our 60 or 90-minute couples therapy
+											sessions, we'll create a space that nurtures open
+											communication and mutual understanding. Relationships can
+											be complex, and every couple has their unique rhythm. My
+											role is to help you both tune into each other's frequencies,
+											discovering new ways to sync harmoniously and reaffirm the
+											bond that brought you together.
+										</p>
+										<p>
+											As we journey through your shared experiences, we will
+											identify and address the underlying patterns that may be
+											causing distress. It's about building a stronger foundation
+											together — one that is resilient in the face of life's ebb
+											and flow. Whether you are navigating a particular challenge
+											or simply wish to deepen your connection, our sessions are a
+											stepping stone to a more fulfilling partnership. Let's
+											collaborate to reignite the spark and weave intimacy and
+											respect back into the fabric of your relationship.
+										</p>
+									</div>
+									<figure class="th-narrative-figure">
+										<Image
+											src={roomCouplesChairs}
+											alt="Two soft green velvet armchairs facing each other in Ally's therapy room, with a small wooden cabinet between them — a calm space for couples sessions"
+											widths={[360, 540, 720]}
+											sizes="(max-width: 900px) 80vw, 360px"
+											loading="lazy"
+											decoding="async"
+											format="webp"
+											quality={80}
+										/>
+									</figure>
 								</div>
 
 								<ul class="th-benefits" aria-label="What couples therapy offers">
@@ -417,7 +462,7 @@ const couplesBenefits = [
 
 		<!-- ============== SOFT CLOSE ============== -->
 		<section class="th-close section">
-			<div class="container">
+			<div class="container th-close-grid">
 				<div class="th-close-inner">
 					<p class="section-kicker">Not sure which is right?</p>
 					<h2>Let's talk it through first</h2>
@@ -439,6 +484,18 @@ const couplesBenefits = [
 						<a class="cta cta-outline" href="/pricing">See Pricing & Bundles</a>
 					</div>
 				</div>
+				<figure class="th-close-figure">
+					<Image
+						src={allyWithDog}
+						alt="Ally seated on a wooden stool in her garden with her cairn terrier sitting attentively beside her"
+						widths={[380, 560, 760]}
+						sizes="(max-width: 900px) 75vw, 380px"
+						loading="lazy"
+						decoding="async"
+						format="webp"
+						quality={80}
+					/>
+				</figure>
 			</div>
 		</section>
 	</main>
@@ -494,8 +551,32 @@ const couplesBenefits = [
 		padding-top: 4rem;
 	}
 
+	.th-hero-grid {
+		display: grid;
+		grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+		gap: clamp(1.6rem, 4vw, 3rem);
+		align-items: center;
+	}
+
 	.th-hero-inner {
 		max-width: 62ch;
+	}
+
+	.th-hero-figure {
+		margin: 0;
+		border-radius: 1rem;
+		overflow: hidden;
+		box-shadow: 0 16px 38px rgb(0 94 71 / 16%);
+		aspect-ratio: 4 / 5;
+		background: var(--color-white-smoke);
+	}
+
+	.th-hero-figure img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		object-position: 50% 30%;
+		display: block;
 	}
 
 	.th-lede {
@@ -636,16 +717,42 @@ const couplesBenefits = [
 		margin: 0 0.4rem;
 	}
 
-	.th-narrative {
-		max-width: 62ch;
+	.th-narrative-grid {
+		display: grid;
+		grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+		gap: clamp(1.6rem, 3.5vw, 2.6rem);
+		align-items: start;
 		margin: 0 auto;
+		max-width: 1080px;
+	}
+
+	.th-narrative {
+		max-width: 60ch;
 		color: var(--ink-soft);
 		line-height: 1.8;
-		text-align: center;
+		text-align: left;
 	}
 
 	.th-narrative p {
 		margin: 0 0 1rem;
+	}
+
+	.th-narrative-figure {
+		margin: 0;
+		border-radius: 0.9rem;
+		overflow: hidden;
+		box-shadow: 0 14px 30px rgb(0 94 71 / 14%);
+		aspect-ratio: 3 / 4;
+		background: var(--color-white-smoke);
+		position: sticky;
+		top: 6rem;
+	}
+
+	.th-narrative-figure img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		display: block;
 	}
 
 	.th-benefits {
@@ -802,10 +909,32 @@ const couplesBenefits = [
 	}
 
 	/* ---------- SOFT CLOSE ---------- */
+	.th-close-grid {
+		display: grid;
+		grid-template-columns: minmax(0, 1.25fr) minmax(0, 0.85fr);
+		gap: clamp(1.6rem, 4vw, 3rem);
+		align-items: center;
+	}
+
 	.th-close-inner {
-		max-width: 60ch;
-		text-align: center;
-		margin: 0 auto;
+		max-width: 56ch;
+	}
+
+	.th-close-figure {
+		margin: 0;
+		border-radius: 1rem;
+		overflow: hidden;
+		box-shadow: 0 16px 36px rgb(0 94 71 / 16%);
+		aspect-ratio: 4 / 5;
+		background: var(--color-white-smoke);
+	}
+
+	.th-close-figure img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		object-position: 50% 35%;
+		display: block;
 	}
 
 	.th-close-body {
@@ -822,6 +951,46 @@ const couplesBenefits = [
 	}
 
 	/* ---------- RESPONSIVE ---------- */
+	@media (max-width: 1024px) {
+		.th-hero-grid,
+		.th-close-grid {
+			grid-template-columns: 1fr;
+		}
+
+		.th-hero-figure,
+		.th-close-figure {
+			max-width: 420px;
+			margin-inline: auto;
+		}
+
+		.th-close-inner {
+			margin-inline: auto;
+			text-align: center;
+		}
+
+		.th-close-actions {
+			justify-content: center;
+		}
+	}
+
+	@media (max-width: 900px) {
+		.th-narrative-grid {
+			grid-template-columns: 1fr;
+		}
+
+		.th-narrative {
+			max-width: 62ch;
+			margin-inline: auto;
+		}
+
+		.th-narrative-figure {
+			position: static;
+			max-width: 460px;
+			margin-inline: auto;
+			aspect-ratio: 4 / 5;
+		}
+	}
+
 	@media (max-width: 860px) {
 		.th-session-grid {
 			grid-template-columns: 1fr;

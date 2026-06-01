@@ -2,8 +2,18 @@
 import Layout from "../layouts/Layout.astro";
 import SiteHeader from "../components/SiteHeader.astro";
 import SiteFooter from "../components/SiteFooter.astro";
+import EmailSignup from "../components/home/EmailSignup.astro";
 import { anxietyGuidePath, locations, navItems } from "../data/site";
 import { calendlyLinks } from "../data/calendly";
+
+const findingCalmWhatsInside = [
+	"Grounding techniques for anxious moments",
+	"Gentle nervous system calming practices",
+	"Emotional reflection prompts",
+	"Understanding anxiety within the body",
+	"Simple ways to reconnect with yourself",
+	"Practical emotional support tools",
+];
 ---
 
 <Layout
@@ -49,10 +59,17 @@ import { calendlyLinks } from "../data/calendly";
 					<h2>Anxiety Is More Than "Just Worrying"</h2>
 					<p>
 						Anxiety can feel exhausting in ways that are difficult to explain to
-						other people. The racing thoughts. The constant overthinking. The
-						inability to fully relax. The feeling that your mind and body are always
-						"on alert," even when you desperately want to switch off.
+						other people.
 					</p>
+					<ul class="ec-bullets">
+						<li>The racing thoughts.</li>
+						<li>The constant overthinking.</li>
+						<li>The inability to fully relax.</li>
+						<li>
+							The feeling that your mind and body are always "on alert," even when
+							you desperately want to switch off.
+						</li>
+					</ul>
 					<p>
 						You may look like you are coping on the outside while quietly feeling
 						overwhelmed underneath it all. If this feels familiar, you are not broken
@@ -67,29 +84,208 @@ import { calendlyLinks } from "../data/calendly";
 			</div>
 		</section>
 
-		<section class="coming-up section">
-			<div class="container">
-				<h2 class="cu-title">Coming on this page</h2>
-				<ul class="cu-list">
-					<li>
-						Free Guide — <em>Finding Calm</em> with email signup —
-						<a href={anxietyGuidePath}>live now</a>
-					</li>
-					<li>Meet Ally — anxiety version</li>
-					<li>Continued Support (Anxiety Reflection Journal · One-to-One Therapy)</li>
-					<li>Final CTA — Free Guide · Book a Session · Free Consultation</li>
-				</ul>
-				<p class="cu-note">
-					Want to start now?
-					<a href={anxietyGuidePath}>Grab the free guide</a> or
+		<EmailSignup
+			kicker="Free Guide"
+			heading="Finding Calm"
+			subtitle="A Gentle Guide to Grounding Yourself During Anxiety"
+			body="A calming, body-aware guide designed to help you slow racing thoughts, reconnect with yourself and better understand what anxiety may be trying to communicate beneath the overwhelm."
+			whatsInside={findingCalmWhatsInside}
+			whatsInsideHeading="What's inside"
+			buttonLabel="Send Me the Free Guide"
+			privacyText="Your information will always be treated with care and never shared with third parties."
+		/>
+
+		<section class="meet-ally section">
+			<div class="container ma-inner">
+				<p class="section-kicker">Meet Ally</p>
+				<h2>A Gentle, Compassionate Approach to Anxiety Support</h2>
+
+				<div class="ma-copy">
+					<p>
+						I'm Ally — a Counsellor, Psychotherapist and wellbeing educator
+						supporting people navigating anxiety, emotional overwhelm and nervous
+						system exhaustion.
+					</p>
+					<p>
+						Awaken Discovery was created to offer a calmer, more compassionate
+						space where people can begin understanding themselves with greater
+						gentleness rather than judgment.
+					</p>
+					<p>
+						Using an integrative humanistic and body-aware approach, I support
+						individuals in slowing things down, reconnecting with themselves and
+						finding steadier ways to navigate anxiety and emotional overwhelm.
+					</p>
+					<p class="ma-emphasis">You do not need to do everything perfectly.</p>
+					<p class="ma-emphasis">And you do not need to carry this alone.</p>
+				</div>
+
+				<details class="ma-disclosure">
+					<summary>
+						<span class="ma-disclosure-label">Why I understand anxiety</span>
+						<svg
+							class="ma-disclosure-icon"
+							viewBox="0 0 24 24"
+							aria-hidden="true"
+							focusable="false"
+						>
+							<path
+								d="M6 9l6 6 6-6"
+								fill="none"
+								stroke="currentColor"
+								stroke-width="2"
+								stroke-linecap="round"
+								stroke-linejoin="round"
+							/>
+						</svg>
+					</summary>
+
+					<div class="ma-disclosure-body">
+						<h3>Why I Understand Anxiety</h3>
+						<p>
+							Anxiety is something I understand not only through professional
+							training and years of supporting others, but also through personal
+							experience.
+						</p>
+						<p>
+							Before becoming a counsellor and psychotherapist, I spent
+							twenty-five years working within education, supporting young
+							people, families, and colleagues through the emotional pressures,
+							responsibilities, and challenges that life can bring. During those
+							years, I witnessed how anxiety, stress, overwhelm, and burnout can
+							quietly affect every area of a person's life, often hidden behind a
+							brave face and a determination to keep going.
+						</p>
+						<p>
+							Alongside my professional experience, there was also a period in my
+							own life when anxiety and overwhelm became significant. Like many
+							people, I became very good at coping, carrying responsibility, and
+							putting one foot in front of the other. From the outside,
+							everything may have appeared manageable. Inside, however, the
+							experience was very different.
+						</p>
+						<p>
+							That chapter of my life deepened my understanding of how
+							exhausting it can be when your mind rarely rests, when your body
+							feels constantly alert, and when you begin to lose connection with
+							yourself beneath the weight of everything you are carrying.
+						</p>
+						<p>
+							It also taught me something important: anxiety is rarely just about
+							worry.
+						</p>
+						<p>
+							Often, anxiety is connected to pressure, responsibility,
+							expectations, life experiences, relationships, loss, self-doubt,
+							perfectionism, or simply carrying too much for too long without
+							enough space to pause, process, and breathe.
+						</p>
+						<p>This understanding continues to shape the way I work today.</p>
+						<p>
+							I believe anxiety deserves compassion rather than criticism.
+							Curiosity rather than judgement. Understanding rather than simply
+							being told to "cope better" or "think differently."
+						</p>
+						<p>
+							My approach combines professional training, therapeutic experience,
+							and a deep appreciation for the connection between the mind,
+							emotions, body, and nervous system. Together, we can begin
+							exploring not only how anxiety shows up in your life, but what it
+							may be trying to communicate beneath the surface.
+						</p>
+						<p>
+							For many people, therapy becomes the first place where they no
+							longer have to hold everything together, explain everything away,
+							or face it all alone.
+						</p>
+						<p>
+							Instead, it becomes a space to slow down, feel heard, reconnect
+							with yourself, and begin moving forward with greater understanding,
+							self-compassion, and hope.
+						</p>
+					</div>
+				</details>
+			</div>
+		</section>
+
+		<section class="continued-support section section-soft">
+			<div class="container cs-inner">
+				<h2 class="cs-title">Gentle Support Beyond the Free Guide</h2>
+
+				<div class="cs-cards">
+					<article class="cs-card">
+						<h3>Anxiety Reflection Journal</h3>
+						<p>
+							A guided space to help you notice emotional patterns, better
+							understand your anxiety and reconnect with yourself with greater
+							calm and self-awareness.
+						</p>
+						<a class="cs-link" href="#" aria-disabled="true">
+							<span>Explore the Journal</span>
+							<span class="cs-link-arrow" aria-hidden="true">→</span>
+						</a>
+						<p class="cs-card-todo">
+							{`{{TODO: Anxiety Reflection Journal — Ally to complete; show picture clips only for now}}`}
+						</p>
+					</article>
+
+					<article class="cs-card">
+						<h3>One-to-One Therapy Support</h3>
+						<p>
+							Compassionate counselling support for anxiety, emotional overwhelm
+							and nervous system exhaustion in a calm and supportive space.
+						</p>
+						<a
+							class="cs-link"
+							href={calendlyLinks.tasterSession}
+							target="_blank"
+							rel="noopener noreferrer"
+						>
+							<span>Begin Therapy Support</span>
+							<span class="cs-link-arrow" aria-hidden="true">→</span>
+						</a>
+					</article>
+				</div>
+
+				<p class="cs-future">
+					Additional calming resources and wellbeing tools are currently being
+					developed through Awaken Discovery.
+				</p>
+			</div>
+		</section>
+
+		<section class="final-cta section">
+			<div class="container fc-inner">
+				<h2>You Do Not Need to Keep Pushing Through Anxiety Alone</h2>
+				<div class="fc-copy">
+					<p>
+						Whether anxiety feels loud and overwhelming or quietly exhausting
+						beneath the surface, support is available.
+					</p>
+					<p>
+						Sometimes healing begins simply by slowing down long enough to feel
+						heard, understood and supported.
+					</p>
+				</div>
+				<div class="fc-actions">
+					<a class="cta cta-solid" href="#signup">Download the Free Guide</a>
 					<a
+						class="cta cta-outline"
+						href={calendlyLinks.individual.sixtyFaceToFace}
+						target="_blank"
+						rel="noopener noreferrer"
+					>
+						Book a Session
+					</a>
+					<a
+						class="cta cta-outline"
 						href={calendlyLinks.tasterSession}
 						target="_blank"
 						rel="noopener noreferrer"
 					>
-						book a free consultation
-					</a>.
-				</p>
+						Book a Free Consultation
+					</a>
+				</div>
 			</div>
 		</section>
 	</main>
@@ -100,6 +296,13 @@ import { calendlyLinks } from "../data/calendly";
 </Layout>
 
 <style>
+	main {
+		--brand: var(--color-dark-slate-gray);
+		--brand-deep: #004836;
+		--brand-tint: rgb(0 94 71 / 8%);
+		--ink-soft: rgb(29 35 39 / 78%);
+	}
+
 	.anxiety-hero {
 		position: relative;
 		padding-block: clamp(4rem, 9vh, 7rem);
@@ -223,31 +426,264 @@ import { calendlyLinks } from "../data/calendly";
 		line-height: 1.9;
 	}
 
-	.coming-up {
+	.ec-bullets {
+		list-style: none;
+		padding: 0;
+		margin: 0 0 1.4rem;
+		display: grid;
+		gap: 0.55rem;
+	}
+
+	.ec-bullets li {
+		position: relative;
+		padding-left: 1.6rem;
+		line-height: 1.7;
+		color: var(--ink-soft);
+	}
+
+	.ec-bullets li::before {
+		content: "";
+		position: absolute;
+		left: 0.35rem;
+		top: 0.7em;
+		width: 0.45rem;
+		height: 0.45rem;
+		border-radius: 50%;
+		background: var(--brand);
+		opacity: 0.7;
+	}
+
+	/* ---------- MEET ALLY ---------- */
+	.meet-ally {
 		background: var(--color-white);
 	}
 
-	.cu-title {
+	.ma-inner {
+		max-width: 72ch;
+	}
+
+	.ma-copy {
+		margin-top: 1.4rem;
+	}
+
+	.ma-copy p {
+		margin: 0 0 1rem;
+		line-height: 1.9;
+	}
+
+	.ma-emphasis {
 		font-family: var(--font-serif);
-		font-size: 1.4rem;
-		font-weight: 500;
-		margin: 0 0 0.8rem;
-	}
-
-	.cu-list {
-		margin: 0;
-		padding-left: 1.2rem;
-		display: grid;
-		gap: 0.4rem;
-	}
-
-	.cu-note {
-		margin: 1.1rem 0 0;
-	}
-
-	.cu-note a {
+		font-style: italic;
+		font-size: clamp(1.1rem, 1.9vw, 1.3rem);
 		color: var(--color-dark-slate-gray);
-		text-decoration: underline;
-		text-underline-offset: 3px;
+		line-height: 1.5;
+	}
+
+	.ma-emphasis + .ma-emphasis {
+		margin-top: -0.4rem;
+	}
+
+	.ma-disclosure {
+		margin-top: 2rem;
+		border-top: 1px solid rgb(0 94 71 / 14%);
+		padding-top: 1.6rem;
+	}
+
+	.ma-disclosure > summary {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.5rem;
+		cursor: pointer;
+		padding: 0.7rem 1.2rem 0.7rem 1.3rem;
+		border-radius: 999px;
+		background: var(--color-white);
+		border: 1.5px solid var(--brand);
+		color: var(--brand-deep, var(--color-dark-slate-gray));
+		font-family: var(--font-serif);
+		font-size: 1rem;
+		font-weight: 500;
+		list-style: none;
+		transition:
+			background-color 0.18s ease,
+			color 0.18s ease;
+	}
+
+	.ma-disclosure > summary::-webkit-details-marker {
+		display: none;
+	}
+
+	.ma-disclosure > summary:hover,
+	.ma-disclosure > summary:focus-visible {
+		background: var(--brand);
+		color: var(--color-white);
+	}
+
+	.ma-disclosure > summary:focus-visible {
+		outline: 3px solid rgb(0 94 71 / 30%);
+		outline-offset: 2px;
+	}
+
+	.ma-disclosure-icon {
+		width: 1rem;
+		height: 1rem;
+		transition: transform 0.2s ease;
+	}
+
+	.ma-disclosure[open] > summary .ma-disclosure-icon {
+		transform: rotate(180deg);
+	}
+
+	.ma-disclosure-body {
+		margin-top: 1.6rem;
+		padding: 1.6rem clamp(1rem, 2.5vw, 1.8rem) 0.4rem;
+		background: var(--color-white-smoke);
+		border-radius: 0.85rem;
+		border-left: 3px solid var(--brand);
+	}
+
+	.ma-disclosure-body h3 {
+		margin: 0 0 1rem;
+		font-family: var(--font-serif);
+		font-size: clamp(1.3rem, 2.4vw, 1.6rem);
+		font-weight: 500;
+		color: var(--color-dark-slate-gray);
+	}
+
+	.ma-disclosure-body p {
+		margin: 0 0 1rem;
+		line-height: 1.9;
+		color: var(--ink-soft);
+	}
+
+	/* ---------- CONTINUED SUPPORT ---------- */
+	.cs-inner {
+		max-width: 1080px;
+	}
+
+	.cs-title {
+		text-align: center;
+		max-width: 28ch;
+		margin: 0 auto 2rem;
+	}
+
+	.cs-cards {
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: 1.4rem;
+	}
+
+	.cs-card {
+		background: var(--color-white);
+		padding: 1.8rem 1.6rem;
+		border-radius: 1rem;
+		border: 1px solid rgb(0 94 71 / 18%);
+		box-shadow: 0 10px 28px rgb(0 94 71 / 8%);
+		display: flex;
+		flex-direction: column;
+		gap: 0.7rem;
+	}
+
+	.cs-card h3 {
+		margin: 0;
+		font-family: var(--font-serif);
+		font-size: 1.3rem;
+		font-weight: 500;
+		color: var(--color-dark-slate-gray);
+		line-height: 1.3;
+	}
+
+	.cs-card p {
+		margin: 0;
+		line-height: 1.7;
+		color: var(--ink-soft);
+	}
+
+	.cs-link {
+		margin-top: auto;
+		padding-top: 0.4rem;
+		display: inline-flex;
+		align-items: center;
+		gap: 0.4rem;
+		color: var(--brand);
+		font-weight: 600;
+		text-decoration: none;
+	}
+
+	.cs-link[aria-disabled="true"] {
+		opacity: 0.55;
+		cursor: not-allowed;
+		pointer-events: none;
+	}
+
+	.cs-link:hover .cs-link-arrow,
+	.cs-link:focus-visible .cs-link-arrow {
+		transform: translateX(4px);
+	}
+
+	.cs-link-arrow {
+		transition: transform 0.18s ease;
+		display: inline-block;
+	}
+
+	.cs-card-todo {
+		margin: 0.2rem 0 0;
+		font-size: 0.7rem;
+		font-style: italic;
+		opacity: 0.55;
+	}
+
+	.cs-future {
+		margin: 2rem auto 0;
+		max-width: 60ch;
+		text-align: center;
+		font-style: italic;
+		color: var(--ink-soft);
+		opacity: 0.85;
+		line-height: 1.65;
+	}
+
+	/* ---------- FINAL CTA ---------- */
+	.final-cta {
+		background:
+			radial-gradient(
+				ellipse at 50% 0%,
+				rgb(0 94 71 / 10%),
+				transparent 65%
+			),
+			linear-gradient(180deg, var(--color-white) 0%, var(--brand-tint, #eaf0ea) 100%);
+		text-align: center;
+	}
+
+	.fc-inner {
+		max-width: 64ch;
+	}
+
+	.fc-inner h2 {
+		text-wrap: balance;
+	}
+
+	.fc-copy {
+		margin-top: 1rem;
+	}
+
+	.fc-copy p {
+		margin: 0 0 0.9rem;
+		line-height: 1.85;
+		color: var(--ink-soft);
+	}
+
+	.fc-actions {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: center;
+		gap: 0.7rem;
+		margin-top: 1.6rem;
+	}
+
+	/* ---------- RESPONSIVE ---------- */
+	@media (max-width: 760px) {
+		.cs-cards {
+			grid-template-columns: 1fr;
+		}
 	}
 </style>

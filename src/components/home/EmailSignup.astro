@@ -1,31 +1,77 @@
 ---
 interface Props {
+	kicker?: string;
 	heading?: string;
+	subtitle?: string;
 	body?: string;
 	guideName?: string;
 	guideDescription?: string;
+	whatsInside?: string[];
+	whatsInsideHeading?: string;
 	buttonLabel?: string;
+	privacyText?: string;
 }
 
 const {
+	kicker = "Free Resource",
 	heading = "Begin With Gentle Support",
+	subtitle,
 	body = "Download a free calming guide designed to help you better understand emotional overwhelm, reconnect with yourself and begin creating space to breathe again. You'll also receive gentle wellbeing insights, supportive resources and updates from Awaken Discovery.",
 	guideName = "When You've Been Holding Too Much for Too Long",
 	guideDescription = "A gentle guide to emotional overwhelm, self-reconnection and support.",
+	whatsInside,
+	whatsInsideHeading = "What's inside",
 	buttonLabel = "Discover Calm",
+	privacyText,
 } = Astro.props;
+
+const showGuideCard = !whatsInside || whatsInside.length === 0;
 ---
 
 <section class="signup section section-soft" id="signup">
 	<div class="container signup-inner">
 		<div class="signup-copy">
-			<p class="section-kicker">Free Resource</p>
+			<p class="section-kicker">{kicker}</p>
 			<h2>{heading}</h2>
+			{subtitle && <p class="signup-subtitle">{subtitle}</p>}
 			<p>{body}</p>
-			<div class="signup-guide">
-				<p class="guide-name">{guideName}</p>
-				<p class="guide-desc">{guideDescription}</p>
-			</div>
+			{
+				whatsInside && whatsInside.length > 0 && (
+					<div class="signup-whats-inside">
+						<p class="whats-inside-heading">{whatsInsideHeading}</p>
+						<ul class="whats-inside-list">
+							{whatsInside.map((item) => (
+								<li>
+									<svg
+										class="whats-inside-check"
+										viewBox="0 0 24 24"
+										aria-hidden="true"
+										focusable="false"
+									>
+										<path
+											d="M5 12.5l4.5 4.5L19 7.5"
+											fill="none"
+											stroke="currentColor"
+											stroke-width="2.4"
+											stroke-linecap="round"
+											stroke-linejoin="round"
+										/>
+									</svg>
+									<span>{item}</span>
+								</li>
+							))}
+						</ul>
+					</div>
+				)
+			}
+			{
+				showGuideCard && (
+					<div class="signup-guide">
+						<p class="guide-name">{guideName}</p>
+						<p class="guide-desc">{guideDescription}</p>
+					</div>
+				)
+			}
 		</div>
 
 		<form
@@ -56,9 +102,15 @@ const {
 
 			<button class="cta cta-solid signup-submit" type="submit">{buttonLabel}</button>
 
-			<p class="signup-privacy">
-				Your details are handled with care. See our <a href="/privacy">Privacy Policy</a>.
-			</p>
+			{
+				privacyText ? (
+					<p class="signup-privacy">{privacyText}</p>
+				) : (
+					<p class="signup-privacy">
+						Your details are handled with care. See our <a href="/privacy">Privacy Policy</a>.
+					</p>
+				)
+			}
 			<p id="signup-todo" class="signup-todo">
 				{`{{TODO: connect to ESP — auto-send PDF + trigger nurture sequence.}}`}
 			</p>
@@ -92,14 +144,67 @@ const {
 	}
 
 	h2 {
-		margin: 0.6rem 0 0.9rem;
+		margin: 0.6rem 0 0.4rem;
 		font-family: var(--font-serif);
 		font-size: clamp(1.7rem, 3.3vw, 2.4rem);
 		font-weight: 500;
 	}
 
+	.signup-subtitle {
+		margin: 0 0 1rem;
+		font-family: var(--font-serif);
+		font-style: italic;
+		font-size: clamp(1.05rem, 1.8vw, 1.2rem);
+		color: var(--color-dark-slate-gray);
+		opacity: 0.92;
+		line-height: 1.4;
+	}
+
 	.signup-copy p {
 		line-height: 1.85;
+	}
+
+	.signup-whats-inside {
+		margin-top: 1.2rem;
+		padding: 1.2rem 1.3rem 1.3rem;
+		background: var(--color-white);
+		border-radius: 0.85rem;
+		border: 1px solid rgb(0 94 71 / 18%);
+	}
+
+	.whats-inside-heading {
+		margin: 0 0 0.7rem;
+		text-transform: uppercase;
+		letter-spacing: 0.08em;
+		font-size: 0.78rem;
+		font-weight: 600;
+		color: var(--color-dark-slate-gray);
+		line-height: 1.2;
+	}
+
+	.whats-inside-list {
+		list-style: none;
+		padding: 0;
+		margin: 0;
+		display: grid;
+		gap: 0.5rem;
+	}
+
+	.whats-inside-list li {
+		display: grid;
+		grid-template-columns: auto 1fr;
+		align-items: start;
+		gap: 0.55rem;
+		line-height: 1.55;
+		color: var(--ink-soft);
+	}
+
+	.whats-inside-check {
+		width: 1.1rem;
+		height: 1.1rem;
+		flex-shrink: 0;
+		color: var(--brand);
+		margin-top: 0.18rem;
 	}
 
 	.signup-guide {
