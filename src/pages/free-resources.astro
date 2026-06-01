@@ -3,6 +3,7 @@ import Layout from "../layouts/Layout.astro";
 import SiteHeader from "../components/SiteHeader.astro";
 import SiteFooter from "../components/SiteFooter.astro";
 import { freeResources, locations, navItems } from "../data/site";
+import { calendlyLinks } from "../data/calendly";
 ---
 
 <Layout
@@ -101,7 +102,12 @@ import { freeResources, locations, navItems } from "../data/site";
 					Just gentle support, sent the way you'd want a friend to send it.
 				</p>
 				<p class="fr-signature">— Ally</p>
-				<a class="cta cta-outline" href="/contact">
+				<a
+					class="cta cta-outline"
+					href={calendlyLinks.tasterSession}
+					target="_blank"
+					rel="noopener noreferrer"
+				>
 					Or book a free consultation
 				</a>
 			</div>

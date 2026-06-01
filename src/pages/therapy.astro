@@ -3,6 +3,7 @@ import Layout from "../layouts/Layout.astro";
 import SiteHeader from "../components/SiteHeader.astro";
 import SiteFooter from "../components/SiteFooter.astro";
 import { locations, navItems } from "../data/site";
+import { calendlyLinks } from "../data/calendly";
 
 type SessionFormat = {
 	id: string;
@@ -10,6 +11,7 @@ type SessionFormat = {
 	format: string;
 	price: string;
 	note: string;
+	bookHref: string;
 	image?: string;
 	imageAlt?: string;
 	imagePrompt?: string;
@@ -22,6 +24,7 @@ const individualSessions: SessionFormat[] = [
 		format: "Individual — Face to Face",
 		price: "£60.00",
 		note: "Available to book now",
+		bookHref: calendlyLinks.individual.sixtyFaceToFace,
 		image: "/assets/images/therapy-stones.png",
 		imageAlt: "Stacked white pebbles reflected in calm water",
 	},
@@ -31,6 +34,7 @@ const individualSessions: SessionFormat[] = [
 		format: "Online or Phone",
 		price: "£60.00",
 		note: "Available to book now",
+		bookHref: calendlyLinks.individual.sixtyOnline,
 		image: "/assets/images/therapy-forest.png",
 		imageAlt: "Sunlight filtering through a quiet forest glade",
 	},
@@ -40,6 +44,7 @@ const individualSessions: SessionFormat[] = [
 		format: "Individual — Face to Face",
 		price: "£90.00",
 		note: "Available to book now",
+		bookHref: calendlyLinks.individual.ninetyFaceToFace,
 		image: "/assets/images/therapy-lake-sunset.png",
 		imageAlt: "Calm lake at sunset surrounded by hills and trees",
 	},
@@ -52,6 +57,7 @@ const couplesSessions: SessionFormat[] = [
 		format: "Couples — Face to Face",
 		price: "£90.00",
 		note: "Available to book now",
+		bookHref: calendlyLinks.couples.sixtyFaceToFace,
 		image: "/assets/images/therapy-stones.png",
 		imageAlt: "Stacked white pebbles reflected in calm water",
 	},
@@ -61,6 +67,7 @@ const couplesSessions: SessionFormat[] = [
 		format: "Couples — Online or Phone",
 		price: "£90.00",
 		note: "Available to book now",
+		bookHref: calendlyLinks.couples.sixtyOnline,
 		image: "/assets/images/therapy-forest.png",
 		imageAlt: "Sunlight filtering through a quiet forest glade",
 	},
@@ -70,6 +77,7 @@ const couplesSessions: SessionFormat[] = [
 		format: "Couples — Face to Face",
 		price: "£130.00",
 		note: "Available to book now",
+		bookHref: calendlyLinks.couples.ninetyFaceToFace,
 		image: "/assets/images/therapy-lake-sunset.png",
 		imageAlt: "Calm sunset over open fields with warm light",
 	},
@@ -251,7 +259,9 @@ const couplesBenefits = [
 												<p class="th-session-note">{s.note}</p>
 												<a
 													class="cta cta-solid th-session-cta"
-													href="/pricing/individual#book"
+													href={s.bookHref}
+													target="_blank"
+													rel="noopener noreferrer"
 													aria-label={`Book ${s.duration} ${s.format}`}
 												>
 													Book
@@ -373,7 +383,9 @@ const couplesBenefits = [
 												<p class="th-session-note">{s.note}</p>
 												<a
 													class="cta cta-solid th-session-cta"
-													href="/pricing/individual#book"
+													href={s.bookHref}
+													target="_blank"
+													rel="noopener noreferrer"
 													aria-label={`Book ${s.duration} ${s.format}`}
 												>
 													Book
@@ -416,7 +428,14 @@ const couplesBenefits = [
 						that feels comfortable for you.
 					</p>
 					<div class="th-close-actions">
-						<a class="cta cta-solid" href="/contact">Book a Free Consultation</a>
+						<a
+							class="cta cta-solid"
+							href={calendlyLinks.tasterSession}
+							target="_blank"
+							rel="noopener noreferrer"
+						>
+							Book a Free Consultation
+						</a>
 						<a class="cta cta-outline" href="/pricing">See Pricing & Bundles</a>
 					</div>
 				</div>

@@ -4,6 +4,7 @@ import Layout from "../layouts/Layout.astro";
 import SiteHeader from "../components/SiteHeader.astro";
 import SiteFooter from "../components/SiteFooter.astro";
 import { locations, navItems, teacherGuidePath } from "../data/site";
+import { calendlyLinks } from "../data/calendly";
 import handPickingBook from "../assets/teachers/hand-picking-book.jpg";
 import stoolInClearing from "../assets/teachers/stool-in-clearing.jpg";
 ---
@@ -263,7 +264,12 @@ import stoolInClearing from "../assets/teachers/stool-in-clearing.jpg";
 							A compassionate space to explore anxiety, burnout, overwhelm and
 							life beyond constantly pushing through.
 						</p>
-						<a class="sb-link" href="/contact">
+						<a
+							class="sb-link"
+							href={calendlyLinks.tasterSession}
+							target="_blank"
+							rel="noopener noreferrer"
+						>
 							Begin Therapy Support
 							<span aria-hidden="true">→</span>
 						</a>
@@ -302,8 +308,22 @@ import stoolInClearing from "../assets/teachers/stool-in-clearing.jpg";
 						<a class="cta cta-solid" href={teacherGuidePath}>
 							Download the Free Guide
 						</a>
-						<a class="cta cta-outline" href="/contact">Book a session</a>
-						<a class="cta cta-outline" href="/contact">Book a Free Consultation</a>
+						<a
+							class="cta cta-outline"
+							href={calendlyLinks.individual.sixtyFaceToFace}
+							target="_blank"
+							rel="noopener noreferrer"
+						>
+							Book a session
+						</a>
+						<a
+							class="cta cta-outline"
+							href={calendlyLinks.tasterSession}
+							target="_blank"
+							rel="noopener noreferrer"
+						>
+							Book a Free Consultation
+						</a>
 					</div>
 				</div>
 				<figure class="cf-media">

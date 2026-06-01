@@ -3,6 +3,7 @@ import Layout from "../layouts/Layout.astro";
 import SiteHeader from "../components/SiteHeader.astro";
 import SiteFooter from "../components/SiteFooter.astro";
 import { anxietyGuidePath, locations, navItems } from "../data/site";
+import { calendlyLinks } from "../data/calendly";
 ---
 
 <Layout
@@ -81,7 +82,13 @@ import { anxietyGuidePath, locations, navItems } from "../data/site";
 				<p class="cu-note">
 					Want to start now?
 					<a href={anxietyGuidePath}>Grab the free guide</a> or
-					<a href="/contact">book a free consultation</a>.
+					<a
+						href={calendlyLinks.tasterSession}
+						target="_blank"
+						rel="noopener noreferrer"
+					>
+						book a free consultation
+					</a>.
 				</p>
 			</div>
 		</section>

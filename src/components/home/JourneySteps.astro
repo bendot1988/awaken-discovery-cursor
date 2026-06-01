@@ -1,5 +1,6 @@
 ---
 import type { JourneyStep } from "../../data/site";
+import { calendlyLinks } from "../../data/calendly";
 
 interface Props {
 	steps: JourneyStep[];
@@ -28,7 +29,14 @@ const { steps } = Astro.props;
 		</ol>
 
 		<div class="journey-cta">
-			<a class="cta cta-solid" href="/contact">Begin Your Journey</a>
+			<a
+				class="cta cta-solid"
+				href={calendlyLinks.tasterSession}
+				target="_blank"
+				rel="noopener noreferrer"
+			>
+				Begin Your Journey
+			</a>
 		</div>
 	</div>
 

@@ -3,6 +3,7 @@ import Layout from "../layouts/Layout.astro";
 import SiteHeader from "../components/SiteHeader.astro";
 import SiteFooter from "../components/SiteFooter.astro";
 import { locations, navItems } from "../data/site";
+import { calendlyLinks } from "../data/calendly";
 
 const pillars = [
 	{
@@ -175,8 +176,22 @@ const chapters = [
 						begin reconnecting with who you are beneath the survival mode.
 					</p>
 					<div class="about-meet-ctas">
-						<a class="cta cta-solid" href="/contact">Book a Session</a>
-						<a class="cta cta-outline" href="/contact">Book a Consultation</a>
+						<a
+							class="cta cta-solid"
+							href={calendlyLinks.individual.sixtyFaceToFace}
+							target="_blank"
+							rel="noopener noreferrer"
+						>
+							Book a Session
+						</a>
+						<a
+							class="cta cta-outline"
+							href={calendlyLinks.tasterSession}
+							target="_blank"
+							rel="noopener noreferrer"
+						>
+							Book a Consultation
+						</a>
 					</div>
 				</div>
 			</div>
@@ -332,8 +347,22 @@ const chapters = [
 						warmly welcome to arrange a free initial consultation.
 					</p>
 					<div class="about-begin-ctas">
-						<a class="cta cta-solid" href="/contact">Book a Session</a>
-						<a class="cta cta-outline" href="/contact">Book a Consultation</a>
+						<a
+							class="cta cta-solid"
+							href={calendlyLinks.individual.sixtyFaceToFace}
+							target="_blank"
+							rel="noopener noreferrer"
+						>
+							Book a Session
+						</a>
+						<a
+							class="cta cta-outline"
+							href={calendlyLinks.tasterSession}
+							target="_blank"
+							rel="noopener noreferrer"
+						>
+							Book a Consultation
+						</a>
 					</div>
 					<p class="about-begin-signoff">
 						Whatever you're carrying, you are warmly welcome here.

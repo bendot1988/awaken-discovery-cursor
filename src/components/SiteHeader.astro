@@ -1,5 +1,6 @@
 ---
 import type { NavItem } from "../data/site";
+import { calendlyLinks } from "../data/calendly";
 
 interface Props {
 	navItems: NavItem[];
@@ -107,7 +108,12 @@ const isBranchActive = (item: NavItem) => {
 			<a class="cta cta-outline header-cta header-cta-secondary" href="/free-resources">
 				Free Resources
 			</a>
-			<a class="cta cta-solid header-cta" href="/pricing/individual#book">
+			<a
+				class="cta cta-solid header-cta"
+				href={calendlyLinks.individual.sixtyFaceToFace}
+				target="_blank"
+				rel="noopener noreferrer"
+			>
 				Book a Session
 			</a>
 		</div>
@@ -159,7 +165,14 @@ const isBranchActive = (item: NavItem) => {
 						</a>
 					</li>
 					<li>
-						<a class="mobile-cta" href="/pricing/individual#book">Book a Session</a>
+						<a
+							class="mobile-cta"
+							href={calendlyLinks.individual.sixtyFaceToFace}
+							target="_blank"
+							rel="noopener noreferrer"
+						>
+							Book a Session
+						</a>
 					</li>
 				</ul>
 			</nav>

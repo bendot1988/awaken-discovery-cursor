@@ -1,3 +1,5 @@
+import { calendlyLinks } from "./calendly";
+
 export type NavItem = {
 	label: string;
 	href: string;
@@ -210,7 +212,7 @@ export const therapyServices: ServicePanel[] = [
 	{
 		title: "Young People",
 		body: "A supportive space for emotional expression, anxiety, confidence and wellbeing.",
-		cta: { label: "Begin Therapy", href: "/contact" },
+		cta: { label: "Begin Therapy", href: calendlyLinks.tasterSession },
 	},
 ];
 
@@ -252,20 +254,32 @@ export const journeySteps: JourneyStep[] = [
 
 export const pricingTiers: PricingTier[] = [
 	{
-		name: "Individual Therapy Session",
+		name: "Individual Therapy",
 		price: "£60",
 		cadence: "60-minute session",
-		body: "Suitable for ongoing emotional support, anxiety, burnout, life transitions and personal growth.",
-		primaryCta: { label: "Book Session", href: "/contact" },
+		body: "A gentle, one-to-one space for ongoing emotional support, anxiety, burnout, life transitions and personal growth. Available face-to-face, online or by phone.",
+		primaryCta: {
+			label: "Book a Session",
+			href: calendlyLinks.individual.sixtyFaceToFace,
+		},
+		secondaryCta: {
+			label: "Free Consultation",
+			href: calendlyLinks.tasterSession,
+		},
 	},
 	{
-		name: "Therapy Support Block",
-		price: "{{TODO: price}}",
-		cadence: "6 or 10 session package",
-		body: "A focused block of sessions for deeper, ongoing therapeutic support. Terms & conditions apply.",
-		primaryCta: { label: "Purchase", href: "/contact" },
-		secondaryCta: { label: "Learn More", href: "/pricing" },
-		note: "{{TODO: confirm block pricing against existing live page}}",
+		name: "Couples Therapy",
+		price: "£90",
+		cadence: "60-minute session",
+		body: "A nurturing space for couples to deepen communication, mutual understanding and connection. Available face-to-face, online or by phone.",
+		primaryCta: {
+			label: "Book a Session",
+			href: calendlyLinks.couples.sixtyFaceToFace,
+		},
+		secondaryCta: {
+			label: "Free Consultation",
+			href: calendlyLinks.tasterSession,
+		},
 	},
 ];
 

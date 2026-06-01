@@ -1,5 +1,6 @@
 ---
 import { freeResources, freeResourcesPath } from "../../data/site";
+import { calendlyLinks } from "../../data/calendly";
 
 interface Props {
 	videoSrc?: string;
@@ -30,8 +31,22 @@ const { videoSrc, posterSrc = "/assets/images/hero-ally.png" } = Astro.props;
 			</p>
 
 			<div class="cta-row">
-				<a class="cta cta-solid" href="/contact">Begin Therapy — Book a Session</a>
-				<a class="cta cta-outline" href="/contact">Book a Free Consultation</a>
+				<a
+					class="cta cta-solid"
+					href={calendlyLinks.individual.sixtyFaceToFace}
+					target="_blank"
+					rel="noopener noreferrer"
+				>
+					Begin Therapy — Book a Session
+				</a>
+				<a
+					class="cta cta-outline"
+					href={calendlyLinks.tasterSession}
+					target="_blank"
+					rel="noopener noreferrer"
+				>
+					Book a Free Consultation
+				</a>
 				<div class="cta-dropdown">
 					<a
 						class="cta cta-ghost cta-dropdown-trigger"

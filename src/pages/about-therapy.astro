@@ -3,6 +3,7 @@ import Layout from "../layouts/Layout.astro";
 import SiteHeader from "../components/SiteHeader.astro";
 import SiteFooter from "../components/SiteFooter.astro";
 import { navItems, locations } from "../data/site";
+import { calendlyLinks } from "../data/calendly";
 
 type Scenario = {
 	heading: string;
@@ -176,10 +177,20 @@ const pageDescription =
 					Therapy starts where you are.
 				</p>
 				<div class="at-cta-row">
-					<a class="cta cta-solid" href="/pricing/individual#book">
+					<a
+						class="cta cta-solid"
+						href={calendlyLinks.individual.sixtyFaceToFace}
+						target="_blank"
+						rel="noopener noreferrer"
+					>
 						Book a Session
 					</a>
-					<a class="cta cta-outline" href="/contact">
+					<a
+						class="cta cta-outline"
+						href={calendlyLinks.tasterSession}
+						target="_blank"
+						rel="noopener noreferrer"
+					>
 						Book a Free Consultation
 					</a>
 				</div>

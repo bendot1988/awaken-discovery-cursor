@@ -1,5 +1,6 @@
 ---
 import type { PricingTier } from "../../data/site";
+import { isExternalHref } from "../../data/calendly";
 
 interface Props {
 	tiers: PricingTier[];
@@ -30,11 +31,31 @@ const { tiers } = Astro.props;
 						</p>
 						<p class="pricing-body">{tier.body}</p>
 						<div class="pricing-cta-row">
-							<a class="cta cta-solid" href={tier.primaryCta.href}>
+							<a
+								class="cta cta-solid"
+								href={tier.primaryCta.href}
+								target={isExternalHref(tier.primaryCta.href) ? "_blank" : undefined}
+								rel={
+									isExternalHref(tier.primaryCta.href)
+										? "noopener noreferrer"
+										: undefined
+								}
+							>
 								{tier.primaryCta.label}
 							</a>
 							{tier.secondaryCta && (
-								<a class="cta cta-outline" href={tier.secondaryCta.href}>
+								<a
+									class="cta cta-outline"
+									href={tier.secondaryCta.href}
+									target={
+										isExternalHref(tier.secondaryCta.href) ? "_blank" : undefined
+									}
+									rel={
+										isExternalHref(tier.secondaryCta.href)
+											? "noopener noreferrer"
+											: undefined
+									}
+								>
 									{tier.secondaryCta.label}
 								</a>
 							)}
@@ -44,6 +65,14 @@ const { tiers } = Astro.props;
 				))
 			}
 		</div>
+
+		<p class="pricing-more">
+			Looking for 90-minute sessions or session bundles?
+			<a href="/pricing">
+				See all pricing options
+				<span aria-hidden="true">→</span>
+			</a>
+		</p>
 	</div>
 </section>
 
@@ -140,9 +169,46 @@ const { tiers } = Astro.props;
 		opacity: 0.6;
 	}
 
+	.pricing-more {
+		margin: 1.6rem 0 0;
+		text-align: center;
+		font-size: 0.95rem;
+		line-height: 1.6;
+		color: rgb(29 35 39 / 78%);
+	}
+
+	.pricing-more a {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.35rem;
+		margin-left: 0.4rem;
+		font-weight: 600;
+		color: var(--color-dark-slate-gray);
+		text-decoration: underline;
+		text-underline-offset: 4px;
+		text-decoration-thickness: 1px;
+		transition: gap 0.2s ease, text-decoration-thickness 0.2s ease;
+	}
+
+	.pricing-more a:hover,
+	.pricing-more a:focus-visible {
+		gap: 0.6rem;
+		text-decoration-thickness: 2px;
+	}
+
 	@media (max-width: 760px) {
 		.pricing-grid {
 			grid-template-columns: 1fr;
+		}
+
+		.pricing-more {
+			text-align: left;
+		}
+
+		.pricing-more a {
+			margin-left: 0;
+			margin-top: 0.4rem;
+			display: inline-flex;
 		}
 	}
 </style>

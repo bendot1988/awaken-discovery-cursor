@@ -2,9 +2,8 @@
 import Layout from "../../layouts/Layout.astro";
 import SiteHeader from "../../components/SiteHeader.astro";
 import SiteFooter from "../../components/SiteFooter.astro";
-import BookingForm from "../../components/BookingForm.astro";
-import type { BookingPackage } from "../../components/BookingForm.astro";
 import { locations, navItems } from "../../data/site";
+import { calendlyLinks } from "../../data/calendly";
 
 type SingleCard = {
 	type: "ind" | "cou";
@@ -15,66 +14,8 @@ type SingleCard = {
 	headerVariant: "dark" | "sage";
 	popular: boolean;
 	bullets: string[];
+	bookHref: string;
 };
-
-// Stripe price IDs — replace with real `price_xxx` values from your Stripe dashboard
-// once the six single-session products are created.
-const singlePackages: BookingPackage[] = [
-	{
-		value: "ind-60-f2f",
-		label: "Individual — 60 min, Face to Face",
-		sublabel: "One session, pay as you go",
-		priceLabel: "£60.00",
-		priceAmount: 60,
-		stripePriceId: "{{STRIPE_PRICE_IND_60_F2F}}",
-	},
-	{
-		value: "ind-60-online",
-		label: "Individual — 60 min, Online or Phone",
-		sublabel: "One session, pay as you go",
-		priceLabel: "£60.00",
-		priceAmount: 60,
-		stripePriceId: "{{STRIPE_PRICE_IND_60_ONLINE}}",
-	},
-	{
-		value: "ind-90-f2f",
-		label: "Individual — 90 min, Face to Face",
-		sublabel: "Extended session for deeper work",
-		priceLabel: "£90.00",
-		priceAmount: 90,
-		stripePriceId: "{{STRIPE_PRICE_IND_90_F2F}}",
-	},
-	{
-		value: "cou-60-f2f",
-		label: "Couples — 60 min, Face to Face",
-		sublabel: "One session, pay as you go",
-		priceLabel: "£90.00",
-		priceAmount: 90,
-		stripePriceId: "{{STRIPE_PRICE_COU_60_F2F}}",
-	},
-	{
-		value: "cou-60-online",
-		label: "Couples — 60 min, Online or Phone",
-		sublabel: "One session, pay as you go",
-		priceLabel: "£90.00",
-		priceAmount: 90,
-		stripePriceId: "{{STRIPE_PRICE_COU_60_ONLINE}}",
-	},
-	{
-		value: "cou-90-f2f",
-		label: "Couples — 90 min, Face to Face",
-		sublabel: "Extended session for deeper work together",
-		priceLabel: "£130.00",
-		priceAmount: 130,
-		stripePriceId: "{{STRIPE_PRICE_COU_90_F2F}}",
-	},
-];
-
-const stripeTodoNote = `{{TODO: STRIPE INTEGRATION (single sessions)
-1. Create six products in Stripe Dashboard (Ind 60 F2F £60, Ind 60 Online £60, Ind 90 F2F £90, Cou 60 F2F £90, Cou 60 Online £90, Cou 90 F2F £130) and replace {{STRIPE_PRICE_*}} placeholders in src/pages/pricing/individual.astro with the real price_xxx IDs.
-2. Reuse the same /api/create-checkout-session endpoint as the bulk form — it accepts the selected price_id + customer email + metadata and returns { url }.
-3. Add a /api/booking-enquiry route for the "speak first" path (same shape as the bulk enquiry).
-4. The Stripe webhook for checkout.session.completed should already handle these via the shared booking record + confirmation email flow.}}`;
 
 const singleCards: SingleCard[] = [
 	{
@@ -90,6 +31,7 @@ const singleCards: SingleCard[] = [
 			"In-person sessions in a calm, private setting",
 			"Pay per session, book at your own pace",
 		],
+		bookHref: calendlyLinks.individual.sixtyFaceToFace,
 	},
 	{
 		type: "ind",
@@ -104,6 +46,7 @@ const singleCards: SingleCard[] = [
 			"Secure video or phone, no travel needed",
 			"Pay per session, book at your own pace",
 		],
+		bookHref: calendlyLinks.individual.sixtyOnline,
 	},
 	{
 		type: "ind",
@@ -118,6 +61,7 @@ const singleCards: SingleCard[] = [
 			"Ideal for trauma or complex work",
 			"Pay per session, book at your own pace",
 		],
+		bookHref: calendlyLinks.individual.ninetyFaceToFace,
 	},
 	{
 		type: "cou",
@@ -132,6 +76,7 @@ const singleCards: SingleCard[] = [
 			"60 minutes of guided conversation",
 			"Pay per session, book at your own pace",
 		],
+		bookHref: calendlyLinks.couples.sixtyFaceToFace,
 	},
 	{
 		type: "cou",
@@ -146,6 +91,7 @@ const singleCards: SingleCard[] = [
 			"Secure video or phone for both partners",
 			"Pay per session, book at your own pace",
 		],
+		bookHref: calendlyLinks.couples.sixtyOnline,
 	},
 	{
 		type: "cou",
@@ -160,6 +106,7 @@ const singleCards: SingleCard[] = [
 			"Space to unpack big topics in one sitting",
 			"Pay per session, book at your own pace",
 		],
+		bookHref: calendlyLinks.couples.ninetyFaceToFace,
 	},
 ];
 ---
@@ -188,7 +135,7 @@ const singleCards: SingleCard[] = [
 					</p>
 					<p class="pr-note pr-note-soft">
 						All sessions are with Allyson, MBACP-registered therapist. Free
-						15-minute consultations available before your first session.
+						20-minute consultations available before your first session.
 					</p>
 				</div>
 			</div>
@@ -261,14 +208,16 @@ const singleCards: SingleCard[] = [
 														</ul>
 														<a
 															class="cta cta-solid pr-card-cta"
-															href="#book"
+															href={card.bookHref}
+															target="_blank"
+															rel="noopener noreferrer"
 															aria-label={`Book ${card.duration} ${card.format}`}
 														>
 															Book Now
 														</a>
 														<p class="pr-card-fineprint">
-															Single sessions — pay per session. Contact us
-															within 7 days to confirm your booking time.
+															Single sessions — pay per session. Booking opens
+															in a new tab via my Calendly.
 														</p>
 													</div>
 												</article>
@@ -300,20 +249,6 @@ const singleCards: SingleCard[] = [
 			</div>
 		</section>
 
-		<!-- ============== BOOK FORM ============== -->
-		<BookingForm
-			anchorId="book"
-			title="Book a Single Session"
-			lede="Fill in your details and choose the session that suits you. If you'd like to pay now, you'll be taken to a secure Stripe payment page. If you'd rather have a chat first, choose 'speak with you first' and I'll be in touch within one working day."
-			packageGroupLabel="Choose your session"
-			payNowLegend="I'm happy to pay now for this session"
-			termsLinkLabel="Booking Terms & Conditions"
-			termsHref="/terms"
-			packages={singlePackages}
-			formId="individual-booking-form"
-			todoNote={stripeTodoNote}
-		/>
-
 		<!-- ============== SOFT CLOSE ============== -->
 		<section class="pr-close section">
 			<div class="container">
@@ -322,11 +257,18 @@ const singleCards: SingleCard[] = [
 					<h2>Start with a free consultation</h2>
 					<p class="pr-close-body">
 						If you'd like to chat before booking, you're warmly welcome to start
-						with a free 15-minute consultation. We can talk through what's on
+						with a free 20-minute consultation. We can talk through what's on
 						your mind and find the format that feels right.
 					</p>
 					<div class="pr-close-actions">
-						<a class="cta cta-solid" href="/contact">Book a Free Consultation</a>
+						<a
+							class="cta cta-solid"
+							href={calendlyLinks.tasterSession}
+							target="_blank"
+							rel="noopener noreferrer"
+						>
+							Book a Free Consultation
+						</a>
 						<a class="cta cta-outline" href="/therapy">Learn About Therapy</a>
 					</div>
 				</div>

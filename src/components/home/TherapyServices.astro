@@ -1,5 +1,6 @@
 ---
 import type { ServicePanel } from "../../data/site";
+import { calendlyLinks, isExternalHref } from "../../data/calendly";
 
 interface Props {
 	therapy: ServicePanel[];
@@ -22,7 +23,14 @@ const { therapy, additional } = Astro.props;
 					<article class="service-card">
 						<h3>{panel.title}</h3>
 						<p>{panel.body}</p>
-						<a class="cta cta-outline" href={panel.cta.href}>
+						<a
+							class="cta cta-outline"
+							href={panel.cta.href}
+							target={isExternalHref(panel.cta.href) ? "_blank" : undefined}
+							rel={
+								isExternalHref(panel.cta.href) ? "noopener noreferrer" : undefined
+							}
+						>
 							{panel.cta.label}
 						</a>
 					</article>
@@ -31,7 +39,14 @@ const { therapy, additional } = Astro.props;
 		</div>
 
 		<div class="services-cta-row">
-			<a class="cta cta-solid" href="/contact">Begin Therapy</a>
+			<a
+				class="cta cta-solid"
+				href={calendlyLinks.tasterSession}
+				target="_blank"
+				rel="noopener noreferrer"
+			>
+				Begin Therapy
+			</a>
 			<a class="cta cta-ghost" href="/about-therapy">Learn More About Therapy</a>
 		</div>
 
@@ -45,7 +60,14 @@ const { therapy, additional } = Astro.props;
 					<article class="service-card service-card-soft">
 						<h3>{panel.title}</h3>
 						<p>{panel.body}</p>
-						<a class="cta cta-outline" href={panel.cta.href}>
+						<a
+							class="cta cta-outline"
+							href={panel.cta.href}
+							target={isExternalHref(panel.cta.href) ? "_blank" : undefined}
+							rel={
+								isExternalHref(panel.cta.href) ? "noopener noreferrer" : undefined
+							}
+						>
 							{panel.cta.label}
 						</a>
 					</article>
