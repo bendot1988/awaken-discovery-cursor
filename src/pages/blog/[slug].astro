@@ -1,0 +1,485 @@
+---
+import { getCollection, render } from "astro:content";
+import { Image } from "astro:assets";
+import Layout from "../../layouts/Layout.astro";
+import SiteHeader from "../../components/SiteHeader.astro";
+import SiteFooter from "../../components/SiteFooter.astro";
+import { locations, navItems } from "../../data/site";
+import { calendlyLinks } from "../../data/calendly";
+
+export async function getStaticPaths() {
+	const posts = await getCollection("blog");
+	return posts.map((post) => ({
+		params: { slug: post.id },
+		props: { post },
+	}));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+
+const dateFormatter = new Intl.DateTimeFormat("en-GB", {
+	day: "numeric",
+	month: "long",
+	year: "numeric",
+});
+
+// Build a small "more posts" list (3 most recent, excluding current)
+const allPosts = (await getCollection("blog"))
+	.filter((p) => p.id !== post.id)
+	.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+	.slice(0, 3);
+---
+
+<Layout title={`${post.data.title} · Awaken Discovery`} description={post.data.description}>
+	<SiteHeader navItems={navItems} />
+	<main class="bp-page">
+		<article class="bp-article">
+			<!-- ============== ARTICLE HEADER ============== -->
+			<header class="bp-header section">
+				<div class="container bp-header-inner">
+					<p class="bp-back">
+						<a href="/blog">← Back to all posts</a>
+					</p>
+					<p class="bp-meta">
+						<span class="bp-category">{post.data.category}</span>
+						<span class="bp-dot" aria-hidden="true">·</span>
+						<time datetime={post.data.pubDate.toISOString()}>
+							{dateFormatter.format(post.data.pubDate)}
+						</time>
+					</p>
+					<h1>{post.data.title}</h1>
+					<p class="bp-description">{post.data.description}</p>
+				</div>
+			</header>
+
+			<!-- ============== HERO IMAGE ============== -->
+			{
+				post.data.heroImage && (
+					<figure class="bp-hero">
+						<div class="container">
+							<Image
+								src={post.data.heroImage}
+								alt={post.data.heroImageAlt || post.data.title}
+								widths={[640, 960, 1280, 1600]}
+								sizes="(max-width: 1100px) 92vw, 1080px"
+								loading="eager"
+								decoding="async"
+								format="webp"
+								quality={82}
+							/>
+						</div>
+					</figure>
+				)
+			}
+
+			<!-- ============== PROSE BODY ============== -->
+			<div class="bp-body section">
+				<div class="container bp-body-inner">
+					<div class="bp-prose">
+						<Content />
+					</div>
+				</div>
+			</div>
+
+			<!-- ============== POST FOOTER CTA ============== -->
+			<aside class="bp-cta section section-soft">
+				<div class="container bp-cta-inner">
+					<p class="bp-cta-kicker">Reading is a quiet first step</p>
+					<h2>If something here resonated, we can talk it through.</h2>
+					<p class="bp-cta-body">
+						A free, no-pressure consultation is a gentle way to begin. We can
+						explore what's on your mind and find a format — individual, couples,
+						face-to-face or online — that feels comfortable for you.
+					</p>
+					<div class="bp-cta-actions">
+						<a
+							class="cta cta-solid"
+							href={calendlyLinks.tasterSession}
+							target="_blank"
+							rel="noopener noreferrer"
+						>
+							Book a Free Consultation
+						</a>
+						<a class="cta cta-outline" href="/therapy">Explore Therapy</a>
+					</div>
+				</div>
+			</aside>
+
+			<!-- ============== MORE POSTS ============== -->
+			{
+				allPosts.length > 0 && (
+					<section class="bp-more section">
+						<div class="container">
+							<h2 class="bp-more-title">More from the blog</h2>
+							<ul class="bp-more-grid">
+								{allPosts.map((p) => (
+									<li>
+										<a class="bp-more-card" href={`/blog/${p.id}`}>
+											{p.data.heroImage && (
+												<div class="bp-more-media">
+													<Image
+														src={p.data.heroImage}
+														alt={p.data.heroImageAlt || p.data.title}
+														widths={[360, 540]}
+														sizes="(max-width: 900px) 90vw, 280px"
+														loading="lazy"
+														decoding="async"
+														format="webp"
+														quality={78}
+													/>
+												</div>
+											)}
+											<div class="bp-more-body">
+												<p class="bp-more-meta">
+													<time datetime={p.data.pubDate.toISOString()}>
+														{dateFormatter.format(p.data.pubDate)}
+													</time>
+												</p>
+												<h3>{p.data.title}</h3>
+											</div>
+										</a>
+									</li>
+								))}
+							</ul>
+						</div>
+					</section>
+				)
+			}
+		</article>
+	</main>
+	<SiteFooter
+		locations={locations}
+		tagline="Helping people feel calmer, more connected and more like themselves again."
+	/>
+</Layout>
+
+<style>
+	.bp-page {
+		--brand: var(--color-dark-slate-gray);
+		--brand-deep: #004836;
+		--brand-tint: rgb(0 94 71 / 8%);
+		--ink: var(--color-dark-gray);
+		--ink-soft: rgb(29 35 39 / 78%);
+		color: var(--ink);
+	}
+
+	/* ---------- HEADER ---------- */
+	.bp-header {
+		padding-block: clamp(2.5rem, 6vw, 4rem) clamp(1rem, 3vw, 2rem);
+		background: linear-gradient(180deg, var(--color-white) 0%, var(--brand-tint) 100%);
+	}
+
+	.bp-header-inner {
+		max-width: 760px;
+	}
+
+	.bp-back {
+		margin: 0 0 1.4rem;
+		font-size: 0.88rem;
+	}
+
+	.bp-back a {
+		color: var(--ink-soft);
+		text-decoration: none;
+		font-weight: 500;
+		transition: color 0.18s ease;
+	}
+
+	.bp-back a:hover,
+	.bp-back a:focus-visible {
+		color: var(--brand);
+	}
+
+	.bp-meta {
+		margin: 0 0 0.6rem;
+		display: flex;
+		align-items: center;
+		gap: 0.5rem;
+		font-size: 0.82rem;
+		font-weight: 600;
+		color: var(--ink-soft);
+	}
+
+	.bp-category {
+		text-transform: uppercase;
+		letter-spacing: 0.1em;
+		color: var(--brand);
+	}
+
+	.bp-dot {
+		opacity: 0.5;
+	}
+
+	.bp-page h1 {
+		margin: 0.2rem 0 0.9rem;
+		font-family: var(--font-serif);
+		font-size: clamp(1.9rem, 4.4vw, 2.9rem);
+		font-weight: 500;
+		line-height: 1.16;
+		color: var(--brand-deep);
+		text-wrap: balance;
+	}
+
+	.bp-description {
+		margin: 0;
+		font-family: var(--font-serif);
+		font-style: italic;
+		font-size: clamp(1.05rem, 1.8vw, 1.2rem);
+		line-height: 1.55;
+		color: var(--ink-soft);
+		max-width: 60ch;
+	}
+
+	/* ---------- HERO IMAGE ---------- */
+	.bp-hero {
+		margin: 0;
+		padding-block: 1rem 0;
+	}
+
+	.bp-hero :global(img) {
+		width: 100%;
+		height: auto;
+		max-height: 540px;
+		object-fit: cover;
+		border-radius: 1rem;
+		box-shadow: 0 22px 48px rgb(0 94 71 / 18%);
+		display: block;
+	}
+
+	/* ---------- PROSE BODY ---------- */
+	.bp-body {
+		padding-block: clamp(2rem, 5vw, 3.5rem);
+	}
+
+	.bp-body-inner {
+		display: flex;
+		justify-content: center;
+	}
+
+	.bp-prose {
+		max-width: 68ch;
+		width: 100%;
+		font-size: clamp(1rem, 1.5vw, 1.1rem);
+		line-height: 1.85;
+		color: var(--ink);
+	}
+
+	.bp-prose :global(p) {
+		margin: 0 0 1.2rem;
+	}
+
+	.bp-prose :global(h2) {
+		margin: 2.4rem 0 1rem;
+		font-family: var(--font-serif);
+		font-size: clamp(1.5rem, 2.6vw, 1.85rem);
+		font-weight: 500;
+		line-height: 1.25;
+		color: var(--brand-deep);
+		text-wrap: balance;
+	}
+
+	.bp-prose :global(h3) {
+		margin: 2rem 0 0.9rem;
+		font-family: var(--font-serif);
+		font-size: clamp(1.2rem, 2vw, 1.4rem);
+		font-weight: 500;
+		color: var(--brand-deep);
+	}
+
+	.bp-prose :global(ul),
+	.bp-prose :global(ol) {
+		margin: 0 0 1.4rem;
+		padding-left: 1.5rem;
+	}
+
+	.bp-prose :global(li) {
+		margin: 0 0 0.5rem;
+		line-height: 1.7;
+	}
+
+	.bp-prose :global(li::marker) {
+		color: var(--brand);
+	}
+
+	.bp-prose :global(a) {
+		color: var(--brand);
+		text-decoration: underline;
+		text-decoration-thickness: 1px;
+		text-underline-offset: 3px;
+		transition: color 0.18s ease;
+	}
+
+	.bp-prose :global(a:hover),
+	.bp-prose :global(a:focus-visible) {
+		color: var(--brand-deep);
+	}
+
+	.bp-prose :global(strong) {
+		color: var(--brand-deep);
+		font-weight: 600;
+	}
+
+	.bp-prose :global(em) {
+		color: var(--ink);
+	}
+
+	.bp-prose :global(blockquote) {
+		margin: 1.6rem 0;
+		padding: 0.4rem 0 0.4rem 1.4rem;
+		border-left: 3px solid var(--brand);
+		font-family: var(--font-serif);
+		font-style: italic;
+		color: var(--brand-deep);
+	}
+
+	.bp-prose :global(hr) {
+		margin: 2.4rem auto;
+		max-width: 8ch;
+		border: 0;
+		border-top: 1px solid rgb(0 94 71 / 25%);
+	}
+
+	.bp-prose :global(img) {
+		max-width: 100%;
+		height: auto;
+		border-radius: 0.75rem;
+		margin: 1.6rem 0;
+	}
+
+	/* ---------- FOOTER CTA ---------- */
+	.bp-cta-inner {
+		max-width: 60ch;
+		margin-inline: auto;
+		text-align: center;
+	}
+
+	.bp-cta-kicker {
+		margin: 0;
+		text-transform: uppercase;
+		letter-spacing: 0.12em;
+		font-size: 0.78rem;
+		font-weight: 600;
+		color: var(--brand);
+	}
+
+	.bp-cta-inner h2 {
+		margin: 0.6rem 0 1rem;
+		font-family: var(--font-serif);
+		font-size: clamp(1.45rem, 2.8vw, 1.95rem);
+		font-weight: 500;
+		line-height: 1.3;
+		color: var(--brand-deep);
+		text-wrap: balance;
+	}
+
+	.bp-cta-body {
+		margin: 0 0 1.4rem;
+		line-height: 1.75;
+		color: var(--ink-soft);
+	}
+
+	.bp-cta-actions {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.7rem;
+		justify-content: center;
+	}
+
+	/* ---------- MORE POSTS ---------- */
+	.bp-more-title {
+		margin: 0 0 1.5rem;
+		font-family: var(--font-serif);
+		font-size: clamp(1.3rem, 2.4vw, 1.7rem);
+		font-weight: 500;
+		color: var(--brand-deep);
+	}
+
+	.bp-more-grid {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+		display: grid;
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+		gap: 1.3rem;
+	}
+
+	.bp-more-card {
+		display: block;
+		background: var(--color-white);
+		border: 1px solid rgb(0 94 71 / 14%);
+		border-radius: 0.85rem;
+		overflow: hidden;
+		text-decoration: none;
+		color: inherit;
+		height: 100%;
+		transition:
+			transform 0.2s ease,
+			box-shadow 0.2s ease;
+	}
+
+	.bp-more-card:hover {
+		transform: translateY(-2px);
+		box-shadow: 0 14px 30px rgb(0 94 71 / 12%);
+	}
+
+	.bp-more-media {
+		aspect-ratio: 16 / 10;
+		overflow: hidden;
+		background: linear-gradient(160deg, #eaf0ea 0%, var(--brand-tint) 100%);
+	}
+
+	.bp-more-media :global(img) {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+	}
+
+	.bp-more-body {
+		padding: 0.95rem 1.1rem 1.1rem;
+		display: flex;
+		flex-direction: column;
+		gap: 0.4rem;
+	}
+
+	.bp-more-meta {
+		margin: 0;
+		font-size: 0.75rem;
+		font-weight: 600;
+		letter-spacing: 0.04em;
+		color: var(--ink-soft);
+	}
+
+	.bp-more-body h3 {
+		margin: 0;
+		font-family: var(--font-serif);
+		font-size: 1rem;
+		font-weight: 500;
+		line-height: 1.3;
+		color: var(--brand-deep);
+	}
+
+	/* ---------- RESPONSIVE ---------- */
+	@media (max-width: 900px) {
+		.bp-more-grid {
+			grid-template-columns: 1fr 1fr;
+		}
+	}
+
+	@media (max-width: 600px) {
+		.bp-more-grid {
+			grid-template-columns: 1fr;
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.bp-back a,
+		.bp-more-card {
+			transition: none;
+		}
+
+		.bp-more-card:hover {
+			transform: none;
+		}
+	}
+</style>

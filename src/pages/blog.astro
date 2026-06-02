@@ -1,28 +1,350 @@
 ---
+import { getCollection } from "astro:content";
+import { Image } from "astro:assets";
 import Layout from "../layouts/Layout.astro";
 import SiteHeader from "../components/SiteHeader.astro";
 import SiteFooter from "../components/SiteFooter.astro";
-import ComingSoon from "../components/ComingSoon.astro";
 import { locations, navItems } from "../data/site";
+import { calendlyLinks } from "../data/calendly";
+
+const posts = (await getCollection("blog")).sort(
+	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+);
+
+const dateFormatter = new Intl.DateTimeFormat("en-GB", {
+	day: "numeric",
+	month: "long",
+	year: "numeric",
+});
 ---
 
 <Layout
 	title="Blog · Awaken Discovery"
-	description="Gentle wellbeing insights, reflections and supportive resources from Awaken Discovery."
+	description="Gentle wellbeing reflections from Ally — therapy, anxiety, emotional support and what helps when life feels heavy."
 >
 	<SiteHeader navItems={navItems} />
-	<main>
-		<ComingSoon
-			eyebrow="Blog"
-			title="Blog — Coming Soon"
-			body="Gentle wellbeing insights, reflections and supportive resources for navigating anxiety, burnout and emotional overwhelm."
-			notes={[
-				"Articles on anxiety and the nervous system",
-				"Reflections for teachers in survival mode",
-				"Gentle grounding practices and reflection prompts",
-				"Notes from Ally's therapeutic work",
-			]}
-		/>
+	<main class="bl-page">
+		<!-- ============== HERO ============== -->
+		<section class="bl-hero section">
+			<div class="container">
+				<div class="bl-hero-inner">
+					<p class="bl-eyebrow">Blog</p>
+					<h1>Reflections, gentle insights and notes from the therapy room.</h1>
+					<p class="bl-lede">
+						Writing on therapy, anxiety, relationships and the quieter work of
+						feeling more like yourself again — by Ally, Counsellor &amp;
+						Psychotherapist.
+					</p>
+				</div>
+			</div>
+		</section>
+
+		<!-- ============== POSTS GRID ============== -->
+		<section class="bl-list section section-soft">
+			<div class="container">
+				<ul class="bl-grid">
+					{
+						posts.map((post, i) => (
+							<li>
+								<article class="bl-card">
+									<a class="bl-card-link" href={`/blog/${post.id}`}>
+										<div class="bl-card-media">
+											{post.data.heroImage ? (
+												<Image
+													src={post.data.heroImage}
+													alt={post.data.heroImageAlt || post.data.title}
+													widths={[420, 640, 860]}
+													sizes="(max-width: 700px) 90vw, (max-width: 1100px) 45vw, 360px"
+													loading={i === 0 ? "eager" : "lazy"}
+													decoding="async"
+													format="webp"
+													quality={80}
+												/>
+											) : (
+												<div class="bl-placeholder" aria-hidden="true">
+													<svg viewBox="0 0 60 60" aria-hidden="true">
+														<path
+															d="M30 5C42 14 50 25 50 36C50 46 42 54 30 55C18 54 10 46 10 36C10 25 18 14 30 5Z"
+															fill="currentColor"
+															opacity="0.18"
+														/>
+													</svg>
+												</div>
+											)}
+										</div>
+										<div class="bl-card-body">
+											<p class="bl-card-meta">
+												<span class="bl-card-category">{post.data.category}</span>
+												<span class="bl-card-dot" aria-hidden="true">·</span>
+												<time datetime={post.data.pubDate.toISOString()}>
+													{dateFormatter.format(post.data.pubDate)}
+												</time>
+											</p>
+											<h2 class="bl-card-title">{post.data.title}</h2>
+											<p class="bl-card-desc">{post.data.description}</p>
+											<span class="bl-card-readmore" aria-hidden="true">
+												Read more →
+											</span>
+										</div>
+									</a>
+								</article>
+							</li>
+						))
+					}
+				</ul>
+			</div>
+		</section>
+
+		<!-- ============== CLOSING CTA ============== -->
+		<section class="bl-close section">
+			<div class="container bl-close-inner">
+				<h2>Want gentler support, sent quietly?</h2>
+				<p>
+					New posts and resources land here as they're written — no schedule, no
+					pressure. If you'd like a calmer first step, the door is open.
+				</p>
+				<div class="bl-close-actions">
+					<a
+						class="cta cta-solid"
+						href={calendlyLinks.tasterSession}
+						target="_blank"
+						rel="noopener noreferrer"
+					>
+						Book a Free Consultation
+					</a>
+					<a class="cta cta-outline" href="/free-resources">Browse Free Resources</a>
+				</div>
+			</div>
+		</section>
 	</main>
-	<SiteFooter locations={locations} />
+	<SiteFooter
+		locations={locations}
+		tagline="Helping people feel calmer, more connected and more like themselves again."
+	/>
 </Layout>
+
+<style>
+	.bl-page {
+		--brand: var(--color-dark-slate-gray);
+		--brand-deep: #004836;
+		--brand-tint: rgb(0 94 71 / 8%);
+		--ink: var(--color-dark-gray);
+		--ink-soft: rgb(29 35 39 / 78%);
+		color: var(--ink);
+	}
+
+	.bl-eyebrow {
+		margin: 0;
+		text-transform: uppercase;
+		letter-spacing: 0.12em;
+		font-size: 0.78rem;
+		font-weight: 600;
+		color: var(--brand);
+	}
+
+	/* ---------- HERO ---------- */
+	.bl-hero {
+		padding-block: clamp(3.5rem, 8vw, 5.5rem);
+		background: linear-gradient(180deg, var(--color-white) 0%, var(--brand-tint) 100%);
+	}
+
+	.bl-hero-inner {
+		max-width: 64ch;
+	}
+
+	.bl-page h1 {
+		margin: 0.6rem 0 1rem;
+		font-family: var(--font-serif);
+		font-size: clamp(2rem, 4.4vw, 3rem);
+		font-weight: 500;
+		line-height: 1.16;
+		color: var(--brand-deep);
+		text-wrap: balance;
+	}
+
+	.bl-lede {
+		margin: 0;
+		max-width: 62ch;
+		line-height: 1.75;
+		color: var(--ink-soft);
+		font-size: 1.05rem;
+	}
+
+	/* ---------- POSTS GRID ---------- */
+	.bl-grid {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+		display: grid;
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+		gap: 1.6rem;
+	}
+
+	.bl-card {
+		height: 100%;
+		background: var(--color-white);
+		border: 1px solid rgb(0 94 71 / 14%);
+		border-radius: 1rem;
+		overflow: hidden;
+		transition:
+			transform 0.2s ease,
+			box-shadow 0.2s ease;
+	}
+
+	.bl-card:hover {
+		transform: translateY(-3px);
+		box-shadow: 0 18px 36px rgb(0 94 71 / 14%);
+	}
+
+	.bl-card-link {
+		display: flex;
+		flex-direction: column;
+		height: 100%;
+		text-decoration: none;
+		color: inherit;
+	}
+
+	.bl-card-media {
+		aspect-ratio: 16 / 10;
+		background: linear-gradient(160deg, #eaf0ea 0%, var(--brand-tint) 100%);
+		overflow: hidden;
+		position: relative;
+	}
+
+	.bl-card-media :global(img) {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		display: block;
+		transition: transform 0.4s ease;
+	}
+
+	.bl-card:hover .bl-card-media :global(img) {
+		transform: scale(1.03);
+	}
+
+	.bl-placeholder {
+		position: absolute;
+		inset: 0;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		color: var(--brand);
+	}
+
+	.bl-placeholder svg {
+		width: 64px;
+		height: 64px;
+	}
+
+	.bl-card-body {
+		padding: 1.3rem 1.4rem 1.5rem;
+		display: flex;
+		flex-direction: column;
+		gap: 0.65rem;
+		flex: 1;
+	}
+
+	.bl-card-meta {
+		margin: 0;
+		display: flex;
+		align-items: center;
+		gap: 0.5rem;
+		font-size: 0.78rem;
+		font-weight: 600;
+		letter-spacing: 0.04em;
+		color: var(--ink-soft);
+	}
+
+	.bl-card-category {
+		text-transform: uppercase;
+		letter-spacing: 0.1em;
+		color: var(--brand);
+	}
+
+	.bl-card-dot {
+		opacity: 0.5;
+	}
+
+	.bl-card-title {
+		margin: 0;
+		font-family: var(--font-serif);
+		font-size: clamp(1.2rem, 1.9vw, 1.4rem);
+		font-weight: 500;
+		line-height: 1.25;
+		color: var(--brand-deep);
+		text-wrap: balance;
+	}
+
+	.bl-card-desc {
+		margin: 0;
+		font-size: 0.92rem;
+		line-height: 1.6;
+		color: var(--ink-soft);
+	}
+
+	.bl-card-readmore {
+		margin-top: auto;
+		padding-top: 0.3rem;
+		font-size: 0.9rem;
+		font-weight: 600;
+		color: var(--brand);
+	}
+
+	/* ---------- CLOSING ---------- */
+	.bl-close-inner {
+		max-width: 56ch;
+		margin-inline: auto;
+		text-align: center;
+	}
+
+	.bl-close-inner h2 {
+		margin: 0 0 0.8rem;
+		font-family: var(--font-serif);
+		font-size: clamp(1.5rem, 3vw, 2rem);
+		font-weight: 500;
+		color: var(--brand-deep);
+		text-wrap: balance;
+	}
+
+	.bl-close-inner p {
+		margin: 0 0 1.4rem;
+		color: var(--ink-soft);
+		line-height: 1.7;
+	}
+
+	.bl-close-actions {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.7rem;
+		justify-content: center;
+	}
+
+	/* ---------- RESPONSIVE ---------- */
+	@media (max-width: 1100px) {
+		.bl-grid {
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+		}
+	}
+
+	@media (max-width: 700px) {
+		.bl-grid {
+			grid-template-columns: 1fr;
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.bl-card,
+		.bl-card-media :global(img) {
+			transition: none;
+		}
+
+		.bl-card:hover {
+			transform: none;
+		}
+
+		.bl-card:hover .bl-card-media :global(img) {
+			transform: none;
+		}
+	}
+</style>
