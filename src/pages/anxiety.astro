@@ -23,9 +23,7 @@ const findingCalmWhatsInside = [
 	<SiteHeader navItems={navItems} />
 	<main>
 		<section class="anxiety-hero section">
-			<div class="hero-bg-placeholder" aria-hidden="true">
-				<span>{`{{TODO: calming background video — soft nature, breathing visuals}}`}</span>
-			</div>
+			<div class="hero-bg" aria-hidden="true"></div>
 			<div class="container hero-shell">
 				<p class="eyebrow">Anxiety Support</p>
 				<h1>
@@ -91,12 +89,21 @@ const findingCalmWhatsInside = [
 			body="A calming, body-aware guide designed to help you slow racing thoughts, reconnect with yourself and better understand what anxiety may be trying to communicate beneath the overwhelm."
 			whatsInside={findingCalmWhatsInside}
 			whatsInsideHeading="What's inside"
-			buttonLabel="Send Me the Free Guide"
+			filloutId="jXo5e7D8Hwus"
 			privacyText="Your information will always be treated with care and never shared with third parties."
 		/>
 
 		<section class="meet-ally section">
 			<div class="container ma-inner">
+				<figure class="ma-figure">
+					<img
+						src="/assets/images/ally-portrait-sofa.jpg"
+						alt="Ally — Counsellor and Psychotherapist at Awaken Discovery"
+						loading="lazy"
+						decoding="async"
+					/>
+				</figure>
+				<div class="ma-text">
 				<p class="section-kicker">Meet Ally</p>
 				<h2>A Gentle, Compassionate Approach to Anxiety Support</h2>
 
@@ -205,6 +212,7 @@ const findingCalmWhatsInside = [
 						</p>
 					</div>
 				</details>
+				</div>
 			</div>
 		</section>
 
@@ -214,36 +222,56 @@ const findingCalmWhatsInside = [
 
 				<div class="cs-cards">
 					<article class="cs-card">
-						<h3>Anxiety Reflection Journal</h3>
-						<p>
-							A guided space to help you notice emotional patterns, better
-							understand your anxiety and reconnect with yourself with greater
-							calm and self-awareness.
-						</p>
-						<a class="cs-link" href="#" aria-disabled="true">
-							<span>Explore the Journal</span>
-							<span class="cs-link-arrow" aria-hidden="true">→</span>
-						</a>
-						<p class="cs-card-todo">
-							{`{{TODO: Anxiety Reflection Journal — Ally to complete; show picture clips only for now}}`}
-						</p>
+						<figure class="cs-card-figure">
+							<img
+								src="/assets/images/ally-writing-journal.jpg"
+								alt="Open journal with pen — gentle reflection practice"
+								loading="lazy"
+								decoding="async"
+							/>
+						</figure>
+						<div class="cs-card-body">
+							<h3>Anxiety Reflection Journal</h3>
+							<p>
+								A guided space to help you notice emotional patterns, better
+								understand your anxiety and reconnect with yourself with greater
+								calm and self-awareness.
+							</p>
+							<a class="cs-link" href="#" aria-disabled="true">
+								<span>Explore the Journal</span>
+								<span class="cs-link-arrow" aria-hidden="true">→</span>
+							</a>
+							<p class="cs-card-todo">
+								{`{{TODO: Anxiety Reflection Journal — Ally to complete; show picture clips only for now}}`}
+							</p>
+						</div>
 					</article>
 
 					<article class="cs-card">
-						<h3>One-to-One Therapy Support</h3>
-						<p>
-							Compassionate counselling support for anxiety, emotional overwhelm
-							and nervous system exhaustion in a calm and supportive space.
-						</p>
-						<a
-							class="cs-link"
-							href={calendlyLinks.tasterSession}
-							target="_blank"
-							rel="noopener noreferrer"
-						>
-							<span>Begin Therapy Support</span>
-							<span class="cs-link-arrow" aria-hidden="true">→</span>
-						</a>
+						<figure class="cs-card-figure">
+							<img
+								src="/assets/images/ally-with-client.jpg"
+								alt="A calm therapy session with Ally — gentle, body-aware support"
+								loading="lazy"
+								decoding="async"
+							/>
+						</figure>
+						<div class="cs-card-body">
+							<h3>One-to-One Therapy Support</h3>
+							<p>
+								Compassionate counselling support for anxiety, emotional overwhelm
+								and nervous system exhaustion in a calm and supportive space.
+							</p>
+							<a
+								class="cs-link"
+								href={calendlyLinks.tasterSession}
+								target="_blank"
+								rel="noopener noreferrer"
+							>
+								<span>Begin Therapy Support</span>
+								<span class="cs-link-arrow" aria-hidden="true">→</span>
+							</a>
+						</div>
 					</article>
 				</div>
 
@@ -310,31 +338,26 @@ const findingCalmWhatsInside = [
 		isolation: isolate;
 	}
 
-	.hero-bg-placeholder {
+	.hero-bg {
 		position: absolute;
 		inset: 0;
 		z-index: -1;
 		background:
+			linear-gradient(
+				160deg,
+				rgb(234 240 234 / 92%) 0%,
+				rgb(246 248 246 / 78%) 55%,
+				rgb(244 236 234 / 78%) 100%
+			),
 			radial-gradient(
 				ellipse at 70% 30%,
-				rgb(0 94 71 / 18%),
+				rgb(0 94 71 / 14%),
 				transparent 60%
 			),
-			linear-gradient(160deg, #eaf0ea 0%, #f6f8f6 60%, #f4ecea 100%);
-		display: flex;
-		align-items: flex-end;
-		justify-content: flex-end;
-		padding: 1rem;
-	}
-
-	.hero-bg-placeholder span {
-		font-size: 0.72rem;
-		font-style: italic;
-		color: var(--color-dark-slate-gray);
-		opacity: 0.55;
-		background: rgb(255 255 255 / 65%);
-		padding: 0.3rem 0.6rem;
-		border-radius: 999px;
+			url("/assets/images/begin-journey-sunrise.png");
+		background-size: cover;
+		background-position: center 30%;
+		background-repeat: no-repeat;
 	}
 
 	.hero-shell {
@@ -459,7 +482,28 @@ const findingCalmWhatsInside = [
 	}
 
 	.ma-inner {
-		max-width: 72ch;
+		max-width: 1080px;
+		display: grid;
+		grid-template-columns: 0.85fr 1.15fr;
+		gap: clamp(1.6rem, 4vw, 3.5rem);
+		align-items: start;
+	}
+
+	.ma-figure {
+		margin: 0;
+	}
+
+	.ma-figure img {
+		width: 100%;
+		aspect-ratio: 4 / 5;
+		object-fit: cover;
+		object-position: 50% 25%;
+		border-radius: 1rem;
+		box-shadow: 0 18px 36px rgb(0 94 71 / 18%);
+	}
+
+	.ma-text {
+		max-width: 62ch;
 	}
 
 	.ma-copy {
@@ -574,13 +618,41 @@ const findingCalmWhatsInside = [
 
 	.cs-card {
 		background: var(--color-white);
-		padding: 1.8rem 1.6rem;
 		border-radius: 1rem;
 		border: 1px solid rgb(0 94 71 / 18%);
 		box-shadow: 0 10px 28px rgb(0 94 71 / 8%);
 		display: flex;
 		flex-direction: column;
+		overflow: hidden;
+	}
+
+	.cs-card-figure {
+		margin: 0;
+		aspect-ratio: 16 / 9;
+		overflow: hidden;
+		background: var(--brand-tint);
+	}
+
+	.cs-card-figure img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		object-position: 50% 40%;
+		display: block;
+		transition: transform 0.5s ease;
+	}
+
+	.cs-card:hover .cs-card-figure img,
+	.cs-card:focus-within .cs-card-figure img {
+		transform: scale(1.03);
+	}
+
+	.cs-card-body {
+		padding: 1.6rem;
+		display: flex;
+		flex-direction: column;
 		gap: 0.7rem;
+		flex: 1;
 	}
 
 	.cs-card h3 {
@@ -681,6 +753,17 @@ const findingCalmWhatsInside = [
 	}
 
 	/* ---------- RESPONSIVE ---------- */
+	@media (max-width: 900px) {
+		.ma-inner {
+			grid-template-columns: 1fr;
+		}
+
+		.ma-figure {
+			max-width: 420px;
+			margin-inline: auto;
+		}
+	}
+
 	@media (max-width: 760px) {
 		.cs-cards {
 			grid-template-columns: 1fr;

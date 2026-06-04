@@ -6,6 +6,7 @@ Suggested structure:
 
 - `public/assets/images/` for photos and section images
 - `public/assets/logos/` for logos and brand marks
+- `public/assets/pdf/` for downloadable lead-magnet PDFs (linked from email sequences)
 
 Current homepage files:
 
