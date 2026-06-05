@@ -123,48 +123,23 @@ import stoolInClearing from "../assets/teachers/stool-in-clearing.jpg";
 					</ul>
 				</div>
 
-				<form
-					class="fg-form"
-					method="post"
-					action="#"
-					novalidate
-					aria-describedby="fg-todo"
-				>
+				<div class="fg-form-slot">
 					<p class="fg-form-kicker">Email signup</p>
 					<h3 class="fg-form-title">Send Me the Free Guide</h3>
-					<label class="fg-field">
-						<span>Email address</span>
-						<input
-							type="email"
-							name="email"
-							autocomplete="email"
-							required
-							placeholder="you@example.com"
-						/>
-					</label>
-
-					<label class="fg-consent">
-						<input type="checkbox" name="consent" required />
-						<span>
-							I'd like to receive supportive wellbeing emails, resources and
-							updates from Awaken Discovery. I understand I can unsubscribe at
-							any time.
-						</span>
-					</label>
-
-					<button type="submit" class="cta cta-solid fg-submit">
-						Send Me the Free Guide
-					</button>
-
+					<div
+						class="fillout-embed"
+						style="width:100%;height:560px;"
+						data-fillout-id="bzhC71AYFfus"
+						data-fillout-embed-type="standard"
+						data-fillout-inherit-parameters
+						data-fillout-dynamic-resize
+					>
+					</div>
 					<p class="fg-privacy">
 						Your information will always be treated with care and never shared
 						with third parties. See our <a href="/privacy">Privacy Policy</a>.
 					</p>
-
-					<p id="fg-todo" class="fg-todo">
-						{`{{TODO: connect to ESP — auto-send Teacher Guide PDF + trigger nurture sequence.}}`}
-					</p>
-				</form>
+				</div>
 			</div>
 		</section>
 
@@ -346,6 +321,8 @@ import stoolInClearing from "../assets/teachers/stool-in-clearing.jpg";
 		tagline="Helping overwhelmed teachers reconnect with themselves beyond survival mode."
 	/>
 </Layout>
+
+<script is:inline async src="https://server.fillout.com/embed/v1/"></script>
 
 <style>
 	.teachers-hero {
@@ -606,7 +583,7 @@ import stoolInClearing from "../assets/teachers/stool-in-clearing.jpg";
 		transform: rotate(-45deg);
 	}
 
-	.fg-form {
+	.fg-form-slot {
 		background: linear-gradient(180deg, #f6f8f6 0%, #eaf0ea 100%);
 		padding: 1.8rem 1.6rem;
 		border-radius: 1rem;
@@ -635,40 +612,10 @@ import stoolInClearing from "../assets/teachers/stool-in-clearing.jpg";
 		color: var(--color-dark-slate-gray);
 	}
 
-	.fg-field {
-		display: grid;
-		gap: 0.4rem;
-		font-size: 0.85rem;
-	}
-
-	.fg-field input {
-		padding: 0.78rem 1rem;
-		border-radius: 0.65rem;
-		border: 1px solid var(--color-gainsboro);
-		font: inherit;
+	.fillout-embed {
 		background: var(--color-white);
-	}
-
-	.fg-field input:focus-visible {
-		outline: none;
-		border-color: var(--color-dark-slate-gray);
-		box-shadow: 0 0 0 3px rgb(0 94 71 / 18%);
-	}
-
-	.fg-consent {
-		display: flex;
-		gap: 0.6rem;
-		font-size: 0.82rem;
-		line-height: 1.55;
-	}
-
-	.fg-consent input {
-		margin-top: 0.25rem;
-		flex-shrink: 0;
-	}
-
-	.fg-submit {
-		justify-self: stretch;
+		border-radius: 0.8rem;
+		overflow: hidden;
 	}
 
 	.fg-privacy {
@@ -682,13 +629,6 @@ import stoolInClearing from "../assets/teachers/stool-in-clearing.jpg";
 		color: var(--color-dark-slate-gray);
 		text-decoration: underline;
 		text-underline-offset: 3px;
-	}
-
-	.fg-todo {
-		margin: 0;
-		font-size: 0.72rem;
-		font-style: italic;
-		opacity: 0.55;
 	}
 
 	/* ---------- MEET ALLY (TEACHER) ---------- */
@@ -929,7 +869,7 @@ import stoolInClearing from "../assets/teachers/stool-in-clearing.jpg";
 			margin-inline: auto;
 		}
 
-		.fg-form {
+		.fg-form-slot {
 			position: static;
 		}
 
