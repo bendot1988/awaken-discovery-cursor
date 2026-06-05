@@ -95,12 +95,36 @@ const { videoSrc, posterSrc = "/assets/images/hero-ally.png" } = Astro.props;
 			</div>
 
 			<ul class="trust-strip" aria-label="Credentials">
-				<li>✔ MBACP Registered</li>
 				<li>✔ Online &amp; In-Person Sessions</li>
 				<li>✔ Individuals · Couples · Young People</li>
 				<li>✔ Integrative Humanistic Counselling</li>
 			</ul>
-			<p class="trust-todo">{`{{TODO: accreditation logos}}`}</p>
+			<ul class="trust-logos" aria-label="Accreditations">
+				<li>
+					<img
+						src="/assets/logos/accredited-bacp.png"
+						alt="BACP Registered Member 392865 — MBACP, Professional Standards Authority accredited register"
+						loading="lazy"
+						decoding="async"
+					/>
+				</li>
+				<li>
+					<img
+						src="/assets/logos/accredited-ncps.png"
+						alt="NCPS Accredited Registrant MNCPS (Acc.) — Professional Standards Authority accredited register"
+						loading="lazy"
+						decoding="async"
+					/>
+				</li>
+				<li>
+					<img
+						src="/assets/logos/accredited-online-counselling.png"
+						alt="Online & Telephone Counselling Certified Counsellor"
+						loading="lazy"
+						decoding="async"
+					/>
+				</li>
+			</ul>
 		</div>
 
 		<div class="hero-media">
@@ -116,20 +140,15 @@ const { videoSrc, posterSrc = "/assets/images/hero-ally.png" } = Astro.props;
 						playsinline
 					></video>
 				) : (
-					<>
-						<img
-							src={posterSrc}
-							alt="Ally — counsellor and psychotherapist, smiling in a calm sage-green office"
-							width="682"
-							height="1024"
-							loading="eager"
-							decoding="async"
-							fetchpriority="high"
-						/>
-						<p class="video-placeholder-label">
-							{`{{TODO: calming hero video — stock or client supplied}}`}
-						</p>
-					</>
+					<img
+						src={posterSrc}
+						alt="Ally — counsellor and psychotherapist, smiling in a calm sage-green office"
+						width="682"
+						height="1024"
+						loading="eager"
+						decoding="async"
+						fetchpriority="high"
+					/>
 				)}
 			</div>
 		</div>
@@ -320,11 +339,46 @@ const { videoSrc, posterSrc = "/assets/images/hero-ally.png" } = Astro.props;
 		color: rgb(29 35 39 / 78%);
 	}
 
-	.trust-todo {
-		margin: 0.6rem 0 0;
-		font-size: 0.75rem;
-		font-style: italic;
-		opacity: 0.55;
+	.trust-logos {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		gap: 0.9rem;
+		margin: 1.6rem 0 0;
+		padding: 0;
+		list-style: none;
+	}
+
+	.trust-logos li {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		background: var(--color-white);
+		border-radius: 0.7rem;
+		padding: 0.6rem 0.9rem;
+		box-shadow: 0 4px 12px rgb(29 35 39 / 6%);
+	}
+
+	.trust-logos img {
+		height: 68px;
+		width: auto;
+		max-width: 100%;
+		object-fit: contain;
+		display: block;
+	}
+
+	@media (max-width: 480px) {
+		.trust-logos {
+			gap: 0.6rem;
+		}
+
+		.trust-logos li {
+			padding: 0.5rem 0.7rem;
+		}
+
+		.trust-logos img {
+			height: 54px;
+		}
 	}
 
 	.hero-media {
@@ -346,18 +400,6 @@ const { videoSrc, posterSrc = "/assets/images/hero-ally.png" } = Astro.props;
 		height: 100%;
 		object-fit: cover;
 		object-position: 50% 28%;
-	}
-
-	.video-placeholder-label {
-		position: absolute;
-		left: 0.75rem;
-		bottom: 0.75rem;
-		margin: 0;
-		padding: 0.35rem 0.7rem;
-		background: rgb(0 0 0 / 55%);
-		color: var(--color-white);
-		font-size: 0.72rem;
-		border-radius: 999px;
 	}
 
 	@media (max-width: 1024px) {

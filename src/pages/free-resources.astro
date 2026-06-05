@@ -77,11 +77,6 @@ import { calendlyLinks } from "../data/calendly";
 										<a class="cta cta-solid fr-card-cta" href={r.href}>
 											{r.ctaLabel}
 										</a>
-										{r.imagePrompt && (
-											<p class="fr-card-todo">
-												{`{{IMAGE PROMPT: ${r.imagePrompt}}}`}
-											</p>
-										)}
 									</div>
 								</article>
 							</li>
@@ -323,15 +318,6 @@ import { calendlyLinks } from "../data/calendly";
 		align-self: flex-start;
 		padding: 0.7rem 1.1rem;
 		font-size: 0.92rem;
-	}
-
-	.fr-card-todo {
-		margin: 0.4rem 0 0;
-		font-size: 0.7rem;
-		font-style: italic;
-		color: var(--ink-soft);
-		opacity: 0.6;
-		line-height: 1.5;
 	}
 
 	.fr-coming-soon {
