@@ -63,12 +63,12 @@ export type FreeResource = {
 
 export const freeResources: FreeResource[] = [
 	{
-		title: "Finding Calm in the Chaos",
-		subtitle: "Why You Can't Switch Off After Teaching",
+		title: "Why You Can't Switch Off After Teaching",
+		subtitle: "A calming guide to understanding anxiety after teaching",
 		footerSubtitle:
-			"Why You Can't Switch Off After Teaching — a guide for overwhelmed teachers",
+			"Teacher support for switching off after the school day",
 		description:
-			"A teacher's guide to grounding yourself when you're already overwhelmed. Body-aware techniques you can use between lessons, in the staffroom or in the car park.",
+			"A calming guide to understanding emotional overload, nervous-system tension and why teaching can become so difficult to mentally leave behind at the end of the day.",
 		href: teacherGuidePath,
 		ctaLabel: "Get the Teacher Guide",
 		audience: "For teachers",
@@ -79,12 +79,12 @@ export const freeResources: FreeResource[] = [
 		],
 		image: "/assets/images/finding-calm-guide-mockup.png",
 		imageAlt:
-			"Finding Calm in the Chaos — free guide on a desk with notebook and mug",
+			"Why You Can't Switch Off After Teaching — free teacher guide on a desk with notebook and mug",
 	},
 	{
 		title: "Finding Calm",
 		subtitle: "A Simple Guide to Grounding Yourself During Anxiety",
-		footerSubtitle: "A simple guide to grounding yourself during anxiety",
+		footerSubtitle: "Anxiety support for grounding yourself during anxious moments",
 		description:
 			"For anyone tired of fighting their own nervous system. Gentle, body-aware ways to pause, breathe and find your way back to yourself when anxiety rises.",
 		href: anxietyGuidePath,
@@ -101,7 +101,7 @@ export const freeResources: FreeResource[] = [
 	{
 		title: "When You've Been Holding Too Much for Too Long",
 		subtitle: "A gentle guide to emotional overwhelm and reconnection",
-		footerSubtitle: "A gentle guide to emotional overwhelm and reconnection",
+		footerSubtitle: "General emotional wellbeing support for overwhelm and reconnection",
 		description:
 			"For when you've been holding everything together for everyone else and quietly forgetting yourself in the process. A short, gentle invitation back.",
 		href: "/#signup",
@@ -127,8 +127,8 @@ export const navItems: NavItem[] = [
 			{ label: "About Therapy", href: "/about-therapy", dividerAfter: true },
 			{ label: "For Teachers", href: "/teachers" },
 			{ label: "For Anxiety", href: "/anxiety", dividerAfter: true },
-			{ label: "Individual Pricing", href: "/pricing/individual" },
-			{ label: "Bulk Pricing", href: "/pricing" },
+			{ label: "Single Session Pricing", href: "/pricing/individual" },
+			{ label: "Bundle Pricing", href: "/pricing" },
 		],
 	},
 	{ label: "Products", href: "/products" },
@@ -145,8 +145,8 @@ export const footerNavItems: NavItem[] = [
 	{ label: "Anxiety", href: "/anxiety" },
 	{ label: "Free Resources", href: "/free-resources" },
 	{ label: "Products", href: "/products" },
-	{ label: "Individual Pricing", href: "/pricing/individual" },
-	{ label: "Bulk Pricing", href: "/pricing" },
+	{ label: "Single Session Pricing", href: "/pricing/individual" },
+	{ label: "Bundle Pricing", href: "/pricing" },
 	{ label: "Blog", href: "/blog" },
 	{ label: "Contact", href: "/contact" },
 ];

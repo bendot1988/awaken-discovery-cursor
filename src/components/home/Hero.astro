@@ -341,9 +341,9 @@ const { videoSrc, posterSrc = "/assets/images/hero-ally.png" } = Astro.props;
 
 	.trust-logos {
 		display: flex;
-		flex-wrap: wrap;
+		flex-wrap: nowrap;
 		align-items: center;
-		gap: 0.9rem;
+		gap: 0.65rem;
 		margin: 1.6rem 0 0;
 		padding: 0;
 		list-style: none;
@@ -355,20 +355,22 @@ const { videoSrc, posterSrc = "/assets/images/hero-ally.png" } = Astro.props;
 		justify-content: center;
 		background: var(--color-white);
 		border-radius: 0.7rem;
-		padding: 0.6rem 0.9rem;
+		padding: 0.55rem 0.75rem;
 		box-shadow: 0 4px 12px rgb(29 35 39 / 6%);
+		min-width: 0;
 	}
 
 	.trust-logos img {
-		height: 68px;
+		height: 58px;
 		width: auto;
 		max-width: 100%;
 		object-fit: contain;
 		display: block;
 	}
 
-	@media (max-width: 480px) {
+	@media (max-width: 640px) {
 		.trust-logos {
+			flex-wrap: wrap;
 			gap: 0.6rem;
 		}
 

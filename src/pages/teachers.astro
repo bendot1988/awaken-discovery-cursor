@@ -105,8 +105,8 @@ import stoolInClearing from "../assets/teachers/stool-in-clearing.jpg";
 			<div class="container fg-grid">
 				<div class="fg-copy">
 					<p class="section-kicker">A Free Guide for Overwhelmed Teachers</p>
-					<h2>Finding Calm in the Chaos</h2>
-					<p class="fg-subtitle">Why you can't switch off after teaching.</p>
+					<h2>Why You Can't Switch Off After Teaching</h2>
+					<p class="fg-subtitle">A calming guide for teachers who struggle to mentally leave work behind.</p>
 					<p>
 						A gentle, body-aware guide designed to help teachers better
 						understand emotional overwhelm, calm the nervous system and begin
@@ -229,7 +229,7 @@ import stoolInClearing from "../assets/teachers/stool-in-clearing.jpg";
 							Learn About the Reset
 							<span aria-hidden="true">→</span>
 						</a>
-						<p class="sb-todo">{`{{TODO: confirm cadence (monthly vs weekly) + final landing URL.}}`}</p>
+						<p class="sb-todo">{`{{TODO: confirm schedule (monthly vs weekly) + final landing URL.}}`}</p>
 					</article>
 
 					<article class="sb-card">
@@ -773,12 +773,17 @@ import stoolInClearing from "../assets/teachers/stool-in-clearing.jpg";
 		margin-top: 1.6rem;
 		padding: 1.4rem 1.5rem;
 		border-radius: 1rem;
-		background: linear-gradient(180deg, var(--color-white) 0%, #f6f8f6 100%);
-		border: 1px dashed rgb(0 94 71 / 35%);
+		background: var(--color-dark-slate-gray);
+		border: 1px solid var(--color-dark-slate-gray);
+		color: var(--color-white);
 		display: grid;
 		grid-template-columns: minmax(0, 1fr) auto;
 		gap: 1.2rem;
 		align-items: center;
+	}
+
+	.sb-more .section-kicker {
+		color: rgb(255 255 255 / 82%);
 	}
 
 	.sb-more-copy h3 {
@@ -786,7 +791,7 @@ import stoolInClearing from "../assets/teachers/stool-in-clearing.jpg";
 		font-family: var(--font-serif);
 		font-size: 1.15rem;
 		font-weight: 500;
-		color: var(--color-dark-slate-gray);
+		color: var(--color-white);
 		line-height: 1.3;
 	}
 
@@ -795,10 +800,20 @@ import stoolInClearing from "../assets/teachers/stool-in-clearing.jpg";
 		font-size: 0.92rem;
 		line-height: 1.6;
 		max-width: 60ch;
+		color: rgb(255 255 255 / 84%);
 	}
 
 	.sb-more-cta {
 		flex-shrink: 0;
+		border-color: rgb(255 255 255 / 78%);
+		color: var(--color-white);
+		background: transparent;
+	}
+
+	.sb-more-cta:hover,
+	.sb-more-cta:focus-visible {
+		background: var(--color-white);
+		color: var(--color-dark-slate-gray);
 	}
 
 	/* ---------- FINAL CTA — BREAKING POINT ---------- */

@@ -2,28 +2,296 @@
 import Layout from "../layouts/Layout.astro";
 import SiteHeader from "../components/SiteHeader.astro";
 import SiteFooter from "../components/SiteFooter.astro";
-import ComingSoon from "../components/ComingSoon.astro";
 import { locations, navItems } from "../data/site";
+
+const amazonJournalUrl =
+	"https://www.amazon.co.uk/Therapy-Journal-Couples-Awaken-Discovery/dp/B0DJZHZSL6/ref=sr_1_1?nsdOptOutParam=true&sr=8-1";
+
+const developingProducts = [
+	{
+		label: "Guided Journal",
+		title: "Anxiety Reflection Journal",
+		body: "A reflective journal to help you notice patterns, track emotional wellbeing and build a personal calming toolkit.",
+	},
+	{
+		label: "Teacher Support",
+		title: "Teacher Anxiety Reflection Journal",
+		body: "A teacher-focused journal for recognising overload, processing overwhelm and reconnecting beyond survival mode.",
+	},
+	{
+		label: "Group Wellbeing",
+		title: "Sunday Reset for Teachers",
+		body: "Gentle wellbeing sessions designed to help teachers decompress, regulate and prepare for the week ahead.",
+	},
+	{
+		label: "Digital Support",
+		title: "Product videos and walkthroughs",
+		body: "Simple previews and walkthroughs to help you understand which resources may be right for you.",
+	},
+];
 ---
 
 <Layout
 	title="Wellbeing Products · Awaken Discovery"
-	description="Journals, audios, guides and emotional wellbeing tools — coming soon."
+	description="Journals, guides and emotional wellbeing tools from Awaken Discovery, including the Therapy Journal for Couples available on Amazon."
 >
 	<SiteHeader navItems={navItems} />
-	<main>
-		<ComingSoon
-			eyebrow="Wellbeing Products"
-			title="Wellbeing Products — Coming Soon"
-			body="Journals, audios, guides and emotional wellbeing tools designed to support you between sessions and beyond."
-			notes={[
-				"Anxiety Reflection Journal",
-				"Teacher decompression system",
-				"Teacher realignment system",
-				"Membership / Sunday Reset sessions",
-				"Product videos and walkthroughs",
-			]}
-		/>
+	<main class="products-page">
+		<section class="products-hero section">
+			<div class="container products-hero-inner">
+				<p class="section-kicker">Wellbeing Products</p>
+				<h1>Journals and resources for emotional wellbeing between sessions.</h1>
+				<p>
+					Awaken Discovery resources are designed to support reflection,
+					connection and gentle emotional awareness — whether used independently
+					or alongside therapy.
+				</p>
+			</div>
+		</section>
+
+		<section class="featured-product section section-soft">
+			<div class="container featured-grid">
+				<div class="product-media">
+					<video
+						src="/assets/videos/therapy-journal-for-couples.mp4"
+						controls
+						preload="metadata"
+						playsinline
+						aria-label="Preview of the Therapy Journal for Couples"
+					></video>
+				</div>
+
+				<div class="product-copy">
+					<p class="section-kicker">Available now</p>
+					<h2>Therapy Journal for Couples</h2>
+					<p class="product-lede">
+						A 52-week journal designed for couples to collaboratively track
+						their individual and shared emotional wellbeing.
+					</p>
+					<p>
+						This journal can be used daily or weekly as a gentle way to notice
+						the progress of your relationship over time. Throughout the journal,
+						thoughtful prompts and questions support self-reflection, shared
+						discussion and deeper connection.
+					</p>
+					<p>
+						Whether used on its own or alongside therapy, it offers a supportive
+						companion for couples who want to nurture their relationship with
+						more care, awareness and emotional honesty.
+					</p>
+					<div class="product-actions">
+						<a
+							class="cta cta-solid"
+							href={amazonJournalUrl}
+							target="_blank"
+							rel="noopener noreferrer"
+						>
+							Available on Amazon
+						</a>
+						<a class="cta cta-outline" href="/therapy">Explore Couples Therapy</a>
+					</div>
+					<p class="product-note">
+						This product is sold via Amazon and opens in a new tab.
+					</p>
+				</div>
+			</div>
+		</section>
+
+		<section class="developing-products section">
+			<div class="container">
+				<header class="products-section-head">
+					<p class="section-kicker">In development</p>
+					<h2>More wellbeing resources are being shaped.</h2>
+					<p>
+						These resources are part of the wider Awaken Discovery product
+						roadmap and will be added as soon as the content and checkout flow
+						are ready.
+					</p>
+				</header>
+
+				<div class="developing-grid">
+					{
+						developingProducts.map((product) => (
+							<article class="developing-card">
+								<p class="product-label">{product.label}</p>
+								<h3>{product.title}</h3>
+								<p>{product.body}</p>
+							</article>
+						))
+					}
+				</div>
+			</div>
+		</section>
 	</main>
-	<SiteFooter locations={locations} />
+	<SiteFooter
+		locations={locations}
+		tagline="Journals, guides and emotional wellbeing tools to support reflection, connection and calm."
+	/>
 </Layout>
+
+<style>
+	.products-page {
+		--brand: var(--color-dark-slate-gray);
+		--brand-deep: #004836;
+		--brand-tint: rgb(0 94 71 / 8%);
+		--ink-soft: rgb(29 35 39 / 78%);
+		color: var(--color-dark-gray);
+	}
+
+	.products-hero {
+		background:
+			radial-gradient(ellipse at 80% 20%, rgb(0 94 71 / 10%), transparent 55%),
+			linear-gradient(180deg, var(--color-white) 0%, #f6f8f6 100%);
+	}
+
+	.products-hero-inner {
+		max-width: 760px;
+	}
+
+	.section-kicker {
+		margin: 0;
+		text-transform: uppercase;
+		letter-spacing: 0.1em;
+		font-size: 0.78rem;
+		font-weight: 600;
+		color: var(--brand);
+	}
+
+	h1,
+	h2,
+	h3 {
+		font-family: var(--font-serif);
+		font-weight: 500;
+		color: var(--brand-deep);
+		text-wrap: balance;
+	}
+
+	h1 {
+		margin: 0.6rem 0 1rem;
+		font-size: clamp(2rem, 4.4vw, 3.4rem);
+		line-height: 1.14;
+	}
+
+	h2 {
+		margin: 0.55rem 0 1rem;
+		font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+		line-height: 1.18;
+	}
+
+	h3 {
+		margin: 0.3rem 0 0.55rem;
+		font-size: 1.35rem;
+		line-height: 1.25;
+	}
+
+	.products-hero p,
+	.product-copy p,
+	.products-section-head p,
+	.developing-card p {
+		line-height: 1.75;
+	}
+
+	.products-hero p,
+	.product-copy p,
+	.products-section-head p {
+		max-width: 62ch;
+	}
+
+	.featured-grid {
+		display: grid;
+		grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+		gap: clamp(2rem, 4vw, 4rem);
+		align-items: center;
+	}
+
+	.product-media {
+		background: var(--color-white);
+		border: 1px solid rgb(0 94 71 / 14%);
+		border-radius: 1.1rem;
+		box-shadow: 0 18px 42px rgb(0 94 71 / 12%);
+		overflow: hidden;
+	}
+
+	.product-media video {
+		width: 100%;
+		display: block;
+		aspect-ratio: 4 / 5;
+		object-fit: cover;
+		background: #e8efea;
+	}
+
+	.product-copy {
+		max-width: 62ch;
+	}
+
+	.product-lede {
+		font-family: var(--font-serif);
+		font-style: italic;
+		font-size: 1.15rem;
+		color: var(--brand);
+	}
+
+	.product-actions {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.75rem;
+		margin-top: 1.4rem;
+	}
+
+	.product-note {
+		margin: 1rem 0 0;
+		font-size: 0.82rem;
+		color: var(--ink-soft);
+	}
+
+	.products-section-head {
+		max-width: 680px;
+		margin-bottom: 2rem;
+	}
+
+	.developing-grid {
+		display: grid;
+		grid-template-columns: repeat(4, minmax(0, 1fr));
+		gap: 1rem;
+	}
+
+	.developing-card {
+		padding: 1.4rem;
+		border: 1px solid rgb(0 94 71 / 16%);
+		border-radius: 1rem;
+		background: linear-gradient(180deg, var(--color-white) 0%, #f6f8f6 100%);
+		box-shadow: 0 10px 24px rgb(29 35 39 / 6%);
+	}
+
+	.product-label {
+		display: inline-flex;
+		margin: 0 0 0.45rem;
+		padding: 0.25rem 0.65rem;
+		border-radius: 999px;
+		background: var(--brand-tint);
+		color: var(--brand);
+		text-transform: uppercase;
+		letter-spacing: 0.08em;
+		font-size: 0.72rem;
+		font-weight: 600;
+	}
+
+	.developing-card p:last-child {
+		margin-bottom: 0;
+		color: var(--ink-soft);
+	}
+
+	@media (max-width: 1024px) {
+		.featured-grid,
+		.developing-grid {
+			grid-template-columns: 1fr 1fr;
+		}
+	}
+
+	@media (max-width: 720px) {
+		.featured-grid,
+		.developing-grid {
+			grid-template-columns: 1fr;
+		}
+	}
+</style>
