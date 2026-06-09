@@ -2,27 +2,540 @@
 import Layout from "../layouts/Layout.astro";
 import SiteHeader from "../components/SiteHeader.astro";
 import SiteFooter from "../components/SiteFooter.astro";
-import ComingSoon from "../components/ComingSoon.astro";
+import Testimonials from "../components/home/Testimonials.astro";
 import { locations, navItems } from "../data/site";
+import { calendlyLinks } from "../data/calendly";
+
+const contactEmail = "awakendiscoverytherapy@gmail.com";
+
+const reassurances = [
+	{
+		title: "A reply within one working day",
+		body: "I read every message personally and aim to respond within one working day, often sooner.",
+	},
+	{
+		title: "No pressure, no commitment",
+		body: "You're welcome to ask anything — practical, emotional or simply curious — before deciding whether therapy feels right.",
+	},
+	{
+		title: "A calm, confidential space",
+		body: "Whatever you share is held with care and confidentiality. There's no expectation to have the right words.",
+	},
+];
+
+const faqs = [
+	{
+		q: "What happens after I send a message?",
+		a: "I'll read it personally and reply by email, usually within one working day. From there, we can arrange a short, free consultation if it feels helpful — or simply continue the conversation by email at your pace.",
+	},
+	{
+		q: "Do you offer in-person, online or telephone sessions?",
+		a: "All three. Face-to-face sessions take place locally in the East Yorkshire area, and online or telephone sessions are available across the UK. You're welcome to mention your preference in your message.",
+	},
+	{
+		q: "I'm not sure what I need yet — can I still get in touch?",
+		a: "Yes, absolutely. Many people reach out before they're sure therapy is right for them. You can use the form to ask a question, talk through what you're noticing, or simply say hello.",
+	},
+	{
+		q: "Is my message confidential?",
+		a: "Yes. Anything you share through the form, by email or in a consultation is treated with care and held in confidence, in line with our Privacy Policy.",
+	},
+];
 ---
 
 <Layout
-	title="Contact · Awaken Discovery"
-	description="Book a free consultation or get in touch with Ally at Awaken Discovery."
+	title="Contact Ally · Awaken Discovery"
+	description="Get in touch with Ally at Awaken Discovery — for therapy enquiries, free consultations, bundle questions or simply to say hello. Replies within one working day."
 >
 	<SiteHeader navItems={navItems} />
-	<main>
-		<ComingSoon
-			eyebrow="Contact"
-			title="Contact — Coming Soon"
-			body="A full contact and booking page is in progress. In the meantime, please reach out by email and we will be in touch with availability for a free consultation."
-			notes={[
-				"Booking calendar for sessions and free consultations",
-				"Email enquiry form with GDPR-compliant handling",
-				"In-person and online session options",
-				"What to expect at your first session",
-			]}
-		/>
+	<main class="contact-page">
+		<!-- ============== HERO ============== -->
+		<section class="ct-hero section">
+			<div class="container ct-hero-inner">
+				<p class="section-kicker">Contact</p>
+				<h1>Get in touch</h1>
+				<p class="ct-hero-lede">
+					Whether you're considering therapy, have a question about sessions
+					or simply want to say hello, you're warmly welcome to reach out.
+				</p>
+			</div>
+		</section>
+
+		<!-- ============== CONTACT GRID ============== -->
+		<section class="ct-grid section section-soft" id="form">
+			<div class="container ct-grid-inner">
+				<aside class="ct-side">
+					<p class="section-kicker">What to expect</p>
+					<h2>A gentle, human reply.</h2>
+
+					<ul class="ct-reassurance-list">
+						{
+							reassurances.map((item) => (
+								<li class="ct-reassurance">
+									<span class="ct-reassurance-dot" aria-hidden="true" />
+									<div>
+										<p class="ct-reassurance-title">{item.title}</p>
+										<p class="ct-reassurance-body">{item.body}</p>
+									</div>
+								</li>
+							))
+						}
+					</ul>
+
+					<div class="ct-direct">
+						<p class="ct-direct-label">Prefer not to use the form?</p>
+						<p class="ct-direct-body">
+							You're welcome to email directly:
+							<a class="ct-direct-link" href={`mailto:${contactEmail}`}>
+								{contactEmail}
+							</a>
+						</p>
+					</div>
+				</aside>
+
+				<div class="ct-form-wrap">
+					<div class="ct-form-card">
+						<div
+							class="fillout-embed"
+							style="width:100%;height:560px;"
+							data-fillout-id="t5xKDhCRfyus"
+							data-fillout-embed-type="standard"
+							data-fillout-inherit-parameters
+							data-fillout-dynamic-resize
+						>
+						</div>
+
+						<p class="ct-privacy">
+							Your details are handled with care and never shared with third
+							parties. See our <a href="/privacy">Privacy Policy</a>.
+						</p>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- ============== OTHER WAYS TO BEGIN ============== -->
+		<section class="ct-other section" id="other-ways">
+			<div class="container">
+				<header class="ct-section-head">
+					<p class="section-kicker">Other ways to begin</p>
+					<h2>Prefer to talk it through instead?</h2>
+					<p class="ct-section-lede">
+						If a short, friendly chat feels easier than writing, you're warmly
+						invited to book a free 20-minute consultation. It's a relaxed,
+						no-obligation conversation to explore whether working together
+						feels like the right fit.
+					</p>
+				</header>
+
+				<div class="ct-other-grid">
+					<article class="ct-other-card">
+						<p class="ct-other-eyebrow">Free consultation</p>
+						<h3>A 20-minute conversation</h3>
+						<p>
+							A short call by phone or video to ask questions, share what's
+							going on and see how I work. No pressure to book afterwards.
+						</p>
+						<a
+							class="cta cta-solid"
+							href={calendlyLinks.tasterSession}
+							target="_blank"
+							rel="noopener noreferrer"
+						>
+							Book a Free Consultation
+						</a>
+					</article>
+
+					<article class="ct-other-card">
+						<p class="ct-other-eyebrow">Ready to begin</p>
+						<h3>Book a first session</h3>
+						<p>
+							If you'd like to skip the consultation and arrange a first full
+							session, you can book directly from the pricing page.
+						</p>
+						<a class="cta cta-outline" href="/pricing/individual">
+							View Session Options
+						</a>
+					</article>
+				</div>
+			</div>
+		</section>
+
+		<!-- ============== TESTIMONIALS ============== -->
+		<Testimonials />
+
+		<!-- ============== FAQ ============== -->
+		<section class="ct-faq section section-soft" id="faq">
+			<div class="container ct-faq-inner">
+				<header class="ct-section-head">
+					<p class="section-kicker">Common questions</p>
+					<h2>A few things people often ask before reaching out.</h2>
+				</header>
+
+				<ol class="ct-faq-list">
+					{
+						faqs.map((item) => (
+							<li>
+								<details class="ct-faq-item">
+									<summary>
+										<span class="ct-faq-q">{item.q}</span>
+										<span class="ct-faq-icon" aria-hidden="true">
+											+
+										</span>
+									</summary>
+									<div class="ct-faq-a">
+										<p>{item.a}</p>
+									</div>
+								</details>
+							</li>
+						))
+					}
+				</ol>
+			</div>
+		</section>
 	</main>
 	<SiteFooter locations={locations} />
 </Layout>
+
+<script is:inline async src="https://server.fillout.com/embed/v1/"></script>
+
+<style>
+	.contact-page {
+		--brand: var(--color-dark-slate-gray);
+		--brand-deep: #004836;
+		--brand-tint: rgb(0 94 71 / 8%);
+		--ink: var(--color-dark-gray);
+		--ink-soft: rgb(29 35 39 / 78%);
+	}
+
+	.contact-page .section-kicker {
+		margin: 0;
+		text-transform: uppercase;
+		letter-spacing: 0.12em;
+		font-size: 0.78rem;
+		font-weight: 600;
+		color: var(--brand);
+	}
+
+	.contact-page h1,
+	.contact-page h2 {
+		font-family: var(--font-serif);
+		font-weight: 500;
+		line-height: 1.18;
+		text-wrap: balance;
+	}
+
+	.contact-page h1 {
+		margin: 0.6rem 0 1rem;
+		font-size: clamp(2.1rem, 4.5vw, 3.1rem);
+	}
+
+	.contact-page h2 {
+		margin: 0.6rem 0 1rem;
+		font-size: clamp(1.6rem, 3vw, 2.2rem);
+	}
+
+	.contact-page h3 {
+		margin: 0 0 0.6rem;
+		font-family: var(--font-serif);
+		font-size: 1.2rem;
+		font-weight: 500;
+		color: var(--brand-deep);
+	}
+
+	.ct-section-head {
+		max-width: 60ch;
+		margin-bottom: 2rem;
+	}
+
+	.ct-section-lede {
+		margin: 0;
+		line-height: 1.8;
+		color: var(--ink-soft);
+	}
+
+	/* ---------- HERO ---------- */
+	.ct-hero {
+		background: linear-gradient(180deg, var(--color-white) 0%, var(--brand-tint) 100%);
+		padding-top: clamp(3.5rem, 8vw, 5rem);
+		padding-bottom: clamp(2.5rem, 6vw, 4rem);
+	}
+
+	.ct-hero-inner {
+		max-width: 62ch;
+		text-align: center;
+		margin-inline: auto;
+	}
+
+	.ct-hero-lede {
+		margin: 0 auto;
+		max-width: 56ch;
+		font-family: var(--font-serif);
+		font-style: italic;
+		font-size: clamp(1.15rem, 2vw, 1.45rem);
+		line-height: 1.55;
+		color: var(--ink-soft);
+	}
+
+	/* ---------- CONTACT GRID ---------- */
+	.ct-grid-inner {
+		display: grid;
+		grid-template-columns: 0.85fr 1.15fr;
+		gap: clamp(1.6rem, 4vw, 3rem);
+		align-items: start;
+	}
+
+	.ct-side {
+		position: sticky;
+		top: 6.5rem;
+	}
+
+	.ct-reassurance-list {
+		list-style: none;
+		padding: 0;
+		margin: 1.3rem 0 1.6rem;
+		display: grid;
+		gap: 1rem;
+	}
+
+	.ct-reassurance {
+		display: grid;
+		grid-template-columns: auto 1fr;
+		gap: 0.85rem;
+		align-items: start;
+	}
+
+	.ct-reassurance-dot {
+		width: 0.7rem;
+		height: 0.7rem;
+		margin-top: 0.55rem;
+		border-radius: 999px;
+		background: var(--brand);
+		flex-shrink: 0;
+	}
+
+	.ct-reassurance-title {
+		margin: 0 0 0.2rem;
+		font-family: var(--font-serif);
+		font-size: 1.05rem;
+		font-weight: 500;
+		color: var(--ink);
+	}
+
+	.ct-reassurance-body {
+		margin: 0;
+		line-height: 1.65;
+		color: var(--ink-soft);
+		font-size: 0.95rem;
+	}
+
+	.ct-direct {
+		margin-top: 1.4rem;
+		padding: 1.1rem 1.2rem;
+		background: var(--color-white);
+		border: 1px solid rgb(0 94 71 / 18%);
+		border-radius: 0.85rem;
+	}
+
+	.ct-direct-label {
+		margin: 0 0 0.25rem;
+		font-size: 0.75rem;
+		font-weight: 600;
+		letter-spacing: 0.1em;
+		text-transform: uppercase;
+		color: var(--brand);
+	}
+
+	.ct-direct-body {
+		margin: 0;
+		line-height: 1.6;
+		color: var(--ink-soft);
+		font-size: 0.95rem;
+	}
+
+	.ct-direct-link {
+		display: inline-block;
+		margin-top: 0.2rem;
+		font-family: var(--font-serif);
+		font-size: 1.05rem;
+		color: var(--brand-deep);
+		text-decoration: underline;
+		text-underline-offset: 3px;
+		word-break: break-all;
+	}
+
+	/* ---------- FORM CARD ---------- */
+	.ct-form-card {
+		background: #f7f7f7;
+		border-radius: 1rem;
+		border: 1px solid rgb(0 94 71 / 16%);
+		box-shadow: 0 14px 32px rgb(29 35 39 / 8%);
+		padding: clamp(1.4rem, 2.5vw, 2.1rem);
+	}
+
+	.fillout-embed {
+		background: var(--color-white);
+		border-radius: 0.85rem;
+		overflow: hidden;
+	}
+
+	.ct-privacy {
+		margin: 1rem 0 0;
+		font-size: 0.82rem;
+		line-height: 1.55;
+		color: var(--ink-soft);
+		opacity: 0.85;
+	}
+
+	.ct-privacy a {
+		text-decoration: underline;
+		text-underline-offset: 3px;
+	}
+
+	/* ---------- OTHER WAYS ---------- */
+	.ct-other-grid {
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+		gap: 1.2rem;
+	}
+
+	.ct-other-card {
+		padding: 1.4rem 1.4rem 1.5rem;
+		background: var(--color-white);
+		border: 1px solid rgb(0 94 71 / 16%);
+		border-radius: 0.95rem;
+		display: flex;
+		flex-direction: column;
+		gap: 0.5rem;
+		transition: transform 0.2s ease, box-shadow 0.2s ease;
+	}
+
+	.ct-other-card:hover {
+		transform: translateY(-2px);
+		box-shadow: 0 14px 28px rgb(0 94 71 / 12%);
+	}
+
+	.ct-other-eyebrow {
+		margin: 0;
+		font-size: 0.72rem;
+		font-weight: 600;
+		letter-spacing: 0.12em;
+		text-transform: uppercase;
+		color: var(--brand);
+	}
+
+	.ct-other-card p {
+		margin: 0;
+		line-height: 1.7;
+		color: var(--ink-soft);
+	}
+
+	.ct-other-card .cta {
+		margin-top: 0.7rem;
+		align-self: flex-start;
+	}
+
+	/* ---------- FAQ ---------- */
+	.ct-faq-inner {
+		max-width: 72ch;
+		margin-inline: auto;
+	}
+
+	.ct-faq-list {
+		list-style: none;
+		padding: 0;
+		margin: 0;
+		display: grid;
+		gap: 0.7rem;
+	}
+
+	.ct-faq-item {
+		background: var(--color-white);
+		border: 1px solid rgb(0 94 71 / 16%);
+		border-radius: 0.85rem;
+		overflow: hidden;
+		transition: box-shadow 0.2s ease, border-color 0.2s ease;
+	}
+
+	.ct-faq-item[open] {
+		box-shadow: 0 12px 26px rgb(29 35 39 / 8%);
+		border-color: rgb(0 94 71 / 30%);
+	}
+
+	.ct-faq-item summary {
+		list-style: none;
+		cursor: pointer;
+		padding: 1rem 1.2rem;
+		display: grid;
+		grid-template-columns: 1fr auto;
+		align-items: center;
+		gap: 1rem;
+	}
+
+	.ct-faq-item summary::-webkit-details-marker {
+		display: none;
+	}
+
+	.ct-faq-q {
+		font-family: var(--font-serif);
+		font-size: 1.05rem;
+		font-weight: 500;
+		color: var(--ink);
+		line-height: 1.35;
+	}
+
+	.ct-faq-icon {
+		width: 1.8rem;
+		height: 1.8rem;
+		flex-shrink: 0;
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		border-radius: 999px;
+		background: var(--brand-tint);
+		color: var(--brand);
+		font-size: 1.1rem;
+		font-weight: 600;
+		transition: transform 0.2s ease;
+	}
+
+	.ct-faq-item[open] .ct-faq-icon {
+		transform: rotate(45deg);
+	}
+
+	.ct-faq-a {
+		padding: 0 1.2rem 1.2rem;
+	}
+
+	.ct-faq-a p {
+		margin: 0;
+		line-height: 1.75;
+		color: var(--ink-soft);
+	}
+
+	/* ---------- RESPONSIVE ---------- */
+	@media (max-width: 900px) {
+		.ct-grid-inner {
+			grid-template-columns: 1fr;
+		}
+
+		.ct-side {
+			position: static;
+		}
+
+		.ct-other-grid {
+			grid-template-columns: 1fr;
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.ct-other-card,
+		.ct-faq-icon {
+			transition: none;
+		}
+
+		.ct-other-card:hover {
+			transform: none;
+		}
+	}
+</style>
