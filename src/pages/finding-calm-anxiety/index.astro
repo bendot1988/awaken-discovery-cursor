@@ -89,7 +89,7 @@ const faqs = [
 					<a class="cta cta-outline" href="#inside">See what's inside</a>
 				</div>
 				<ul class="anx-trust" aria-label="Credentials">
-					<li>✔ Counsellor &amp; Psychotherapist</li>
+					<li>✔ Teacher · Counsellor &amp; Psychotherapist</li>
 					<li>✔ Body-aware, nervous-system informed</li>
 					<li>✔ Gentle, no-pressure approach</li>
 				</ul>
@@ -130,9 +130,6 @@ const faqs = [
 						loading="lazy"
 						decoding="async"
 					/>
-					<figcaption class="anx-img-todo">
-						{`{{IMAGE PROMPT: Warm portrait of Ally — soft natural light, sage tones, calm and approachable. Reuses hero-ally.png until a dedicated anxiety-page shot is available.}}`}
-					</figcaption>
 				</figure>
 				<div class="anx-different-copy">
 					<p class="section-kicker">Here's what makes this different</p>
@@ -186,33 +183,19 @@ const faqs = [
 				</div>
 
 				<figure class="anx-mockup-wrap">
-					<div class="anx-mockup" aria-hidden="true">
-						<div class="anx-mockup-cover">
-							<span class="anx-mockup-eyebrow">A free guide</span>
-							<span class="anx-mockup-title">Finding Calm</span>
-							<span class="anx-mockup-sub">
-								A simple guide to grounding yourself during anxiety
-							</span>
-							<span class="anx-mockup-author">Ally · Awaken Discovery</span>
-							<svg class="anx-mockup-leaf" viewBox="0 0 60 60" aria-hidden="true">
-								<path
-									d="M30 5C42 14 50 25 50 36C50 46 42 54 30 55C18 54 10 46 10 36C10 25 18 14 30 5Z"
-									fill="currentColor"
-									opacity="0.18"
-								></path>
-								<path
-									d="M30 10C30 25 30 40 30 55"
-									stroke="currentColor"
-									stroke-width="1"
-									opacity="0.5"
-									fill="none"
-								></path>
-							</svg>
-						</div>
+					<div class="anx-mockup">
+						<div class="anx-mockup-pages" aria-hidden="true"></div>
+						<div class="anx-mockup-spine" aria-hidden="true"></div>
+						<img
+							class="anx-mockup-cover"
+							src="/assets/images/finding-calm-anxiety-cover.png"
+							alt="Finding Calm — A Simple Guide to Grounding Yourself During Anxiety, by Ally at Awaken Discovery"
+							width="517"
+							height="730"
+							loading="lazy"
+							decoding="async"
+						/>
 					</div>
-					<figcaption class="anx-img-todo">
-						{`{{IMAGE PROMPT: 3D mockup or flatlay of the printed PDF — sage cover with calligraphic title, on a softly lit desk beside a warm mug or open notebook. Replaces the CSS-painted placeholder when ready.}}`}
-					</figcaption>
 				</figure>
 			</div>
 		</section>
@@ -224,11 +207,11 @@ const faqs = [
 					<p class="section-kicker">Who am I and why should you listen?</p>
 					<h2>Hi — I'm Ally.</h2>
 					<p>
-						I'm a counsellor, psychotherapist and wellbeing educator based in
-						Market Weighton, East Yorkshire. But more importantly, I've spent
-						years helping people just like you understand their anxiety and
-						reconnect with themselves — so they can feel more emotionally
-						balanced in everyday life.
+						I'm a teacher, counsellor, psychotherapist and wellbeing educator
+						based in Market Weighton, East Yorkshire. But more importantly,
+						I've spent years helping people just like you understand their
+						anxiety and reconnect with themselves — so they can feel more
+						emotionally balanced in everyday life.
 					</p>
 					<p>
 						Over time I've developed a gentle, body-aware approach that helps
@@ -249,9 +232,6 @@ const faqs = [
 						loading="lazy"
 						decoding="async"
 					/>
-					<figcaption class="anx-img-todo">
-						{`{{IMAGE PROMPT: A softer, slightly more candid portrait of Ally. Could be reading, holding a mug, mid-conversation. Sage tones, natural light, warm and trustworthy.}}`}
-					</figcaption>
 				</figure>
 			</div>
 		</section>
@@ -285,9 +265,6 @@ const faqs = [
 						</footer>
 					</blockquote>
 				</div>
-				<p class="anx-img-todo">
-					{`{{TODO: lift anxiety-specific testimonials when available. Current quotes are general counselling clients from the live site.}}`}
-				</p>
 			</div>
 		</section>
 
@@ -322,9 +299,6 @@ const faqs = [
 						loading="lazy"
 						decoding="async"
 					/>
-					<figcaption class="anx-img-todo">
-						{`{{IMAGE PROMPT: A small, warm portrait of Ally with a gentle, encouraging smile. Could reuse a softer companion shot.}}`}
-					</figcaption>
 				</figure>
 
 				<div class="anx-claim-copy">
@@ -335,50 +309,21 @@ const faqs = [
 						couple of minutes — read it whenever you next have a quiet five.
 					</p>
 
-					<form
-						class="anx-form"
-						method="post"
-						action="#"
-						aria-describedby="anx-form-todo"
-						novalidate
-					>
-						<label class="anx-field">
-							<span>Your first name</span>
-							<input
-								type="text"
-								name="first_name"
-								autocomplete="given-name"
-								placeholder="First name"
-							/>
-						</label>
-						<label class="anx-field">
-							<span>Your email</span>
-							<input
-								type="email"
-								name="email"
-								autocomplete="email"
-								required
-								placeholder="you@example.com"
-							/>
-						</label>
-						<label class="anx-consent">
-							<input type="checkbox" name="consent" required />
-							<span>
-								Send me the guide and supportive wellbeing emails. I can
-								unsubscribe any time.
-							</span>
-						</label>
-						<button class="cta cta-solid anx-submit" type="submit">
-							Yes — Send Me the Free Guide Now
-						</button>
+					<div class="anx-form-slot">
+						<div
+							class="fillout-embed"
+							style="width:100%;height:560px;"
+							data-fillout-id="jXo5e7D8Hwus"
+							data-fillout-embed-type="standard"
+							data-fillout-inherit-parameters
+							data-fillout-dynamic-resize
+						>
+						</div>
 						<p class="anx-privacy">
 							Your details are handled with care. See our
 							<a href="/privacy">Privacy Policy</a>.
 						</p>
-						<p id="anx-form-todo" class="anx-img-todo">
-							{`{{TODO: wire to ESP — auto-send PDF, trigger nurture sequence (see /docs/email-sequence-anxiety.md), redirect to /finding-calm-anxiety/thank-you}}`}
-						</p>
-					</form>
+					</div>
 				</div>
 			</div>
 		</section>
@@ -437,6 +382,8 @@ const faqs = [
 	/>
 </Layout>
 
+<script is:inline async src="https://server.fillout.com/embed/v1/"></script>
+
 <style>
 	.anx-page {
 		--brand: var(--color-dark-slate-gray);
@@ -478,16 +425,6 @@ const faqs = [
 	.anx-section-head {
 		max-width: 60ch;
 		margin-bottom: 2rem;
-	}
-
-	.anx-img-todo {
-		margin: 0.7rem 0 0;
-		font-size: 0.72rem;
-		font-style: italic;
-		color: var(--ink-soft);
-		opacity: 0.65;
-		line-height: 1.55;
-		max-width: 44ch;
 	}
 
 	/* ---------- HERO ---------- */
@@ -721,7 +658,7 @@ const faqs = [
 		font-size: 1.05rem;
 	}
 
-	/* ---------- MOCKUP (CSS-painted placeholder) ---------- */
+	/* ---------- BOOK MOCKUP ---------- */
 	.anx-mockup-wrap {
 		margin: 0;
 		display: flex;
@@ -734,77 +671,58 @@ const faqs = [
 		position: relative;
 		width: 100%;
 		max-width: 360px;
-		aspect-ratio: 3 / 4;
-		transform: perspective(1200px) rotateY(-6deg) rotateX(2deg);
-		filter: drop-shadow(0 22px 40px rgb(0 94 71 / 25%));
+		aspect-ratio: 517 / 730;
+		transform: perspective(1400px) rotateY(-9deg) rotateX(2deg);
+		transform-origin: left center;
+		filter: drop-shadow(0 24px 40px rgb(0 94 71 / 28%));
 	}
 
 	.anx-mockup-cover {
 		position: relative;
+		display: block;
 		width: 100%;
 		height: 100%;
-		background: linear-gradient(160deg, #4f8a72 0%, var(--brand) 60%, var(--brand-deep) 100%);
-		border-radius: 0.6rem 1rem 1rem 0.6rem;
-		padding: 2rem 1.8rem;
-		display: flex;
-		flex-direction: column;
-		justify-content: space-between;
-		color: var(--color-white);
-		overflow: hidden;
+		object-fit: cover;
+		border-radius: 0.35rem 0.7rem 0.7rem 0.35rem;
+		box-shadow:
+			inset 14px 0 18px -10px rgb(0 0 0 / 25%),
+			inset -2px 0 0 0 rgb(255 255 255 / 35%),
+			0 1px 0 0 rgb(0 0 0 / 18%);
+		z-index: 2;
 	}
 
-	.anx-mockup-cover::before {
-		content: "";
+	.anx-mockup-spine {
 		position: absolute;
-		inset: 0;
+		top: 1.5%;
+		bottom: 1.5%;
+		left: 0;
+		width: 14px;
+		border-radius: 0.35rem 0 0 0.35rem;
 		background: linear-gradient(
 			90deg,
-			rgb(0 0 0 / 18%) 0%,
-			rgb(0 0 0 / 0%) 8%,
-			rgb(0 0 0 / 0%) 92%,
-			rgb(255 255 255 / 14%) 100%
+			rgb(0 0 0 / 30%) 0%,
+			rgb(0 0 0 / 12%) 55%,
+			rgb(0 0 0 / 0%) 100%
 		);
+		z-index: 3;
 		pointer-events: none;
 	}
 
-	.anx-mockup-eyebrow {
-		font-size: 0.7rem;
-		text-transform: uppercase;
-		letter-spacing: 0.18em;
-		font-weight: 600;
-		opacity: 0.78;
-	}
-
-	.anx-mockup-title {
-		font-family: var(--font-serif);
-		font-size: clamp(2rem, 3.2vw, 2.5rem);
-		font-weight: 500;
-		line-height: 1;
-	}
-
-	.anx-mockup-sub {
-		font-family: var(--font-serif);
-		font-style: italic;
-		font-size: 0.95rem;
-		line-height: 1.4;
-		max-width: 26ch;
-		opacity: 0.86;
-	}
-
-	.anx-mockup-author {
-		font-family: var(--font-script);
-		font-size: 1.4rem;
-		line-height: 1;
-		opacity: 0.95;
-	}
-
-	.anx-mockup-leaf {
+	.anx-mockup-pages {
 		position: absolute;
-		top: 1.4rem;
-		right: 1.4rem;
-		width: 48px;
-		height: 48px;
-		color: var(--color-white);
+		top: 1.8%;
+		bottom: 1.8%;
+		right: -6px;
+		width: 8px;
+		background:
+			repeating-linear-gradient(
+				180deg,
+				#f5f1e8 0 1px,
+				#e8e2d2 1px 3px
+			);
+		border-radius: 0 0.35rem 0.35rem 0;
+		box-shadow: 1px 0 2px rgb(0 0 0 / 12%);
+		z-index: 1;
 	}
 
 	/* ---------- MEET ALLY ---------- */
@@ -937,51 +855,18 @@ const faqs = [
 		margin: 0.4rem 0 0.9rem;
 	}
 
-	.anx-form {
+	.anx-form-slot {
 		margin-top: 1.2rem;
-		padding: 1.6rem;
-		background: var(--color-white);
-		border-radius: 1rem;
-		border: 1px solid rgb(0 94 71 / 16%);
 		display: grid;
 		gap: 0.9rem;
 	}
 
-	.anx-field {
-		display: grid;
-		gap: 0.35rem;
-		font-size: 0.9rem;
-		font-weight: 500;
-	}
-
-	.anx-field input {
-		font: inherit;
-		padding: 0.7rem 0.85rem;
-		border: 1px solid rgb(0 94 71 / 25%);
-		border-radius: 0.6rem;
+	.fillout-embed {
 		background: var(--color-white);
-	}
-
-	.anx-field input:focus-visible {
-		outline: 2px solid var(--brand);
-		outline-offset: 1px;
-	}
-
-	.anx-consent {
-		display: flex;
-		gap: 0.6rem;
-		align-items: flex-start;
-		font-size: 0.85rem;
-		line-height: 1.5;
-		color: var(--ink-soft);
-	}
-
-	.anx-consent input {
-		margin-top: 0.25rem;
-	}
-
-	.anx-submit {
-		justify-self: stretch;
+		border-radius: 1rem;
+		border: 1px solid rgb(0 94 71 / 16%);
+		box-shadow: 0 10px 28px rgb(29 35 39 / 8%);
+		overflow: hidden;
 	}
 
 	.anx-privacy {

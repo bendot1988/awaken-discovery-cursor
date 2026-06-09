@@ -293,16 +293,122 @@ const chapters = [
 				</header>
 				<ul class="about-quals-list">
 					<li>
-						<span class="about-quals-tag">Qualification</span>
-						<p>{`{{TODO: list primary counselling / psychotherapy qualification(s) from the original webpage — e.g. Diploma in Integrative Counselling, MSc / level, awarding body, year}}`}</p>
+						<span class="about-quals-tag">Qualifications</span>
+						<ul class="about-quals-sublist">
+							<li>
+								Master of Arts in Counselling —
+								<em>York St John University</em>
+							</li>
+							<li>
+								Counselling Skills Levels 1, 2 and 3 —
+								<em>Focus Counselling Training</em>
+							</li>
+							<li>
+								Post-graduate Certificate in Education &amp; Educational
+								Leadership — <em>De Montfort / Leicester University</em>
+							</li>
+							<li>
+								BSc (Hons) Environmental Science (Monitoring &amp;
+								Management) — <em>Nene College, Leicester University</em>
+							</li>
+						</ul>
 					</li>
 					<li>
-						<span class="about-quals-tag">Membership</span>
-						<p>BACP registered (MBACP) and NCPS.</p>
+						<span class="about-quals-tag">Memberships &amp; accreditation</span>
+						<p>
+							BACP registered (MBACP) and NCPS. Practice held in line with
+							the BACP and NCPS Ethical Frameworks.
+						</p>
+						<ul class="about-quals-logos" aria-label="Accreditations">
+							<li>
+								<img
+									src="/assets/logos/accredited-bacp.png"
+									alt="BACP Registered Member 392865 — MBACP, Professional Standards Authority accredited register"
+									loading="lazy"
+									decoding="async"
+								/>
+							</li>
+							<li>
+								<img
+									src="/assets/logos/accredited-ncps.png"
+									alt="NCPS Accredited Registrant MNCPS (Acc.) — Professional Standards Authority accredited register"
+									loading="lazy"
+									decoding="async"
+								/>
+							</li>
+							<li>
+								<img
+									src="/assets/logos/accredited-online-counselling.png"
+									alt="Online &amp; Telephone Counselling Certified Counsellor"
+									loading="lazy"
+									decoding="async"
+								/>
+							</li>
+						</ul>
 					</li>
 					<li>
-						<span class="about-quals-tag">CPD &amp; specialisms</span>
-						<p>{`{{TODO: pull CPD bullets from existing site — trauma-informed practice, nervous-system work, couples work, working with young people, etc.}}`}</p>
+						<span class="about-quals-tag">Areas of focus &amp; specialisms</span>
+						<p>
+							Alongside ongoing reading and continuing professional
+							development, the areas listed below are those I most commonly
+							work with — though my experience extends beyond them. If
+							something you're carrying isn't here, please feel free to ask.
+						</p>
+						<div class="about-quals-clusters">
+							<div class="about-quals-cluster">
+								<h3>Anxiety &amp; emotional overwhelm</h3>
+								<p>
+									Anxiety · panic attacks · health anxiety · social anxiety
+									· generalised anxiety · stress · work-related stress ·
+									burnout · low mood · depression · seasonal affective
+									disorder.
+								</p>
+							</div>
+							<div class="about-quals-cluster">
+								<h3>Trauma &amp; past experiences</h3>
+								<p>
+									Trauma · PTSD · dissociation · childhood and family
+									experiences · emotional, physical, sexual and domestic
+									abuse · bullying · attachment.
+								</p>
+							</div>
+							<div class="about-quals-cluster">
+								<h3>Relationships &amp; life transitions</h3>
+								<p>
+									Relationship difficulties · communication and connection ·
+									separation and divorce · affairs and betrayals ·
+									bereavement · pregnancy, birth and postnatal experiences ·
+									miscarriage · redundancy · carer support.
+								</p>
+							</div>
+							<div class="about-quals-cluster">
+								<h3>Identity, self-worth &amp; the self</h3>
+								<p>
+									Self-esteem and self-confidence · loneliness · LGBTQ+
+									support · gender identity · neurodiversity · learning
+									differences · self-harm and difficult thoughts ·
+									self-discovery and personal growth.
+								</p>
+							</div>
+							<div class="about-quals-cluster">
+								<h3>Teachers, helping professionals &amp; young carers</h3>
+								<p>
+									Teacher burnout · classroom anxiety · educator
+									wellbeing · supporting young carers · caring-role
+									exhaustion · the pressures of holding everything together
+									for everyone else.
+								</p>
+							</div>
+						</div>
+					</li>
+					<li>
+						<span class="about-quals-tag">Safeguarding &amp; experience</span>
+						<p>
+							DBS checked. Alongside private practice, previously worked as a
+							counsellor at Selby College and York St John Communities
+							Centre, with over twenty-five years supporting students,
+							colleagues and families within education.
+						</p>
 					</li>
 				</ul>
 			</div>
@@ -767,6 +873,104 @@ const chapters = [
 		font-style: italic;
 		color: var(--ink-soft);
 		line-height: 1.6;
+	}
+
+	.about-quals-sublist {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+		display: grid;
+		gap: 0.45rem;
+	}
+
+	.about-quals-sublist li {
+		padding: 0;
+		background: transparent;
+		border-left: none;
+		border-radius: 0;
+		font-size: 0.95rem;
+		line-height: 1.55;
+		color: var(--ink);
+		display: list-item;
+	}
+
+	.about-quals-sublist li::before {
+		content: "›";
+		display: inline-block;
+		margin-right: 0.55rem;
+		color: var(--brand);
+		font-weight: 600;
+	}
+
+	.about-quals-sublist em {
+		color: var(--ink-soft);
+		font-style: italic;
+	}
+
+	.about-quals-logos {
+		list-style: none;
+		margin: 0.85rem 0 0;
+		padding: 0;
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		gap: 0.55rem;
+	}
+
+	.about-quals-logos li {
+		padding: 0.5rem 0.7rem;
+		background: var(--color-white);
+		border: 1px solid rgb(0 94 71 / 14%);
+		border-left: 1px solid rgb(0 94 71 / 14%);
+		border-radius: 0.65rem;
+		box-shadow: 0 3px 10px rgb(29 35 39 / 6%);
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		min-width: 0;
+	}
+
+	.about-quals-logos img {
+		display: block;
+		height: 48px;
+		width: auto;
+		max-width: 100%;
+		object-fit: contain;
+	}
+
+	@media (max-width: 540px) {
+		.about-quals-logos img {
+			height: 42px;
+		}
+	}
+
+	.about-quals-clusters {
+		margin-top: 0.85rem;
+		display: grid;
+		gap: 0.7rem;
+	}
+
+	.about-quals-cluster {
+		padding: 0.85rem 1rem;
+		background: var(--color-white);
+		border: 1px solid rgb(0 94 71 / 14%);
+		border-radius: 0.65rem;
+	}
+
+	.about-quals-cluster h3 {
+		margin: 0 0 0.3rem;
+		font-family: var(--font-serif);
+		font-size: 1rem;
+		font-weight: 500;
+		color: var(--brand-deep);
+	}
+
+	.about-quals-cluster p {
+		margin: 0;
+		font-size: 0.88rem;
+		font-style: normal;
+		line-height: 1.65;
+		color: var(--ink-soft);
 	}
 
 	/* ---------- BEGIN YOUR JOURNEY ---------- */
