@@ -4,7 +4,7 @@ description: "Many people assume therapy is only for moments of extreme stress, 
 pubDate: 2025-10-13T08:14:10
 category: "Therapy"
 heroImage: "./therapy-in-crisis-vs-therapy-for-growth-why-counselling-helps-everyone.jpeg"
-heroImageAlt: ""
+heroImageAlt: "Hands cradling a softly lit candle in warm natural light — a quiet moment of self-care that suggests therapy as care, not only crisis response."
 ---
 Many people assume therapy is only for moments of extreme stress, loss, or emotional breakdown. While counselling is essential during crises, it’s also a powerful tool for **personal growth, self-understanding, and long-term emotional resilience**. Understanding the difference between these approaches can help you see why therapy is valuable for everyone.
 

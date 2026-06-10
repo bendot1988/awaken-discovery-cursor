@@ -4,7 +4,7 @@ description: "Discover how couples counselling helps deepen communication, rebui
 pubDate: 2026-01-16T12:36:33
 category: "Therapy"
 heroImage: "./couples-counselling-isnt-just-for-crisis-its-for-connection.jpeg"
-heroImageAlt: ""
+heroImageAlt: "A hand gently letting sand fall into a terracotta bowl surrounded by ferns — a grounded, reflective image evoking presence and quiet connection."
 ---
 Discover how couples counselling helps deepen communication, rebuild trust, and strengthen emotional connection — not just in crisis, but throughout your relationship journey.
 

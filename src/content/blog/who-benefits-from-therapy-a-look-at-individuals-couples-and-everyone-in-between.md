@@ -4,7 +4,7 @@ description: "Discover how therapy supports individuals, couples, and anyone see
 pubDate: 2026-01-14T12:34:47
 category: "Therapy"
 heroImage: "./who-benefits-from-therapy-a-look-at-individuals-couples-and-everyone-in-between.jpg"
-heroImageAlt: ""
+heroImageAlt: "A couple sitting on a sofa with hands gently held together — a small, intimate image of communication, support and connection."
 ---
 Discover how therapy supports individuals, couples, and anyone seeking personal growth, emotional balance, and deeper connection — not just in crisis, but throughout life’s journey.
 

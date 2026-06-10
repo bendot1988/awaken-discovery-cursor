@@ -214,7 +214,7 @@ import stoolInClearing from "../assets/teachers/stool-in-clearing.jpg";
 							Explore the Journal
 							<span aria-hidden="true">→</span>
 						</a>
-						<p class="sb-todo">{`{{TODO: link to Teacher Decompression / Realignment / Membership product page once built. Available via wellbeing product section.}}`}</p>
+						<p class="sb-status">In development — currently being shaped.</p>
 					</article>
 
 					<article class="sb-card">
@@ -229,7 +229,7 @@ import stoolInClearing from "../assets/teachers/stool-in-clearing.jpg";
 							Learn About the Reset
 							<span aria-hidden="true">→</span>
 						</a>
-						<p class="sb-todo">{`{{TODO: confirm schedule (monthly vs weekly) + final landing URL.}}`}</p>
+						<p class="sb-status">In development — get in touch for updates.</p>
 					</article>
 
 					<article class="sb-card">
@@ -734,7 +734,7 @@ import stoolInClearing from "../assets/teachers/stool-in-clearing.jpg";
 		color: var(--color-dark-slate-gray);
 	}
 
-	.sb-card p:not(.sb-tag):not(.sb-todo) {
+	.sb-card p:not(.sb-tag):not(.sb-status) {
 		margin: 0;
 		font-size: 0.92rem;
 		line-height: 1.65;
@@ -761,12 +761,18 @@ import stoolInClearing from "../assets/teachers/stool-in-clearing.jpg";
 		text-underline-offset: 3px;
 	}
 
-	.sb-todo {
+	.sb-status {
 		margin: 0;
-		font-size: 0.7rem !important;
-		font-style: italic;
-		opacity: 0.5;
-		line-height: 1.4 !important;
+		padding: 0.35rem 0.7rem;
+		align-self: flex-start;
+		font-size: 0.72rem !important;
+		font-weight: 600;
+		letter-spacing: 0.06em;
+		text-transform: uppercase;
+		line-height: 1.35 !important;
+		color: var(--color-dark-slate-gray);
+		background: rgb(0 94 71 / 10%);
+		border-radius: 999px;
 	}
 
 	.sb-more {

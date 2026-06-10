@@ -4,7 +4,7 @@ description: "Many people believe that therapy is only for times of crisis, depr
 pubDate: 2025-10-13T08:08:08
 category: "Therapy"
 heroImage: "./you-dont-need-to-be-in-a-bad-place-to-access-therapy.jpeg"
-heroImageAlt: ""
+heroImageAlt: "Ally's calm therapy room — two sage-green velvet armchairs facing each other beside a sunlit window, ready for a session."
 ---
 Many people believe that therapy is only for times of crisis, depression, or extreme stress. While Counselling/Psychotherapy can absolutely help during challenging periods, it’s equally valuable as a tool for self-understanding, personal growth, and emotional resilience. You don’t have to be in a “bad place” to benefit from therapy—it can help you thrive, not just survive.
 

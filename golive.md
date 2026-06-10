@@ -4,8 +4,9 @@
 > Este arquivo vive na raiz do projeto, fora de `src/pages/` e `public/`,
 > portanto não é servido em produção (verificado via `astro build` → não aparece em `dist/`).
 > Também está em `Disallow:` no `public/robots.txt` como defesa em profundidade.
+> O antigo `TODO.md` agora é apenas um pointer para este arquivo.
 >
-> Última auditoria de código: **09/Jun/2026**.
+> Última atualização: **10/Jun/2026**.
 
 ---
 
@@ -13,9 +14,9 @@
 
 | Estado | Total |
 |---|---|
-| ✅ Concluído | 14 |
-| 🟡 Pendente (código) | 6 |
-| 🔵 Pendente (decisão cliente) | 3 |
+| ✅ Concluído | 19 |
+| 🟡 Pendente (código) | 2 |
+| 🔵 Pendente (decisão cliente) | 6 |
 | 🟣 Pendente (externo — Fillout/Mailchimp/Domínio) | 3 |
 
 ---
@@ -97,17 +98,24 @@
 ### Audit (extra). `/style-guide` — noindex
 - ✅ Confirmado hoje: `noindex={true}` no `<Layout>` + `Disallow: /style-guide` em `public/robots.txt`. Não linkado em nenhuma navegação.
 
+## 🟢 Bloqueadores adicionais resolvidos (10/Jun)
+
+### Audit #6. `/finding-calm-teachers` — placeholders removidos
+- ✅ Removidos os 3 `{{IMAGE PROMPT}}` (hero portrait, sala de professor, segundo portrait) e o TODO de testimonials. CSS órfão (`.sl-img-todo`, `.sl-test-todo`) também removido.
+
+### Audit #8. `/free-resources` — TODO substituído por copy real
+- ✅ `{{TODO: more guides coming...}}` substituído por "More gentle guides are being shaped — they'll appear here as they're ready." (legível pelo usuário, sem placeholder).
+
+### Audit #9. `/anxiety` — CTA "Anxiety Reflection Journal" agora limpa
+- ✅ TODO removido. Card recebeu um badge sage **"Coming soon"** visível, mantendo o card no ar de forma transparente até a Ally decidir o destino final.
+
+### Audit #10. `/teachers` — TODOs de produtos futuros substituídos
+- ✅ Os 2 `<p class="sb-todo">` (Teacher Anxiety Journal + Sunday Reset) viraram pílulas "In development" elegíveis (`.sb-status`), no mesmo padrão visual do `/products`.
+
+### Audit #16. Blog — `heroImageAlt` preenchido em todos os 10 posts
+- ✅ Cada post agora tem alt text descritivo coerente com a imagem real (verificado via leitura das próprias jpegs). Melhora acessibilidade e SEO.
+
 ## 🟡 Bloqueadores ainda visíveis no site
-
-### Audit #6. `/finding-calm-teachers` — 3 IMAGE PROMPTS + 1 TODO
-| Linha | Conteúdo |
-|---|---|
-| `src/pages/finding-calm-teachers/index.astro:76` | IMAGE PROMPT — portrait da Ally no hero |
-| `src/pages/finding-calm-teachers/index.astro:103` | IMAGE PROMPT — professor/escola após expediente |
-| `src/pages/finding-calm-teachers/index.astro:191` | IMAGE PROMPT — segundo portrait da Ally |
-| `src/pages/finding-calm-teachers/index.astro:280` | TODO — "lift teacher-specific testimonials" |
-
-**Ação proposta:** remover figcaptions e o `<p>` do TODO de testimonials (mesmo padrão que apliquei no `/finding-calm-anxiety` hoje). Imagens da Ally já existentes podem ser reusadas como fallback.
 
 ### Audit #7. Thank-you pages — checkout do journal
 - `src/pages/finding-calm-anxiety/thank-you.astro:85` → IMAGE PROMPT do journal.
@@ -116,31 +124,7 @@
 - `src/pages/finding-calm-teachers/thank-you.astro:169` → TODO de checkout (mesmos placeholders).
 
 **Decisão necessária:** remover a oferta de journal por enquanto **OU** fornecer produto + preço + checkout (Amazon? Gumroad? Stripe?).
-
-### Audit #8. `/free-resources` — TODO visível
-- `src/pages/free-resources.astro:87` → `{{TODO: more guides coming — drop new items into the freeResources array...}}`.
-
-**Ação proposta:** remover o `<p>` do TODO (a mensagem é para o dev, não pro usuário). Cards sem imagem real continuam OK como estão — o placeholder visual atual é sóbrio.
-
-### Audit #9. `/anxiety` — CTA Anxiety Reflection Journal desactivado
-- `src/pages/anxiety.astro:241` → `<a class="cs-link" href="#" aria-disabled="true">`.
-- `src/pages/anxiety.astro:246` → `{{TODO: Anxiety Reflection Journal — Ally to complete; show picture clips only for now}}`.
-
-**Decisão necessária:**
-- (a) manter como "Coming soon" com badge claro e remover o TODO;
-- (b) remover a card por enquanto;
-- (c) ligar a Amazon/produto real se já existe.
-
-### Audit #10. `/teachers` — 2 TODOs de produtos futuros
-- `src/pages/teachers.astro:217` → "Teacher Decompression / Realignment / Membership product page".
-- `src/pages/teachers.astro:232` → "Sunday Reset schedule + URL final".
-
-**Ação proposta:** trocar `<p class="sb-todo">` por copy de "in development" visível ao usuário (similar ao `/products`) ou remover o `<p>` e deixar só o card. Card já está em verde escuro (item #9 da Parte A).
-
-### Audit #16. Blog — `heroImageAlt` vazio em todos os posts
-- 10 arquivos em `src/content/blog/*.md` com `heroImageAlt: ""`.
-
-**Ação proposta:** preencher `heroImageAlt` em cada um (1 frase descritiva por imagem). Posso fazer isso em lote olhando cada hero image.
+**Cross-ref:** [`docs/email-sequence-anxiety.md`](docs/email-sequence-anxiety.md) também tem os mesmos placeholders `{{PRICE}}`/`{{DISCOUNTED_PRICE}}`/`{{X}}`/`{{DEADLINE}}` em Emails 5 e 7.
 
 ## 🔵 Pendente — Decisão da cliente
 
@@ -153,6 +137,13 @@
 
 ### Audit #13. Música no vídeo do Therapy Journal
 - Vídeo sem áudio. Decisão de música + licença com a cliente. Não bloqueia.
+
+### Legacy do `TODO.md` — pendências da cliente ainda em aberto
+1. **Duplicate Calendly slug para Couples** — `src/data/calendly.ts` usa o mesmo evento para *60min Couples Online/Phone* e *90min Couples Face-to-Face*. Confirmar com a Ally se é intencional ou se ela vai criar um evento separado. (Também consta em "Calendly slugs — bug sinalizado" abaixo.)
+2. **90-minute couples bulk pricing** — sessão avulsa de 90min é £130; os bundles em `/pricing` (£486×6, £810×10) foram calculados em cima do £90 da sessão de 60min. Decisão de copy: 90min entram nos bundles ou bundles são só 60min? Cards atuais dizem "60-min sessions".
+3. **Confirmar valores das tarifas** — `pricingTiers` em `src/data/site.ts` precisa ser sanity-checked com Ally: £540/£324 (Individual), £810/£486 (Couples), £60/£90 nas sessões avulsas.
+4. **Mecanismo de pagamento dos bundles** — fluxo atual diz "I'll send a secure payment link" depois da consulta gratuita. Ally precisa confirmar o quê esse link é (Stripe? GoCardless? PayPal? Calendly pago?). Sem trabalho de código no site enquanto não houver decisão.
+5. **Seção 4b "Areas of Emotional Support"** — omitida da homepage no brief original (considerada duplicada das 8 flip cards). Revisar se Ally quer ressuscitar.
 
 ## 🟣 Pendente — Validações externas
 
@@ -206,18 +197,18 @@ Páginas a revisar após mudanças recentes de naming:
 |---|---|---|---|
 | 1 | `/contact` página real | ✅ feito | — |
 | 2 | Form Fillout em `/finding-calm-anxiety` | ✅ feito | — |
-| 3 | Remover todos os `{{TODO}}` e `{{IMAGE PROMPT}}` visíveis | 🟡 parcial | Falta `/finding-calm-teachers`, thank-yous, `/free-resources`, `/anxiety`, `/teachers` |
+| 3 | Remover todos os `{{TODO}}` e `{{IMAGE PROMPT}}` visíveis | 🟡 parcial | Falta apenas as duas thank-you pages (item 4) |
 | 4 | Decidir thank-you pages (journal/checkout) | 🟡 | Decisão cliente: oferta ou remover |
 | 5 | Qualifications + CPD em `/about` | ✅ feito | — |
 | 6 | Decidir produtos "In development" | 🔵 | Cliente decide visibilidade |
 | 7 | Testar Fillout → Mailchimp → PDF → thank-you | 🟣 | Pendente externo |
 | 8 | Testar links externos + PDFs no domínio final | 🟣 | Pós-DNS cutover |
 | 9 | Noindex `/style-guide` | ✅ feito | — |
-| 10 | Revisar alt texts (blog) + SEO básico | 🟡 | Posso preencher os 10 `heroImageAlt` em lote |
+| 10 | Revisar alt texts (blog) + SEO básico | ✅ feito | 10 `heroImageAlt` preenchidos (10/Jun) |
 
 ---
 
 ## Notas operacionais
 - Cada item resolvido → tick + referência ao arquivo/commit.
 - Itens novos do workflow.design → adicionar ao final da Parte A com o número do comentário.
-- `TODO.md` na raiz tem itens antigos parcialmente desactualizados — consolidar com este arquivo numa próxima limpeza.
+- `TODO.md` agora é apenas um pointer para este arquivo (10/Jun/2026).

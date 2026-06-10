@@ -4,7 +4,7 @@ description: "Discover how counselling helps you build resilience, clarity, and 
 pubDate: 2026-01-14T12:17:32
 category: "Therapy"
 heroImage: "./feeling-nervous-about-starting-therapy-heres-why-thats-completely-normal.jpeg"
-heroImageAlt: ""
+heroImageAlt: "A person sitting with hands gently clasped in a calm, plant-filled therapy room — a moment of pause suggesting therapy as ongoing support beyond crisis."
 ---
 Discover how counselling helps you build resilience, clarity, and confidence — not only during crisis but as a long-term path to emotional wellbeing and personal growth.
 

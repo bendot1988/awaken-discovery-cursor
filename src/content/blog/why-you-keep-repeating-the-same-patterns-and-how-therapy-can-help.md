@@ -4,7 +4,7 @@ description: "Ever wonder why you repeat the same emotional or relationship patt
 pubDate: 2026-01-16T12:51:29
 category: "Therapy"
 heroImage: "./why-you-keep-repeating-the-same-patterns-and-how-therapy-can-help.jpeg"
-heroImageAlt: ""
+heroImageAlt: "Hands holding a lit candle while sitting quietly in soft pastel light — a grounding pause that invites noticing emotional patterns."
 ---
 Ever wonder why you repeat the same emotional or relationship patterns? Discover how therapy helps you break cycles, build awareness, and create lasting change.
 

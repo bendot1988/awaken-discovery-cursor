@@ -4,7 +4,7 @@ description: "Feeling anxious about starting therapy? You’re not alone. Learn 
 pubDate: 2025-08-08T10:55:32
 category: "Therapy"
 heroImage: "./feeling-nervous-about-starting-therapy-heres-why-thats-completely-normal.jpeg"
-heroImageAlt: ""
+heroImageAlt: "A person sitting with hands gently clasped in a calm, plant-filled therapy room — a quiet, reflective moment before a first counselling session."
 ---
 **Feeling anxious about starting therapy?** You’re not alone. Learn why nerves are part of the process—and how therapy can still be a powerful step forward.
 

@@ -4,7 +4,7 @@ description: "You have heard people talk about therapy, you have seen it adverti
 pubDate: 2025-08-11T13:11:34
 category: "Therapy"
 heroImage: "./thinking-about-therapy-common-fears-and-what-helps-you-move-forward.webp"
-heroImageAlt: ""
+heroImageAlt: "A calm, reflective scene representing the quiet pause before taking the first step toward counselling — gentle light and soft tones."
 ---
 You have heard people talk about therapy, you have seen it advertised but you feel worried about starting therapy? Discover what holds many people back and what makes it easier to take that first step toward healing and growth.
 

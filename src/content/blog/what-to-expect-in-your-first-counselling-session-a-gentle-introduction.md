@@ -4,7 +4,7 @@ description: "Wondering what therapy is like? This gentle guide walks you throug
 pubDate: 2025-08-11T13:03:53
 category: "Therapy"
 heroImage: "./what-to-expect-in-your-first-counselling-session-a-gentle-introduction.webp"
-heroImageAlt: ""
+heroImageAlt: "A welcoming, warmly lit counselling space — soft natural light, plants and gentle textures setting the tone for a first session."
 ---
 Wondering what therapy is like? This gentle guide walks you through what to expect in your first session—so you can feel more prepared and less nervous.
 

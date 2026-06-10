@@ -306,6 +306,27 @@ const toc = [
 								<a href="tel:+443031231113">0303 123 1113</a>
 							</p>
 						</div>
+
+						<div class="legal-form" id="data-request-form">
+							<p class="legal-form-title">Submit a data rights request</p>
+							<p class="legal-form-lede">
+								To exercise any of the rights above — access, correction,
+								erasure, restriction, objection, portability or withdrawal of
+								consent — please complete the form below. I'll respond within
+								the time frame required by UK GDPR (usually within one month).
+							</p>
+							<div
+								style="width:100%;height:500px;"
+								data-fillout-id="wkUmW35GQous"
+								data-fillout-embed-type="standard"
+								data-fillout-inherit-parameters
+								data-fillout-dynamic-resize
+							>
+							</div>
+							<script
+								is:inline
+								src="https://server.fillout.com/embed/v1/"></script>
+						</div>
 					</section>
 
 					<section aria-labelledby="international-users" id="international-users">
@@ -676,6 +697,30 @@ const toc = [
 
 	.legal-callout--ico p + p {
 		margin-top: 0.35rem;
+	}
+
+	/* ---------- DATA RIGHTS FORM ---------- */
+	.legal-form {
+		margin: 1.8rem 0 0;
+		padding: 1.4rem 1.4rem 0.6rem;
+		background: var(--color-white);
+		border: 1px solid rgb(0 94 71 / 18%);
+		border-radius: 0.85rem;
+		scroll-margin-top: 6.5rem;
+	}
+
+	.legal-form-title {
+		margin: 0 0 0.4rem !important;
+		font-family: var(--font-serif);
+		font-size: 1.15rem;
+		font-weight: 600;
+		color: var(--brand-deep);
+	}
+
+	.legal-form-lede {
+		margin: 0 0 1rem !important;
+		font-size: 0.95rem;
+		color: var(--ink-soft);
 	}
 
 	/* ---------- FOOTNOTE ---------- */

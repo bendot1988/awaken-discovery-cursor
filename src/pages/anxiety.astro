@@ -232,6 +232,7 @@ const findingCalmWhatsInside = [
 							/>
 						</figure>
 						<div class="cs-card-body">
+							<span class="cs-card-badge">Coming soon</span>
 							<h3>Anxiety Reflection Journal</h3>
 							<p>
 								A guided space to help you notice emotional patterns, better
@@ -242,9 +243,6 @@ const findingCalmWhatsInside = [
 								<span>Explore the Journal</span>
 								<span class="cs-link-arrow" aria-hidden="true">→</span>
 							</a>
-							<p class="cs-card-todo">
-								{`{{TODO: Anxiety Reflection Journal — Ally to complete; show picture clips only for now}}`}
-							</p>
 						</div>
 					</article>
 
@@ -698,11 +696,18 @@ const findingCalmWhatsInside = [
 		display: inline-block;
 	}
 
-	.cs-card-todo {
-		margin: 0.2rem 0 0;
+	.cs-card-badge {
+		display: inline-block;
+		align-self: flex-start;
+		margin: 0 0 0.4rem;
+		padding: 0.25rem 0.65rem;
 		font-size: 0.7rem;
-		font-style: italic;
-		opacity: 0.55;
+		font-weight: 600;
+		letter-spacing: 0.08em;
+		text-transform: uppercase;
+		color: var(--color-dark-slate-gray);
+		background: rgb(0 94 71 / 10%);
+		border-radius: 999px;
 	}
 
 	.cs-future {

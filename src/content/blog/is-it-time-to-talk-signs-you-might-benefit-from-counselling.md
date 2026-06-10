@@ -4,7 +4,7 @@ description: "Knowing when to seek counselling can be challenging and confusing.
 pubDate: 2025-10-13T08:03:22
 category: "Therapy"
 heroImage: "./is-it-time-to-talk-signs-you-might-benefit-from-counselling.jpeg"
-heroImageAlt: ""
+heroImageAlt: "A hand letting sand pour slowly into a bowl outdoors — a calming, grounding image symbolising release and the decision to slow down."
 ---
 Knowing when to seek counselling can be challenging and confusing. It might also be blocked with what seems like a valid reason, but it’s the subconscious putting in place a safety measure. Many people ignore emotional, physical, and relational signs that indicate they could benefit from therapy.  Counselling/Psychotherapy isn’t just for crises—it’s a proactive step toward emotional, mental, and relational well-being.
 
