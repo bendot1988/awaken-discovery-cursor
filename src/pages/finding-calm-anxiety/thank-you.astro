@@ -7,7 +7,7 @@ import { locations, navItems } from "../../data/site";
 
 <Layout
 	title="Your Guide is on its Way · Awaken Discovery"
-	description="Your free Finding Calm guide is on its way — plus a special offer on the Anxiety Reflection Journal."
+	description="Your free Finding Calm guide is on its way — open your inbox to begin."
 >
 	<SiteHeader navItems={navItems} />
 	<main class="ty-page">
@@ -77,13 +77,10 @@ import { locations, navItems } from "../../data/site";
 				<figure class="ty-offer-mockup">
 					<img
 						src="/assets/images/teachers-guide-journal.svg"
-						alt="Mockup of the Anxiety Reflection Journal"
+						alt="Soft illustration of the upcoming Anxiety Reflection Journal"
 						loading="lazy"
 						decoding="async"
 					/>
-					<figcaption class="ty-image-todo">
-						{`{{IMAGE PROMPT: 3D mockup or top-down photograph of the Anxiety Reflection Journal — soft sage cover with calligraphic title, lying open to show interior reflection prompts. A pen, a warm mug, soft natural light. Calm and personal.}}`}
-					</figcaption>
 				</figure>
 				<div class="ty-offer-copy">
 					<p class="ty-eyebrow">For people who download the guide</p>
@@ -136,47 +133,25 @@ import { locations, navItems } from "../../data/site";
 			</div>
 		</section>
 
-		<!-- ============== DISCOUNT CTA ============== -->
+		<!-- ============== COMING SOON ============== -->
 		<section class="ty-discount">
 			<div class="container ty-discount-inner">
-				<p class="ty-eyebrow">And here's the best part</p>
-				<h2>A New-Reader Discount</h2>
+				<p class="ty-eyebrow">Coming soon</p>
+				<h2>The Journal Is Still Being Shaped</h2>
 				<p>
-					Because you just downloaded the free guide, I want to make this a
-					no-brainer for you.
+					The Anxiety Reflection Journal isn't ready just yet — I'm taking
+					my time to make sure it actually helps, rather than rushing
+					something out before it's right.
 				</p>
-
-				<div class="ty-price-card">
-					<p class="ty-price-row">
-						<span class="ty-price-was">
-							Normally <s>{`{{PRICE}}`}</s>
-						</span>
-						<span class="ty-price-now">{`{{DISCOUNTED_PRICE}}`}</span>
-					</p>
-					<p class="ty-price-note">
-						{`{{X}}`}% off — but only if you claim it before {`{{DEADLINE}}`}.
-					</p>
-					<a class="cta cta-solid ty-cta" href="#claim-journal">
-						Yes — I Want the Anxiety Reflection Journal
-					</a>
-					<p class="ty-todo">
-						{`{{TODO: wire CTA to checkout when journal is ready; replace {{PRICE}}, {{DISCOUNTED_PRICE}}, {{X}}, {{DEADLINE}} placeholders}}`}
-					</p>
-				</div>
-
-				<div class="ty-prose ty-imagine">
-					<p>Think about it:</p>
-					<ul class="ty-questions">
-						<li>What would it be worth to actually <em>understand</em> your anxiety instead of feeling ambushed by it?</li>
-						<li>To have a system that helps you feel steadier… more grounded… more like yourself again?</li>
-						<li>To stop white-knuckling your way through every day hoping you don't fall apart?</li>
-					</ul>
-					<p>The journal gives you that.</p>
-					<p>And there's no rush — you can take this work at your own pace.</p>
-					<a class="cta cta-outline" href="#claim-journal">
-						Claim Your Journal — {`{{X}}`}% Off
-					</a>
-				</div>
+				<p>
+					Because you've just joined the free guide list, you'll be the
+					first to hear when it's available — and the first to be offered an
+					early reader discount.
+				</p>
+				<p class="ty-emphasis">
+					In the meantime, the free guide you've just downloaded is a
+					complete tool on its own. Start there.
+				</p>
 			</div>
 		</section>
 
@@ -191,13 +166,11 @@ import { locations, navItems } from "../../data/site";
 
 				<aside class="ty-ps">
 					<p>
-						<strong>P.S.</strong> This discount expires {`{{DEADLINE}}`}.
-						After that, the journal goes back to full price. If you think you
-						might want it, grab it now while it's {`{{X}}`}% off.
+						<strong>P.S.</strong> Keep an eye on your inbox over the coming
+						weeks. I'll be sharing more gentle support — and the moment the
+						Anxiety Reflection Journal is ready, you'll be among the first
+						to know.
 					</p>
-					<a class="cta cta-solid" href="#claim-journal">
-						Get the Journal — {`{{X}}`}% Off Today Only
-					</a>
 				</aside>
 			</div>
 		</section>
@@ -395,60 +368,9 @@ import { locations, navItems } from "../../data/site";
 		font-weight: 500;
 	}
 
-	.ty-price-card {
-		margin: 1.4rem 0 2rem;
-		padding: 1.6rem 1.6rem;
-		background: linear-gradient(160deg, #f6f8f6 0%, #eaf0ea 100%);
-		border: 1px solid rgb(0 94 71 / 22%);
-		border-radius: 1rem;
-		display: grid;
-		gap: 0.9rem;
-	}
-
-	.ty-price-row {
-		margin: 0;
-		display: flex;
-		flex-wrap: wrap;
-		align-items: baseline;
-		gap: 0.7rem 1rem;
-	}
-
-	.ty-price-was {
-		font-size: 0.95rem;
-		opacity: 0.75;
-	}
-
-	.ty-price-now {
-		font-family: var(--font-serif);
-		font-size: 2.2rem;
-		color: var(--brand);
-		font-weight: 500;
-	}
-
-	.ty-price-note {
-		margin: 0;
-		font-size: 0.95rem;
-		font-style: italic;
-		color: var(--brand-deep);
-	}
-
-	.ty-cta {
-		justify-self: start;
-	}
-
-	.ty-todo {
-		margin: 0;
-		font-size: 0.72rem;
-		font-style: italic;
-		opacity: 0.55;
-	}
-
-	.ty-imagine p {
-		margin: 0 0 1rem;
-	}
-
-	.ty-imagine .cta {
-		margin-top: 0.5rem;
+	.ty-discount > .ty-discount-inner > p,
+	.ty-discount > .ty-discount-inner > h2 {
+		max-width: 60ch;
 	}
 
 	.ty-signoff {
@@ -468,14 +390,6 @@ import { locations, navItems } from "../../data/site";
 
 	.ty-ps p {
 		margin: 0 0 0.9rem;
-	}
-
-	.ty-image-todo {
-		margin-top: 0.45rem;
-		font-size: 0.72rem;
-		font-style: italic;
-		opacity: 0.55;
-		line-height: 1.5;
 	}
 
 	@media (max-width: 1024px) {

@@ -37,9 +37,9 @@ export type PricingTier = {
 };
 
 export const siteMeta = {
-	title: "Therapy • Emotional Wellbeing • Teacher Support • Anxiety Help",
+	title: "Counselling & Psychotherapy with Ally · Awaken Discovery",
 	description:
-		"Compassionate counselling and emotional wellbeing support for anxiety, burnout, overwhelm and life's emotional challenges.",
+		"Compassionate counselling and psychotherapy with Ally Donoghue (MBACP, NCPS). Online or face-to-face near York. Support for anxiety, burnout and overwhelm.",
 	canonicalOrigin: "https://awakendiscovery.co.uk",
 };
 
