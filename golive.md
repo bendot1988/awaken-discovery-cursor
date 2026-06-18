@@ -6,7 +6,7 @@
 > It's also `Disallow:`-ed in `public/robots.txt` as defence in depth.
 > The legacy `TODO.md` is now only a pointer to this file.
 >
-> Last updated: **15 Jun 2026 (evening update)**.
+> Last updated: **18 Jun 2026**.
 
 ---
 
@@ -14,9 +14,9 @@
 
 | Status | Total |
 |---|---|
-| ✅ Done | 25 |
-| 🟡 Pending (code) | 0 |
-| 🔵 Pending (client decision) | 6 |
+| ✅ Done | 30 |
+| 🟡 Pending (code) | 1 |
+| 🔵 Pending (client decision) | 2 |
 | 🟣 Pending (external — Fillout/Mailchimp/domain) | 2 |
 
 ---
@@ -162,6 +162,33 @@ Closed the last 🟡 blocker without needing Ally's price/checkout decision by s
   - The only remaining `{{IMAGE PROMPT}}` is inside `/style-guide`, which is intentional demo content explaining the syntax — and `/style-guide` is `noindex` + `Disallow:` in `robots.txt` and not linked anywhere in nav.
 - **Cross-ref:** `docs/email-sequence-anxiety.md` still has `{{PRICE}}`/`{{DEADLINE}}` in Emails 5 and 7 — left intentionally so Ally can fill them in when she configures Mailchimp; this file is not shipped (lives in `docs/`).
 
+### Audit (extra). Ally launch Q&A applied — **done 18 Jun**
+Client confirmed via WhatsApp (15 Jun). Code changes:
+
+**Pricing & payments (confirmed)**
+- Bundle prices unchanged and correct: Individual 10×£540 / 6×£324; Couples 10×£810 / 6×£486; singles £60/£90 (ind), £90/£130 (couples).
+- Bundles are **60-minute sessions only** — copy added on `/pricing` cards, hero note, fine print, and `/pricing/individual` cross-sell.
+- Bundle payment after consultation: **Stripe** — step 3 on `/pricing#book` now names Stripe explicitly.
+
+**Calendly couples split (fixed)**
+- `couples.sixtyFaceToFace` → `90-minutes-individual-1-2-1-clone-clone` (Calendly: "Reignite Connection - 60 Minute Couples Therapy Session")
+- `couples.sixtyOnline` → `60-minutes-individual-1-2-1-clone-2` (Calendly: "60-Minutes Couple 1-2-1") — was incorrectly sharing the 90-min slug
+- `couples.ninetyFaceToFace` → `reignite-connection-60-minute-couples-therapy-clone` (Calendly: "Reignite Connection - 90 Minute Couples Therapy")
+- 90-min couples card on `/pricing/individual` + `/therapy` now says "Face to Face, Online or Phone" to match Calendly.
+
+**Products (`/products`)**
+- **Anxiety Reflection Journal** promoted from teaser → **available now** as PDF at **£18.99** / **$24.99** (`src/data/products.ts`). Featured section at `#anxiety-reflection-journal`. CTA → `/contact` until Ally shares Stripe payment link (`checkoutUrl` placeholder).
+- **Grounded Wellness** affiliate restored: `https://www.groundedwellness.co.uk/?ref=ztu5yzm` (partner band on `/products`).
+- Teasers kept for **Teachers Reflection Journal** + **Sunday Reset for Teachers** only (product-walkthroughs card removed).
+- `/anxiety` journal card updated: "PDF available" badge + link to products.
+- `/finding-calm-anxiety/thank-you` updated with live £18.99 offer + links to products/contact (aligned with email-sequence upsell).
+
+**Naming**
+- "Teacher Anxiety Reflection Journal" → **"Teachers Reflection Journal"** on `/products`, `/teachers`, teacher thank-you.
+
+**Homepage Section 4b**
+- Ally couldn't recall "Areas of Emotional Support" — **left out** (flip cards remain; no change).
+
 ### Audit #17. SEO titles & descriptions sweep — **done 15 Jun**
 Rewrote `<title>` and `<meta description>` across the 7 main pages so each one (i) leads with the brand or product, (ii) names Ally where helpful, (iii) fits Google's display limits (≤ 65 chars title, 140–160 chars description) and (iv) drops keyword-stuffing.
 - **`/` (siteMeta)** — was `"Therapy • Emotional Wellbeing • Teacher Support • Anxiety Help"` (no brand, no Ally, bullet-stuffed). Now: **"Counselling & Psychotherapy with Ally · Awaken Discovery"** + description naming Ally, MBACP/NCPS and York.
@@ -177,24 +204,42 @@ Rewrote `<title>` and `<meta description>` across the 7 main pages so each one (
 
 _None._ All `{{TODO}}` / `{{IMAGE PROMPT}}` / `{{PRICE}}` placeholders are gone from the indexable site (closed 15 Jun, see Audit #7 entry above).
 
+## 🟡 Pending (code)
+
+### Anxiety Reflection Journal — Stripe checkout URL
+- PDF is live on site at £18.99 / $24.99 with CTA → `/contact` as fallback.
+- Ally confirmed Stripe for payments but did **not** share the journal PDF payment link in chat.
+- Once received: set `checkoutUrl` in `src/data/products.ts` → auto-switches CTA to "Buy the PDF Journal" on `/products` and thank-you.
+
 ## 🔵 Pending — client decision
-
-### Audit #11. "In development" products visible on `/products`
-- Anxiety Reflection Journal, Teacher Anxiety Reflection Journal, Sunday Reset for Teachers, product walkthroughs.
-- Client decides whether they stay visible or are hidden until ready.
-
-### Audit #12. "My Grounded Wellness Link" (from the old site) left out
-- We don't have the exact link nor confirmation as to whether it should still appear. Needs Ally's input.
 
 ### Audit #13. Music on the Therapy Journal video
 - Video has no audio. Music + licence decision with the client. Not a blocker.
 
-### Legacy from `TODO.md` — client items still open
-1. **Duplicate Calendly slug for Couples** — `src/data/calendly.ts` uses the same event for both *60-min Couples Online/Phone* and *90-min Couples Face-to-Face*. Confirm with Ally whether this is intentional or whether she'll create a separate event. (Also listed under "Calendly slugs — flagged bug" below.)
-2. **90-minute couples bulk pricing** — a single 90-min session is £130; the bundles on `/pricing` (£486 for 6, £810 for 10) were costed against the £90 60-min rate. Copy decision: do 90-min sessions count toward bundles, or are bundles 60-min only? Current cards say "60-min sessions".
-3. **Confirm pricing values** — `pricingTiers` in `src/data/site.ts` needs a sanity check with Ally: £540/£324 (Individual), £810/£486 (Couples), £60/£90 on single sessions.
-4. **Bundle payment mechanism** — the current flow says "I'll send a secure payment link" after the free consultation. Ally needs to confirm what that link actually is (Stripe? GoCardless? PayPal? Calendly paid event?). No code work on the site until a decision is made.
-5. **Section 4b "Areas of Emotional Support"** — omitted from the homepage in the original brief (considered duplicative of the 8 flip cards). Review whether Ally wants it back.
+### Legacy — unanswered in Ally's reply
+- **Double opt-in** for Mailchimp (asked in launch message, no answer yet).
+- **Cookie banner** wording — quick eyes before go-live.
+
+## ✅ Client decisions now closed (15 Jun WhatsApp)
+
+| Topic | Ally's answer | Applied |
+|---|---|---|
+| Bundle pricing | Confirmed £540/£324, £810/£486 | ✅ already correct |
+| Bundle session length | 60-min only | ✅ copy on `/pricing` |
+| Payment mechanism | Stripe | ✅ `/pricing#book` step 3 |
+| Calendly couples | Separate durations, clear Book Now | ✅ slug split in `calendly.ts` |
+| Products visibility | Anxiety PDF live; teasers for Teachers Journal + Sunday Reset | ✅ `/products` |
+| Grounded Wellness | `?ref=ztu5yzm` | ✅ affiliate band |
+| Homepage Section 4b | "I can't even remember" | ✅ left out |
+
+## 🔵 Removed from pending (was client decision, now done)
+- ~~Audit #11 in-development products~~ → resolved (see above)
+- ~~Audit #12 Grounded Wellness~~ → resolved
+- ~~Calendly duplicate slug~~ → resolved
+- ~~90-min bulk pricing~~ → bundles are 60-min only
+- ~~Confirm pricing values~~ → confirmed
+- ~~Bundle payment mechanism~~ → Stripe
+- ~~Section 4b homepage~~ → leave as is
 
 ## 🟣 Pending — external validations
 
@@ -203,6 +248,7 @@ Before going live, open each of these in production:
 - Calendly (`tasterSession`, `individual.*`, `couples.*` in `src/data/calendly.ts`);
 - Fillout embeds (4 IDs: `jXo5e7D8Hwus` anxiety, `bzhC71AYFfus` teachers, `t5xKDhCRfyus` contact, `wkUmW35GQous` DSAR/privacy);
 - Amazon (`/products` → "Therapy Journal for Couples");
+- Grounded Wellness affiliate (`/products`);
 - findahelpline.com (`/finding-calm-teachers`);
 - Internal Privacy / Terms;
 - PDFs at `/assets/pdf/finding-calm-anxiety.pdf` and `/assets/pdf/finding-calm-teachers.pdf`;
@@ -225,8 +271,8 @@ For `t5xKDhCRfyus` (contact) and `wkUmW35GQous` (DSAR/privacy): **does not** go 
 ### `siteMeta.canonicalOrigin`
 - `src/data/site.ts` points to `https://awakendiscovery.co.uk` — confirm the final domain before publishing.
 
-### Calendly slugs — flagged bug
-- `src/data/calendly.ts` notes that `couples.sixtyOnline` and `couples.ninetyFaceToFace` appear to point to the same event (copy-paste from the old site). Confirm with Ally and split.
+## 🟣 Removed from pending (was flagged, now fixed)
+- ~~Calendly slugs — couples duplicate~~ → split 18 Jun (see Ally Q&A entry above).
 
 ### Cookie banner
 - `CookieBanner.astro` is already wired up. Confirm wording and categories with the client before go-live.
@@ -240,9 +286,9 @@ For `t5xKDhCRfyus` (contact) and `wkUmW35GQous` (DSAR/privacy): **does not** go 
 | 1 | `/contact` real page | ✅ done | — |
 | 2 | Fillout form on `/finding-calm-anxiety` | ✅ done | — |
 | 3 | Remove all visible `{{TODO}}` and `{{IMAGE PROMPT}}` | ✅ done | Indexable site is clean (15 Jun evening) |
-| 4 | Thank-you pages (journal/checkout) | ✅ done | Soft-hidden to "Coming soon" until Ally has price + checkout |
+| 4 | Thank-you pages (journal/checkout) | ✅ done | Anxiety journal live at £18.99; teachers journal still "coming soon" |
 | 5 | Qualifications + CPD on `/about` | ✅ done | — |
-| 6 | Decide on "In development" products | 🔵 | Client decides visibility |
+| 6 | Decide on "In development" products | ✅ done | Anxiety PDF live; Teachers Journal + Sunday Reset teasers (15 Jun Ally) |
 | 7 | Test Fillout → Mailchimp → PDF → thank-you | 🟣 | External pending |
 | 8 | Test external links + PDFs on final domain | 🟣 | Post-DNS cutover |
 | 9 | Noindex `/style-guide` | ✅ done | — |

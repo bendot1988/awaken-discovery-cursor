@@ -3,19 +3,16 @@ import Layout from "../layouts/Layout.astro";
 import SiteHeader from "../components/SiteHeader.astro";
 import SiteFooter from "../components/SiteFooter.astro";
 import { locations, navItems } from "../data/site";
-
-const amazonJournalUrl =
-	"https://www.amazon.co.uk/Therapy-Journal-Couples-Awaken-Discovery/dp/B0DJZHZSL6/ref=sr_1_1?nsdOptOutParam=true&sr=8-1";
+import {
+	amazonTherapyJournalForCouplesUrl,
+	anxietyReflectionJournal,
+	groundedWellnessAffiliateUrl,
+} from "../data/products";
 
 const developingProducts = [
 	{
-		label: "Guided Journal",
-		title: "Anxiety Reflection Journal",
-		body: "A reflective journal to help you notice patterns, track emotional wellbeing and build a personal calming toolkit.",
-	},
-	{
 		label: "Teacher Support",
-		title: "Teacher Anxiety Reflection Journal",
+		title: "Teachers Reflection Journal",
 		body: "A teacher-focused journal for recognising overload, processing overwhelm and reconnecting beyond survival mode.",
 	},
 	{
@@ -23,17 +20,12 @@ const developingProducts = [
 		title: "Sunday Reset for Teachers",
 		body: "Gentle wellbeing sessions designed to help teachers decompress, regulate and prepare for the week ahead.",
 	},
-	{
-		label: "Digital Support",
-		title: "Product videos and walkthroughs",
-		body: "Simple previews and walkthroughs to help you understand which resources may be right for you.",
-	},
 ];
 ---
 
 <Layout
 	title="Wellbeing Products · Journals & Guides · Awaken Discovery"
-	description="Therapy journals, guides and wellbeing tools from Awaken Discovery — including the Therapy Journal for Couples, available now on Amazon UK."
+	description="Therapy journals, guides and wellbeing tools from Awaken Discovery — including the Therapy Journal for Couples on Amazon UK and the Anxiety Reflection Journal PDF."
 >
 	<SiteHeader navItems={navItems} />
 	<main class="products-page">
@@ -82,7 +74,7 @@ const developingProducts = [
 					<div class="product-actions">
 						<a
 							class="cta cta-solid"
-							href={amazonJournalUrl}
+							href={amazonTherapyJournalForCouplesUrl}
 							target="_blank"
 							rel="noopener noreferrer"
 						>
@@ -97,15 +89,97 @@ const developingProducts = [
 			</div>
 		</section>
 
+		<section class="featured-product section" id="anxiety-reflection-journal">
+			<div class="container featured-grid featured-grid-reverse">
+				<div class="product-media product-media-static">
+					<img
+						src="/assets/images/ally-writing-journal.jpg"
+						alt="Open journal with pen — gentle reflection practice"
+						loading="lazy"
+						decoding="async"
+					/>
+				</div>
+
+				<div class="product-copy">
+					<p class="section-kicker">Available now</p>
+					<h2>Anxiety Reflection Journal</h2>
+					<p class="product-lede">
+						A guided PDF journal to help you notice patterns, track emotional
+						wellbeing and build a personal calming toolkit.
+					</p>
+					<p>
+						Think of it as the natural next step after the free
+						<em>Finding Calm</em> guide — a structured space to understand
+						<em>your</em> anxiety in <em>your</em> body, not generic advice.
+					</p>
+					<p class="product-price">
+						<strong>{anxietyReflectionJournal.priceGbp}</strong>
+						<span class="product-price-alt">
+							({anxietyReflectionJournal.priceUsd} for international buyers)
+						</span>
+					</p>
+					<div class="product-actions">
+						{
+							anxietyReflectionJournal.checkoutUrl ? (
+								<a
+									class="cta cta-solid"
+									href={anxietyReflectionJournal.checkoutUrl}
+									target="_blank"
+									rel="noopener noreferrer"
+								>
+									Buy the PDF Journal
+								</a>
+							) : (
+								<a class="cta cta-solid" href="/contact">
+									Request the PDF Journal
+								</a>
+							)
+						}
+						<a class="cta cta-outline" href="/finding-calm-anxiety">
+							Get the Free Guide First
+						</a>
+					</div>
+					<p class="product-note">
+						Digital PDF download. A printed edition is planned — you'll be
+						able to choose either format when it's ready.
+						{
+							!anxietyReflectionJournal.checkoutUrl &&
+								" If you've just downloaded the free guide, the purchase link is also shared in the follow-up email sequence."
+						}
+					</p>
+				</div>
+			</div>
+		</section>
+
+		<section class="affiliate-band section section-soft">
+			<div class="container affiliate-inner">
+				<div>
+					<p class="section-kicker">Partner recommendation</p>
+					<h2>My Grounded Wellness Link</h2>
+					<p>
+						Alongside my own resources, I sometimes recommend products from
+						Grounded Wellness — gentle wellbeing tools I trust and use myself.
+					</p>
+				</div>
+				<a
+					class="cta cta-outline"
+					href={groundedWellnessAffiliateUrl}
+					target="_blank"
+					rel="noopener noreferrer sponsored"
+				>
+					Visit Grounded Wellness
+				</a>
+			</div>
+		</section>
+
 		<section class="developing-products section">
 			<div class="container">
 				<header class="products-section-head">
 					<p class="section-kicker">In development</p>
 					<h2>More wellbeing resources are being shaped.</h2>
 					<p>
-						These resources are part of the wider Awaken Discovery product
-						roadmap and will be added as soon as the content and checkout flow
-						are ready.
+						These are part of the wider Awaken Discovery roadmap and will be
+						added as soon as the content and checkout flow are ready.
 					</p>
 				</header>
 
@@ -187,13 +261,15 @@ const developingProducts = [
 	.products-hero p,
 	.product-copy p,
 	.products-section-head p,
-	.developing-card p {
+	.developing-card p,
+	.affiliate-inner p {
 		line-height: 1.75;
 	}
 
 	.products-hero p,
 	.product-copy p,
-	.products-section-head p {
+	.products-section-head p,
+	.affiliate-inner p {
 		max-width: 62ch;
 	}
 
@@ -204,6 +280,14 @@ const developingProducts = [
 		align-items: center;
 	}
 
+	.featured-grid-reverse {
+		direction: rtl;
+	}
+
+	.featured-grid-reverse > * {
+		direction: ltr;
+	}
+
 	.product-media {
 		background: var(--color-white);
 		border: 1px solid rgb(0 94 71 / 14%);
@@ -212,7 +296,8 @@ const developingProducts = [
 		overflow: hidden;
 	}
 
-	.product-media video {
+	.product-media video,
+	.product-media img {
 		width: 100%;
 		display: block;
 		aspect-ratio: 4 / 5;
@@ -231,6 +316,18 @@ const developingProducts = [
 		color: var(--brand);
 	}
 
+	.product-price {
+		margin: 0.2rem 0 0.4rem;
+		font-size: 1.15rem;
+		color: var(--brand-deep);
+	}
+
+	.product-price-alt {
+		font-size: 0.92rem;
+		font-weight: 400;
+		color: var(--ink-soft);
+	}
+
 	.product-actions {
 		display: flex;
 		flex-wrap: wrap;
@@ -244,6 +341,19 @@ const developingProducts = [
 		color: var(--ink-soft);
 	}
 
+	.affiliate-inner {
+		display: grid;
+		grid-template-columns: 1fr auto;
+		gap: 1.5rem;
+		align-items: center;
+		padding: 1.6rem clamp(1.4rem, 3vw, 2rem);
+		background: var(--color-white);
+		border: 1px solid rgb(0 94 71 / 16%);
+		border-left: 4px solid var(--brand);
+		border-radius: 0.9rem;
+		box-shadow: 0 12px 28px rgb(0 94 71 / 8%);
+	}
+
 	.products-section-head {
 		max-width: 680px;
 		margin-bottom: 2rem;
@@ -251,7 +361,7 @@ const developingProducts = [
 
 	.developing-grid {
 		display: grid;
-		grid-template-columns: repeat(4, minmax(0, 1fr));
+		grid-template-columns: repeat(2, minmax(0, 1fr));
 		gap: 1rem;
 	}
 
@@ -284,13 +394,14 @@ const developingProducts = [
 	@media (max-width: 1024px) {
 		.featured-grid,
 		.developing-grid {
-			grid-template-columns: 1fr 1fr;
+			grid-template-columns: 1fr;
 		}
-	}
 
-	@media (max-width: 720px) {
-		.featured-grid,
-		.developing-grid {
+		.featured-grid-reverse {
+			direction: ltr;
+		}
+
+		.affiliate-inner {
 			grid-template-columns: 1fr;
 		}
 	}

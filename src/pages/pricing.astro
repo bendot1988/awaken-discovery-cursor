@@ -25,7 +25,7 @@ const bulkCards: BulkCard[] = [
 		popular: true,
 		bullets: [
 			"Ideal for focused personal development",
-			"Extendable sessions to suit your needs",
+			"60-minute sessions only",
 			"Dates and times agreed together",
 		],
 	},
@@ -38,7 +38,7 @@ const bulkCards: BulkCard[] = [
 		popular: false,
 		bullets: [
 			"Ideal for focused personal development",
-			"Extendable sessions to suit your needs",
+			"60-minute sessions only",
 			"Dates and times agreed together",
 		],
 	},
@@ -51,7 +51,7 @@ const bulkCards: BulkCard[] = [
 		popular: true,
 		bullets: [
 			"Ideal for strengthening your relationship",
-			"Sessions tailored to your needs as a couple",
+			"60-minute sessions only",
 			"Dates and times agreed together",
 		],
 	},
@@ -64,14 +64,14 @@ const bulkCards: BulkCard[] = [
 		popular: false,
 		bullets: [
 			"Ideal for strengthening your relationship",
-			"Sessions tailored to your needs as a couple",
+			"60-minute sessions only",
 			"Dates and times agreed together",
 		],
 	},
 ];
 
 const finePrint =
-	"Bundles are arranged after a free 20-minute consultation. Sessions must be booked within 7 days of payment. Non-refundable, but rescheduling with 7 days' notice is fine.";
+	"Bundles are 60-minute sessions only, arranged after a free 20-minute consultation. Sessions must be booked within 7 days of payment. Non-refundable, but rescheduling with 7 days' notice is fine.";
 ---
 
 <Layout
@@ -100,9 +100,9 @@ const finePrint =
 						for an extended booking period.
 					</p>
 					<p class="pr-note pr-note-soft">
-						Discounted bundles are non-refundable but can be rescheduled
-						with 7 days' notice. <a href="/contact">Contact us</a> to find
-						out more.
+						All bundle sessions are <strong>60 minutes</strong>. For 90-minute
+						single sessions, see
+						<a href="/pricing/individual">single session pricing</a>.
 					</p>
 				</div>
 			</div>
@@ -276,8 +276,9 @@ const finePrint =
 							<div>
 								<h3>Pay &amp; start your sessions</h3>
 								<p>
-									Once we've agreed your bundle, I'll send a secure payment link
-									and we'll get the first session in the diary.
+									Once we've agreed your bundle, I'll send a secure
+									<strong>Stripe</strong> payment link and we'll get the first
+									session in the diary.
 								</p>
 							</div>
 						</li>

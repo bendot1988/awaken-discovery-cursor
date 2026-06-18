@@ -30,14 +30,9 @@ export const calendlyLinks = {
 	couples: {
 		/** 60-minute couples session, face-to-face — £90 */
 		sixtyFaceToFace: `${CALENDLY_BASE}/90-minutes-individual-1-2-1-clone-clone`,
-		/**
-		 * 60-minute couples session, online or phone — £90.
-		 * NOTE: On the live site this slug is shared with the 90-min couples
-		 * face-to-face event — likely a copy-paste bug in Ally's pricing page.
-		 * Flagged for review.
-		 */
-		sixtyOnline: `${CALENDLY_BASE}/reignite-connection-60-minute-couples-therapy-clone`,
-		/** 90-minute couples session, face-to-face — £130 */
+		/** 60-minute couples session, online or phone — £90 */
+		sixtyOnline: `${CALENDLY_BASE}/60-minutes-individual-1-2-1-clone-2`,
+		/** 90-minute couples session (face-to-face, online or phone) — £130 */
 		ninetyFaceToFace: `${CALENDLY_BASE}/reignite-connection-60-minute-couples-therapy-clone`,
 	},
 } as const;

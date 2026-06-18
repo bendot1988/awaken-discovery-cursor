@@ -3,11 +3,12 @@ import Layout from "../../layouts/Layout.astro";
 import SiteHeader from "../../components/SiteHeader.astro";
 import SiteFooter from "../../components/SiteFooter.astro";
 import { locations, navItems } from "../../data/site";
+import { anxietyReflectionJournal } from "../../data/products";
 ---
 
 <Layout
 	title="Your Guide is on its Way · Awaken Discovery"
-	description="Your free Finding Calm guide is on its way — open your inbox to begin."
+	description="Your free Finding Calm guide is on its way — plus the Anxiety Reflection Journal PDF if you'd like to go deeper."
 >
 	<SiteHeader navItems={navItems} />
 	<main class="ty-page">
@@ -133,24 +134,36 @@ import { locations, navItems } from "../../data/site";
 			</div>
 		</section>
 
-		<!-- ============== COMING SOON ============== -->
+		<!-- ============== JOURNAL OFFER ============== -->
 		<section class="ty-discount">
 			<div class="container ty-discount-inner">
-				<p class="ty-eyebrow">Coming soon</p>
-				<h2>The Journal Is Still Being Shaped</h2>
+				<p class="ty-eyebrow">Available now</p>
+				<h2>Go Deeper with the Full Journal</h2>
 				<p>
-					The Anxiety Reflection Journal isn't ready just yet — I'm taking
-					my time to make sure it actually helps, rather than rushing
-					something out before it's right.
+					The <strong>Anxiety Reflection Journal</strong> is ready as a PDF
+					download — a complete system for understanding your anxiety in your
+					own body, at your own pace.
+				</p>
+				<p class="ty-price-line">
+					<strong>{anxietyReflectionJournal.priceGbp}</strong>
+					<span class="ty-price-alt">
+						({anxietyReflectionJournal.priceUsd} international)
+					</span>
 				</p>
 				<p>
-					Because you've just joined the free guide list, you'll be the
-					first to hear when it's available — and the first to be offered an
-					early reader discount.
+					Because you've just joined the free guide list, you'll also receive
+					the purchase link in your follow-up emails. Or you can request it
+					straight away below.
 				</p>
+				<div class="ty-offer-actions">
+					<a class="cta cta-solid" href="/products#anxiety-reflection-journal">
+						View the Journal
+					</a>
+					<a class="cta cta-outline" href="/contact">Request the PDF</a>
+				</div>
 				<p class="ty-emphasis">
-					In the meantime, the free guide you've just downloaded is a
-					complete tool on its own. Start there.
+					A printed edition is on the way — for now, the PDF is a complete
+					tool on its own.
 				</p>
 			</div>
 		</section>
@@ -166,10 +179,9 @@ import { locations, navItems } from "../../data/site";
 
 				<aside class="ty-ps">
 					<p>
-						<strong>P.S.</strong> Keep an eye on your inbox over the coming
-						weeks. I'll be sharing more gentle support — and the moment the
-						Anxiety Reflection Journal is ready, you'll be among the first
-						to know.
+						<strong>P.S.</strong> Watch your inbox — I'll be sharing more
+						gentle support over the coming days, including how to get the
+						full journal if you want to take the next step.
 					</p>
 				</aside>
 			</div>
@@ -371,6 +383,25 @@ import { locations, navItems } from "../../data/site";
 	.ty-discount > .ty-discount-inner > p,
 	.ty-discount > .ty-discount-inner > h2 {
 		max-width: 60ch;
+	}
+
+	.ty-price-line {
+		margin: 0.4rem 0 1rem;
+		font-size: 1.35rem;
+		color: var(--brand-deep);
+	}
+
+	.ty-price-alt {
+		font-size: 0.92rem;
+		font-weight: 400;
+		color: var(--ink-soft);
+	}
+
+	.ty-offer-actions {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.75rem;
+		margin: 1.2rem 0;
 	}
 
 	.ty-signoff {
