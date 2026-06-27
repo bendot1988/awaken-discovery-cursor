@@ -199,9 +199,13 @@ const finePrint =
 															Bulk Sessions For{" "}
 															{card.type === "ind" ? "Individuals" : "Couples"}
 														</h3>
-														<p>
-															Save 10% by buying {card.sessions} sessions
+														<p class="pr-card-sessions">
+															<span class="pr-card-sessions-num">
+																{card.sessions}
+															</span>
+															<span class="pr-card-sessions-text">sessions</span>
 														</p>
+														<p class="pr-card-header-note">Save 10% on the bundle price</p>
 													</header>
 													<div class="pr-card-body">
 														<p class="pr-card-price">
@@ -591,12 +595,36 @@ const finePrint =
 		color: var(--color-white);
 	}
 
-	.pr-card-header p {
-		margin: 0;
+	.pr-card-sessions {
+		margin: 0.85rem 0 0.45rem;
+		display: flex;
+		align-items: baseline;
+		gap: 0.4rem;
+		line-height: 1;
+	}
+
+	.pr-card-sessions-num {
 		font-family: var(--font-serif);
-		font-style: italic;
-		font-size: 0.98rem;
-		opacity: 0.92;
+		font-size: clamp(3rem, 5.5vw, 3.75rem);
+		font-weight: 500;
+		font-style: normal;
+		letter-spacing: -0.02em;
+	}
+
+	.pr-card-sessions-text {
+		font-family: var(--font-serif);
+		font-size: clamp(1.35rem, 2.4vw, 1.65rem);
+		font-weight: 500;
+		font-style: normal;
+		opacity: 0.95;
+	}
+
+	.pr-card-header-note {
+		margin: 0;
+		font-family: var(--font-body);
+		font-size: 0.92rem;
+		font-style: normal;
+		opacity: 0.88;
 	}
 
 	.pr-card-body {

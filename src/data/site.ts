@@ -296,4 +296,7 @@ export const locations: string[] = [
 	"Goole",
 	"Driffield",
 	"Beverley",
+	"Pocklington",
+	"UK",
+	"International",
 ];
