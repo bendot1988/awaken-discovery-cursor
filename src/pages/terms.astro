@@ -32,13 +32,15 @@ const toc = [
 		<!-- ============== HERO ============== -->
 		<section class="legal-hero section">
 			<div class="container legal-hero-inner">
-				<p class="section-kicker">Legal</p>
-				<h1>Terms &amp; Conditions</h1>
-				<p class="legal-subtitle">Awaken Discovery Counselling &amp; Psychotherapy</p>
-				<p class="legal-meta">
-					<span>Last updated</span>
-					<time datetime="2026-06">{lastUpdated}</time>
-				</p>
+				<div class="legal-hero-copy">
+					<p class="section-kicker">Legal</p>
+					<h1>Terms &amp; Conditions</h1>
+					<p class="legal-subtitle">Awaken Discovery Counselling &amp; Psychotherapy</p>
+					<p class="legal-meta">
+						<span>Last updated</span>
+						<time datetime="2026-06">{lastUpdated}</time>
+					</p>
+				</div>
 			</div>
 		</section>
 
@@ -547,6 +549,10 @@ const toc = [
 	}
 
 	.legal-hero-inner {
+		align-items: start;
+	}
+
+	.legal-hero-copy {
 		max-width: 70ch;
 	}
 
