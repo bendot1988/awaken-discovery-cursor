@@ -79,7 +79,7 @@ export const freeResources: FreeResource[] = [
 		],
 		image: "/assets/images/finding-calm-guide-mockup.png",
 		imageAlt:
-			"Why You Can't Switch Off After Teaching — free teacher guide on a desk with notebook and mug",
+			"Why You Can't Switch Off After Teaching — free teacher guide standing on a wooden table",
 	},
 	{
 		title: "Finding Calm",
@@ -95,8 +95,9 @@ export const freeResources: FreeResource[] = [
 			"Personal anchors for overwhelming moments",
 			"How to notice patterns before they spiral",
 		],
-		imagePrompt:
-			"3D mockup or flatlay of the printed PDF — sage cover with calligraphic title, on a softly lit desk beside a warm mug or open notebook.",
+		image: "/assets/images/finding-calm-anxiety-mockup.png",
+		imageAlt:
+			"Finding Calm — free anxiety grounding guide standing on a wooden table",
 	},
 	{
 		title: "When You've Been Holding Too Much for Too Long",
