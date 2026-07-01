@@ -1,0 +1,274 @@
+---
+import { anxietyReflectionJournal } from "../data/products";
+
+interface Props {
+	buttonClass?: string;
+	buttonLabel?: string;
+	dialogId?: string;
+}
+
+const {
+	buttonClass = "cta cta-solid",
+	buttonLabel = "Buy the PDF Journal",
+	dialogId = "journal-checkout-dialog",
+} = Astro.props;
+
+const { checkoutUrlGbp, checkoutUrlUsd, priceGbp, priceUsd, title } =
+	anxietyReflectionJournal;
+const hasCheckout = Boolean(checkoutUrlGbp && checkoutUrlUsd);
+---
+
+{
+	hasCheckout ? (
+		<>
+			<button
+				type="button"
+				class={buttonClass}
+				data-journal-checkout-open
+				aria-haspopup="dialog"
+				aria-controls={dialogId}
+			>
+				{buttonLabel}
+			</button>
+
+			<dialog id={dialogId} class="journal-checkout-dialog" aria-labelledby={`${dialogId}-title`}>
+				<form method="dialog" class="journal-checkout-form">
+					<header class="journal-checkout-head">
+						<p class="journal-checkout-kicker">Secure checkout</p>
+						<h2 id={`${dialogId}-title`}>Choose your currency</h2>
+						<p class="journal-checkout-lede">
+							Select how you'd like to pay for the <strong>{title}</strong>.
+							You'll complete checkout securely on Stripe.
+						</p>
+					</header>
+
+					<div class="journal-checkout-options">
+						<a
+							class="journal-checkout-option"
+							href={checkoutUrlGbp}
+							target="_blank"
+							rel="noopener noreferrer"
+						>
+							<span class="journal-checkout-flag" aria-hidden="true">£</span>
+							<span class="journal-checkout-option-copy">
+								<strong>British pounds</strong>
+								<span>{priceGbp}</span>
+							</span>
+						</a>
+						<a
+							class="journal-checkout-option"
+							href={checkoutUrlUsd}
+							target="_blank"
+							rel="noopener noreferrer"
+						>
+							<span class="journal-checkout-flag" aria-hidden="true">$</span>
+							<span class="journal-checkout-option-copy">
+								<strong>US dollars</strong>
+								<span>{priceUsd}</span>
+							</span>
+						</a>
+					</div>
+
+					<footer class="journal-checkout-foot">
+						<button type="submit" class="journal-checkout-cancel">
+							Cancel
+						</button>
+					</footer>
+				</form>
+			</dialog>
+		</>
+	) : (
+		<a class={buttonClass} href="/contact">
+			Request the PDF Journal
+		</a>
+	)
+}
+
+<script>
+	function initJournalCheckoutDialogs() {
+		document.querySelectorAll("[data-journal-checkout-open]").forEach((button) => {
+			if (button.dataset.journalCheckoutBound === "true") return;
+			button.dataset.journalCheckoutBound = "true";
+
+			const controls = button.getAttribute("aria-controls");
+			const dialog =
+				controls &&
+				(document.getElementById(controls) as HTMLDialogElement | null);
+			if (!dialog) return;
+
+			button.addEventListener("click", () => {
+				if (typeof dialog.showModal === "function") dialog.showModal();
+				else dialog.setAttribute("open", "");
+			});
+
+			dialog.querySelectorAll(".journal-checkout-option").forEach((link) => {
+				link.addEventListener("click", () => {
+					if (typeof dialog.close === "function") dialog.close();
+					else dialog.removeAttribute("open");
+				});
+			});
+		});
+	}
+
+	initJournalCheckoutDialogs();
+	document.addEventListener("astro:page-load", initJournalCheckoutDialogs);
+</script>
+
+<style>
+	button.cta {
+		cursor: pointer;
+	}
+
+	.journal-checkout-dialog {
+		width: min(28rem, calc(100vw - 2rem));
+		max-width: none;
+		margin: auto;
+		padding: 0;
+		border: 1px solid rgb(0 94 71 / 18%);
+		border-radius: 1rem;
+		background: var(--color-white);
+		box-shadow: 0 24px 48px rgb(0 94 71 / 18%);
+		color: var(--color-dark-gray);
+	}
+
+	.journal-checkout-dialog::backdrop {
+		background: rgb(29 35 39 / 52%);
+		backdrop-filter: blur(2px);
+	}
+
+	.journal-checkout-dialog[open] {
+		animation: journal-checkout-in 0.24s cubic-bezier(0.2, 0.7, 0.2, 1);
+	}
+
+	@keyframes journal-checkout-in {
+		from {
+			opacity: 0;
+			transform: translateY(0.75rem) scale(0.98);
+		}
+
+		to {
+			opacity: 1;
+			transform: translateY(0) scale(1);
+		}
+	}
+
+	.journal-checkout-form {
+		display: grid;
+		gap: 0;
+	}
+
+	.journal-checkout-head {
+		padding: 1.5rem 1.5rem 1.25rem;
+		border-bottom: 1px solid rgb(0 94 71 / 12%);
+	}
+
+	.journal-checkout-kicker {
+		margin: 0;
+		font-size: 0.72rem;
+		font-weight: 600;
+		letter-spacing: 0.14em;
+		text-transform: uppercase;
+		color: var(--color-dark-slate-gray);
+	}
+
+	.journal-checkout-head h2 {
+		margin: 0.45rem 0 0.55rem;
+		font-family: var(--font-serif);
+		font-size: 1.45rem;
+		font-weight: 500;
+		line-height: 1.2;
+		color: #004836;
+	}
+
+	.journal-checkout-lede {
+		margin: 0;
+		font-size: 0.94rem;
+		line-height: 1.6;
+		color: rgb(29 35 39 / 78%);
+	}
+
+	.journal-checkout-options {
+		display: grid;
+		gap: 0.75rem;
+		padding: 1.25rem 1.5rem;
+	}
+
+	.journal-checkout-option {
+		display: grid;
+		grid-template-columns: 2.75rem 1fr;
+		gap: 0.85rem;
+		align-items: center;
+		padding: 0.95rem 1rem;
+		border: 1px solid rgb(0 94 71 / 18%);
+		border-radius: 0.8rem;
+		text-decoration: none;
+		color: inherit;
+		background: rgb(0 94 71 / 4%);
+		transition:
+			border-color 0.18s ease,
+			background-color 0.18s ease,
+			transform 0.18s ease;
+	}
+
+	.journal-checkout-option:hover,
+	.journal-checkout-option:focus-visible {
+		border-color: var(--color-dark-slate-gray);
+		background: rgb(0 94 71 / 8%);
+		transform: translateY(-1px);
+		outline: none;
+	}
+
+	.journal-checkout-flag {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		width: 2.75rem;
+		height: 2.75rem;
+		border-radius: 50%;
+		background: #004836;
+		color: var(--color-white);
+		font-family: var(--font-serif);
+		font-size: 1.2rem;
+		font-weight: 500;
+	}
+
+	.journal-checkout-option-copy {
+		display: grid;
+		gap: 0.15rem;
+	}
+
+	.journal-checkout-option-copy strong {
+		font-size: 0.98rem;
+		color: #004836;
+	}
+
+	.journal-checkout-option-copy span:last-child {
+		font-family: var(--font-serif);
+		font-size: 1.15rem;
+		color: var(--color-dark-gray);
+	}
+
+	.journal-checkout-foot {
+		display: flex;
+		justify-content: flex-end;
+		padding: 0 1.5rem 1.25rem;
+	}
+
+	.journal-checkout-cancel {
+		padding: 0.55rem 0.9rem;
+		border: none;
+		border-radius: 999px;
+		background: transparent;
+		color: rgb(29 35 39 / 72%);
+		font: inherit;
+		font-size: 0.9rem;
+		cursor: pointer;
+	}
+
+	.journal-checkout-cancel:hover,
+	.journal-checkout-cancel:focus-visible {
+		color: #004836;
+		outline: 2px solid rgb(0 94 71 / 24%);
+		outline-offset: 2px;
+	}
+</style>

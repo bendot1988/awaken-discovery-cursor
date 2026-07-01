@@ -14,6 +14,7 @@ export const anxietyReflectionJournal = {
 	format: "PDF",
 	priceGbp: "£18.99",
 	priceUsd: "$24.99",
-	/** Stripe checkout URL — add when Ally shares the live payment link. */
-	checkoutUrl: null as string | null,
+	/** Stripe Payment Links — hosted checkout for the PDF journal. */
+	checkoutUrlGbp: "https://buy.stripe.com/cNi28rejZ7nO71q8rn8ww07",
+	checkoutUrlUsd: "https://buy.stripe.com/fZubJ12BheQgadCazv8ww08",
 };

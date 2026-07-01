@@ -2,6 +2,7 @@
 import Layout from "../layouts/Layout.astro";
 import SiteHeader from "../components/SiteHeader.astro";
 import SiteFooter from "../components/SiteFooter.astro";
+import JournalCheckout from "../components/JournalCheckout.astro";
 import { locations, navItems } from "../data/site";
 import {
 	amazonTherapyJournalForCouplesUrl,
@@ -119,33 +120,14 @@ const developingProducts = [
 						</span>
 					</p>
 					<div class="product-actions">
-						{
-							anxietyReflectionJournal.checkoutUrl ? (
-								<a
-									class="cta cta-solid"
-									href={anxietyReflectionJournal.checkoutUrl}
-									target="_blank"
-									rel="noopener noreferrer"
-								>
-									Buy the PDF Journal
-								</a>
-							) : (
-								<a class="cta cta-solid" href="/contact">
-									Request the PDF Journal
-								</a>
-							)
-						}
+						<JournalCheckout />
 						<a class="cta cta-outline" href="/finding-calm-anxiety">
 							Get the Free Guide First
 						</a>
 					</div>
 					<p class="product-note">
-						Digital PDF download. A printed edition is planned — you'll be
-						able to choose either format when it's ready.
-						{
-							!anxietyReflectionJournal.checkoutUrl &&
-								" If you've just downloaded the free guide, the purchase link is also shared in the follow-up email sequence."
-						}
+						Digital PDF download · secure checkout via Stripe. A printed edition
+						is planned — you'll be able to choose either format when it's ready.
 					</p>
 				</div>
 			</div>

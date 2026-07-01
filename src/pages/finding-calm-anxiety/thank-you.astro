@@ -2,6 +2,7 @@
 import Layout from "../../layouts/Layout.astro";
 import SiteHeader from "../../components/SiteHeader.astro";
 import SiteFooter from "../../components/SiteFooter.astro";
+import JournalCheckout from "../../components/JournalCheckout.astro";
 import { locations, navItems } from "../../data/site";
 import { anxietyReflectionJournal } from "../../data/products";
 ---
@@ -152,14 +153,14 @@ import { anxietyReflectionJournal } from "../../data/products";
 				</p>
 				<p>
 					Because you've just joined the free guide list, you'll also receive
-					the purchase link in your follow-up emails. Or you can request it
-					straight away below.
+					the purchase link in your follow-up emails. Or you can buy the full
+					journal straight away below.
 				</p>
 				<div class="ty-offer-actions">
-					<a class="cta cta-solid" href="/products#anxiety-reflection-journal">
-						View the Journal
+					<JournalCheckout dialogId="journal-checkout-dialog-thank-you" />
+					<a class="cta cta-outline" href="/products#anxiety-reflection-journal">
+						Learn More
 					</a>
-					<a class="cta cta-outline" href="/contact">Request the PDF</a>
 				</div>
 				<p class="ty-emphasis">
 					A printed edition is on the way — for now, the PDF is a complete
