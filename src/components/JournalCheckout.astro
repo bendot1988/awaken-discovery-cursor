@@ -1,20 +1,25 @@
 ---
-import { anxietyReflectionJournal } from "../data/products";
+import type { DigitalProduct } from "../data/products";
 
 interface Props {
+	product: DigitalProduct;
 	buttonClass?: string;
 	buttonLabel?: string;
+	fallbackHref?: string;
+	fallbackLabel?: string;
 	dialogId?: string;
 }
 
 const {
+	product,
 	buttonClass = "cta cta-solid",
-	buttonLabel = "Buy the PDF Journal",
-	dialogId = "journal-checkout-dialog",
+	buttonLabel = "Buy now",
+	fallbackHref = "/contact",
+	fallbackLabel = "Request access",
+	dialogId = "product-checkout-dialog",
 } = Astro.props;
 
-const { checkoutUrlGbp, checkoutUrlUsd, priceGbp, priceUsd, title } =
-	anxietyReflectionJournal;
+const { checkoutUrlGbp, checkoutUrlUsd, priceGbp, priceUsd, title } = product;
 const hasCheckout = Boolean(checkoutUrlGbp && checkoutUrlUsd);
 ---
 
@@ -24,7 +29,7 @@ const hasCheckout = Boolean(checkoutUrlGbp && checkoutUrlUsd);
 			<button
 				type="button"
 				class={buttonClass}
-				data-journal-checkout-open
+				data-product-checkout-open
 				aria-haspopup="dialog"
 				aria-controls={dialogId}
 			>
@@ -78,17 +83,17 @@ const hasCheckout = Boolean(checkoutUrlGbp && checkoutUrlUsd);
 			</dialog>
 		</>
 	) : (
-		<a class={buttonClass} href="/contact">
-			Request the PDF Journal
+		<a class={buttonClass} href={fallbackHref}>
+			{fallbackLabel}
 		</a>
 	)
 }
 
 <script>
-	function initJournalCheckoutDialogs() {
-		document.querySelectorAll("[data-journal-checkout-open]").forEach((button) => {
-			if (button.dataset.journalCheckoutBound === "true") return;
-			button.dataset.journalCheckoutBound = "true";
+	function initProductCheckoutDialogs() {
+		document.querySelectorAll("[data-product-checkout-open]").forEach((button) => {
+			if (button.dataset.productCheckoutBound === "true") return;
+			button.dataset.productCheckoutBound = "true";
 
 			const controls = button.getAttribute("aria-controls");
 			const dialog =
@@ -110,8 +115,8 @@ const hasCheckout = Boolean(checkoutUrlGbp && checkoutUrlUsd);
 		});
 	}
 
-	initJournalCheckoutDialogs();
-	document.addEventListener("astro:page-load", initJournalCheckoutDialogs);
+	initProductCheckoutDialogs();
+	document.addEventListener("astro:page-load", initProductCheckoutDialogs);
 </script>
 
 <style>

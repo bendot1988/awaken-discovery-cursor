@@ -9,7 +9,16 @@ export const amazonTherapyJournalForCouplesUrl =
 export const groundedWellnessAffiliateUrl =
 	"https://www.groundedwellness.co.uk/?ref=ztu5yzm";
 
-export const anxietyReflectionJournal = {
+export type DigitalProduct = {
+	title: string;
+	format: string;
+	priceGbp: string;
+	priceUsd: string;
+	checkoutUrlGbp?: string | null;
+	checkoutUrlUsd?: string | null;
+};
+
+export const anxietyReflectionJournal: DigitalProduct = {
 	title: "Anxiety Reflection Journal",
 	format: "PDF",
 	priceGbp: "£18.99",
@@ -17,4 +26,14 @@ export const anxietyReflectionJournal = {
 	/** Stripe Payment Links — hosted checkout for the PDF journal. */
 	checkoutUrlGbp: "https://buy.stripe.com/cNi28rejZ7nO71q8rn8ww07",
 	checkoutUrlUsd: "https://buy.stripe.com/fZubJ12BheQgadCazv8ww08",
+};
+
+export const teacherRealignmentSystem: DigitalProduct = {
+	title: "The Teacher Realignment System",
+	format: "PDF",
+	priceGbp: "£37",
+	priceUsd: "$47",
+	/** Stripe Payment Links — add when Ally shares the live payment links. */
+	checkoutUrlGbp: null,
+	checkoutUrlUsd: null,
 };

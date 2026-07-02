@@ -157,7 +157,12 @@ import { anxietyReflectionJournal } from "../../data/products";
 					journal straight away below.
 				</p>
 				<div class="ty-offer-actions">
-					<JournalCheckout dialogId="journal-checkout-dialog-thank-you" />
+					<JournalCheckout
+						product={anxietyReflectionJournal}
+						buttonLabel="Buy the PDF Journal"
+						dialogId="journal-checkout-dialog-thank-you"
+						fallbackLabel="Request the PDF Journal"
+					/>
 					<a class="cta cta-outline" href="/products#anxiety-reflection-journal">
 						Learn More
 					</a>

@@ -8,14 +8,10 @@ import {
 	amazonTherapyJournalForCouplesUrl,
 	anxietyReflectionJournal,
 	groundedWellnessAffiliateUrl,
+	teacherRealignmentSystem,
 } from "../data/products";
 
 const developingProducts = [
-	{
-		label: "Teacher Support",
-		title: "Teachers Reflection Journal",
-		body: "A teacher-focused journal for recognising overload, processing overwhelm and reconnecting beyond survival mode.",
-	},
 	{
 		label: "Group Wellbeing",
 		title: "Sunday Reset for Teachers",
@@ -26,7 +22,7 @@ const developingProducts = [
 
 <Layout
 	title="Wellbeing Products · Journals & Guides · Awaken Discovery"
-	description="Therapy journals, guides and wellbeing tools from Awaken Discovery — including the Therapy Journal for Couples on Amazon UK and the Anxiety Reflection Journal PDF."
+	description="Therapy journals, guides and wellbeing tools from Awaken Discovery — including the Therapy Journal for Couples on Amazon UK, the Anxiety Reflection Journal PDF and The Teacher Realignment System."
 >
 	<SiteHeader navItems={navItems} />
 	<main class="products-page">
@@ -120,7 +116,12 @@ const developingProducts = [
 						</span>
 					</p>
 					<div class="product-actions">
-						<JournalCheckout />
+						<JournalCheckout
+							product={anxietyReflectionJournal}
+							buttonLabel="Buy the PDF Journal"
+							dialogId="journal-checkout-dialog-anxiety"
+							fallbackLabel="Request the PDF Journal"
+						/>
 						<a class="cta cta-outline" href="/finding-calm-anxiety">
 							Get the Free Guide First
 						</a>
@@ -128,6 +129,57 @@ const developingProducts = [
 					<p class="product-note">
 						Digital PDF download · secure checkout via Stripe. A printed edition
 						is planned — you'll be able to choose either format when it's ready.
+					</p>
+				</div>
+			</div>
+		</section>
+
+		<section class="featured-product section" id="teacher-realignment-system">
+			<div class="container featured-grid">
+				<div class="product-media product-media-static">
+					<img
+						src="/assets/images/teacher-realignment-system-mockup.png"
+						alt="The Teacher Realignment System — guided PDF workbook for teachers on a neutral surface"
+						loading="lazy"
+						decoding="async"
+					/>
+				</div>
+
+				<div class="product-copy">
+					<p class="section-kicker">Available now</p>
+					<h2>The Teacher Realignment System</h2>
+					<p class="product-lede">
+						A guided PDF workbook for teachers who struggle to switch off, carry
+						school home, or feel overwhelmed by the emotional demands of teaching.
+					</p>
+					<p>
+						Designed to help you clear mental overload, calm a busy mind,
+						reconnect with your body, and create practical moments of wellbeing
+						throughout your day.
+					</p>
+					<p>
+						Created by a qualified counsellor and former teacher with 23 years of
+						experience in education.
+					</p>
+					<p class="product-price">
+						<strong>{teacherRealignmentSystem.priceGbp}</strong>
+						<span class="product-price-alt">
+							({teacherRealignmentSystem.priceUsd} for international buyers)
+						</span>
+					</p>
+					<div class="product-actions">
+						<JournalCheckout
+							product={teacherRealignmentSystem}
+							buttonLabel="Download The Teacher Realignment System"
+							dialogId="journal-checkout-dialog-teacher"
+							fallbackLabel="Download The Teacher Realignment System"
+						/>
+						<a class="cta cta-outline" href="/finding-calm-teachers">
+							Get the Free Guide First
+						</a>
+					</div>
+					<p class="product-note">
+						Digital PDF download · secure checkout via Stripe.
 					</p>
 				</div>
 			</div>
@@ -343,8 +395,9 @@ const developingProducts = [
 
 	.developing-grid {
 		display: grid;
-		grid-template-columns: repeat(2, minmax(0, 1fr));
+		grid-template-columns: minmax(0, 1fr);
 		gap: 1rem;
+		max-width: 36rem;
 	}
 
 	.developing-card {
