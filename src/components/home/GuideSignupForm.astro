@@ -1,0 +1,240 @@
+---
+interface Props {
+	list?: string;
+	buttonLabel?: string;
+	consentLabel?: string;
+}
+
+const {
+	list = "holding-too-much",
+	buttonLabel = "Send Me The Free Guide",
+	consentLabel = "I'd like to receive supportive wellbeing emails, resources and updates from Awaken Discovery. I understand I can unsubscribe at any time.",
+} = Astro.props;
+---
+
+<form
+	class="guide-signup-form"
+	data-guide-signup
+	data-list={list}
+	novalidate
+>
+	<label class="guide-field">
+		<span class="guide-label">Email Address</span>
+		<span class="guide-input-wrap">
+			<svg
+				class="guide-input-icon"
+				viewBox="0 0 24 24"
+				aria-hidden="true"
+				focusable="false"
+			>
+				<path
+					d="M4 6.5h16a1.5 1.5 0 0 1 1.5 1.5v8A1.5 1.5 0 0 1 20 17.5H4A1.5 1.5 0 0 1 2.5 16V8A1.5 1.5 0 0 1 4 6.5Z"
+					fill="none"
+					stroke="currentColor"
+					stroke-width="1.6"></path>
+				<path
+					d="m4 8 8 5.5L20 8"
+					fill="none"
+					stroke="currentColor"
+					stroke-width="1.6"
+					stroke-linecap="round"
+					stroke-linejoin="round"></path>
+			</svg>
+			<input
+				class="guide-input"
+				type="email"
+				name="email"
+				autocomplete="email"
+				required
+				placeholder="you@example.com"
+			/>
+		</span>
+	</label>
+
+	<label class="guide-consent">
+		<input type="checkbox" name="consent" required />
+		<span>{consentLabel}</span>
+	</label>
+
+	<button class="cta cta-solid guide-submit" type="submit">
+		{buttonLabel}
+	</button>
+
+	<p class="guide-status" data-guide-status hidden></p>
+</form>
+
+<script>
+	function initGuideSignupForms() {
+		document.querySelectorAll("[data-guide-signup]").forEach((formEl) => {
+			const form = formEl as HTMLFormElement;
+			if (form.dataset.bound === "true") return;
+			form.dataset.bound = "true";
+
+			const status = form.querySelector(
+				"[data-guide-status]",
+			) as HTMLParagraphElement | null;
+			const submit = form.querySelector(
+				'button[type="submit"]',
+			) as HTMLButtonElement | null;
+			const list = form.dataset.list || "holding-too-much";
+
+			form.addEventListener("submit", async (event) => {
+				event.preventDefault();
+
+				const emailInput = form.elements.namedItem(
+					"email",
+				) as HTMLInputElement | null;
+				const consentInput = form.elements.namedItem(
+					"consent",
+				) as HTMLInputElement | null;
+
+				const email = emailInput?.value.trim() || "";
+				const consent = Boolean(consentInput?.checked);
+
+				if (!status || !submit) return;
+
+				status.hidden = false;
+				status.dataset.state = "pending";
+				status.textContent = "Sending…";
+				submit.disabled = true;
+
+				try {
+					const response = await fetch("/api/subscribe", {
+						method: "POST",
+						headers: { "Content-Type": "application/json" },
+						body: JSON.stringify({ email, consent, list }),
+					});
+					const data = await response.json().catch(() => ({}));
+
+					if (!response.ok) {
+						throw new Error(
+							data.error || "Something went wrong. Please try again.",
+						);
+					}
+
+					status.dataset.state = "success";
+					status.textContent =
+						"You're in — check your inbox for the free guide.";
+					form.reset();
+				} catch (error) {
+					status.dataset.state = "error";
+					status.textContent =
+						error instanceof Error
+							? error.message
+							: "Something went wrong. Please try again.";
+				} finally {
+					submit.disabled = false;
+				}
+			});
+		});
+	}
+
+	initGuideSignupForms();
+	document.addEventListener("astro:page-load", initGuideSignupForms);
+</script>
+
+<style>
+	.guide-signup-form {
+		display: grid;
+		gap: 1rem;
+		padding: 1.25rem 1.3rem 1.35rem;
+		background: var(--color-white);
+		border-radius: 1rem;
+		border: 1px solid rgb(0 94 71 / 18%);
+		box-shadow: 0 10px 28px rgb(29 35 39 / 8%);
+	}
+
+	.guide-field {
+		display: grid;
+		gap: 0.45rem;
+	}
+
+	.guide-label {
+		font-size: 0.92rem;
+		font-weight: 500;
+		color: var(--color-dark-gray);
+	}
+
+	.guide-input-wrap {
+		position: relative;
+		display: block;
+	}
+
+	.guide-input-icon {
+		position: absolute;
+		left: 0.85rem;
+		top: 50%;
+		width: 1.15rem;
+		height: 1.15rem;
+		transform: translateY(-50%);
+		color: rgb(29 35 39 / 55%);
+		pointer-events: none;
+	}
+
+	.guide-input {
+		width: 100%;
+		box-sizing: border-box;
+		padding: 0.85rem 0.95rem 0.85rem 2.7rem;
+		border: 1px solid rgb(0 94 71 / 22%);
+		border-radius: 0.65rem;
+		background: var(--color-white);
+		font: inherit;
+		font-size: 0.98rem;
+		color: var(--color-dark-gray);
+	}
+
+	.guide-input:focus {
+		outline: 2px solid rgb(0 94 71 / 35%);
+		outline-offset: 1px;
+		border-color: var(--color-dark-slate-gray);
+	}
+
+	.guide-consent {
+		display: grid;
+		grid-template-columns: auto 1fr;
+		gap: 0.65rem;
+		align-items: start;
+		font-size: 0.86rem;
+		line-height: 1.5;
+		color: rgb(29 35 39 / 82%);
+		cursor: pointer;
+	}
+
+	.guide-consent input {
+		margin-top: 0.2rem;
+		width: 1.05rem;
+		height: 1.05rem;
+		accent-color: var(--color-dark-slate-gray);
+	}
+
+	.guide-submit {
+		width: 100%;
+		padding: 0.9rem 1.2rem;
+		border: none;
+		cursor: pointer;
+		font: inherit;
+	}
+
+	.guide-submit:disabled {
+		opacity: 0.7;
+		cursor: wait;
+	}
+
+	.guide-status {
+		margin: 0;
+		font-size: 0.88rem;
+		line-height: 1.5;
+	}
+
+	.guide-status[data-state="pending"] {
+		color: rgb(29 35 39 / 75%);
+	}
+
+	.guide-status[data-state="success"] {
+		color: #004836;
+	}
+
+	.guide-status[data-state="error"] {
+		color: #8a2f2f;
+	}
+</style>

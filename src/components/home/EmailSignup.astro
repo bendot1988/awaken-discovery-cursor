@@ -1,4 +1,6 @@
 ---
+import GuideSignupForm from "./GuideSignupForm.astro";
+
 interface Props {
 	kicker?: string;
 	heading?: string;
@@ -8,11 +10,16 @@ interface Props {
 	guideDescription?: string;
 	whatsInside?: string[];
 	whatsInsideHeading?: string;
-	filloutId: string;
+	/** Keep for pages still on Fillout; omit when using the Sender form. */
+	filloutId?: string;
 	filloutHeight?: string;
 	privacyText?: string;
 	guideImage?: string;
 	guideImageAlt?: string;
+	/** When true (default if no filloutId), use the custom Sender form. */
+	useSenderForm?: boolean;
+	senderList?: string;
+	submitLabel?: string;
 }
 
 const {
@@ -29,10 +36,14 @@ const {
 	privacyText,
 	guideImage,
 	guideImageAlt = "When You've Been Holding Too Much for Too Long — free gentle reflection guide",
+	useSenderForm = !filloutId,
+	senderList = "holding-too-much",
+	submitLabel = "Send Me The Free Guide",
 } = Astro.props;
 
 const showGuideCard = !whatsInside || whatsInside.length === 0;
 const hasImage = Boolean(guideImage);
+const showSenderForm = useSenderForm || !filloutId;
 ---
 
 <section class="signup section section-soft" id="signup">
@@ -96,15 +107,20 @@ const hasImage = Boolean(guideImage);
 						</div>
 					)
 				}
-				<div
-					class="fillout-embed"
-					style={`width:100%;height:${filloutHeight};`}
-					data-fillout-id={filloutId}
-					data-fillout-embed-type="standard"
-					data-fillout-inherit-parameters
-					data-fillout-dynamic-resize
-				>
-				</div>
+				{
+					showSenderForm ? (
+						<GuideSignupForm list={senderList} buttonLabel={submitLabel} />
+					) : (
+						<div
+							class="fillout-embed"
+							style={`width:100%;height:${filloutHeight};`}
+							data-fillout-id={filloutId}
+							data-fillout-embed-type="standard"
+							data-fillout-inherit-parameters
+							data-fillout-dynamic-resize
+						/>
+					)
+				}
 				{
 					privacyText ? (
 						<p class="signup-privacy">{privacyText}</p>
@@ -120,7 +136,9 @@ const hasImage = Boolean(guideImage);
 	</div>
 </section>
 
-<script is:inline async src="https://server.fillout.com/embed/v1/"></script>
+{!showSenderForm && (
+	<script is:inline async src="https://server.fillout.com/embed/v1/" />
+)}
 
 <style>
 	.signup {
