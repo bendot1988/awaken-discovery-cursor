@@ -115,7 +115,9 @@ const {
 
 					if (!response.ok) {
 						throw new Error(
-							data.error || "Something went wrong. Please try again.",
+							data.hint ||
+								data.error ||
+								"Something went wrong. Please try again.",
 						);
 					}
 

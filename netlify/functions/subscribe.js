@@ -3,10 +3,10 @@
  *
  * Env vars (Netlify → Environment variables):
  * - SENDER_API_TOKEN
- * - SENDER_GROUP_HOLDING_TOO_MUCH
+ * - SENDER_GROUP_HOLDING_TOO_MUCH  (must be a Group ID from Sender → Groups)
  * - RESEND_API_KEY
- * - SIGNUP_NOTIFY_TO (optional — defaults to awakendiscoverytherapy@gmail.com)
- * - RESEND_FROM (optional — e.g. "Awaken Discovery <hello@awakendiscovery.co.uk>")
+ * - SIGNUP_NOTIFY_TO (optional)
+ * - RESEND_FROM (optional)
  */
 
 const SENDER_API = "https://api.sender.net/v2";
@@ -48,15 +48,26 @@ function escapeHtml(value) {
 		.replaceAll("'", "&#39;");
 }
 
-async function senderFetch(path, token, body) {
+function senderMessage(data) {
+	if (!data) return "";
+	if (typeof data.message === "string") return data.message;
+	if (Array.isArray(data.message)) return data.message.filter(Boolean).join(" ");
+	if (data.message && typeof data.message === "object") {
+		return JSON.stringify(data.message);
+	}
+	if (typeof data.error === "string") return data.error;
+	return "";
+}
+
+async function senderFetch(path, token, body, method = "POST") {
 	const response = await fetch(`${SENDER_API}${path}`, {
-		method: "POST",
+		method,
 		headers: {
 			Authorization: `Bearer ${token}`,
 			"Content-Type": "application/json",
 			Accept: "application/json",
 		},
-		body: JSON.stringify(body),
+		body: body ? JSON.stringify(body) : undefined,
 	});
 
 	const data = await response.json().catch(() => ({}));
@@ -188,6 +199,66 @@ async function notifyAlly({
 	return { ok: true, data };
 }
 
+async function ensureInSenderGroup(token, email, groupId) {
+	// 1) Create (or accept "already exists") without groups first —
+	//    so a bad group ID doesn't block creating the subscriber.
+	const create = await senderFetch("/subscribers", token, {
+		email,
+		trigger_automation: false,
+	});
+
+	const createOk =
+		create.response.ok ||
+		create.response.status === 409 ||
+		/already|exist/i.test(senderMessage(create.data));
+
+	if (!create.response.ok && !createOk) {
+		// Still try grouping; some accounts return odd codes for duplicates.
+		console.warn("Sender create subscriber warning", {
+			status: create.response.status,
+			data: create.data,
+		});
+	}
+
+	// 2) Add to group and trigger automations
+	const addToGroup = await senderFetch(
+		`/subscribers/groups/${groupId}`,
+		token,
+		{
+			subscribers: [email],
+			trigger_automation: true,
+		},
+	);
+
+	if (addToGroup.response.ok) {
+		const added = addToGroup.data?.message?.subscribers_added_to_group;
+		const missing = addToGroup.data?.message?.non_existing_subscribers;
+		if (Array.isArray(missing) && missing.includes(email) && (!added || !added.includes(email))) {
+			return {
+				ok: false,
+				step: "add-to-group",
+				status: addToGroup.response.status,
+				detail:
+					"Sender created the request but did not add this email to the group. Check the group ID.",
+				data: addToGroup.data,
+			};
+		}
+		return { ok: true };
+	}
+
+	return {
+		ok: false,
+		step: "add-to-group",
+		status: addToGroup.response.status,
+		detail:
+			senderMessage(addToGroup.data) ||
+			"Sender rejected the group ID. Use a Group ID from Sender → Subscribers → Groups (not a filter/tag from the URL).",
+		data: addToGroup.data,
+		createStatus: create.response.status,
+		createData: create.data,
+	};
+}
+
 export async function handler(event) {
 	if (event.httpMethod === "OPTIONS") {
 		return json(204, {});
@@ -245,40 +316,21 @@ export async function handler(event) {
 	}
 
 	try {
-		const create = await senderFetch("/subscribers", token, {
-			email,
-			groups: [groupId],
-			trigger_automation: true,
-		});
+		const result = await ensureInSenderGroup(token, email, groupId);
 
-		let subscribed = create.response.ok;
-
-		if (!subscribed) {
-			const addToGroup = await senderFetch(
-				`/subscribers/groups/${groupId}`,
-				token,
-				{
-					subscribers: [email],
-					trigger_automation: true,
-				},
-			);
-			subscribed = addToGroup.response.ok;
-
-			if (!subscribed) {
-				console.error("Sender API error", {
-					createStatus: create.response.status,
-					createData: create.data,
-					groupStatus: addToGroup.response.status,
-					groupData: addToGroup.data,
-				});
-				return json(502, {
-					error:
-						"We couldn't complete your signup just now. Please try again.",
-				});
-			}
+		if (!result.ok) {
+			console.error("Sender subscribe failed", {
+				email,
+				groupId,
+				result,
+			});
+			return json(502, {
+				error:
+					"We couldn't complete your signup just now. Please try again.",
+				hint: result.detail,
+			});
 		}
 
-		// Ally notification — soft-fail so the visitor still gets success
 		await notifyAlly({
 			subscriberEmail: email,
 			list,
