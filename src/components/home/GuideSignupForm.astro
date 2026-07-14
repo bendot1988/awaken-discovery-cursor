@@ -102,7 +102,14 @@ const {
 					const response = await fetch("/api/subscribe", {
 						method: "POST",
 						headers: { "Content-Type": "application/json" },
-						body: JSON.stringify({ email, consent, list }),
+						body: JSON.stringify({
+							email,
+							consent,
+							list,
+							pagePath: `${window.location.pathname}${window.location.hash || "#signup"}`,
+							pageUrl: window.location.href,
+							pageLocation: "Homepage · Free Resource (#signup)",
+						}),
 					});
 					const data = await response.json().catch(() => ({}));
 
