@@ -11,6 +11,8 @@ interface Props {
 	filloutId: string;
 	filloutHeight?: string;
 	privacyText?: string;
+	guideImage?: string;
+	guideImageAlt?: string;
 }
 
 const {
@@ -25,77 +27,95 @@ const {
 	filloutId,
 	filloutHeight = "560px",
 	privacyText,
+	guideImage,
+	guideImageAlt = "When You've Been Holding Too Much for Too Long — free gentle reflection guide",
 } = Astro.props;
 
 const showGuideCard = !whatsInside || whatsInside.length === 0;
+const hasImage = Boolean(guideImage);
 ---
 
 <section class="signup section section-soft" id="signup">
-	<div class="container signup-inner">
-		<div class="signup-copy">
-			<p class="section-kicker">{kicker}</p>
-			<h2>{heading}</h2>
-			{subtitle && <p class="signup-subtitle">{subtitle}</p>}
-			<p>{body}</p>
-			{
-				whatsInside && whatsInside.length > 0 && (
-					<div class="signup-whats-inside">
-						<p class="whats-inside-heading">{whatsInsideHeading}</p>
-						<ul class="whats-inside-list">
-							{whatsInside.map((item) => (
-								<li>
-									<svg
-										class="whats-inside-check"
-										viewBox="0 0 24 24"
-										aria-hidden="true"
-										focusable="false"
-									>
-										<path
-											d="M5 12.5l4.5 4.5L19 7.5"
-											fill="none"
-											stroke="currentColor"
-											stroke-width="2.4"
-											stroke-linecap="round"
-											stroke-linejoin="round"
-										/>
-									</svg>
-									<span>{item}</span>
-								</li>
-							))}
-						</ul>
-					</div>
-				)
-			}
-			{
-				showGuideCard && (
-					<div class="signup-guide">
-						<p class="guide-name">{guideName}</p>
-						<p class="guide-desc">{guideDescription}</p>
-					</div>
-				)
-			}
-		</div>
+	<div class={`container signup-inner ${hasImage ? "signup-inner-visual" : ""}`}>
+		{
+			hasImage && (
+				<figure class="signup-guide-media">
+					<img
+						src={guideImage}
+						alt={guideImageAlt}
+						loading="lazy"
+						decoding="async"
+					/>
+				</figure>
+			)
+		}
 
-		<div class="signup-form-slot">
-			<div
-				class="fillout-embed"
-				style={`width:100%;height:${filloutHeight};`}
-				data-fillout-id={filloutId}
-				data-fillout-embed-type="standard"
-				data-fillout-inherit-parameters
-				data-fillout-dynamic-resize
-			>
+		<div class="signup-content">
+			<div class="signup-copy">
+				<p class="section-kicker">{kicker}</p>
+				<h2>{heading}</h2>
+				{subtitle && <p class="signup-subtitle">{subtitle}</p>}
+				<p>{body}</p>
+				{
+					whatsInside && whatsInside.length > 0 && (
+						<div class="signup-whats-inside">
+							<p class="whats-inside-heading">{whatsInsideHeading}</p>
+							<ul class="whats-inside-list">
+								{whatsInside.map((item) => (
+									<li>
+										<svg
+											class="whats-inside-check"
+											viewBox="0 0 24 24"
+											aria-hidden="true"
+											focusable="false"
+										>
+											<path
+												d="M5 12.5l4.5 4.5L19 7.5"
+												fill="none"
+												stroke="currentColor"
+												stroke-width="2.4"
+												stroke-linecap="round"
+												stroke-linejoin="round"
+											/>
+										</svg>
+										<span>{item}</span>
+									</li>
+								))}
+							</ul>
+						</div>
+					)
+				}
 			</div>
-			{
-				privacyText ? (
-					<p class="signup-privacy">{privacyText}</p>
-				) : (
-					<p class="signup-privacy">
-						Your details are handled with care. See our{" "}
-						<a href="/privacy">Privacy Policy</a>.
-					</p>
-				)
-			}
+
+			<div class="signup-form-slot">
+				{
+					showGuideCard && (
+						<div class="signup-guide">
+							<p class="guide-name">{guideName}</p>
+							<p class="guide-desc">{guideDescription}</p>
+						</div>
+					)
+				}
+				<div
+					class="fillout-embed"
+					style={`width:100%;height:${filloutHeight};`}
+					data-fillout-id={filloutId}
+					data-fillout-embed-type="standard"
+					data-fillout-inherit-parameters
+					data-fillout-dynamic-resize
+				>
+				</div>
+				{
+					privacyText ? (
+						<p class="signup-privacy">{privacyText}</p>
+					) : (
+						<p class="signup-privacy">
+							Your details are handled with care. See our{" "}
+							<a href="/privacy">Privacy Policy</a>.
+						</p>
+					)
+				}
+			</div>
 		</div>
 	</div>
 </section>
@@ -109,13 +129,44 @@ const showGuideCard = !whatsInside || whatsInside.length === 0;
 
 	.signup-inner {
 		display: grid;
-		grid-template-columns: 1.05fr 0.95fr;
+		grid-template-columns: 1fr;
+		gap: clamp(1.6rem, 3vw, 2.4rem);
+		align-items: start;
+	}
+
+	.signup-inner-visual {
+		grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
 		gap: clamp(2rem, 4vw, 3.5rem);
+		align-items: stretch;
+	}
+
+	.signup-guide-media {
+		margin: 0;
+		display: flex;
 		align-items: center;
+		justify-content: center;
+		align-self: stretch;
+		width: min(100%, 22rem);
+		justify-self: center;
+		min-height: 100%;
+	}
+
+	.signup-guide-media img {
+		display: block;
+		width: 100%;
+		height: auto;
+		object-fit: contain;
+		filter: drop-shadow(0 18px 32px rgb(29 35 39 / 14%));
+	}
+
+	.signup-content {
+		display: grid;
+		gap: 1.25rem;
+		min-width: 0;
 	}
 
 	.signup-copy {
-		max-width: 56ch;
+		max-width: 54ch;
 	}
 
 	.section-kicker {
@@ -128,14 +179,16 @@ const showGuideCard = !whatsInside || whatsInside.length === 0;
 	}
 
 	h2 {
-		margin: 0.6rem 0 0.4rem;
+		margin: 0.55rem 0 0.4rem;
 		font-family: var(--font-serif);
-		font-size: clamp(1.7rem, 3.3vw, 2.4rem);
+		font-size: clamp(1.7rem, 3.3vw, 2.35rem);
 		font-weight: 500;
+		line-height: 1.18;
+		text-wrap: balance;
 	}
 
 	.signup-subtitle {
-		margin: 0 0 1rem;
+		margin: 0 0 0.85rem;
 		font-family: var(--font-serif);
 		font-style: italic;
 		font-size: clamp(1.05rem, 1.8vw, 1.2rem);
@@ -144,13 +197,14 @@ const showGuideCard = !whatsInside || whatsInside.length === 0;
 		line-height: 1.4;
 	}
 
-	.signup-copy p {
-		line-height: 1.85;
+	.signup-copy > p {
+		margin: 0;
+		line-height: 1.75;
 	}
 
 	.signup-whats-inside {
-		margin-top: 1.2rem;
-		padding: 1.2rem 1.3rem 1.3rem;
+		margin-top: 1.1rem;
+		padding: 1.1rem 1.2rem 1.2rem;
 		background: var(--color-white);
 		border-radius: 0.85rem;
 		border: 1px solid rgb(0 94 71 / 18%);
@@ -191,20 +245,27 @@ const showGuideCard = !whatsInside || whatsInside.length === 0;
 		margin-top: 0.18rem;
 	}
 
+	.signup-form-slot {
+		display: grid;
+		gap: 0.85rem;
+	}
+
 	.signup-guide {
-		margin-top: 1.2rem;
-		padding: 1rem 1.1rem;
+		margin: 0;
+		padding: 1rem 1.15rem;
 		background: var(--color-white);
 		border-radius: 0.75rem;
 		border: 1px solid rgb(0 94 71 / 18%);
+		box-shadow: 0 8px 20px rgb(29 35 39 / 6%);
 	}
 
 	.guide-name {
 		margin: 0;
 		font-family: var(--font-serif);
-		font-size: 1.1rem;
+		font-size: 1.08rem;
 		font-weight: 500;
 		color: var(--color-dark-slate-gray);
+		line-height: 1.3;
 	}
 
 	.guide-desc {
@@ -212,11 +273,6 @@ const showGuideCard = !whatsInside || whatsInside.length === 0;
 		font-size: 0.92rem;
 		line-height: 1.55;
 		opacity: 0.85;
-	}
-
-	.signup-form-slot {
-		display: grid;
-		gap: 0.9rem;
 	}
 
 	.fillout-embed {
@@ -240,8 +296,27 @@ const showGuideCard = !whatsInside || whatsInside.length === 0;
 	}
 
 	@media (max-width: 900px) {
-		.signup-inner {
+		.signup-inner-visual {
 			grid-template-columns: 1fr;
+			justify-items: center;
+		}
+
+		.signup-guide-media {
+			width: min(100%, 16rem);
+			order: -1;
+		}
+
+		.signup-content {
+			width: 100%;
+		}
+
+		.signup-copy {
+			max-width: none;
+			text-align: center;
+		}
+
+		.signup-whats-inside {
+			text-align: left;
 		}
 	}
 </style>
