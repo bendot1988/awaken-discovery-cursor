@@ -2,6 +2,7 @@
 import Layout from "../../layouts/Layout.astro";
 import SiteHeader from "../../components/SiteHeader.astro";
 import SiteFooter from "../../components/SiteFooter.astro";
+import GuideSignupForm from "../../components/home/GuideSignupForm.astro";
 import { locations, navItems } from "../../data/site";
 
 const insideBullets = [
@@ -310,15 +311,11 @@ const faqs = [
 					</p>
 
 					<div class="anx-form-slot">
-						<div
-							class="fillout-embed"
-							style="width:100%;height:560px;"
-							data-fillout-id="jXo5e7D8Hwus"
-							data-fillout-embed-type="standard"
-							data-fillout-inherit-parameters
-							data-fillout-dynamic-resize
-						>
-						</div>
+						<GuideSignupForm
+							list="anxiety-guide"
+							buttonLabel="Send Me the Free Guide"
+							pageLocation="Finding Calm anxiety landing · Free Guide (#claim)"
+						/>
 						<p class="anx-privacy">
 							Your details are handled with care. See our
 							<a href="/privacy">Privacy Policy</a>.
@@ -381,8 +378,6 @@ const faqs = [
 		tagline="Gentle, body-aware support for anxiety, overthinking and emotional overwhelm."
 	/>
 </Layout>
-
-<script is:inline async src="https://server.fillout.com/embed/v1/"></script>
 
 <style>
 	.anx-page {

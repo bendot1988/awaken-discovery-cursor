@@ -2,6 +2,7 @@
 import Layout from "../../layouts/Layout.astro";
 import SiteHeader from "../../components/SiteHeader.astro";
 import SiteFooter from "../../components/SiteFooter.astro";
+import GuideSignupForm from "../../components/home/GuideSignupForm.astro";
 import { locations, navItems } from "../../data/site";
 
 const faqs = [
@@ -349,15 +350,11 @@ const faqs = [
 					</p>
 
 					<div class="sl-form-slot">
-						<div
-							class="fillout-embed"
-							style="width:100%;height:560px;"
-							data-fillout-id="bzhC71AYFfus"
-							data-fillout-embed-type="standard"
-							data-fillout-inherit-parameters
-							data-fillout-dynamic-resize
-						>
-						</div>
+						<GuideSignupForm
+							list="teachers-guide"
+							buttonLabel="Send Me the Free Guide"
+							pageLocation="Teachers guide landing · Why You Can't Switch Off After Teaching (#claim)"
+						/>
 						<p class="sl-privacy">
 							Your details are handled with care. See our
 							<a href="/privacy">Privacy Policy</a>.
@@ -433,8 +430,6 @@ const faqs = [
 		tagline="Helping teachers move beyond anxiety and overwhelm, reconnect with themselves, and create a life that feels calmer, fuller, and more aligned with who they truly are."
 	/>
 </Layout>
-
-<script is:inline async src="https://server.fillout.com/embed/v1/"></script>
 
 <style>
 	.sl {

@@ -3,6 +3,7 @@ import { Image } from "astro:assets";
 import Layout from "../layouts/Layout.astro";
 import SiteHeader from "../components/SiteHeader.astro";
 import SiteFooter from "../components/SiteFooter.astro";
+import GuideSignupForm from "../components/home/GuideSignupForm.astro";
 import { locations, navItems, teacherGuidePath } from "../data/site";
 import { calendlyLinks } from "../data/calendly";
 import handPickingBook from "../assets/teachers/hand-picking-book.jpg";
@@ -126,15 +127,11 @@ import stoolInClearing from "../assets/teachers/stool-in-clearing.jpg";
 				<div class="fg-form-slot">
 					<p class="fg-form-kicker">Email signup</p>
 					<h3 class="fg-form-title">Send Me the Free Guide</h3>
-					<div
-						class="fillout-embed"
-						style="width:100%;height:560px;"
-						data-fillout-id="bzhC71AYFfus"
-						data-fillout-embed-type="standard"
-						data-fillout-inherit-parameters
-						data-fillout-dynamic-resize
-					>
-					</div>
+					<GuideSignupForm
+						list="teachers-guide"
+						buttonLabel="Send Me the Free Guide"
+						pageLocation="Teachers page · Why You Can't Switch Off After Teaching"
+					/>
 					<p class="fg-privacy">
 						Your information will always be treated with care and never shared
 						with third parties. See our <a href="/privacy">Privacy Policy</a>.
@@ -321,8 +318,6 @@ import stoolInClearing from "../assets/teachers/stool-in-clearing.jpg";
 		tagline="Helping overwhelmed teachers reconnect with themselves beyond survival mode."
 	/>
 </Layout>
-
-<script is:inline async src="https://server.fillout.com/embed/v1/"></script>
 
 <style>
 	.teachers-hero {

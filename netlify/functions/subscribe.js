@@ -3,7 +3,9 @@
  *
  * Env vars (Netlify → Site configuration → Environment variables):
  * - MAILCHIMP_API_KEY          full key ending in -usX (e.g. abcdef-us21)
- * - MAILCHIMP_AUDIENCE_ID      Audience ID for the free-guide list
+ * - MAILCHIMP_AUDIENCE_ID      Audience ID (used for homepage + teachers unless overridden)
+ * - MAILCHIMP_AUDIENCE_TEACHERS optional separate audience for the teachers guide
+ * - MAILCHIMP_AUDIENCE_ANXIETY  optional separate audience for the anxiety guide
  * - MAILCHIMP_SERVER_PREFIX    optional — auto-detected from API key if unset (us21, etc.)
  * - MAILCHIMP_STATUS           optional — "subscribed" (default) or "pending" for double opt-in
  * - RESEND_API_KEY             required to email the free PDF to the subscriber
@@ -26,6 +28,28 @@ const LIST_CONFIG = {
 		tags: ["holding-too-much", "free-guide", "website-signup"],
 		pdfPath: "/assets/guides/holding-too-much.pdf",
 		pdfFilename: "holding-too-much-guide.pdf",
+	},
+	"teachers-guide": {
+		audienceEnv: "MAILCHIMP_AUDIENCE_TEACHERS",
+		audienceFallbackEnv: "MAILCHIMP_AUDIENCE_ID",
+		offerTitle: "Why You Can't Switch Off After Teaching",
+		offerType: "Free teacher guide (PDF)",
+		defaultLocation: "Teachers · Free Guide",
+		listLabel: "Mailchimp audience · Teachers free guide",
+		tags: ["teachers-guide", "finding-calm-teachers", "free-guide", "website-signup"],
+		pdfPath: "/assets/pdf/finding-calm-teachers.pdf",
+		pdfFilename: "why-you-cant-switch-off-after-teaching.pdf",
+	},
+	"anxiety-guide": {
+		audienceEnv: "MAILCHIMP_AUDIENCE_ANXIETY",
+		audienceFallbackEnv: "MAILCHIMP_AUDIENCE_ID",
+		offerTitle: "Finding Calm — A Simple Guide to Grounding Yourself During Anxiety",
+		offerType: "Free anxiety grounding guide (PDF)",
+		defaultLocation: "Anxiety · Finding Calm free guide",
+		listLabel: "Mailchimp audience · Finding Calm anxiety guide",
+		tags: ["anxiety-guide", "finding-calm-anxiety", "free-guide", "website-signup"],
+		pdfPath: "/assets/pdf/finding-calm-anxiety.pdf",
+		pdfFilename: "finding-calm-anxiety-guide.pdf",
 	},
 };
 
@@ -421,10 +445,16 @@ export async function handler(event) {
 		return json(400, { error: "Unknown signup list." });
 	}
 
-	const audienceId = String(process.env[config.audienceEnv] || "").trim();
+	const audienceId = String(
+		process.env[config.audienceEnv] ||
+			(config.audienceFallbackEnv
+				? process.env[config.audienceFallbackEnv]
+				: "") ||
+			"",
+	).trim();
 	if (!audienceId) {
 		return json(500, {
-			error: `Mailchimp audience is not configured. Add ${config.audienceEnv} in Netlify.`,
+			error: `Mailchimp audience is not configured. Add ${config.audienceEnv}${config.audienceFallbackEnv ? ` (or ${config.audienceFallbackEnv})` : ""} in Netlify.`,
 		});
 	}
 

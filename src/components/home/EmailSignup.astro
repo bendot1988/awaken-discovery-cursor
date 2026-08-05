@@ -20,6 +20,7 @@ interface Props {
 	useSenderForm?: boolean;
 	senderList?: string;
 	submitLabel?: string;
+	pageLocation?: string;
 }
 
 const {
@@ -39,6 +40,7 @@ const {
 	useSenderForm = !filloutId,
 	senderList = "holding-too-much",
 	submitLabel = "Send Me The Free Guide",
+	pageLocation,
 } = Astro.props;
 
 const showGuideCard = !whatsInside || whatsInside.length === 0;
@@ -109,7 +111,18 @@ const showSenderForm = useSenderForm || !filloutId;
 				}
 				{
 					showSenderForm ? (
-						<GuideSignupForm list={senderList} buttonLabel={submitLabel} />
+						<GuideSignupForm
+							list={senderList}
+							buttonLabel={submitLabel}
+							pageLocation={
+								pageLocation ||
+								(senderList === "anxiety-guide"
+									? "Anxiety page · Finding Calm free guide"
+									: senderList === "teachers-guide"
+										? "Teachers page · Free Guide"
+										: "Homepage · Free Resource (#signup)")
+							}
+						/>
 					) : (
 						<div
 							class="fillout-embed"
