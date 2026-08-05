@@ -1190,3 +1190,43 @@ const couplesBenefits = [
 		}
 	}
 </style>
+
+<script>
+	function applyTherapyTabFromHash() {
+		const hash = window.location.hash.replace(/^#/, "").toLowerCase();
+		if (!hash) return;
+
+		const wantsCouples =
+			hash === "choose-couples" ||
+			hash === "couples" ||
+			hash.includes("couples");
+		const wantsIndividual =
+			hash === "choose-individual" ||
+			hash === "individual" ||
+			hash.includes("individual");
+
+		const ind = document.getElementById("th-tab-ind") as HTMLInputElement | null;
+		const cou = document.getElementById("th-tab-cou") as HTMLInputElement | null;
+		const choose = document.getElementById("choose");
+
+		if (wantsCouples && cou) {
+			cou.checked = true;
+		} else if (wantsIndividual && ind) {
+			ind.checked = true;
+		}
+
+		if (
+			(wantsCouples || wantsIndividual || hash === "choose") &&
+			choose
+		) {
+			// Let the browser finish layout, then scroll to the choose section
+			requestAnimationFrame(() => {
+				choose.scrollIntoView({ behavior: "smooth", block: "start" });
+			});
+		}
+	}
+
+	applyTherapyTabFromHash();
+	window.addEventListener("hashchange", applyTherapyTabFromHash);
+	document.addEventListener("astro:page-load", applyTherapyTabFromHash);
+</script>

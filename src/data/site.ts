@@ -205,17 +205,17 @@ export const therapyServices: ServicePanel[] = [
 	{
 		title: "Individual Therapy",
 		body: "For anxiety, overwhelm, self-esteem, emotional wellbeing and personal growth.",
-		cta: { label: "Explore Individual", href: "/therapy#choose" },
+		cta: { label: "Explore Individual", href: "/therapy#choose-individual" },
 	},
 	{
 		title: "Couples Counselling",
 		body: "Support for communication, connection, conflict and emotional understanding.",
-		cta: { label: "Explore Couples", href: "/therapy#choose" },
+		cta: { label: "Explore Couples", href: "/therapy#choose-couples" },
 	},
 	{
 		title: "Young People",
 		body: "A supportive space for emotional expression, anxiety, confidence and wellbeing.",
-		cta: { label: "Begin Therapy", href: calendlyLinks.tasterSession },
+		cta: { label: "Begin Therapy", href: "/therapy#choose-individual" },
 	},
 ];
 
