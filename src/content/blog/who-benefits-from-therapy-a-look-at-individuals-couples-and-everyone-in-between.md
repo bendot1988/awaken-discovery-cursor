@@ -1,6 +1,8 @@
 ---
 title: "Who Benefits from Therapy? A Look at Individuals, Couples, and Everyone in Between"
 description: "Discover how therapy supports individuals, couples, and anyone seeking personal growth, emotional balance, and deeper connection — not just in crisis, but throughout life’s journey. Therapy Is for Everyone — Not Just in…"
+seoTitle: "Who Benefits from Therapy · Awaken Discovery"
+seoDescription: "Therapy supports individuals, couples and anyone seeking growth, balance and deeper connection — not only people in crisis."
 pubDate: 2026-01-14T12:34:47
 category: "Therapy"
 heroImage: "./who-benefits-from-therapy-a-look-at-individuals-couples-and-everyone-in-between.jpg"

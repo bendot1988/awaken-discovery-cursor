@@ -1,6 +1,8 @@
 ---
 title: "Couples Counselling Isn’t Just for Crisis – It’s for Connection"
 description: "Discover how couples counselling helps deepen communication, rebuild trust, and strengthen emotional connection — not just in crisis, but throughout your relationship journey. Therapy Isn’t Only for When Things Go Wrong…"
+seoTitle: "Couples Counselling for Connection · Awaken Discovery"
+seoDescription: "Couples counselling isn’t only for crisis — it can deepen communication, rebuild trust and strengthen connection throughout your relationship."
 pubDate: 2026-01-16T12:36:33
 category: "Therapy"
 heroImage: "./couples-counselling-isnt-just-for-crisis-its-for-connection.jpeg"

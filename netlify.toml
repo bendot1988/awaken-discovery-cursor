@@ -6,7 +6,32 @@
 [functions]
   node_bundler = "esbuild"
 
+# Pretty alias so /sitemap.xml resolves to Astro's generated index
+[[redirects]]
+  from = "/sitemap.xml"
+  to = "/sitemap-index.xml"
+  status = 200
+
 [[redirects]]
   from = "/api/*"
   to = "/.netlify/functions/:splat"
   status = 200
+
+# Prefer apex domain (www → non-www). HTTPS is enforced by Netlify.
+[[redirects]]
+  from = "https://www.awakendiscovery.co.uk/*"
+  to = "https://awakendiscovery.co.uk/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "http://www.awakendiscovery.co.uk/*"
+  to = "https://awakendiscovery.co.uk/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "http://awakendiscovery.co.uk/*"
+  to = "https://awakendiscovery.co.uk/:splat"
+  status = 301
+  force = true

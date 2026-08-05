@@ -3,6 +3,7 @@ import Layout from "../layouts/Layout.astro";
 import SiteHeader from "../components/SiteHeader.astro";
 import SiteFooter from "../components/SiteFooter.astro";
 import JournalCheckout from "../components/JournalCheckout.astro";
+import GuideSignupDialog from "../components/GuideSignupDialog.astro";
 import { locations, navItems } from "../data/site";
 import {
 	amazonTherapyJournalForCouplesUrl,
@@ -21,8 +22,8 @@ const developingProducts = [
 ---
 
 <Layout
-	title="Wellbeing Products · Journals & Guides · Awaken Discovery"
-	description="Therapy journals, guides and wellbeing tools from Awaken Discovery — including the Therapy Journal for Couples on Amazon UK, the Anxiety Reflection Journal PDF and The Teacher Realignment System."
+	title="Wellbeing Products · Awaken Discovery"
+	description="Therapy journals and wellbeing tools from Awaken Discovery — couples journal on Amazon UK, anxiety journal PDF and teacher resources."
 >
 	<SiteHeader navItems={navItems} />
 	<main class="products-page">
@@ -120,9 +121,14 @@ const developingProducts = [
 							dialogId="journal-checkout-dialog-anxiety"
 							fallbackLabel="Request the PDF Journal"
 						/>
-						<a class="cta cta-outline" href="/finding-calm-anxiety">
-							Get the Free Guide First
-						</a>
+						<GuideSignupDialog
+							list="anxiety-guide"
+							dialogId="guide-signup-dialog-anxiety"
+							title="Finding Calm — free anxiety guide"
+							lede="A simple guide to grounding yourself during anxiety. Enter your email and the PDF will arrive shortly."
+							buttonLabel="Send Me the Free Guide"
+							pageLocation="Products · Anxiety Reflection Journal · Free Finding Calm guide"
+						/>
 					</div>
 					<p class="product-note">
 						Digital PDF download · secure checkout via Stripe. A printed edition
@@ -172,9 +178,14 @@ const developingProducts = [
 							dialogId="journal-checkout-dialog-teacher"
 							fallbackLabel="Download The Teacher Realignment System"
 						/>
-						<a class="cta cta-outline" href="/finding-calm-teachers">
-							Get the Free Guide First
-						</a>
+						<GuideSignupDialog
+							list="teachers-guide"
+							dialogId="guide-signup-dialog-teachers"
+							title="Why You Can't Switch Off — free teacher guide"
+							lede="Gentle grounding tools for teachers. Enter your email and the free PDF will arrive shortly."
+							buttonLabel="Send Me the Free Guide"
+							pageLocation="Products · Teacher Realignment System · Free teacher guide"
+						/>
 					</div>
 					<p class="product-note">
 						Digital PDF download · secure checkout via Stripe.

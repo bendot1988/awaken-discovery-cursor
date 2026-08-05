@@ -1,6 +1,8 @@
 ---
 title: "Thinking About Therapy? Common Fears—And What Helps You Move Forward"
 description: "You have heard people talk about therapy, you have seen it advertised but you feel worried about starting therapy? Discover what holds many people back and what makes it easier to take that first step toward healing and…"
+seoTitle: "Common Fears About Therapy · Awaken Discovery"
+seoDescription: "Worried about starting therapy? Explore common fears and what makes it easier to take a first step toward counselling and healing."
 pubDate: 2025-08-11T13:11:34
 category: "Therapy"
 heroImage: "./thinking-about-therapy-common-fears-and-what-helps-you-move-forward.webp"

@@ -1,0 +1,357 @@
+---
+import Layout from "../layouts/Layout.astro";
+import SiteHeader from "../components/SiteHeader.astro";
+import SiteFooter from "../components/SiteFooter.astro";
+import {
+	freeResources,
+	freeResourcesPath,
+	locations,
+	navItems,
+} from "../data/site";
+import { calendlyLinks } from "../data/calendly";
+---
+
+<Layout
+	title="Page Not Found · Awaken Discovery"
+	description="This page couldn’t be found. Explore free calming guides, therapy support, or head back home with Awaken Discovery."
+	noindex={true}
+>
+	<SiteHeader navItems={navItems} />
+	<main class="nf-page">
+		<section class="nf-hero section">
+			<div class="container nf-hero-inner">
+				<p class="nf-kicker">404</p>
+				<p class="nf-script" aria-hidden="true">A quiet pause</p>
+				<h1>This page isn’t here — but support still is.</h1>
+				<p class="nf-lede">
+					The link may be old, mistyped, or the page has moved. You’re welcome to
+					head home, explore therapy, or take a free guide while you’re here.
+				</p>
+				<div class="nf-cta-row">
+					<a class="cta cta-solid" href="/">Back to home</a>
+					<a class="cta cta-outline" href="/therapy">Explore therapy</a>
+					<a class="cta cta-outline" href="/contact">Get in touch</a>
+				</div>
+			</div>
+		</section>
+
+		<section class="nf-guides section section-soft" aria-labelledby="nf-guides-heading">
+			<div class="container">
+				<header class="nf-guides-head">
+					<p class="nf-kicker">While you’re here</p>
+					<h2 id="nf-guides-heading">Free guides you can take with you</h2>
+					<p class="nf-guides-lede">
+						Short, gentle PDFs for teachers, anxiety, and anyone who’s been
+						holding too much — free, no rush, no pressure.
+					</p>
+				</header>
+
+				<ul class="nf-guide-grid">
+					{
+						freeResources.map((r) => (
+							<li>
+								<article class="nf-guide-card">
+									{r.image && (
+										<a class="nf-guide-media" href={r.href} tabindex="-1" aria-hidden="true">
+											<img
+												src={r.image}
+												alt=""
+												loading="lazy"
+												decoding="async"
+											/>
+										</a>
+									)}
+									<div class="nf-guide-body">
+										<p class="nf-guide-audience">{r.audience}</p>
+										<h3>
+											<a href={r.href}>{r.title}</a>
+										</h3>
+										<p>{r.subtitle}</p>
+										<a class="cta cta-outline nf-guide-cta" href={r.href}>
+											{r.ctaLabel}
+										</a>
+									</div>
+								</article>
+							</li>
+						))
+					}
+				</ul>
+
+				<p class="nf-guides-more">
+					<a href={freeResourcesPath}>See all free resources →</a>
+				</p>
+			</div>
+		</section>
+
+		<section class="nf-next section">
+			<div class="container nf-next-inner">
+				<div>
+					<p class="nf-kicker">A gentle next step</p>
+					<h2>Prefer to talk it through?</h2>
+					<p>
+						Book a free consultation, or browse individual and couples therapy
+						options whenever you feel ready.
+					</p>
+				</div>
+				<div class="nf-cta-row">
+					<a
+						class="cta cta-solid"
+						href={calendlyLinks.tasterSession}
+						target="_blank"
+						rel="noopener noreferrer"
+					>
+						Book a free consultation
+					</a>
+					<a class="cta cta-outline" href="/pricing/individual">View session pricing</a>
+				</div>
+			</div>
+		</section>
+	</main>
+	<SiteFooter locations={locations} />
+</Layout>
+
+<style>
+	.nf-page {
+		background:
+			radial-gradient(ellipse 80% 50% at 10% 0%, rgba(0, 94, 71, 0.06), transparent 55%),
+			radial-gradient(ellipse 60% 40% at 100% 20%, rgba(206, 216, 207, 0.45), transparent 50%),
+			var(--color-white);
+	}
+
+	.nf-kicker {
+		margin: 0 0 0.55rem;
+		font-family: var(--font-body);
+		font-size: 0.72rem;
+		font-weight: 600;
+		letter-spacing: 0.14em;
+		text-transform: uppercase;
+		color: var(--color-dark-slate-gray);
+	}
+
+	.nf-hero {
+		padding-block: clamp(3.5rem, 8vw, 5.5rem) 2.5rem;
+	}
+
+	.nf-hero-inner {
+		max-width: 40rem;
+	}
+
+	.nf-script {
+		margin: 0 0 0.35rem;
+		font-family: var(--font-script);
+		font-size: clamp(2.4rem, 6vw, 3.4rem);
+		line-height: 1;
+		color: var(--color-dark-slate-gray);
+	}
+
+	.nf-hero h1 {
+		margin: 0 0 1rem;
+		font-family: var(--font-serif);
+		font-size: clamp(2rem, 4.5vw, 2.85rem);
+		font-weight: 500;
+		line-height: 1.15;
+		color: var(--color-dark-gray);
+	}
+
+	.nf-lede {
+		margin: 0 0 1.6rem;
+		font-size: 1.05rem;
+		line-height: 1.65;
+		color: color-mix(in srgb, var(--color-dark-gray) 78%, transparent);
+	}
+
+	.nf-cta-row {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.7rem;
+	}
+
+	.nf-guides {
+		padding-block: clamp(2.5rem, 6vw, 4rem);
+	}
+
+	.nf-guides-head {
+		max-width: 38rem;
+		margin-bottom: 2rem;
+	}
+
+	.nf-guides-head h2 {
+		margin: 0 0 0.75rem;
+		font-family: var(--font-serif);
+		font-size: clamp(1.7rem, 3.5vw, 2.2rem);
+		font-weight: 500;
+		line-height: 1.2;
+	}
+
+	.nf-guides-lede {
+		margin: 0;
+		font-size: 1rem;
+		line-height: 1.65;
+		color: color-mix(in srgb, var(--color-dark-gray) 75%, transparent);
+	}
+
+	.nf-guide-grid {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: 1.25rem;
+	}
+
+	.nf-guide-card {
+		height: 100%;
+		display: flex;
+		flex-direction: column;
+		background: var(--color-white);
+		border: 1px solid color-mix(in srgb, var(--color-light-gray) 70%, transparent);
+		border-radius: 1.1rem;
+		overflow: hidden;
+		transition: border-color 0.2s ease, transform 0.25s ease;
+	}
+
+	.nf-guide-card:hover {
+		border-color: color-mix(in srgb, var(--color-dark-slate-gray) 35%, transparent);
+		transform: translateY(-2px);
+	}
+
+	.nf-guide-media {
+		display: block;
+		aspect-ratio: 4 / 3;
+		overflow: hidden;
+		background: var(--color-white-smoke);
+	}
+
+	.nf-guide-media img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		transition: transform 0.45s ease;
+	}
+
+	.nf-guide-card:hover .nf-guide-media img {
+		transform: scale(1.03);
+	}
+
+	.nf-guide-body {
+		display: flex;
+		flex-direction: column;
+		flex: 1;
+		gap: 0.45rem;
+		padding: 1.15rem 1.2rem 1.3rem;
+	}
+
+	.nf-guide-audience {
+		margin: 0;
+		font-size: 0.72rem;
+		font-weight: 600;
+		letter-spacing: 0.08em;
+		text-transform: uppercase;
+		color: var(--color-dark-slate-gray);
+	}
+
+	.nf-guide-body h3 {
+		margin: 0;
+		font-family: var(--font-serif);
+		font-size: 1.2rem;
+		font-weight: 500;
+		line-height: 1.25;
+	}
+
+	.nf-guide-body h3 a:hover {
+		color: var(--color-dark-slate-gray);
+	}
+
+	.nf-guide-body p {
+		margin: 0;
+		font-size: 0.92rem;
+		line-height: 1.55;
+		color: color-mix(in srgb, var(--color-dark-gray) 72%, transparent);
+	}
+
+	.nf-guide-cta {
+		align-self: flex-start;
+		margin-top: auto;
+		padding: 0.55rem 1rem;
+		font-size: 0.88rem;
+	}
+
+	.nf-guides-more {
+		margin: 1.75rem 0 0;
+		text-align: center;
+		font-size: 0.95rem;
+	}
+
+	.nf-guides-more a {
+		color: var(--color-dark-slate-gray);
+		font-weight: 500;
+		text-decoration: underline;
+		text-underline-offset: 0.18em;
+	}
+
+	.nf-next {
+		padding-block: clamp(2.5rem, 6vw, 4rem);
+	}
+
+	.nf-next-inner {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: flex-end;
+		justify-content: space-between;
+		gap: 1.5rem 2rem;
+		padding: 1.75rem 1.85rem;
+		border-radius: 1.15rem;
+		border-left: 4px solid var(--color-dark-slate-gray);
+		background: color-mix(in srgb, var(--color-white-smoke) 85%, var(--color-light-gray));
+	}
+
+	.nf-next-inner h2 {
+		margin: 0 0 0.55rem;
+		font-family: var(--font-serif);
+		font-size: clamp(1.55rem, 3vw, 1.95rem);
+		font-weight: 500;
+		line-height: 1.2;
+	}
+
+	.nf-next-inner p {
+		margin: 0;
+		max-width: 34rem;
+		font-size: 0.98rem;
+		line-height: 1.6;
+		color: color-mix(in srgb, var(--color-dark-gray) 75%, transparent);
+	}
+
+	@media (max-width: 960px) {
+		.nf-guide-grid {
+			grid-template-columns: 1fr;
+			max-width: 26rem;
+			margin-inline: auto;
+		}
+
+		.nf-next-inner {
+			flex-direction: column;
+			align-items: flex-start;
+		}
+	}
+
+	@media (max-width: 540px) {
+		.nf-cta-row .cta {
+			width: 100%;
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.nf-guide-card,
+		.nf-guide-media img {
+			transition: none;
+		}
+
+		.nf-guide-card:hover {
+			transform: none;
+		}
+
+		.nf-guide-card:hover .nf-guide-media img {
+			transform: none;
+		}
+	}
+</style>

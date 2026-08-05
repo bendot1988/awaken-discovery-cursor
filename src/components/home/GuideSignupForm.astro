@@ -4,6 +4,8 @@ interface Props {
 	buttonLabel?: string;
 	consentLabel?: string;
 	pageLocation?: string;
+	/** Strip card chrome when nested in a dialog or other container. */
+	variant?: "card" | "plain";
 }
 
 const {
@@ -11,11 +13,12 @@ const {
 	buttonLabel = "Send Me The Free Guide",
 	consentLabel = "I'd like to receive supportive wellbeing emails, resources and updates from Awaken Discovery. I understand I can unsubscribe at any time.",
 	pageLocation = "Homepage · Free Resource (#signup)",
+	variant = "card",
 } = Astro.props;
 ---
 
 <form
-	class="guide-signup-form"
+	class:list={["guide-signup-form", variant === "plain" && "guide-signup-form--plain"]}
 	data-guide-signup
 	data-list={list}
 	data-page-location={pageLocation}
@@ -156,6 +159,14 @@ const {
 		border-radius: 1rem;
 		border: 1px solid rgb(0 94 71 / 18%);
 		box-shadow: 0 10px 28px rgb(29 35 39 / 8%);
+	}
+
+	.guide-signup-form--plain {
+		padding: 0;
+		border: none;
+		border-radius: 0;
+		box-shadow: none;
+		background: transparent;
 	}
 
 	.guide-field {

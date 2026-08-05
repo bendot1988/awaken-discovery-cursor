@@ -1,6 +1,8 @@
 ---
 title: "Feeling Nervous About Starting Therapy? Here’s Why That’s Completely Normal"
 description: "Feeling anxious about starting therapy? You’re not alone. Learn why nerves are part of the process—and how therapy can still be a powerful step forward. It’s Okay to Be Nervous You’ve made the decision to look into…"
+seoTitle: "Nervous About Starting Therapy · Awaken Discovery"
+seoDescription: "Feeling anxious about starting therapy is normal. Learn why nerves are part of the process — and how counselling can still help you move forward."
 pubDate: 2025-08-08T10:55:32
 category: "Therapy"
 heroImage: "./feeling-nervous-about-starting-therapy-heres-why-thats-completely-normal.jpeg"

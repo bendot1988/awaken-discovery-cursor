@@ -1,0 +1,21 @@
+{
+	"name": "Awaken Discovery",
+	"short_name": "Awaken",
+	"description": "Counselling and psychotherapy with Ally Donoghue — online and near York.",
+	"start_url": "/",
+	"display": "standalone",
+	"background_color": "#f7f5f2",
+	"theme_color": "#155240",
+	"icons": [
+		{
+			"src": "/favicon.png",
+			"sizes": "100x100",
+			"type": "image/png"
+		},
+		{
+			"src": "/apple-touch-icon.png",
+			"sizes": "180x180",
+			"type": "image/png"
+		}
+	]
+}

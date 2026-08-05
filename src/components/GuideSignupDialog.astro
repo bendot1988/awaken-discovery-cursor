@@ -1,0 +1,224 @@
+---
+import GuideSignupForm from "./home/GuideSignupForm.astro";
+
+interface Props {
+	list: string;
+	triggerLabel?: string;
+	triggerClass?: string;
+	dialogId: string;
+	title: string;
+	lede?: string;
+	buttonLabel?: string;
+	pageLocation?: string;
+}
+
+const {
+	list,
+	triggerLabel = "Get the Free Guide First",
+	triggerClass = "cta cta-outline",
+	dialogId,
+	title,
+	lede = "Pop your email below and the free PDF will land in your inbox in the next couple of minutes.",
+	buttonLabel = "Send Me the Free Guide",
+	pageLocation = "Products · Free guide modal",
+} = Astro.props;
+---
+
+<button
+	type="button"
+	class={triggerClass}
+	data-guide-dialog-open
+	aria-haspopup="dialog"
+	aria-controls={dialogId}
+>
+	{triggerLabel}
+</button>
+
+<dialog id={dialogId} class="guide-signup-dialog" aria-labelledby={`${dialogId}-title`}>
+	<div class="guide-signup-dialog-inner">
+		<header class="guide-signup-dialog-head">
+			<p class="guide-signup-dialog-kicker">Free guide</p>
+			<h2 id={`${dialogId}-title`}>{title}</h2>
+			<p class="guide-signup-dialog-lede">{lede}</p>
+			<button
+				type="button"
+				class="guide-signup-dialog-close"
+				data-guide-dialog-close
+				aria-label="Close"
+			>
+				×
+			</button>
+		</header>
+
+		<div class="guide-signup-dialog-body">
+			<GuideSignupForm
+				list={list}
+				buttonLabel={buttonLabel}
+				pageLocation={pageLocation}
+				variant="plain"
+			/>
+			<p class="guide-signup-dialog-privacy">
+				Your details are handled with care. See our <a href="/privacy">Privacy Policy</a>.
+			</p>
+		</div>
+	</div>
+</dialog>
+
+<script>
+	function initGuideSignupDialogs() {
+		document.querySelectorAll("[data-guide-dialog-open]").forEach((button) => {
+			if (!(button instanceof HTMLElement)) return;
+			if (button.dataset.guideDialogBound === "true") return;
+			button.dataset.guideDialogBound = "true";
+
+			const controls = button.getAttribute("aria-controls");
+			const dialog =
+				controls &&
+				(document.getElementById(controls) as HTMLDialogElement | null);
+			if (!dialog) return;
+
+			button.addEventListener("click", () => {
+				if (typeof dialog.showModal === "function") dialog.showModal();
+				else dialog.setAttribute("open", "");
+			});
+
+			dialog.querySelectorAll("[data-guide-dialog-close]").forEach((closeBtn) => {
+				closeBtn.addEventListener("click", () => {
+					if (typeof dialog.close === "function") dialog.close();
+					else dialog.removeAttribute("open");
+				});
+			});
+
+			dialog.addEventListener("click", (event) => {
+				if (event.target === dialog) {
+					if (typeof dialog.close === "function") dialog.close();
+					else dialog.removeAttribute("open");
+				}
+			});
+		});
+	}
+
+	initGuideSignupDialogs();
+	document.addEventListener("astro:page-load", initGuideSignupDialogs);
+</script>
+
+<style>
+	button.cta {
+		cursor: pointer;
+		font: inherit;
+		background: transparent;
+	}
+
+	.guide-signup-dialog {
+		width: min(28rem, calc(100vw - 2rem));
+		max-width: none;
+		margin: auto;
+		padding: 0;
+		border: 1px solid rgb(0 94 71 / 18%);
+		border-radius: 1rem;
+		background: var(--color-white);
+		box-shadow: 0 24px 48px rgb(0 94 71 / 18%);
+		color: var(--color-dark-gray);
+	}
+
+	.guide-signup-dialog::backdrop {
+		background: rgb(29 35 39 / 52%);
+		backdrop-filter: blur(2px);
+	}
+
+	.guide-signup-dialog[open] {
+		animation: guide-signup-dialog-in 0.24s cubic-bezier(0.2, 0.7, 0.2, 1);
+	}
+
+	@keyframes guide-signup-dialog-in {
+		from {
+			opacity: 0;
+			transform: translateY(0.75rem) scale(0.98);
+		}
+
+		to {
+			opacity: 1;
+			transform: translateY(0) scale(1);
+		}
+	}
+
+	.guide-signup-dialog-inner {
+		position: relative;
+	}
+
+	.guide-signup-dialog-head {
+		padding: 1.5rem 1.5rem 1.15rem;
+		padding-right: 3rem;
+		border-bottom: 1px solid rgb(0 94 71 / 12%);
+	}
+
+	.guide-signup-dialog-kicker {
+		margin: 0;
+		font-size: 0.72rem;
+		font-weight: 600;
+		letter-spacing: 0.14em;
+		text-transform: uppercase;
+		color: var(--color-dark-slate-gray);
+	}
+
+	.guide-signup-dialog-head h2 {
+		margin: 0.45rem 0 0.55rem;
+		font-family: var(--font-serif);
+		font-size: 1.4rem;
+		font-weight: 500;
+		line-height: 1.2;
+		color: #004836;
+	}
+
+	.guide-signup-dialog-lede {
+		margin: 0;
+		font-size: 0.94rem;
+		line-height: 1.6;
+		color: rgb(29 35 39 / 78%);
+	}
+
+	.guide-signup-dialog-close {
+		position: absolute;
+		top: 0.85rem;
+		right: 0.85rem;
+		width: 2.25rem;
+		height: 2.25rem;
+		border: none;
+		border-radius: 999px;
+		background: transparent;
+		color: rgb(29 35 39 / 65%);
+		font-size: 1.5rem;
+		line-height: 1;
+		cursor: pointer;
+	}
+
+	.guide-signup-dialog-close:hover,
+	.guide-signup-dialog-close:focus-visible {
+		background: rgb(0 94 71 / 8%);
+		color: var(--color-dark-slate-gray);
+		outline: none;
+	}
+
+	.guide-signup-dialog-body {
+		padding: 1.25rem 1.5rem 1.5rem;
+	}
+
+	.guide-signup-dialog-privacy {
+		margin: 0.95rem 0 0;
+		font-size: 0.82rem;
+		line-height: 1.5;
+		color: rgb(29 35 39 / 65%);
+	}
+
+	.guide-signup-dialog-privacy a {
+		color: var(--color-dark-slate-gray);
+		text-decoration: underline;
+		text-underline-offset: 0.15em;
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.guide-signup-dialog[open] {
+			animation: none;
+		}
+	}
+</style>

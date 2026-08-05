@@ -1,6 +1,8 @@
 ---
 title: "You Don’t Need to Be in a Bad Place to Access Therapy"
 description: "Many people believe that therapy is only for times of crisis, depression, or extreme stress. While Counselling/Psychotherapy can absolutely help during challenging periods, it’s equally valuable as a tool for…"
+seoTitle: "Therapy Isn’t Only for Crisis · Awaken Discovery"
+seoDescription: "You don’t need to be in crisis to start therapy. Counselling can support growth, clarity and emotional wellbeing at any stage."
 pubDate: 2025-10-13T08:08:08
 category: "Therapy"
 heroImage: "./you-dont-need-to-be-in-a-bad-place-to-access-therapy.jpeg"

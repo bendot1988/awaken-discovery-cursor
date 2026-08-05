@@ -1,6 +1,8 @@
 ---
 title: "Is It Time to Talk? Signs You Might Benefit from Counselling"
 description: "Knowing when to seek counselling can be challenging and confusing. It might also be blocked with what seems like a valid reason, but it’s the subconscious putting in place a safety measure. Many people ignore emotional,…"
+seoTitle: "Signs You Might Need Counselling · Awaken Discovery"
+seoDescription: "Not sure if it’s time to talk? Explore gentle signs that counselling could help — and why reaching out doesn’t mean you’ve failed."
 pubDate: 2025-10-13T08:03:22
 category: "Therapy"
 heroImage: "./is-it-time-to-talk-signs-you-might-benefit-from-counselling.jpeg"

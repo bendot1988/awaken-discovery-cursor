@@ -41,6 +41,33 @@ export const siteMeta = {
 	description:
 		"Compassionate counselling and psychotherapy with Ally Donoghue (MBACP, NCPS). Online or face-to-face near York. Support for anxiety, burnout and overwhelm.",
 	canonicalOrigin: "https://awakendiscovery.co.uk",
+	ogImage: "/assets/images/og-default.jpg",
+};
+
+/** Structured data for LocalBusiness / ProfessionalService schema. */
+export const businessInfo = {
+	name: "Awaken Discovery",
+	alternateName: "Awaken Discovery Counselling & Psychotherapy",
+	url: "https://awakendiscovery.co.uk",
+	email: "awakendiscoverytherapy@gmail.com",
+	/** Omit until a public booking/landline number is confirmed. */
+	telephone: null as string | null,
+	logoPath: "/favicon.png",
+	streetAddress: null as string | null,
+	addressLocality: "Market Weighton",
+	addressRegion: "East Yorkshire",
+	postalCode: null as string | null,
+	addressCountry: "GB",
+	/** Omit until public social profile URLs are confirmed. */
+	sameAs: [] as string[],
+	areaServed: [
+		"Market Weighton",
+		"York",
+		"Hull",
+		"East Yorkshire",
+		"United Kingdom",
+	],
+	priceRange: "££",
 };
 
 export const teacherGuidePath = "/finding-calm-teachers";

@@ -1,6 +1,8 @@
 ---
 title: "Therapy in Crisis vs Therapy for Growth: Why Counselling Helps Everyone"
 description: "Many people assume therapy is only for moments of extreme stress, loss, or emotional breakdown. While counselling is essential during crises, it’s also a powerful tool for personal growth, self-understanding, and…"
+seoTitle: "Therapy for Crisis & Growth · Awaken Discovery"
+seoDescription: "Therapy helps in crisis and for growth. See why counselling supports self-understanding, resilience and wellbeing at every stage of life."
 pubDate: 2025-10-13T08:14:10
 category: "Therapy"
 heroImage: "./therapy-in-crisis-vs-therapy-for-growth-why-counselling-helps-everyone.jpeg"

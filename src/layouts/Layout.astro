@@ -1,6 +1,6 @@
 ---
 import "../styles/global.css";
-import { siteMeta } from "../data/site";
+import { siteMeta, businessInfo } from "../data/site";
 import CookieBanner from "../components/CookieBanner.astro";
 
 interface Props {
@@ -8,6 +8,10 @@ interface Props {
 	description?: string;
 	canonicalPath?: string;
 	noindex?: boolean;
+	ogImage?: string;
+	ogType?: string;
+	/** When true, inject LocalBusiness JSON-LD (homepage). */
+	localBusiness?: boolean;
 }
 
 const {
@@ -15,18 +19,62 @@ const {
 	description = siteMeta.description,
 	canonicalPath = Astro.url.pathname,
 	noindex = false,
+	ogImage = siteMeta.ogImage,
+	ogType = "website",
+	localBusiness = false,
 } = Astro.props;
 
-const canonical = `${siteMeta.canonicalOrigin}${canonicalPath}`;
+/** Prefer https URLs with no trailing slash (except the homepage). */
+const normalizedPath =
+	canonicalPath === "/" ? "/" : canonicalPath.replace(/\/+$/, "");
+const canonical = `${siteMeta.canonicalOrigin}${normalizedPath}`;
+const ogImageUrl = ogImage.startsWith("http")
+	? ogImage
+	: `${siteMeta.canonicalOrigin}${ogImage.startsWith("/") ? "" : "/"}${ogImage}`;
+
+const localBusinessSchema = localBusiness
+	? {
+			"@context": "https://schema.org",
+			"@type": "ProfessionalService",
+			name: businessInfo.name,
+			alternateName: businessInfo.alternateName,
+			url: businessInfo.url,
+			logo: `${siteMeta.canonicalOrigin}${businessInfo.logoPath}`,
+			image: ogImageUrl,
+			email: businessInfo.email,
+			...(businessInfo.telephone
+				? { telephone: businessInfo.telephone }
+				: {}),
+			address: {
+				"@type": "PostalAddress",
+				...(businessInfo.streetAddress
+					? { streetAddress: businessInfo.streetAddress }
+					: {}),
+				addressLocality: businessInfo.addressLocality,
+				addressRegion: businessInfo.addressRegion,
+				...(businessInfo.postalCode
+					? { postalCode: businessInfo.postalCode }
+					: {}),
+				addressCountry: businessInfo.addressCountry,
+			},
+			areaServed: businessInfo.areaServed,
+			...(businessInfo.sameAs.length > 0
+				? { sameAs: businessInfo.sameAs }
+				: {}),
+			priceRange: businessInfo.priceRange,
+		}
+	: null;
 ---
 
 <!doctype html>
 <html lang="en">
 	<head>
 		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="icon" type="image/png" href="/favicon.png" sizes="100x100" />
+		<link rel="icon" href="/favicon.ico" sizes="32x32" />
+		<link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180" />
+		<link rel="manifest" href="/site.webmanifest" />
 		<link rel="canonical" href={canonical} />
 		{noindex && <meta name="robots" content="noindex, nofollow" />}
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -39,9 +87,26 @@ const canonical = `${siteMeta.canonicalOrigin}${canonicalPath}`;
 		<meta name="description" content={description} />
 		<meta property="og:title" content={title} />
 		<meta property="og:description" content={description} />
+		<meta property="og:image" content={ogImageUrl} />
+		<meta property="og:image:width" content="1200" />
+		<meta property="og:image:height" content="630" />
 		<meta property="og:url" content={canonical} />
-		<meta property="og:type" content="website" />
+		<meta property="og:type" content={ogType} />
+		<meta property="og:site_name" content="Awaken Discovery" />
+		<meta property="og:locale" content="en_GB" />
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:title" content={title} />
+		<meta name="twitter:description" content={description} />
+		<meta name="twitter:image" content={ogImageUrl} />
 		<title>{title}</title>
+		{
+			localBusinessSchema && (
+				<script
+					type="application/ld+json"
+					set:html={JSON.stringify(localBusinessSchema)}
+				/>
+			)
+		}
 	</head>
 	<body>
 		<slot />

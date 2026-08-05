@@ -1,6 +1,8 @@
 ---
 title: "Why You Keep Repeating the Same Patterns – and How Therapy Can Help"
 description: "Ever wonder why you repeat the same emotional or relationship patterns? Discover how therapy helps you break cycles, build awareness, and create lasting change. Why Do I Keep Doing This? Have you ever found yourself…"
+seoTitle: "Breaking Repeated Patterns · Awaken Discovery"
+seoDescription: "Why do the same emotional patterns keep returning? Learn how therapy helps you notice cycles, build awareness and create lasting change."
 pubDate: 2026-01-16T12:51:29
 category: "Therapy"
 heroImage: "./why-you-keep-repeating-the-same-patterns-and-how-therapy-can-help.jpeg"

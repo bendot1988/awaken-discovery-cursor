@@ -1,5 +1,7 @@
 User-agent: *
+Allow: /
+
 Disallow: /style-guide
 Disallow: /style-guide/
-Disallow: /golive
-Disallow: /golive.md
+
+Sitemap: https://awakendiscovery.co.uk/sitemap-index.xml

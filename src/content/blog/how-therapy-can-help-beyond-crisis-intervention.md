@@ -1,6 +1,8 @@
 ---
 title: "How Therapy Can Help: Beyond Crisis Intervention"
 description: "Discover how counselling helps you build resilience, clarity, and confidence — not only during crisis but as a long-term path to emotional wellbeing and personal growth. Therapy Isn’t Only for the Tough Times When…"
+seoTitle: "Therapy Beyond Crisis · Awaken Discovery"
+seoDescription: "Counselling isn’t only for crisis. Discover how therapy builds resilience, clarity and confidence as a longer path to emotional wellbeing."
 pubDate: 2026-01-14T12:17:32
 category: "Therapy"
 heroImage: "./feeling-nervous-about-starting-therapy-heres-why-thats-completely-normal.jpeg"

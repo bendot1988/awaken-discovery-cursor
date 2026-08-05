@@ -1,6 +1,8 @@
 ---
 title: "What to Expect in Your First Counselling Session: A Gentle Introduction"
 description: "Wondering what therapy is like? This gentle guide walks you through what to expect in your first session—so you can feel more prepared and less nervous. Starting Therapy Doesn’t Have to Be a Mystery For many people, the…"
+seoTitle: "First Counselling Session Guide · Awaken Discovery"
+seoDescription: "Wondering what therapy is like? A gentle guide to your first counselling session — so you feel more prepared and less nervous."
 pubDate: 2025-08-11T13:03:53
 category: "Therapy"
 heroImage: "./what-to-expect-in-your-first-counselling-session-a-gentle-introduction.webp"

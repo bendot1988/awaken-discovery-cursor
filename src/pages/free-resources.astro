@@ -42,6 +42,7 @@ import { calendlyLinks } from "../data/calendly";
 												alt={r.imageAlt ?? r.title}
 												loading={i === 0 ? "eager" : "lazy"}
 												decoding="async"
+												fetchpriority={i === 0 ? "high" : undefined}
 											/>
 										) : (
 											<div class="fr-placeholder" aria-hidden="true">
