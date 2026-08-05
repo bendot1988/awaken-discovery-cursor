@@ -1,0 +1,814 @@
+---
+import { Image } from "astro:assets";
+import Layout from "../../layouts/Layout.astro";
+import SiteHeader from "../../components/SiteHeader.astro";
+import SiteFooter from "../../components/SiteFooter.astro";
+import { locations, navItems } from "../../data/site";
+import { calendlyLinks } from "../../data/calendly";
+import { bulkPackages, getBulkPackage } from "../../data/products";
+import allyTreePortrait from "../../assets/therapy/ally-tree-portrait.png";
+
+const preselected = getBulkPackage(Astro.url.searchParams.get("package"));
+const calendlyConsultation = calendlyLinks.tasterSession;
+---
+
+<Layout
+	title="Book Bulk Sessions · Awaken Discovery"
+	description="Request a bulk counselling package, opt into the newsletter, and pay securely via Stripe when you're ready."
+>
+	<SiteHeader navItems={navItems} />
+	<main class="bb-page">
+		<section class="bb-hero section">
+			<div class="container bb-hero-grid">
+				<div class="bb-hero-copy">
+					<p class="bb-kicker">Bulk sessions</p>
+					<h1>Book your package</h1>
+					<p class="bb-lede">
+						Share a few details below. You can pay now with Stripe, or ask to
+						speak with Ally first — either way you'll get a confirmation email
+						with your reference number.
+					</p>
+					{
+						preselected && (
+							<p class="bb-preselect">
+								Selected: <strong>{preselected.label}</strong>
+								<span aria-hidden="true"> · </span>
+								{preselected.priceGbp}
+							</p>
+						)
+					}
+				</div>
+				<figure class="bb-hero-figure">
+					<Image
+						src={allyTreePortrait}
+						alt="Ally outdoors, leaning gently on a tree branch in soft natural light"
+						widths={[420, 640, 860]}
+						sizes="(max-width: 960px) 70vw, 380px"
+						loading="eager"
+						decoding="async"
+						format="webp"
+						quality={82}
+					/>
+				</figure>
+			</div>
+		</section>
+
+		<section class="bb-form-section section section-soft">
+			<div class="container">
+				<form class="bb-form" data-bulk-book novalidate>
+					<fieldset class="bb-fieldset">
+						<legend>Personal information</legend>
+						<div class="bb-row">
+							<label class="bb-field">
+								<span class="bb-label">First Name <abbr title="required">*</abbr></span>
+								<input
+									type="text"
+									name="firstName"
+									autocomplete="given-name"
+									placeholder="Jane"
+									required
+								/>
+							</label>
+							<label class="bb-field">
+								<span class="bb-label">Last Name <abbr title="required">*</abbr></span>
+								<input
+									type="text"
+									name="lastName"
+									autocomplete="family-name"
+									placeholder="Smith"
+									required
+								/>
+							</label>
+						</div>
+						<label class="bb-field">
+							<span class="bb-label">Email <abbr title="required">*</abbr></span>
+							<input
+								type="email"
+								name="email"
+								autocomplete="email"
+								placeholder="you@example.com"
+								required
+							/>
+						</label>
+						<label class="bb-field">
+							<span class="bb-label">Phone/Mobile <abbr title="required">*</abbr></span>
+							<input
+								type="tel"
+								name="phone"
+								autocomplete="tel"
+								placeholder="07XXX XXXXXX"
+								required
+							/>
+						</label>
+						<fieldset class="bb-choice">
+							<legend class="bb-label">
+								Preferred method of contact <abbr title="required">*</abbr>
+							</legend>
+							<label class="bb-radio">
+								<input type="radio" name="preferredContact" value="telephone" required />
+								<span>Telephone</span>
+							</label>
+							<label class="bb-radio">
+								<input type="radio" name="preferredContact" value="email" />
+								<span>Email</span>
+							</label>
+						</fieldset>
+					</fieldset>
+
+					<fieldset class="bb-fieldset">
+						<legend>Address information</legend>
+						<div class="bb-row">
+							<label class="bb-field">
+								<span class="bb-label">Address Line 1 <abbr title="required">*</abbr></span>
+								<input
+									type="text"
+									name="address1"
+									autocomplete="address-line1"
+									placeholder="123 High Street"
+									required
+								/>
+							</label>
+							<label class="bb-field">
+								<span class="bb-label">Address Line 2</span>
+								<input
+									type="text"
+									name="address2"
+									autocomplete="address-line2"
+									placeholder="Apartment, suite, etc. (optional)"
+								/>
+							</label>
+						</div>
+						<div class="bb-row">
+							<label class="bb-field">
+								<span class="bb-label">City</span>
+								<input
+									type="text"
+									name="city"
+									autocomplete="address-level2"
+									placeholder="York"
+								/>
+							</label>
+							<label class="bb-field">
+								<span class="bb-label">County</span>
+								<input
+									type="text"
+									name="county"
+									autocomplete="address-level1"
+									placeholder="East Yorkshire"
+								/>
+							</label>
+						</div>
+						<div class="bb-row">
+							<label class="bb-field">
+								<span class="bb-label">Postcode <abbr title="required">*</abbr></span>
+								<input
+									type="text"
+									name="postcode"
+									autocomplete="postal-code"
+									placeholder="YO42 2AB"
+									required
+								/>
+							</label>
+							<label class="bb-field">
+								<span class="bb-label">Country</span>
+								<select name="country" autocomplete="country-name">
+									<option value="">Select Country</option>
+									<option value="United Kingdom" selected>United Kingdom</option>
+									<option value="Ireland">Ireland</option>
+									<option value="Other">Other</option>
+								</select>
+							</label>
+						</div>
+					</fieldset>
+
+					<fieldset class="bb-fieldset">
+						<legend>Client status and consent</legend>
+						<fieldset class="bb-choice">
+							<legend class="bb-label">
+								Are you a returning customer? <abbr title="required">*</abbr>
+							</legend>
+							<label class="bb-radio">
+								<input type="radio" name="returningCustomer" value="yes" required />
+								<span>Yes</span>
+							</label>
+							<label class="bb-radio">
+								<input type="radio" name="returningCustomer" value="no" />
+								<span>No</span>
+							</label>
+						</fieldset>
+
+						<div class="bb-check-block">
+							<p class="bb-label">Would you like to join my newsletter?</p>
+							<label class="bb-check">
+								<input type="checkbox" name="newsletter" value="yes" />
+								<span>
+									Yes, I would like to receive updates, newsletters, and
+									promotional materials from Awaken Discovery, Counselling and
+									Psychotherapy.
+								</span>
+							</label>
+						</div>
+
+						<label class="bb-check">
+							<input type="checkbox" name="terms" value="yes" required />
+							<span>
+								I have read and agree to the <a href="/terms#bulk-buying" target="_blank" rel="noopener noreferrer">Bulk Pricing Terms and Conditions</a>.
+							</span>
+						</label>
+					</fieldset>
+
+					<fieldset class="bb-fieldset">
+						<legend>Payment intent</legend>
+						<fieldset class="bb-choice">
+							<legend class="bb-label">
+								I'm happy to pay now for my bulk session block
+								<abbr title="required">*</abbr>
+							</legend>
+							<label class="bb-radio">
+								<input type="radio" name="payNow" value="yes" required />
+								<span>Yes</span>
+							</label>
+							<label class="bb-radio">
+								<input type="radio" name="payNow" value="speak-first" />
+								<span>No, I'd like to speak with you first.</span>
+							</label>
+						</fieldset>
+					</fieldset>
+
+					<div class="bb-pay-panel" data-pay-panel hidden>
+						<fieldset class="bb-fieldset">
+							<legend>Package</legend>
+							<p class="bb-label">
+								Choose how many sessions you would like
+								<abbr title="required">*</abbr>
+							</p>
+							<div class="bb-packages" role="radiogroup" aria-label="Bulk package">
+								{
+									bulkPackages.map((pkg) => (
+										<label class:list={["bb-package", { "is-preselected": preselected?.id === pkg.id }]}>
+											<input
+												type="radio"
+												name="packageId"
+												value={pkg.id}
+												checked={preselected?.id === pkg.id}
+												data-has-stripe={pkg.stripeUrl ? "true" : "false"}
+												data-price={pkg.priceGbp}
+											/>
+											<span class="bb-package-body">
+												<span class="bb-package-label">{pkg.label}</span>
+												<span class="bb-package-price">{pkg.priceGbp}</span>
+											</span>
+										</label>
+									))
+								}
+							</div>
+						</fieldset>
+					</div>
+
+					<div class="bb-speak-panel" data-speak-panel hidden>
+						<div class="bb-calendly-card">
+							<p class="bb-label">Book a free consultation</p>
+							<p class="bb-calendly-copy">
+								No payment needed yet. Book a free 30-minute chat with Ally to
+								talk through which package feels right.
+							</p>
+							<a
+								class="cta cta-solid bb-calendly-cta"
+								href={calendlyConsultation}
+								target="_blank"
+								rel="noopener noreferrer"
+							>
+								Book Free 30-min Consultation
+							</a>
+						</div>
+					</div>
+
+					<fieldset class="bb-fieldset">
+						<label class="bb-field">
+							<span class="bb-label">Your comments (optional)</span>
+							<textarea name="comments" rows="4" placeholder="Anything you'd like Ally to know…"></textarea>
+						</label>
+
+						<label class="bb-field">
+							<span class="bb-label">How did you hear about me?</span>
+							<select name="howHeard">
+								<option value="">— Select —</option>
+								<option value="Google">Google</option>
+								<option value="Social media">Social media</option>
+								<option value="Friend or family">Friend or family</option>
+								<option value="GP / professional referral">GP / professional referral</option>
+								<option value="Existing client">Existing client</option>
+								<option value="Other">Other</option>
+							</select>
+						</label>
+
+						<label class="bb-check">
+							<input type="checkbox" name="storeConsent" value="yes" required />
+							<span>
+								I consent to have this website store my submitted information so
+								they can respond to my purchase.
+							</span>
+						</label>
+					</fieldset>
+
+					<button class="cta cta-solid bb-submit" type="submit" data-bulk-submit>
+						Submit Enquiry
+					</button>
+					<p class="bb-status" data-bulk-status hidden></p>
+					<p class="bb-fineprint" data-pay-fineprint hidden>
+						If you choose to pay now, you'll be taken to secure Stripe Checkout.
+						Your confirmation email includes a reference you can match to the
+						Stripe receipt.
+					</p>
+					<p class="bb-fineprint" data-speak-fineprint hidden>
+						Please submit the form so Ally has your details, then use the
+						Calendly link above to book your free consultation.
+					</p>
+				</form>
+			</div>
+		</section>
+	</main>
+	<SiteFooter
+		locations={locations}
+		tagline="Calm, transparent pricing — book a bundle or a single session."
+	/>
+</Layout>
+
+<style>
+	.bb-page {
+		--brand: var(--color-dark-slate-gray);
+		--brand-deep: #004836;
+		--brand-mid: #005e47;
+		--brand-tint: rgb(0 94 71 / 8%);
+		--ink: #1d2327;
+		--muted: #5b656b;
+		--line: rgba(0, 94, 71, 0.18);
+		--soft: #f3f6f4;
+		color: var(--ink);
+	}
+
+	.bb-hero {
+		background: linear-gradient(180deg, #fff 0%, var(--brand-tint) 100%);
+		padding-top: 3.5rem;
+		padding-bottom: 2.5rem;
+	}
+
+	.bb-hero-grid {
+		display: grid;
+		grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
+		gap: clamp(1.6rem, 4vw, 3rem);
+		align-items: center;
+	}
+
+	.bb-hero-copy {
+		max-width: 36rem;
+	}
+
+	.bb-kicker {
+		margin: 0;
+		text-transform: uppercase;
+		letter-spacing: 0.12em;
+		font-size: 0.78rem;
+		font-weight: 600;
+		color: var(--brand);
+	}
+
+	.bb-hero h1 {
+		margin: 0.55rem 0 0;
+		font-family: var(--font-serif);
+		font-size: clamp(2.1rem, 4.5vw, 3rem);
+		font-weight: 500;
+		line-height: 1.15;
+		color: var(--brand-deep);
+		text-wrap: balance;
+	}
+
+	.bb-lede {
+		margin: 1rem 0 0;
+		font-size: clamp(1.02rem, 1.6vw, 1.12rem);
+		line-height: 1.7;
+		color: var(--muted);
+	}
+
+	.bb-preselect {
+		margin: 1.15rem 0 0;
+		padding: 0.75rem 1rem;
+		display: inline-block;
+		font-size: 0.92rem;
+		line-height: 1.45;
+		color: var(--brand-deep);
+		background: rgb(255 255 255 / 78%);
+		border: 1px solid var(--line);
+		border-radius: 0.65rem;
+	}
+
+	.bb-hero-figure {
+		margin: 0;
+		border-radius: 1rem;
+		overflow: hidden;
+		box-shadow: 0 16px 38px rgb(0 94 71 / 16%);
+		aspect-ratio: 4 / 5;
+		background: var(--soft);
+		max-width: 22rem;
+		justify-self: end;
+		width: 100%;
+	}
+
+	.bb-hero-figure img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		object-position: 50% 30%;
+		display: block;
+	}
+
+	@media (max-width: 900px) {
+		.bb-hero-grid {
+			grid-template-columns: 1fr;
+		}
+
+		.bb-hero-figure {
+			justify-self: center;
+			max-width: 18rem;
+		}
+	}
+
+	.bb-form {
+		max-width: 42rem;
+		margin: 0 auto;
+		padding: 1.75rem 1.5rem 2rem;
+		background: #fff;
+		border: 1px solid var(--line);
+		border-radius: 1rem;
+		display: grid;
+		gap: 1.75rem;
+	}
+
+	.bb-fieldset {
+		margin: 0;
+		padding: 0;
+		border: 0;
+		display: grid;
+		gap: 1rem;
+	}
+
+	.bb-fieldset > legend {
+		padding: 0;
+		margin: 0 0 0.25rem;
+		font-family: var(--font-display, Georgia, serif);
+		font-size: 1.35rem;
+		color: var(--brand-deep);
+	}
+
+	.bb-row {
+		display: grid;
+		gap: 1rem;
+	}
+
+	@media (min-width: 640px) {
+		.bb-row {
+			grid-template-columns: 1fr 1fr;
+		}
+	}
+
+	.bb-field {
+		display: grid;
+		gap: 0.4rem;
+	}
+
+	.bb-label {
+		font-size: 0.92rem;
+		font-weight: 600;
+		color: var(--ink);
+	}
+
+	.bb-label abbr {
+		color: #b42318;
+		text-decoration: none;
+	}
+
+	.bb-field input,
+	.bb-field select,
+	.bb-field textarea {
+		width: 100%;
+		padding: 0.75rem 0.9rem;
+		border: 1px solid var(--line);
+		border-radius: 0.55rem;
+		background: #fff;
+		font: inherit;
+		color: var(--ink);
+	}
+
+	.bb-field input:focus-visible,
+	.bb-field select:focus-visible,
+	.bb-field textarea:focus-visible {
+		outline: 2px solid var(--brand-mid);
+		outline-offset: 1px;
+	}
+
+	.bb-field input::placeholder,
+	.bb-field textarea::placeholder {
+		color: rgb(29 35 39 / 42%);
+	}
+
+	.bb-choice {
+		margin: 0;
+		padding: 0;
+		border: 0;
+		display: grid;
+		gap: 0.55rem;
+	}
+
+	.bb-choice > legend {
+		padding: 0;
+		margin: 0 0 0.15rem;
+	}
+
+	.bb-radio,
+	.bb-check {
+		display: flex;
+		align-items: flex-start;
+		gap: 0.65rem;
+		font-size: 0.95rem;
+		line-height: 1.45;
+		color: var(--ink);
+		cursor: pointer;
+	}
+
+	.bb-radio input,
+	.bb-check input {
+		margin-top: 0.2rem;
+		accent-color: var(--brand-mid);
+		flex-shrink: 0;
+	}
+
+	.bb-check a {
+		color: var(--brand-mid);
+		font-weight: 600;
+	}
+
+	.bb-check-block {
+		display: grid;
+		gap: 0.55rem;
+	}
+
+	.bb-packages {
+		display: grid;
+		gap: 0.65rem;
+	}
+
+	.bb-calendly-card {
+		display: grid;
+		gap: 0.75rem;
+		padding: 1.15rem 1.2rem;
+		background: var(--soft);
+		border: 1px solid var(--line);
+		border-radius: 0.85rem;
+	}
+
+	.bb-calendly-copy {
+		margin: 0;
+		font-size: 0.95rem;
+		line-height: 1.55;
+		color: var(--muted);
+	}
+
+	.bb-calendly-cta {
+		justify-self: start;
+	}
+
+	.bb-package {
+		display: block;
+		cursor: pointer;
+	}
+
+	.bb-package input {
+		position: absolute;
+		opacity: 0;
+		pointer-events: none;
+	}
+
+	.bb-package-body {
+		display: grid;
+		gap: 0.25rem;
+		padding: 0.95rem 1rem;
+		border: 1.5px solid var(--line);
+		border-radius: 0.65rem;
+		background: #fff;
+		transition: border-color 0.15s ease, background 0.15s ease, color 0.15s ease;
+	}
+
+	.bb-package-label {
+		font-weight: 600;
+		color: var(--ink);
+	}
+
+	.bb-package-price {
+		font-size: 0.95rem;
+		color: var(--muted);
+	}
+
+	.bb-package-note {
+		font-size: 0.85rem;
+		color: var(--muted);
+	}
+
+	.bb-package:has(input:checked) .bb-package-body,
+	.bb-package.is-preselected:has(input:checked) .bb-package-body {
+		background: var(--brand-mid);
+		border-color: var(--brand-mid);
+		color: #fff;
+	}
+
+	.bb-package:has(input:checked) .bb-package-label,
+	.bb-package:has(input:checked) .bb-package-price,
+	.bb-package:has(input:checked) .bb-package-note {
+		color: #fff;
+	}
+
+	.bb-package:focus-within .bb-package-body {
+		outline: 2px solid var(--brand-mid);
+		outline-offset: 2px;
+	}
+
+	.bb-submit {
+		width: 100%;
+		justify-content: center;
+		text-transform: uppercase;
+		letter-spacing: 0.04em;
+	}
+
+	.bb-submit:disabled {
+		opacity: 0.7;
+		cursor: wait;
+	}
+
+	.bb-status {
+		margin: 0;
+		font-size: 0.95rem;
+		line-height: 1.5;
+	}
+
+	.bb-status[data-state="pending"] {
+		color: var(--muted);
+	}
+
+	.bb-status[data-state="error"] {
+		color: #b42318;
+	}
+
+	.bb-status[data-state="ok"] {
+		color: var(--brand-deep);
+	}
+
+	.bb-fineprint {
+		margin: 0;
+		font-size: 0.85rem;
+		line-height: 1.5;
+		color: var(--muted);
+	}
+</style>
+
+<script>
+	function initBulkBookForm() {
+		const form = document.querySelector("[data-bulk-book]") as HTMLFormElement | null;
+		if (!form || form.dataset.bound === "true") return;
+		form.dataset.bound = "true";
+
+		const status = form.querySelector("[data-bulk-status]") as HTMLParagraphElement | null;
+		const submit = form.querySelector("[data-bulk-submit]") as HTMLButtonElement | null;
+		const payPanel = form.querySelector("[data-pay-panel]") as HTMLElement | null;
+		const speakPanel = form.querySelector("[data-speak-panel]") as HTMLElement | null;
+		const payFineprint = form.querySelector("[data-pay-fineprint]") as HTMLElement | null;
+		const speakFineprint = form.querySelector(
+			"[data-speak-fineprint]",
+		) as HTMLElement | null;
+		const packageInputs = () =>
+			form.querySelectorAll(
+				'input[name="packageId"]',
+			) as NodeListOf<HTMLInputElement>;
+
+		const getPayNow = () =>
+			(form.elements.namedItem("payNow") as RadioNodeList | null)?.value || "";
+
+		const syncPanels = () => {
+			const payNow = getPayNow();
+			const wantsPay = payNow === "yes";
+			const wantsSpeak = payNow === "speak-first";
+
+			if (payPanel) payPanel.hidden = !wantsPay;
+			if (speakPanel) speakPanel.hidden = !wantsSpeak;
+			if (payFineprint) payFineprint.hidden = !wantsPay;
+			if (speakFineprint) speakFineprint.hidden = !wantsSpeak;
+
+			packageInputs().forEach((input) => {
+				input.required = wantsPay;
+				if (!wantsPay) input.checked = false;
+			});
+
+			// Restore preselected package when switching back to pay-now
+			if (wantsPay) {
+				const pre = form.querySelector(
+					".bb-package.is-preselected input",
+				) as HTMLInputElement | null;
+				const anyChecked = form.querySelector(
+					'input[name="packageId"]:checked',
+				);
+				if (pre && !anyChecked) pre.checked = true;
+			}
+
+			if (!submit) return;
+			if (wantsPay) {
+				const pkgInput = form.querySelector(
+					'input[name="packageId"]:checked',
+				) as HTMLInputElement | null;
+				submit.textContent =
+					pkgInput?.dataset.hasStripe === "true"
+						? "Make Payment"
+						: "Submit Enquiry";
+			} else if (wantsSpeak) {
+				submit.textContent = "Submit Enquiry";
+			} else {
+				submit.textContent = "Submit Enquiry";
+			}
+		};
+
+		form.querySelectorAll('input[name="payNow"]').forEach((el) =>
+			el.addEventListener("change", syncPanels),
+		);
+		packageInputs().forEach((el) => el.addEventListener("change", syncPanels));
+		syncPanels();
+
+		form.addEventListener("submit", async (event) => {
+			event.preventDefault();
+			if (!status || !submit) return;
+
+			if (!form.reportValidity()) return;
+
+			const fd = new FormData(form);
+			const payload = {
+				firstName: String(fd.get("firstName") || "").trim(),
+				lastName: String(fd.get("lastName") || "").trim(),
+				email: String(fd.get("email") || "").trim(),
+				phone: String(fd.get("phone") || "").trim(),
+				preferredContact: String(fd.get("preferredContact") || "").trim(),
+				address1: String(fd.get("address1") || "").trim(),
+				address2: String(fd.get("address2") || "").trim(),
+				city: String(fd.get("city") || "").trim(),
+				county: String(fd.get("county") || "").trim(),
+				postcode: String(fd.get("postcode") || "").trim(),
+				country: String(fd.get("country") || "").trim(),
+				returningCustomer: String(fd.get("returningCustomer") || "").trim(),
+				newsletter: fd.get("newsletter") === "yes",
+				terms: fd.get("terms") === "yes",
+				payNow: String(fd.get("payNow") || "").trim(),
+				packageId: String(fd.get("packageId") || "").trim(),
+				comments: String(fd.get("comments") || "").trim(),
+				howHeard: String(fd.get("howHeard") || "").trim(),
+			};
+
+			status.hidden = false;
+			status.dataset.state = "pending";
+			status.textContent = "Submitting…";
+			submit.disabled = true;
+
+			try {
+				const response = await fetch("/api/bulk-book", {
+					method: "POST",
+					headers: { "Content-Type": "application/json" },
+					body: JSON.stringify(payload),
+				});
+				const data = await response.json().catch(() => ({}));
+
+				if (!response.ok || !data.success) {
+					status.dataset.state = "error";
+					status.textContent =
+						(typeof data.error === "string" && data.error) ||
+						"Something went wrong. Please try again.";
+					submit.disabled = false;
+					return;
+				}
+
+				if (typeof data.stripeUrl === "string" && data.stripeUrl) {
+					status.dataset.state = "ok";
+					status.textContent = "Taking you to secure Stripe checkout…";
+					window.location.href = data.stripeUrl;
+					return;
+				}
+
+				const thankYou =
+					(typeof data.thankYouUrl === "string" && data.thankYouUrl) ||
+					`/pricing/bulk-thank-you?ref=${encodeURIComponent(data.reference || "")}`;
+				window.location.href = thankYou;
+			} catch {
+				status.dataset.state = "error";
+				status.textContent =
+					"Network error — please check your connection and try again.";
+				submit.disabled = false;
+			}
+		});
+	}
+
+	initBulkBookForm();
+	document.addEventListener("astro:page-load", initBulkBookForm);
+</script>

@@ -26,6 +26,57 @@ const year = new Date().getFullYear();
 				/>
 			</a>
 			<p class="footer-tagline">{tagline}</p>
+
+			<section class="footer-signup" aria-labelledby="footer-signup-heading">
+				<h2 id="footer-signup-heading">Stay in touch</h2>
+				<form class="footer-signup-form" data-footer-signup novalidate>
+					<div class="footer-signup-row">
+						<label class="footer-field">
+							<span class="footer-label">First name</span>
+							<input
+								type="text"
+								name="firstName"
+								autocomplete="given-name"
+								placeholder="Jane"
+								required
+							/>
+						</label>
+						<div class="footer-email-action">
+							<label class="footer-field footer-field-email">
+								<span class="footer-label">Email</span>
+								<input
+									type="email"
+									name="email"
+									autocomplete="email"
+									placeholder="you@example.com"
+									required
+								/>
+							</label>
+							<button class="footer-submit" type="submit">Sign up</button>
+						</div>
+					</div>
+
+					<label class="footer-field">
+						<span class="footer-label">Would you like a free resource?</span>
+						<select name="resource">
+							<option value="newsletter" selected>No resource required at this moment</option>
+							<option value="teachers-guide">Why You Can't Switch Off After Teaching</option>
+							<option value="anxiety-guide">Finding Calm (anxiety guide)</option>
+							<option value="holding-too-much">When You've Been Holding Too Much for Too Long</option>
+						</select>
+					</label>
+
+					<label class="footer-check">
+						<input type="checkbox" name="consent" value="yes" required />
+						<span>
+							I'd like to receive supportive emails from Awaken Discovery. I can
+							unsubscribe anytime.
+						</span>
+					</label>
+
+					<p class="footer-signup-status" data-footer-status hidden></p>
+				</form>
+			</section>
 		</div>
 	</div>
 
@@ -110,7 +161,7 @@ const year = new Date().getFullYear();
 	.footer-brand-stripe {
 		background: var(--color-white);
 		color: var(--color-dark-gray);
-		padding: 2rem 0 1.6rem;
+		padding: 2rem 0 2rem;
 	}
 
 	.footer-brand-inner {
@@ -138,6 +189,156 @@ const year = new Date().getFullYear();
 		line-height: 1.35;
 		color: var(--color-dark-gray);
 		white-space: nowrap;
+	}
+
+	.footer-signup {
+		width: min(100%, 40rem);
+		margin-top: 0.85rem;
+		padding-top: 1.25rem;
+		border-top: 1px solid rgb(0 94 71 / 14%);
+		text-align: left;
+	}
+
+	.footer-signup h2 {
+		margin: 0 0 0.75rem;
+		font-size: 0.78rem;
+		font-weight: 600;
+		letter-spacing: 0.1em;
+		text-transform: uppercase;
+		color: var(--color-dark-slate-gray);
+	}
+
+	.footer-signup-form {
+		display: grid;
+		gap: 0.75rem;
+	}
+
+	.footer-signup-row {
+		display: grid;
+		gap: 0.75rem;
+	}
+
+	@media (min-width: 640px) {
+		.footer-signup-row {
+			grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.4fr);
+			align-items: end;
+		}
+	}
+
+	.footer-email-action {
+		display: grid;
+		grid-template-columns: minmax(0, 1fr) auto;
+		gap: 0.55rem;
+		align-items: end;
+	}
+
+	.footer-field {
+		display: grid;
+		gap: 0.3rem;
+		min-width: 0;
+	}
+
+	.footer-label {
+		font-size: 0.78rem;
+		font-weight: 600;
+		letter-spacing: 0.04em;
+		color: var(--color-dark-gray);
+	}
+
+	.footer-field input,
+	.footer-field select {
+		width: 100%;
+		padding: 0.7rem 0.85rem;
+		border: 1px solid rgb(0 94 71 / 22%);
+		border-radius: 0.55rem;
+		background: #fff;
+		color: var(--color-dark-gray);
+		font: inherit;
+	}
+
+	.footer-field select {
+		appearance: none;
+		background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%23005E47' d='M1 1l5 5 5-5'/%3E%3C/svg%3E");
+		background-repeat: no-repeat;
+		background-position: right 0.85rem center;
+		padding-right: 2.2rem;
+		cursor: pointer;
+	}
+
+	.footer-field select option {
+		color: #1d2327;
+		background: #fff;
+	}
+
+	.footer-field input::placeholder {
+		color: rgb(29 35 39 / 45%);
+	}
+
+	.footer-field input:focus-visible,
+	.footer-field select:focus-visible {
+		outline: 2px solid #005e47;
+		outline-offset: 1px;
+	}
+
+	.footer-check {
+		display: flex;
+		align-items: flex-start;
+		gap: 0.55rem;
+		font-size: 0.84rem;
+		line-height: 1.4;
+		cursor: pointer;
+		color: rgb(29 35 39 / 82%);
+	}
+
+	.footer-check input {
+		margin-top: 0.15rem;
+		accent-color: #005e47;
+		flex-shrink: 0;
+	}
+
+	.footer-submit {
+		padding: 0.7rem 1.2rem;
+		border: 0;
+		border-radius: 0.55rem;
+		background: #004836;
+		color: #fff;
+		font: inherit;
+		font-size: 0.9rem;
+		font-weight: 600;
+		cursor: pointer;
+		white-space: nowrap;
+		height: fit-content;
+		transition: background-color 0.15s ease, transform 0.15s ease;
+	}
+
+	.footer-submit:hover,
+	.footer-submit:focus-visible {
+		background: #005e47;
+		transform: translateY(-1px);
+	}
+
+	.footer-submit:disabled {
+		opacity: 0.65;
+		cursor: wait;
+		transform: none;
+	}
+
+	.footer-signup-status {
+		margin: 0;
+		font-size: 0.88rem;
+		line-height: 1.45;
+	}
+
+	.footer-signup-status[data-state="pending"] {
+		color: rgb(29 35 39 / 72%);
+	}
+
+	.footer-signup-status[data-state="error"] {
+		color: #b42318;
+	}
+
+	.footer-signup-status[data-state="ok"] {
+		color: #004836;
 	}
 
 	.footer-resources {
@@ -363,3 +564,81 @@ const year = new Date().getFullYear();
 		}
 	}
 </style>
+
+<script>
+	function initFooterSignup() {
+		document.querySelectorAll("[data-footer-signup]").forEach((formEl) => {
+			const form = formEl as HTMLFormElement;
+			if (form.dataset.bound === "true") return;
+			form.dataset.bound = "true";
+
+			const status = form.querySelector(
+				"[data-footer-status]",
+			) as HTMLParagraphElement | null;
+			const submit = form.querySelector(
+				'button[type="submit"]',
+			) as HTMLButtonElement | null;
+
+			form.addEventListener("submit", async (event) => {
+				event.preventDefault();
+				if (!status || !submit) return;
+				if (!form.reportValidity()) return;
+
+				const fd = new FormData(form);
+				const firstName = String(fd.get("firstName") || "").trim();
+				const email = String(fd.get("email") || "").trim();
+				const resource = String(fd.get("resource") || "newsletter");
+				const consent = fd.get("consent") === "yes";
+				const list =
+					resource === "newsletter" ? "newsletter" : resource;
+
+				status.hidden = false;
+				status.dataset.state = "pending";
+				status.textContent = "Signing you up…";
+				submit.disabled = true;
+
+				try {
+					const response = await fetch("/api/subscribe", {
+						method: "POST",
+						headers: { "Content-Type": "application/json" },
+						body: JSON.stringify({
+							email,
+							firstName,
+							consent,
+							list,
+							pagePath: window.location.pathname,
+							pageUrl: window.location.href,
+							pageLocation: "Site footer · Newsletter",
+						}),
+					});
+					const data = await response.json().catch(() => ({}));
+
+					if (!response.ok || !data.success) {
+						status.dataset.state = "error";
+						status.textContent =
+							(typeof data.error === "string" && data.error) ||
+							"Something went wrong. Please try again.";
+						submit.disabled = false;
+						return;
+					}
+
+					status.dataset.state = "ok";
+					status.textContent =
+						list === "newsletter"
+							? "You're signed up — welcome."
+							: "You're signed up. Check your inbox for your free guide.";
+					form.reset();
+					submit.disabled = false;
+				} catch {
+					status.dataset.state = "error";
+					status.textContent =
+						"Network error — please check your connection and try again.";
+					submit.disabled = false;
+				}
+			});
+		});
+	}
+
+	initFooterSignup();
+	document.addEventListener("astro:page-load", initFooterSignup);
+</script>

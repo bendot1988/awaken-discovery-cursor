@@ -53,6 +53,15 @@ const LIST_CONFIG = {
 		pdfPath: "/assets/pdf/finding-calm-anxiety.pdf",
 		pdfFilename: "finding-calm-anxiety-guide.pdf",
 	},
+	newsletter: {
+		audienceEnv: "MAILCHIMP_AUDIENCE_ID",
+		offerTitle: "Newsletter signup",
+		offerType: "Email newsletter (no free guide)",
+		defaultLocation: "Site footer · Newsletter",
+		listLabel: "Mailchimp audience · Newsletter",
+		tags: ["newsletter", "footer-signup", "website-signup"],
+		pdfPath: null,
+	},
 };
 
 function siteOrigin() {
@@ -350,7 +359,15 @@ async function sendGuideToSubscriber({ email, list, config }) {
 	return { ok: true, data, pdfUrl };
 }
 
-async function ensureInMailchimp({ apiKey, server, audienceId, email, tags }) {
+async function ensureInMailchimp({
+	apiKey,
+	server,
+	audienceId,
+	email,
+	tags,
+	firstName,
+	lastName,
+}) {
 	const status = String(process.env.MAILCHIMP_STATUS || "subscribed")
 		.trim()
 		.toLowerCase();
@@ -359,6 +376,10 @@ async function ensureInMailchimp({ apiKey, server, audienceId, email, tags }) {
 
 	const url = `https://${server}.api.mailchimp.com/3.0/lists/${audienceId}/members/${subscriberHash(email)}`;
 	const auth = Buffer.from(`anystring:${apiKey}`).toString("base64");
+
+	const merge_fields = {};
+	if (firstName) merge_fields.FNAME = firstName;
+	if (lastName) merge_fields.LNAME = lastName;
 
 	const response = await fetch(url, {
 		method: "PUT",
@@ -372,6 +393,7 @@ async function ensureInMailchimp({ apiKey, server, audienceId, email, tags }) {
 			status_if_new: memberStatus,
 			status: memberStatus,
 			tags: tags || [],
+			...(Object.keys(merge_fields).length ? { merge_fields } : {}),
 		}),
 	});
 
@@ -423,6 +445,8 @@ export async function handler(event) {
 	const email = String(payload.email || "")
 		.trim()
 		.toLowerCase();
+	const firstName = String(payload.firstName || "").trim();
+	const lastName = String(payload.lastName || "").trim();
 	const consent = Boolean(payload.consent);
 	const list = String(payload.list || "holding-too-much");
 	const pagePath = String(payload.pagePath || "").trim();
@@ -435,15 +459,18 @@ export async function handler(event) {
 		return json(400, { error: "Please enter a valid email address." });
 	}
 
-	if (!consent) {
-		return json(400, {
-			error: "Please tick the box to receive emails and your free guide.",
-		});
-	}
-
 	const config = LIST_CONFIG[list];
 	if (!config) {
 		return json(400, { error: "Unknown signup list." });
+	}
+
+	if (!consent) {
+		return json(400, {
+			error:
+				list === "newsletter"
+					? "Please tick the box to receive emails from Awaken Discovery."
+					: "Please tick the box to receive emails and your free guide.",
+		});
 	}
 
 	const audienceId = String(
@@ -466,6 +493,8 @@ export async function handler(event) {
 			audienceId,
 			email,
 			tags: config.tags,
+			firstName,
+			lastName,
 		});
 
 		if (!result.ok) {
@@ -487,19 +516,21 @@ export async function handler(event) {
 			});
 		}
 
-		const guideEmail = await sendGuideToSubscriber({
-			email,
-			list,
-			config,
-		});
-
-		if (!guideEmail.ok) {
-			console.error("Guide email failed after Mailchimp signup", guideEmail);
-			return json(502, {
-				error:
-					"You're on the list, but we couldn't email the guide just now. Please try again or contact us.",
-				hint: guideEmail.detail,
+		if (config.pdfPath) {
+			const guideEmail = await sendGuideToSubscriber({
+				email,
+				list,
+				config,
 			});
+
+			if (!guideEmail.ok) {
+				console.error("Guide email failed after Mailchimp signup", guideEmail);
+				return json(502, {
+					error:
+						"You're on the list, but we couldn't email the guide just now. Please try again or contact us.",
+					hint: guideEmail.detail,
+				});
+			}
 		}
 
 		await notifyAlly({

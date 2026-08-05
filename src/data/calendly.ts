@@ -15,7 +15,7 @@
 const CALENDLY_BASE = "https://calendly.com/awakendiscoverytherapy";
 
 export const calendlyLinks = {
-	/** Free 20-minute taster / consultation. Use this for "Enquire" / "Book a chat" CTAs. */
+	/** Free 30-minute taster / consultation. Use this for "Enquire" / "Book a chat" CTAs. */
 	tasterSession: `${CALENDLY_BASE}/20min`,
 
 	individual: {

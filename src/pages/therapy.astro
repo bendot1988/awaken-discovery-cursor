@@ -940,11 +940,13 @@ const couplesBenefits = [
 		grid-template-columns: repeat(3, minmax(0, 1fr));
 		gap: 1.4rem;
 		margin-top: 0.5rem;
+		align-items: stretch;
 	}
 
 	.th-session-card {
 		display: flex;
 		flex-direction: column;
+		height: 100%;
 		background: var(--color-white);
 		border: 1px solid rgb(0 94 71 / 16%);
 		border-radius: 1rem;
@@ -991,10 +993,11 @@ const couplesBenefits = [
 		display: flex;
 		flex-direction: column;
 		flex: 1 1 auto;
+		gap: 0.3rem;
 	}
 
 	.th-session-eyebrow {
-		margin: 0 0 0.3rem;
+		margin: 0;
 		text-transform: uppercase;
 		letter-spacing: 0.12em;
 		font-size: 0.72rem;
@@ -1003,7 +1006,7 @@ const couplesBenefits = [
 	}
 
 	.th-session-title {
-		margin: 0 0 0.8rem;
+		margin: 0 0 0.5rem;
 		font-family: var(--font-serif);
 		font-weight: 500;
 		font-size: 1.35rem;
@@ -1013,14 +1016,14 @@ const couplesBenefits = [
 	}
 
 	.th-session-price {
-		margin: 0 0 0.2rem;
+		margin: 0;
 		font-family: var(--font-serif);
 		font-size: 1.6rem;
 		color: var(--brand);
 	}
 
 	.th-session-note {
-		margin: 0 0 1.1rem;
+		margin: 0;
 		font-size: 0.88rem;
 		color: var(--ink-soft);
 	}
@@ -1028,6 +1031,7 @@ const couplesBenefits = [
 	.th-session-cta {
 		align-self: center;
 		min-width: 110px;
+		margin-top: auto;
 	}
 
 	/* ---------- BUNDLE BANNER ---------- */

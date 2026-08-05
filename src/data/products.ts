@@ -37,3 +37,70 @@ export const teacherRealignmentSystem: DigitalProduct = {
 	checkoutUrlGbp: null,
 	checkoutUrlUsd: null,
 };
+
+/** Stripe Payment Link for a single £60 therapy session (pay without booking). */
+export const sixtyMinuteSessionPayUrl =
+	"https://buy.stripe.com/6oUbJ12BheQg3PebDz8ww09";
+
+/** Stripe Payment Link for a single £90 therapy session (pay without booking). */
+export const ninetyMinuteSessionPayUrl =
+	"https://buy.stripe.com/14A5kD3Fl23u85u8rn8ww0d";
+
+/** Stripe Payment Link for a couples £130 (90 min) session (pay without booking). */
+export const couplesNinetyMinuteSessionPayUrl =
+	"https://buy.stripe.com/7sY6oH5Nt6jK0D2bDz8ww0e";
+
+/** Stripe Payment Link for a couples £90 (60 min) online/phone session. */
+export const couplesSixtyOnlineSessionPayUrl =
+	"https://buy.stripe.com/6oU00jb7N7nO99y8rn8ww0f";
+
+/** Stripe Payment Link for a couples £90 (60 min) face-to-face session. */
+export const couplesSixtyFaceToFaceSessionPayUrl =
+	"https://buy.stripe.com/eVq5kDejZcI85XmdLH8ww0g";
+
+/** Bulk session packages — form + Stripe Payment Links. */
+export type BulkPackageId = "ind-10" | "ind-6" | "cou-10" | "cou-6";
+
+export type BulkPackage = {
+	id: BulkPackageId;
+	label: string;
+	priceGbp: string;
+	priceLabel: string;
+	stripeUrl: string | null;
+};
+
+export const bulkPackages: BulkPackage[] = [
+	{
+		id: "ind-10",
+		label: "Individual — 10 × 60 min sessions (for the price of 9)",
+		priceGbp: "£540",
+		priceLabel: "540",
+		stripeUrl: "https://buy.stripe.com/eVq7sL8ZF8rS5Xm5fb8ww0h",
+	},
+	{
+		id: "ind-6",
+		label: "Individual — 6 × 60 min sessions (for the price of 5)",
+		priceGbp: "£324",
+		priceLabel: "324",
+		stripeUrl: "https://buy.stripe.com/aFa8wP8ZFbE44Ti7nj8ww0i",
+	},
+	{
+		id: "cou-10",
+		label: "Couples — 10 × 60 min sessions (for the price of 9)",
+		priceGbp: "£810",
+		priceLabel: "810",
+		stripeUrl: "https://buy.stripe.com/28EcN57VBcI8fxW7nj8ww0l",
+	},
+	{
+		id: "cou-6",
+		label: "Couples — 6 × 60 min sessions (for the price of 5)",
+		priceGbp: "£486",
+		priceLabel: "486",
+		stripeUrl: "https://buy.stripe.com/14AeVdcbR37y85u8rn8ww0k",
+	},
+];
+
+export function getBulkPackage(id: string | null | undefined): BulkPackage | undefined {
+	return bulkPackages.find((p) => p.id === id);
+}
+

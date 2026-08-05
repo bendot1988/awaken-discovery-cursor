@@ -4,6 +4,13 @@ import SiteHeader from "../../components/SiteHeader.astro";
 import SiteFooter from "../../components/SiteFooter.astro";
 import { locations, navItems } from "../../data/site";
 import { calendlyLinks } from "../../data/calendly";
+import {
+	sixtyMinuteSessionPayUrl,
+	ninetyMinuteSessionPayUrl,
+	couplesNinetyMinuteSessionPayUrl,
+	couplesSixtyOnlineSessionPayUrl,
+	couplesSixtyFaceToFaceSessionPayUrl,
+} from "../../data/products";
 
 type SingleCard = {
 	type: "ind" | "cou";
@@ -15,6 +22,8 @@ type SingleCard = {
 	popular: boolean;
 	bullets: string[];
 	bookHref: string;
+	/** Optional Stripe pay link — shown as a second CTA when present. */
+	payHref?: string;
 };
 
 const singleCards: SingleCard[] = [
@@ -32,6 +41,7 @@ const singleCards: SingleCard[] = [
 			"Pay per session, book at your own pace",
 		],
 		bookHref: calendlyLinks.individual.sixtyFaceToFace,
+		payHref: sixtyMinuteSessionPayUrl,
 	},
 	{
 		type: "ind",
@@ -47,6 +57,7 @@ const singleCards: SingleCard[] = [
 			"Pay per session, book at your own pace",
 		],
 		bookHref: calendlyLinks.individual.sixtyOnline,
+		payHref: sixtyMinuteSessionPayUrl,
 	},
 	{
 		type: "ind",
@@ -62,6 +73,7 @@ const singleCards: SingleCard[] = [
 			"Pay per session, book at your own pace",
 		],
 		bookHref: calendlyLinks.individual.ninetyFaceToFace,
+		payHref: ninetyMinuteSessionPayUrl,
 	},
 	{
 		type: "cou",
@@ -77,6 +89,7 @@ const singleCards: SingleCard[] = [
 			"Pay per session, book at your own pace",
 		],
 		bookHref: calendlyLinks.couples.sixtyFaceToFace,
+		payHref: couplesSixtyFaceToFaceSessionPayUrl,
 	},
 	{
 		type: "cou",
@@ -92,6 +105,7 @@ const singleCards: SingleCard[] = [
 			"Pay per session, book at your own pace",
 		],
 		bookHref: calendlyLinks.couples.sixtyOnline,
+		payHref: couplesSixtyOnlineSessionPayUrl,
 	},
 	{
 		type: "cou",
@@ -107,6 +121,7 @@ const singleCards: SingleCard[] = [
 			"Pay per session, book at your own pace",
 		],
 		bookHref: calendlyLinks.couples.ninetyFaceToFace,
+		payHref: couplesNinetyMinuteSessionPayUrl,
 	},
 ];
 ---
@@ -135,7 +150,7 @@ const singleCards: SingleCard[] = [
 					</p>
 					<p class="pr-note pr-note-soft">
 						All sessions are with Ally, MBACP-registered therapist. Free
-						20-minute consultations available before your first session.
+						30-minute consultations available before your first session.
 					</p>
 				</div>
 			</div>
@@ -206,18 +221,32 @@ const singleCards: SingleCard[] = [
 																<li>{b}</li>
 															))}
 														</ul>
-														<a
-															class="cta cta-solid pr-card-cta"
-															href={card.bookHref}
-															target="_blank"
-															rel="noopener noreferrer"
-															aria-label={`Book ${card.duration} ${card.format}`}
-														>
-															Book Now
-														</a>
+														<div class="pr-card-actions">
+															<a
+																class="cta cta-solid pr-card-cta"
+																href={card.bookHref}
+																target="_blank"
+																rel="noopener noreferrer"
+																aria-label={`Book ${card.duration} ${card.format}`}
+															>
+																Book Now
+															</a>
+															{card.payHref && (
+																<a
+																	class="cta cta-outline pr-card-cta"
+																	href={card.payHref}
+																	target="_blank"
+																	rel="noopener noreferrer"
+																	aria-label={`Pay for ${card.duration} ${card.format}`}
+																>
+																	Pay Now
+																</a>
+															)}
+														</div>
 														<p class="pr-card-fineprint">
-															Single sessions — pay per session. Booking opens
-															in a new tab via my Calendly.
+															{card.payHref
+																? `Book a time via Calendly, or pay for a ${card.price} session securely via Stripe.`
+																: "Single sessions — pay per session. Booking opens in a new tab via my Calendly."}
 														</p>
 													</div>
 												</article>
@@ -239,9 +268,9 @@ const singleCards: SingleCard[] = [
 						<p class="section-kicker">Booking more than one?</p>
 						<h2 class="pr-bundle-title">Save 10% with bulk session bundles</h2>
 						<p class="pr-bundle-body">
-							Bulk session bundles of 6 or 10 <strong>60-minute</strong>
-							sessions save 10% against the single-session rate. Useful for
-							focused, ongoing work — pay once and book at your own pace.
+							Bulk session bundles of 6 or 10 <strong>60-minute</strong> sessions
+							save 10% against the single-session rate. Useful for focused,
+							ongoing work — pay once and book at your own pace.
 						</p>
 					</div>
 					<a class="cta cta-solid" href="/pricing">See Bundle Pricing →</a>
@@ -257,7 +286,7 @@ const singleCards: SingleCard[] = [
 					<h2>Start with a free consultation</h2>
 					<p class="pr-close-body">
 						If you'd like to chat before booking, you're warmly welcome to start
-						with a free 20-minute consultation. We can talk through what's on
+						with a free 30-minute consultation. We can talk through what's on
 						your mind and find the format that feels right.
 					</p>
 					<div class="pr-close-actions">
@@ -434,6 +463,7 @@ const singleCards: SingleCard[] = [
 		display: grid;
 		grid-template-columns: repeat(2, minmax(0, 1fr));
 		gap: 1.4rem;
+		align-items: stretch;
 	}
 
 	.pr-card-grid-3 {
@@ -444,6 +474,7 @@ const singleCards: SingleCard[] = [
 		position: relative;
 		display: flex;
 		flex-direction: column;
+		height: 100%;
 		background: var(--color-white);
 		border: 1px solid rgb(0 94 71 / 16%);
 		border-radius: 1rem;
@@ -541,7 +572,7 @@ const singleCards: SingleCard[] = [
 
 	.pr-card-bullets {
 		list-style: none;
-		margin: 0 0 1.4rem;
+		margin: 0;
 		padding: 0;
 		text-align: left;
 		display: grid;
@@ -570,10 +601,20 @@ const singleCards: SingleCard[] = [
 		opacity: 0.65;
 	}
 
+	.pr-card-actions {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: center;
+		gap: 0.55rem;
+		margin-top: auto;
+		padding-top: 1.4rem;
+		margin-bottom: 0.9rem;
+	}
+
 	.pr-card-cta {
 		align-self: center;
-		min-width: 130px;
-		margin-bottom: 0.9rem;
+		min-width: 120px;
+		margin-bottom: 0;
 	}
 
 	.pr-card-fineprint {

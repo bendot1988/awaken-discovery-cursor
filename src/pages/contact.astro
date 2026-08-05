@@ -95,15 +95,100 @@ const faqs = [
 
 				<div class="ct-form-wrap">
 					<div class="ct-form-card">
-						<div
-							class="fillout-embed"
-							style="width:100%;height:560px;"
-							data-fillout-id="t5xKDhCRfyus"
-							data-fillout-embed-type="standard"
-							data-fillout-inherit-parameters
-							data-fillout-dynamic-resize
-						>
-						</div>
+						<form class="ct-form" data-contact-form novalidate>
+							<div class="ct-form-row">
+								<label class="ct-field">
+									<span class="ct-label">First name <abbr title="required">*</abbr></span>
+									<input
+										type="text"
+										name="firstName"
+										autocomplete="given-name"
+										placeholder="Jane"
+										required
+									/>
+								</label>
+								<label class="ct-field">
+									<span class="ct-label">Last name <abbr title="required">*</abbr></span>
+									<input
+										type="text"
+										name="lastName"
+										autocomplete="family-name"
+										placeholder="Smith"
+										required
+									/>
+								</label>
+							</div>
+
+							<label class="ct-field">
+								<span class="ct-label">Phone number <abbr title="required">*</abbr></span>
+								<input
+									type="tel"
+									name="phone"
+									autocomplete="tel"
+									placeholder="07XXX XXXXXX"
+									required
+								/>
+							</label>
+
+							<label class="ct-field">
+								<span class="ct-label">Email <abbr title="required">*</abbr></span>
+								<input
+									type="email"
+									name="email"
+									autocomplete="email"
+									placeholder="you@example.com"
+									required
+								/>
+							</label>
+
+							<fieldset class="ct-topics">
+								<legend class="ct-label">How can I help?</legend>
+								<label class="ct-check">
+									<input type="checkbox" name="topics" value="couple-sessions" />
+									<span>Question regarding couple sessions</span>
+								</label>
+								<label class="ct-check">
+									<input type="checkbox" name="topics" value="bulk-pricing" />
+									<span>Question regarding bulk pricing</span>
+								</label>
+								<label class="ct-check">
+									<input type="checkbox" name="topics" value="free-session" />
+									<span>Question regarding free session</span>
+								</label>
+								<label class="ct-check">
+									<input type="checkbox" name="topics" value="hello" />
+									<span>Saying hello / have a question</span>
+								</label>
+							</fieldset>
+
+							<label class="ct-field">
+								<span class="ct-label">Your message <abbr title="required">*</abbr></span>
+								<textarea
+									name="message"
+									rows="5"
+									placeholder="How can Ally help?"
+									required
+								></textarea>
+							</label>
+
+							<label class="ct-check">
+								<input type="checkbox" name="newsletter" value="yes" />
+								<span>
+									Yes, I'd like to receive updates, newsletters and supportive
+									resources from Awaken Discovery.
+								</span>
+							</label>
+
+							<label class="ct-check">
+								<input type="checkbox" name="privacy" value="yes" required />
+								<span>
+									I understand that the information provided by me is subject to the <a href="/privacy">Privacy Policy</a>. <abbr title="required">*</abbr>
+								</span>
+							</label>
+
+							<button class="cta cta-solid ct-submit" type="submit">Submit</button>
+							<p class="ct-status" data-contact-status hidden></p>
+						</form>
 
 						<p class="ct-privacy">
 							Your details are handled with care and never shared with third
@@ -122,7 +207,7 @@ const faqs = [
 					<h2>Prefer to talk it through instead?</h2>
 					<p class="ct-section-lede">
 						If a short, friendly chat feels easier than writing, you're warmly
-						invited to book a free 20-minute consultation. It's a relaxed,
+						invited to book a free 30-minute consultation. It's a relaxed,
 						no-obligation conversation to explore whether working together
 						feels like the right fit.
 					</p>
@@ -131,7 +216,7 @@ const faqs = [
 				<div class="ct-other-grid">
 					<article class="ct-other-card">
 						<p class="ct-other-eyebrow">Free consultation</p>
-						<h3>A 20-minute conversation</h3>
+						<h3>A 30-minute conversation</h3>
 						<p>
 							A short call by phone or video to ask questions, share what's
 							going on and see how I work. No pressure to book afterwards.
@@ -196,8 +281,6 @@ const faqs = [
 	</main>
 	<SiteFooter locations={locations} />
 </Layout>
-
-<script is:inline async src="https://server.fillout.com/embed/v1/"></script>
 
 <style>
 	.contact-page {
@@ -373,10 +456,127 @@ const faqs = [
 		padding: clamp(1.4rem, 2.5vw, 2.1rem);
 	}
 
-	.fillout-embed {
+	.ct-form {
+		display: grid;
+		gap: 1rem;
 		background: var(--color-white);
 		border-radius: 0.85rem;
-		overflow: hidden;
+		padding: 1.25rem 1.2rem 1.35rem;
+		border: 1px solid rgb(0 94 71 / 12%);
+	}
+
+	.ct-form-row {
+		display: grid;
+		gap: 1rem;
+	}
+
+	@media (min-width: 560px) {
+		.ct-form-row {
+			grid-template-columns: 1fr 1fr;
+		}
+	}
+
+	.ct-field {
+		display: grid;
+		gap: 0.4rem;
+	}
+
+	.ct-label {
+		font-size: 0.92rem;
+		font-weight: 600;
+		color: var(--ink);
+	}
+
+	.ct-label abbr,
+	.ct-check abbr {
+		color: #b42318;
+		text-decoration: none;
+	}
+
+	.ct-field input,
+	.ct-field textarea {
+		width: 100%;
+		padding: 0.75rem 0.9rem;
+		border: 1px solid rgb(0 94 71 / 22%);
+		border-radius: 0.55rem;
+		background: #fff;
+		font: inherit;
+		color: var(--ink);
+	}
+
+	.ct-field input:focus-visible,
+	.ct-field textarea:focus-visible {
+		outline: 2px solid var(--brand);
+		outline-offset: 1px;
+	}
+
+	.ct-field input::placeholder,
+	.ct-field textarea::placeholder {
+		color: rgb(29 35 39 / 42%);
+	}
+
+	.ct-topics {
+		margin: 0;
+		padding: 0;
+		border: 0;
+		display: grid;
+		gap: 0.55rem;
+	}
+
+	.ct-topics > legend {
+		padding: 0;
+		margin: 0 0 0.15rem;
+	}
+
+	.ct-check {
+		display: flex;
+		align-items: flex-start;
+		gap: 0.65rem;
+		font-size: 0.95rem;
+		line-height: 1.45;
+		color: var(--ink);
+		cursor: pointer;
+	}
+
+	.ct-check input {
+		margin-top: 0.2rem;
+		accent-color: var(--brand);
+		flex-shrink: 0;
+	}
+
+	.ct-check a {
+		color: var(--brand);
+		font-weight: 600;
+		text-decoration: underline;
+		text-underline-offset: 2px;
+	}
+
+	.ct-submit {
+		width: 100%;
+		justify-content: center;
+	}
+
+	.ct-submit:disabled {
+		opacity: 0.7;
+		cursor: wait;
+	}
+
+	.ct-status {
+		margin: 0;
+		font-size: 0.95rem;
+		line-height: 1.5;
+	}
+
+	.ct-status[data-state="pending"] {
+		color: var(--ink-soft);
+	}
+
+	.ct-status[data-state="error"] {
+		color: #b42318;
+	}
+
+	.ct-status[data-state="ok"] {
+		color: var(--brand-deep);
 	}
 
 	.ct-privacy {
@@ -539,3 +739,79 @@ const faqs = [
 		}
 	}
 </style>
+
+<script>
+	function initContactForm() {
+		const form = document.querySelector(
+			"[data-contact-form]",
+		) as HTMLFormElement | null;
+		if (!form || form.dataset.bound === "true") return;
+		form.dataset.bound = "true";
+
+		const status = form.querySelector(
+			"[data-contact-status]",
+		) as HTMLParagraphElement | null;
+		const submit = form.querySelector(
+			'button[type="submit"]',
+		) as HTMLButtonElement | null;
+
+		form.addEventListener("submit", async (event) => {
+			event.preventDefault();
+			if (!status || !submit) return;
+			if (!form.reportValidity()) return;
+
+			const fd = new FormData(form);
+			const topics = fd
+				.getAll("topics")
+				.map((v) => String(v));
+
+			const payload = {
+				firstName: String(fd.get("firstName") || "").trim(),
+				lastName: String(fd.get("lastName") || "").trim(),
+				phone: String(fd.get("phone") || "").trim(),
+				email: String(fd.get("email") || "").trim(),
+				message: String(fd.get("message") || "").trim(),
+				topics,
+				newsletter: fd.get("newsletter") === "yes",
+				privacy: fd.get("privacy") === "yes",
+			};
+
+			status.hidden = false;
+			status.dataset.state = "pending";
+			status.textContent = "Sending…";
+			submit.disabled = true;
+
+			try {
+				const response = await fetch("/api/contact", {
+					method: "POST",
+					headers: { "Content-Type": "application/json" },
+					body: JSON.stringify(payload),
+				});
+				const data = await response.json().catch(() => ({}));
+
+				if (!response.ok || !data.success) {
+					status.dataset.state = "error";
+					status.textContent =
+						(typeof data.error === "string" && data.error) ||
+						"Something went wrong. Please try again.";
+					submit.disabled = false;
+					return;
+				}
+
+				status.dataset.state = "ok";
+				status.textContent =
+					"Thank you — your message has been sent. Ally aims to reply within one working day.";
+				form.reset();
+				submit.disabled = false;
+			} catch {
+				status.dataset.state = "error";
+				status.textContent =
+					"Network error — please check your connection and try again.";
+				submit.disabled = false;
+			}
+		});
+	}
+
+	initContactForm();
+	document.addEventListener("astro:page-load", initContactForm);
+</script>

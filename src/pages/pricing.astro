@@ -1,13 +1,16 @@
 ---
+import { Image } from "astro:assets";
 import Layout from "../layouts/Layout.astro";
 import SiteHeader from "../components/SiteHeader.astro";
 import SiteFooter from "../components/SiteFooter.astro";
 import { locations, navItems } from "../data/site";
 import { calendlyLinks } from "../data/calendly";
+import allyTreePortrait from "../assets/therapy/ally-tree-portrait.png";
 
 type BulkCard = {
 	type: "ind" | "cou";
 	sessions: number;
+	packageId: "ind-10" | "ind-6" | "cou-10" | "cou-6";
 	price: string;
 	headlinePrice: string;
 	headerVariant: "dark" | "sage";
@@ -19,6 +22,7 @@ const bulkCards: BulkCard[] = [
 	{
 		type: "ind",
 		sessions: 10,
+		packageId: "ind-10",
 		price: "£540",
 		headlinePrice: "540",
 		headerVariant: "dark",
@@ -32,6 +36,7 @@ const bulkCards: BulkCard[] = [
 	{
 		type: "ind",
 		sessions: 6,
+		packageId: "ind-6",
 		price: "£324",
 		headlinePrice: "324",
 		headerVariant: "sage",
@@ -45,6 +50,7 @@ const bulkCards: BulkCard[] = [
 	{
 		type: "cou",
 		sessions: 10,
+		packageId: "cou-10",
 		price: "£810",
 		headlinePrice: "810",
 		headerVariant: "dark",
@@ -58,6 +64,7 @@ const bulkCards: BulkCard[] = [
 	{
 		type: "cou",
 		sessions: 6,
+		packageId: "cou-6",
 		price: "£486",
 		headlinePrice: "486",
 		headerVariant: "sage",
@@ -70,8 +77,6 @@ const bulkCards: BulkCard[] = [
 	},
 ];
 
-const finePrint =
-	"Bundles are 60-minute sessions only, arranged after a free 20-minute consultation. Sessions must be booked within 7 days of payment. Non-refundable, but rescheduling with 7 days' notice is fine.";
 ---
 
 <Layout
@@ -82,7 +87,7 @@ const finePrint =
 	<main class="pr-page">
 		<!-- ============== HERO ============== -->
 		<section class="pr-hero section">
-			<div class="container">
+			<div class="container pr-hero-grid">
 				<div class="pr-hero-inner">
 					<p class="section-kicker">Pricing</p>
 					<h1>Bulk Sessions</h1>
@@ -105,6 +110,18 @@ const finePrint =
 						<a href="/pricing/individual">single session pricing</a>.
 					</p>
 				</div>
+				<figure class="pr-hero-figure">
+					<Image
+						src={allyTreePortrait}
+						alt="Ally outdoors, leaning gently on a tree branch in soft natural light"
+						widths={[420, 640, 860]}
+						sizes="(max-width: 960px) 70vw, 420px"
+						loading="eager"
+						decoding="async"
+						format="webp"
+						quality={82}
+					/>
+				</figure>
 			</div>
 		</section>
 
@@ -222,13 +239,10 @@ const finePrint =
 														</ul>
 														<a
 															class="cta cta-solid pr-card-cta"
-															href={calendlyLinks.tasterSession}
-															target="_blank"
-															rel="noopener noreferrer"
+															href={`/pricing/bulk-book?package=${card.packageId}`}
 														>
-															Enquire to Book
+															Book &amp; Pay
 														</a>
-														<p class="pr-card-fineprint">{finePrint}</p>
 													</div>
 												</article>
 											))}
@@ -246,56 +260,57 @@ const finePrint =
 			<div class="container">
 				<div class="pr-enquire-inner">
 					<p class="section-kicker">Next step</p>
-					<h2>Enquire About a Bulk Bundle</h2>
+					<h2>Book a Bulk Bundle</h2>
 					<p class="pr-enquire-lede">
-						Bundles are arranged after a short, free conversation — that way we
-						can make sure the format, dates and times feel right for you before
-						you commit. Book a free 20-minute consultation below and I'll walk
-						you through the package, scheduling and payment.
+						Fill in a short form to request your package. You can pay securely
+						with Stripe straight away, or ask to speak with Ally first — either
+						way you'll get a confirmation email with your reference number.
 					</p>
 
 					<ol class="pr-enquire-steps">
 						<li>
 							<span class="pr-enquire-num" aria-hidden="true">1</span>
 							<div>
-								<h3>Book a free 20-minute chat</h3>
+								<h3>Complete the bulk booking form</h3>
 								<p>
-									Pick a time that suits you on my Calendly — no payment yet,
-									no pressure.
+									Share your details, choose your package, and say whether you'd
+									like to pay now or speak first.
 								</p>
 							</div>
 						</li>
 						<li>
 							<span class="pr-enquire-num" aria-hidden="true">2</span>
 							<div>
-								<h3>We chat through what you need</h3>
+								<h3>Pay now or chat first</h3>
 								<p>
-									We'll confirm which bundle fits, agree dates and times, and
-									answer any questions about how the work feels.
+									If you choose pay now, you'll go to secure <strong>Stripe</strong> Checkout. Prefer a conversation first?
+									Ally will follow up within one working day.
 								</p>
 							</div>
 						</li>
 						<li>
 							<span class="pr-enquire-num" aria-hidden="true">3</span>
 							<div>
-								<h3>Pay &amp; start your sessions</h3>
+								<h3>Confirm dates &amp; start</h3>
 								<p>
-									Once we've agreed your bundle, I'll send a secure
-									<strong>Stripe</strong> payment link and we'll get the first
-									session in the diary.
+									Once payment (or your chat) is sorted, we'll agree session
+									dates and times and get your first appointment in the diary.
 								</p>
 							</div>
 						</li>
 					</ol>
 
 					<div class="pr-enquire-actions">
+						<a class="cta cta-solid" href="/pricing/bulk-book">
+							Book a Bulk Package
+						</a>
 						<a
-							class="cta cta-solid"
+							class="cta cta-outline"
 							href={calendlyLinks.tasterSession}
 							target="_blank"
 							rel="noopener noreferrer"
 						>
-							Book Your Free 20-min Consultation
+							Free 30-min Consultation
 						</a>
 						<a class="cta cta-outline" href="/pricing/individual">
 							Browse Single Sessions
@@ -363,8 +378,32 @@ const finePrint =
 		padding-top: 4rem;
 	}
 
+	.pr-hero-grid {
+		display: grid;
+		grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+		gap: clamp(1.6rem, 4vw, 3rem);
+		align-items: center;
+	}
+
 	.pr-hero-inner {
 		max-width: 62ch;
+	}
+
+	.pr-hero-figure {
+		margin: 0;
+		border-radius: 1rem;
+		overflow: hidden;
+		box-shadow: 0 16px 38px rgb(0 94 71 / 16%);
+		aspect-ratio: 4 / 5;
+		background: var(--color-white-smoke);
+	}
+
+	.pr-hero-figure img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		object-position: 50% 30%;
+		display: block;
 	}
 
 	.pr-lede {
@@ -536,12 +575,14 @@ const finePrint =
 		display: grid;
 		grid-template-columns: repeat(2, minmax(0, 1fr));
 		gap: 1.4rem;
+		align-items: stretch;
 	}
 
 	.pr-card {
 		position: relative;
 		display: flex;
 		flex-direction: column;
+		height: 100%;
 		background: var(--color-white);
 		border: 1px solid rgb(0 94 71 / 16%);
 		border-radius: 1rem;
@@ -684,7 +725,7 @@ const finePrint =
 	}
 
 	.pr-card-cta {
-		margin-top: 0.4rem;
+		margin-top: auto;
 		padding: 0.9rem 1.4rem;
 		text-align: center;
 		display: block;
@@ -695,14 +736,6 @@ const finePrint =
 	.pr-card-cta:focus-visible {
 		background: var(--brand-deep);
 		border-color: var(--brand-deep);
-	}
-
-	.pr-card-fineprint {
-		margin: 0;
-		font-size: 0.78rem;
-		line-height: 1.55;
-		color: var(--ink-soft);
-		text-align: center;
 	}
 
 	/* ---------- ENQUIRE SECTION ---------- */
@@ -794,8 +827,14 @@ const finePrint =
 
 	/* ---------- RESPONSIVE ---------- */
 	@media (max-width: 900px) {
+		.pr-hero-grid,
 		.pr-single-row {
 			grid-template-columns: 1fr;
+		}
+
+		.pr-hero-figure {
+			max-width: 22rem;
+			margin-inline: auto;
 		}
 
 		.pr-card-grid {

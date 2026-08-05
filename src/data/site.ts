@@ -113,8 +113,9 @@ export const freeResources: FreeResource[] = [
 			"Permission to slow down without guilt",
 			"Small reconnection practices for daily life",
 		],
-		imagePrompt:
-			"Soft, calming flatlay or scene — open hands, warm light, a small leaf or stone. Conveys 'putting something down,' rest, release.",
+		image: "/assets/images/holding-too-much-guide-mockup.png",
+		imageAlt:
+			"When You've Been Holding Too Much for Too Long — free gentle reflection guide",
 	},
 ];
 
