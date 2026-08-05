@@ -10,8 +10,10 @@
  * - MAILCHIMP_STATUS           optional — "subscribed" (default) or "pending" for double opt-in
  * - RESEND_API_KEY             required to email the free PDF to the subscriber
  * - RESEND_FROM                verified from-address (not onboarding@resend.dev for real users)
- * - SIGNUP_NOTIFY_TO           optional Ally notification inbox
  * - SITE_URL                   optional — PDF link origin (Netlify URL used if unset)
+ *
+ * Ally signup alerts always go to: awakendiscoverytherapy@gmail.com
+ * (homepage, teachers, and anxiety forms — all three)
  */
 
 import { createHash } from "node:crypto";
@@ -189,8 +191,7 @@ async function notifyAlly({
 		return { skipped: true };
 	}
 
-	const to =
-		process.env.SIGNUP_NOTIFY_TO || "awakendiscoverytherapy@gmail.com";
+	const to = "awakendiscoverytherapy@gmail.com";
 	const from = resendFrom();
 
 	const html = buildNotifyHtml({
