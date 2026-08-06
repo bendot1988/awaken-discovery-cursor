@@ -202,9 +202,10 @@ const pageDescription =
 <style>
 	.at-page {
 		--ink: var(--color-dark-gray);
-		--ink-soft: #4d5559;
+		--ink-soft: rgb(29 35 39 / 78%);
 		--brand: var(--color-dark-slate-gray);
-		--brand-deep: #00422f;
+		--brand-deep: #004836;
+		--brand-tint: rgb(0 94 71 / 8%);
 		--cream: #fdfaf5;
 	}
 
@@ -213,18 +214,18 @@ const pageDescription =
 		margin: 0;
 		font-size: 0.78rem;
 		font-weight: 600;
-		letter-spacing: 0.14em;
+		letter-spacing: 0.12em;
 		text-transform: uppercase;
 		color: var(--brand);
 	}
 
 	.at-h1 {
-		margin: 1rem 0 1.2rem;
+		margin: 0.6rem 0 1rem;
 		font-family: var(--font-serif);
-		font-size: clamp(2.2rem, 5vw, 3.4rem);
+		font-size: clamp(2.2rem, 5vw, 3.2rem);
 		font-weight: 500;
 		line-height: 1.12;
-		color: var(--ink);
+		color: var(--brand-deep);
 		text-wrap: balance;
 	}
 
@@ -240,24 +241,20 @@ const pageDescription =
 
 	/* ---------- HERO ---------- */
 	.at-hero {
-		padding-block: clamp(4rem, 8vh, 6rem) clamp(1.5rem, 3vh, 2.5rem);
-		background: linear-gradient(180deg, #f6f8f6 0%, var(--color-white) 100%);
+		padding-top: 4rem;
+		padding-bottom: clamp(1.5rem, 3vh, 2.5rem);
+		background: linear-gradient(180deg, var(--color-white) 0%, var(--brand-tint) 100%);
 	}
 
 	.at-hero-inner {
 		max-width: 760px;
-		margin-inline: auto;
-		text-align: center;
 	}
 
 	.at-lede {
-		margin: 0 auto;
-		max-width: 52ch;
-		font-family: var(--font-serif);
-		font-style: italic;
-		font-weight: 500;
-		font-size: clamp(1.2rem, 2.2vw, 1.55rem);
-		line-height: 1.55;
+		margin: 0;
+		max-width: 60ch;
+		font-size: clamp(1.05rem, 1.8vw, 1.2rem);
+		line-height: 1.7;
 		color: var(--ink-soft);
 	}
 

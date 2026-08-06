@@ -73,6 +73,8 @@ export const businessInfo = {
 export const teacherGuidePath = "/finding-calm-teachers";
 export const anxietyGuidePath = "/finding-calm-anxiety";
 export const freeResourcesPath = "/free-resources";
+export const sundayResetPath = "/sunday-reset";
+export const sundayResetBookingUrl = "https://forms.gle/ceJYAUBeZNg9kvXY6";
 
 export type FreeResource = {
 	title: string;
@@ -86,6 +88,8 @@ export type FreeResource = {
 	imageAlt?: string;
 	imagePrompt?: string;
 	audience: string;
+	/** When set, free-resources page opens the email popup instead of navigating. */
+	signupList?: "teachers-guide" | "anxiety-guide" | "holding-too-much";
 };
 
 export const freeResources: FreeResource[] = [
@@ -99,6 +103,7 @@ export const freeResources: FreeResource[] = [
 		href: teacherGuidePath,
 		ctaLabel: "Get the Teacher Guide",
 		audience: "For teachers",
+		signupList: "teachers-guide",
 		bullets: [
 			"Ground yourself in under 60 seconds",
 			"Body-aware techniques nobody can see you doing",
@@ -117,6 +122,7 @@ export const freeResources: FreeResource[] = [
 		href: anxietyGuidePath,
 		ctaLabel: "Get the Anxiety Guide",
 		audience: "For anxiety & overwhelm",
+		signupList: "anxiety-guide",
 		bullets: [
 			"Listen to what your body is telling you",
 			"Personal anchors for overwhelming moments",
@@ -135,6 +141,7 @@ export const freeResources: FreeResource[] = [
 		href: "/#signup",
 		ctaLabel: "Receive the Guide",
 		audience: "For anyone carrying too much",
+		signupList: "holding-too-much",
 		bullets: [
 			"Understand what emotional overwhelm really is",
 			"Permission to slow down without guilt",
@@ -172,6 +179,7 @@ export const footerNavItems: NavItem[] = [
 	{ label: "About Therapy", href: "/about-therapy" },
 	{ label: "Teachers", href: "/teachers" },
 	{ label: "Anxiety", href: "/anxiety" },
+	{ label: "Sunday Reset", href: "/sunday-reset" },
 	{ label: "Free Resources", href: "/free-resources" },
 	{ label: "Products", href: "/products" },
 	{ label: "Single Session Pricing", href: "/pricing/individual" },

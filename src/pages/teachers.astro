@@ -4,7 +4,8 @@ import Layout from "../layouts/Layout.astro";
 import SiteHeader from "../components/SiteHeader.astro";
 import SiteFooter from "../components/SiteFooter.astro";
 import GuideSignupForm from "../components/home/GuideSignupForm.astro";
-import { locations, navItems, teacherGuidePath } from "../data/site";
+import GuideSignupDialog from "../components/GuideSignupDialog.astro";
+import { locations, navItems } from "../data/site";
 import { calendlyLinks } from "../data/calendly";
 import handPickingBook from "../assets/teachers/hand-picking-book.jpg";
 import stoolInClearing from "../assets/teachers/stool-in-clearing.jpg";
@@ -46,10 +47,18 @@ import stoolInClearing from "../assets/teachers/stool-in-clearing.jpg";
 						and rediscover who you are beyond the classroom.
 					</p>
 					<div class="cta-row">
-						<a class="cta cta-solid cta-guide" href={teacherGuidePath}>
+						<GuideSignupDialog
+							list="teachers-guide"
+							dialogId="guide-signup-dialog-teachers-hero"
+							triggerClass="cta cta-solid cta-guide"
+							title="Why You Can't Switch Off — free teacher guide"
+							lede="Gentle grounding tools for teachers. Enter your email and the free PDF will arrive shortly."
+							buttonLabel="Send Me the Free Guide"
+							pageLocation="Teachers · Hero · Free teacher guide"
+						>
 							<span class="cta-guide-lead">Download the Free Guide —</span>
 							<span class="cta-guide-name">Why You Can't Switch Off After Teaching</span>
-						</a>
+						</GuideSignupDialog>
 						<a class="cta cta-outline" href="#support">Explore Teacher Support</a>
 					</div>
 					<ul class="trust-strip" aria-label="Credentials">
@@ -161,28 +170,40 @@ import stoolInClearing from "../assets/teachers/stool-in-clearing.jpg";
 			id="meet-ally-teacher"
 		>
 			<div class="container mat-inner">
-				<p class="section-kicker">Meet Ally</p>
-				<h2>From Teacher Burnout to Emotional Healing</h2>
-				<div class="mat-copy">
-					<p>
-						Before becoming a Counsellor and Psychotherapist, I spent over
-						twenty years working within education.
-					</p>
-					<p>
-						I understand the emotional pressure, overstimulation and
-						exhaustion that teaching can quietly create beneath the surface.
-					</p>
-					<p>
-						Awaken Discovery, Teachers was created to offer teachers a calmer,
-						more compassionate space to pause, breathe and reconnect with
-						themselves again — whether through therapy, emotional wellbeing
-						support or practical nervous system awareness tools.
-					</p>
-					<p class="mat-emphasis">
-						You do not need to keep carrying everything alone.
-					</p>
+				<div class="mat-text">
+					<p class="section-kicker">Meet Ally</p>
+					<h2>From Teacher Burnout to Emotional Healing</h2>
+					<div class="mat-copy">
+						<p>
+							Before becoming a Counsellor and Psychotherapist, I spent over
+							twenty years working within education.
+						</p>
+						<p>
+							I understand the emotional pressure, overstimulation and
+							exhaustion that teaching can quietly create beneath the surface.
+						</p>
+						<p>
+							Awaken Discovery, Teachers was created to offer teachers a calmer,
+							more compassionate space to pause, breathe and reconnect with
+							themselves again — whether through therapy, emotional wellbeing
+							support or practical nervous system awareness tools.
+						</p>
+						<p class="mat-emphasis">
+							You do not need to keep carrying everything alone.
+						</p>
+					</div>
+					<a class="cta cta-outline mat-cta" href="/about">Learn More About Ally</a>
 				</div>
-				<a class="cta cta-outline mat-cta" href="/about">Learn More About Ally</a>
+				<figure class="mat-figure">
+					<img
+						src="/assets/images/ally-portrait-sofa.jpg"
+						alt="Ally — Counsellor, Psychotherapist and former teacher at Awaken Discovery"
+						width="768"
+						height="1024"
+						loading="lazy"
+						decoding="async"
+					/>
+				</figure>
 			</div>
 		</section>
 
@@ -208,40 +229,44 @@ import stoolInClearing from "../assets/teachers/stool-in-clearing.jpg";
 							system exhaustion and why teaching can become so difficult to
 							mentally leave behind at the end of the day.
 						</p>
-						<a class="sb-link" href={teacherGuidePath}>
-							Download the Free Guide
-							<span aria-hidden="true">→</span>
-						</a>
+						<GuideSignupDialog
+							list="teachers-guide"
+							dialogId="guide-signup-dialog-teachers-support"
+							triggerClass="sb-link"
+							triggerLabel="Download the Free Guide →"
+							title="Why You Can't Switch Off — free teacher guide"
+							lede="Gentle grounding tools for teachers. Enter your email and the free PDF will arrive shortly."
+							buttonLabel="Send Me the Free Guide"
+							pageLocation="Teachers · Support & Beyond · Free teacher guide"
+						/>
 					</article>
 
 					<article class="sb-card">
-						<p class="sb-tag">Guided Journal</p>
-						<h3>Teachers Reflection Journal</h3>
+						<p class="sb-tag">Guided PDF · £37</p>
+						<h3>The Teacher Realignment System</h3>
 						<p>
-							A supportive guided journal designed to help teachers recognise
-							emotional patterns, process overwhelm and reconnect with
-							themselves beyond survival mode.
+							A guided PDF workbook for teachers who struggle to switch off,
+							carry school home, or feel overwhelmed by the emotional demands
+							of teaching.
 						</p>
-						<a class="sb-link" href="/products">
-							Explore the Journal
+						<a class="sb-link" href="/products#teacher-realignment-system">
+							Get the Teacher Realignment System
 							<span aria-hidden="true">→</span>
 						</a>
-						<p class="sb-status">In development — currently being shaped.</p>
 					</article>
 
 					<article class="sb-card">
-						<p class="sb-tag">Group Wellbeing Session</p>
+						<p class="sb-tag">Group Wellbeing · £25</p>
 						<h3>Sunday Reset for Teachers</h3>
 						<p>
-							Gentle online wellbeing sessions created to help teachers
-							emotionally decompress, regulate the nervous system and prepare
-							for the week ahead with greater calm.
+							A gentle online workshop on the last Sunday of every month —
+							practical tools to decompress, settle Sunday anxiety and begin
+							the week feeling calmer. Listen, reflect, and take what helps.
 						</p>
-						<a class="sb-link" href="/contact">
-							Learn About the Reset
+						<a class="sb-link" href="/sunday-reset">
+							Learn about the Reset
 							<span aria-hidden="true">→</span>
 						</a>
-						<p class="sb-status">In development — get in touch for updates.</p>
 					</article>
 
 					<article class="sb-card">
@@ -292,9 +317,16 @@ import stoolInClearing from "../assets/teachers/stool-in-clearing.jpg";
 						pressure of holding everything together, support is available.
 					</p>
 					<div class="cf-buttons">
-						<a class="cta cta-solid" href={teacherGuidePath}>
-							Download the Free Guide
-						</a>
+						<GuideSignupDialog
+							list="teachers-guide"
+							dialogId="guide-signup-dialog-teachers-final"
+							triggerClass="cta cta-solid"
+							triggerLabel="Download the Free Guide"
+							title="Why You Can't Switch Off — free teacher guide"
+							lede="Gentle grounding tools for teachers. Enter your email and the free PDF will arrive shortly."
+							buttonLabel="Send Me the Free Guide"
+							pageLocation="Teachers · Final CTA · Free teacher guide"
+						/>
 						<a
 							class="cta cta-outline"
 							href={calendlyLinks.individual.sixtyFaceToFace}
@@ -383,7 +415,8 @@ import stoolInClearing from "../assets/teachers/stool-in-clearing.jpg";
 		margin-top: 1.6rem;
 	}
 
-	.cta-guide {
+	/* Button lives in GuideSignupDialog — style via :global */
+	.cta-row :global(.cta-guide) {
 		display: inline-flex;
 		flex-wrap: wrap;
 		align-items: baseline;
@@ -647,13 +680,37 @@ import stoolInClearing from "../assets/teachers/stool-in-clearing.jpg";
 
 	/* ---------- MEET ALLY (TEACHER) ---------- */
 	.mat-inner {
-		max-width: 64ch;
-		text-align: left;
+		max-width: 1080px;
+		display: grid;
+		grid-template-columns: 1.15fr 0.85fr;
+		gap: clamp(1.6rem, 4vw, 3.5rem);
+		align-items: center;
 	}
 
-	.mat-inner h2 {
+	.mat-text {
+		max-width: 62ch;
+	}
+
+	.mat-text h2 {
 		max-width: 24ch;
-		margin-bottom: 1.4rem;
+		margin-bottom: 0.2rem;
+	}
+
+	.mat-figure {
+		margin: 0;
+	}
+
+	.mat-figure img {
+		width: 100%;
+		aspect-ratio: 4 / 5;
+		object-fit: cover;
+		object-position: 50% 25%;
+		border-radius: 1rem;
+		box-shadow: 0 18px 36px rgb(0 94 71 / 18%);
+	}
+
+	.mat-copy {
+		margin-top: 1.4rem;
 	}
 
 	.mat-copy p {
@@ -671,6 +728,18 @@ import stoolInClearing from "../assets/teachers/stool-in-clearing.jpg";
 
 	.mat-cta {
 		margin-top: 1.3rem;
+	}
+
+	@media (max-width: 900px) {
+		.mat-inner {
+			grid-template-columns: 1fr;
+		}
+
+		.mat-figure {
+			max-width: 360px;
+			margin-inline: auto;
+			order: -1;
+		}
 	}
 
 	/* ---------- SUPPORT BEYOND SURVIVAL MODE ---------- */
@@ -755,21 +824,30 @@ import stoolInClearing from "../assets/teachers/stool-in-clearing.jpg";
 		flex: 1;
 	}
 
-	.sb-link {
+	.sb-link,
+	.sb-card :global(button.sb-link) {
 		margin-top: 0.4rem;
 		display: inline-flex;
 		align-items: center;
 		gap: 0.35rem;
+		padding: 0;
+		border: none;
+		background: none;
+		font: inherit;
 		font-weight: 600;
 		font-size: 0.92rem;
 		color: var(--color-dark-slate-gray);
 		text-decoration: none;
 		width: fit-content;
+		cursor: pointer;
+		text-align: left;
 		transition: gap 0.2s ease;
 	}
 
 	.sb-link:hover,
-	.sb-link:focus-visible {
+	.sb-link:focus-visible,
+	.sb-card :global(button.sb-link:hover),
+	.sb-card :global(button.sb-link:focus-visible) {
 		gap: 0.6rem;
 		text-decoration: underline;
 		text-underline-offset: 3px;

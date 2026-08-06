@@ -3,7 +3,8 @@ import Layout from "../layouts/Layout.astro";
 import SiteHeader from "../components/SiteHeader.astro";
 import SiteFooter from "../components/SiteFooter.astro";
 import EmailSignup from "../components/home/EmailSignup.astro";
-import { anxietyGuidePath, locations, navItems } from "../data/site";
+import GuideSignupDialog from "../components/GuideSignupDialog.astro";
+import { locations, navItems } from "../data/site";
 import { calendlyLinks } from "../data/calendly";
 
 const findingCalmWhatsInside = [
@@ -59,10 +60,18 @@ const anxietyApproach = [
 						emotional support.
 					</p>
 					<div class="cta-row">
-						<a class="cta cta-solid cta-guide" href={anxietyGuidePath}>
+						<GuideSignupDialog
+							list="anxiety-guide"
+							dialogId="guide-signup-dialog-anxiety-hero"
+							triggerClass="cta cta-solid cta-guide"
+							title="Finding Calm — free anxiety guide"
+							lede="A simple guide to grounding yourself during anxiety. Enter your email and the PDF will arrive shortly."
+							buttonLabel="Send Me the Free Guide"
+							pageLocation="Anxiety · Hero · Free Finding Calm guide"
+						>
 							<span class="cta-guide-lead">Download the Free Guide —</span>
 							<span class="cta-guide-name">Finding Calm</span>
-						</a>
+						</GuideSignupDialog>
 						<a class="cta cta-outline" href="#support">Explore Anxiety Support</a>
 					</div>
 					<ul class="trust-strip" aria-label="Credentials">
@@ -507,7 +516,16 @@ const anxietyApproach = [
 					</p>
 				</div>
 				<div class="fc-actions">
-					<a class="cta cta-solid" href="#signup">Download the Free Guide</a>
+					<GuideSignupDialog
+						list="anxiety-guide"
+						dialogId="guide-signup-dialog-anxiety-final"
+						triggerClass="cta cta-solid"
+						triggerLabel="Download the Free Guide"
+						title="Finding Calm — free anxiety guide"
+						lede="A simple guide to grounding yourself during anxiety. Enter your email and the PDF will arrive shortly."
+						buttonLabel="Send Me the Free Guide"
+						pageLocation="Anxiety · Final CTA · Free Finding Calm guide"
+					/>
 					<a
 						class="cta cta-outline"
 						href={calendlyLinks.individual.sixtyFaceToFace}
@@ -586,7 +604,8 @@ const anxietyApproach = [
 		margin-top: 1.6rem;
 	}
 
-	.cta-guide {
+	/* Button lives in GuideSignupDialog — style via :global */
+	.cta-row :global(.cta-guide) {
 		display: inline-flex;
 		flex-wrap: wrap;
 		align-items: baseline;

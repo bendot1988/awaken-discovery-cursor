@@ -31,7 +31,7 @@ const {
 	aria-haspopup="dialog"
 	aria-controls={dialogId}
 >
-	{triggerLabel}
+	<slot>{triggerLabel}</slot>
 </button>
 
 <dialog id={dialogId} class="guide-signup-dialog" aria-labelledby={`${dialogId}-title`}>
@@ -106,6 +106,9 @@ const {
 	button.cta {
 		cursor: pointer;
 		font: inherit;
+	}
+
+	button.cta.cta-outline {
 		background: transparent;
 	}
 

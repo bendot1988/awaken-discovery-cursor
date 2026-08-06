@@ -11,14 +11,8 @@ import {
 	groundedWellnessAffiliateUrl,
 	teacherRealignmentSystem,
 } from "../data/products";
+import { sundayResetBookingUrl } from "../data/site";
 
-const developingProducts = [
-	{
-		label: "Group Wellbeing",
-		title: "Sunday Reset for Teachers",
-		body: "Gentle wellbeing sessions designed to help teachers decompress, regulate and prepare for the week ahead.",
-	},
-];
 ---
 
 <Layout
@@ -242,30 +236,34 @@ const developingProducts = [
 			</div>
 		</section>
 
-		<section class="developing-products section">
-			<div class="container">
-				<header class="products-section-head">
-					<p class="section-kicker">In development</p>
-					<h2>Supporting you beyond the therapy room.</h2>
-					<p>
-						Alongside counselling and psychotherapy, a growing library of
-						wellbeing resources are being created to help you reconnect with
-						yourself, build emotional resilience and continue your journey at
-						your own pace. New resources will be added here as they become
-						available.
-					</p>
-				</header>
-
-				<div class="developing-grid">
-					{
-						developingProducts.map((product) => (
-							<article class="developing-card">
-								<p class="product-label">{product.label}</p>
-								<h3>{product.title}</h3>
-								<p>{product.body}</p>
-							</article>
-						))
-					}
+		<section class="featured-product section section-soft" id="sunday-reset">
+			<div class="container sunday-reset-block">
+				<p class="section-kicker">Group wellbeing · Available now</p>
+				<h2>Sunday Reset for Teachers</h2>
+				<p class="product-lede">
+					A gentle online workshop on the last Sunday of every month — practical
+					tools to decompress, settle Sunday anxiety and begin the week feeling
+					calmer.
+				</p>
+				<p>
+					Listen, reflect and take away what feels helpful. No expectation to
+					speak or share. Includes a downloadable Sunday Reset Guide.
+				</p>
+				<p class="product-price">
+					<strong>£25</strong>
+					{" "}
+					<span class="product-price-alt">per person · Online via Zoom</span>
+				</p>
+				<div class="product-actions">
+					<a class="cta cta-solid" href="/sunday-reset">Learn more</a>
+					<a
+						class="cta cta-outline"
+						href={sundayResetBookingUrl}
+						target="_blank"
+						rel="noopener noreferrer"
+					>
+						Book your place
+					</a>
 				</div>
 			</div>
 		</section>
@@ -286,9 +284,8 @@ const developingProducts = [
 	}
 
 	.products-hero {
-		background:
-			radial-gradient(ellipse at 80% 20%, rgb(0 94 71 / 10%), transparent 55%),
-			linear-gradient(180deg, var(--color-white) 0%, #f6f8f6 100%);
+		background: linear-gradient(180deg, var(--color-white) 0%, var(--brand-tint) 100%);
+		padding-top: 4rem;
 	}
 
 	.products-hero-inner {
@@ -298,7 +295,7 @@ const developingProducts = [
 	.section-kicker {
 		margin: 0;
 		text-transform: uppercase;
-		letter-spacing: 0.1em;
+		letter-spacing: 0.12em;
 		font-size: 0.78rem;
 		font-weight: 600;
 		color: var(--brand);
@@ -315,8 +312,8 @@ const developingProducts = [
 
 	h1 {
 		margin: 0.6rem 0 1rem;
-		font-size: clamp(2rem, 4.4vw, 3.4rem);
-		line-height: 1.14;
+		font-size: clamp(2.2rem, 5vw, 3.2rem);
+		line-height: 1.12;
 	}
 
 	h2 {
@@ -331,15 +328,21 @@ const developingProducts = [
 		line-height: 1.25;
 	}
 
-	.products-hero p,
 	.product-copy p,
 	.products-section-head p,
-	.developing-card p,
+	.sunday-reset-block p,
 	.affiliate-inner p {
 		line-height: 1.75;
 	}
 
-	.products-hero p,
+	.products-hero p {
+		margin: 0;
+		max-width: 60ch;
+		font-size: clamp(1.05rem, 1.8vw, 1.2rem);
+		line-height: 1.7;
+		color: var(--ink-soft);
+	}
+
 	.product-copy p,
 	.products-section-head p,
 	.affiliate-inner p {
@@ -535,42 +538,17 @@ const developingProducts = [
 		margin-bottom: 2rem;
 	}
 
-	.developing-grid {
-		display: grid;
-		grid-template-columns: minmax(0, 1fr);
-		gap: 1rem;
-		max-width: 36rem;
+	.sunday-reset-block {
+		max-width: 760px;
 	}
 
-	.developing-card {
-		padding: 1.4rem;
-		border: 1px solid rgb(0 94 71 / 16%);
-		border-radius: 1rem;
-		background: linear-gradient(180deg, var(--color-white) 0%, #f6f8f6 100%);
-		box-shadow: 0 10px 24px rgb(29 35 39 / 6%);
-	}
-
-	.product-label {
-		display: inline-flex;
-		margin: 0 0 0.45rem;
-		padding: 0.25rem 0.65rem;
-		border-radius: 999px;
-		background: var(--brand-tint);
-		color: var(--brand);
-		text-transform: uppercase;
-		letter-spacing: 0.08em;
-		font-size: 0.72rem;
-		font-weight: 600;
-	}
-
-	.developing-card p:last-child {
-		margin-bottom: 0;
-		color: var(--ink-soft);
+	.sunday-reset-block .product-lede,
+	.sunday-reset-block > p {
+		max-width: 60ch;
 	}
 
 	@media (max-width: 1024px) {
-		.featured-grid,
-		.developing-grid {
+		.featured-grid {
 			grid-template-columns: 1fr;
 		}
 

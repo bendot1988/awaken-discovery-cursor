@@ -41,7 +41,7 @@ const variants = [
 >
 	<SiteHeader navItems={navItems} />
 	<main class="pt-page">
-		<section class="pt-hero">
+		<section class="pt-hero section">
 			<div class="container pt-hero-inner" data-product-thanks>
 				{
 					variants.map((copy) => (
@@ -105,21 +105,20 @@ const variants = [
 <style>
 	.pt-page {
 		--ink: var(--color-dark-gray);
+		--ink-soft: rgb(29 35 39 / 78%);
 		--brand: var(--color-dark-slate-gray);
 		--brand-deep: #004836;
-		--cream: #fbf9f5;
-		--cream-deep: #f3eee5;
+		--brand-tint: rgb(0 94 71 / 8%);
 		color: var(--ink);
-		background: var(--cream);
 	}
 
 	.pt-hero {
-		padding-block: clamp(3.5rem, 10vh, 7rem) clamp(4rem, 12vh, 8rem);
-		background: linear-gradient(180deg, var(--cream) 0%, var(--cream-deep) 100%);
+		background: linear-gradient(180deg, var(--color-white) 0%, var(--brand-tint) 100%);
+		padding-top: 4rem;
 	}
 
 	.pt-hero-inner {
-		max-width: 40rem;
+		max-width: 760px;
 	}
 
 	.pt-eyebrow {
@@ -127,34 +126,37 @@ const variants = [
 		font-family: var(--font-body);
 		font-size: 0.78rem;
 		font-weight: 600;
-		letter-spacing: 0.1em;
+		letter-spacing: 0.12em;
 		text-transform: uppercase;
 		color: var(--brand);
 	}
 
 	.pt-hero h1 {
-		margin: 0.7rem 0 0;
+		margin: 0.6rem 0 1rem;
 		font-family: var(--font-serif);
-		font-size: clamp(2.1rem, 4.6vw, 3.15rem);
+		font-size: clamp(2.2rem, 5vw, 3.2rem);
 		font-weight: 500;
-		line-height: 1.16;
-		color: var(--ink);
+		line-height: 1.12;
+		color: var(--brand-deep);
+		text-wrap: balance;
 	}
 
 	.pt-lede {
-		margin: 1.15rem 0 0;
+		margin: 0;
+		max-width: 60ch;
 		font-family: var(--font-body);
-		font-size: 1.12rem;
+		font-size: clamp(1.05rem, 1.8vw, 1.2rem);
 		line-height: 1.7;
-		color: var(--ink);
+		color: var(--ink-soft);
 	}
 
 	.pt-copy {
 		margin: 1rem 0 0;
+		max-width: 60ch;
 		font-family: var(--font-body);
 		font-size: 1.05rem;
 		line-height: 1.7;
-		color: #3d474c;
+		color: var(--ink-soft);
 	}
 
 	.pt-copy strong {
@@ -164,23 +166,18 @@ const variants = [
 
 	.pt-aside {
 		margin: 1.15rem 0 0;
+		max-width: 60ch;
 		font-family: var(--font-body);
 		font-size: 0.98rem;
-		font-style: italic;
 		line-height: 1.65;
-		color: #5b656b;
+		color: var(--ink-soft);
 	}
 
 	.pt-aside a {
-		color: var(--brand-deep);
-		font-style: normal;
+		color: var(--brand);
 		font-weight: 500;
 		text-decoration: underline;
-		text-underline-offset: 0.15em;
-	}
-
-	.pt-aside a:hover {
-		color: var(--brand);
+		text-underline-offset: 3px;
 	}
 
 	.pt-actions {
@@ -188,10 +185,5 @@ const variants = [
 		flex-wrap: wrap;
 		gap: 0.85rem;
 		margin-top: 2rem;
-	}
-
-	.pt-page :global(.cta) {
-		font-size: 1rem;
-		padding: 0.9rem 1.4rem;
 	}
 </style>
