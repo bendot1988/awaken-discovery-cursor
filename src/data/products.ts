@@ -33,8 +33,8 @@ export const teacherRealignmentSystem: DigitalProduct = {
 	format: "PDF",
 	priceGbp: "£37",
 	priceUsd: "$47",
-	/** Stripe Payment Links — add when Ally shares the live payment links. */
-	checkoutUrlGbp: null,
+	/** Stripe Payment Links — USD link to add when Ally shares it. */
+	checkoutUrlGbp: "https://buy.stripe.com/8x2dR9dfV4bC99yazv8ww0n",
 	checkoutUrlUsd: null,
 };
 
@@ -48,7 +48,7 @@ export const ninetyMinuteSessionPayUrl =
 
 /** Stripe Payment Link for a couples £130 (90 min) session (pay without booking). */
 export const couplesNinetyMinuteSessionPayUrl =
-	"https://buy.stripe.com/7sY6oH5Nt6jK0D2bDz8ww0e";
+	"https://buy.stripe.com/5kQ00j3Fl37y71q9vr8ww0m";
 
 /** Stripe Payment Link for a couples £90 (60 min) online/phone session. */
 export const couplesSixtyOnlineSessionPayUrl =

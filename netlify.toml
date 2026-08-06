@@ -5,6 +5,8 @@
 
 [functions]
   node_bundler = "esbuild"
+  # Paid product PDFs — available to functions for post-purchase email, not publicly served
+  included_files = ["private/products/**"]
 
 # Pretty alias so /sitemap.xml resolves to Astro's generated index
 [[redirects]]

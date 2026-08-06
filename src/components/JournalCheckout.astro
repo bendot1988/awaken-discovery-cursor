@@ -20,7 +20,16 @@ const {
 } = Astro.props;
 
 const { checkoutUrlGbp, checkoutUrlUsd, priceGbp, priceUsd, title } = product;
-const hasCheckout = Boolean(checkoutUrlGbp && checkoutUrlUsd);
+const hasGbp = Boolean(checkoutUrlGbp);
+const hasUsd = Boolean(checkoutUrlUsd);
+const hasCheckout = hasGbp || hasUsd;
+const currencyCount = Number(hasGbp) + Number(hasUsd);
+const dialogTitle =
+	currencyCount > 1 ? "Choose your currency" : "Continue to checkout";
+const dialogLede =
+	currencyCount > 1
+		? `Select how you'd like to pay for the ${title}. You'll complete checkout securely on Stripe.`
+		: `You'll complete checkout securely on Stripe for the ${title}.`;
 ---
 
 {
@@ -40,38 +49,39 @@ const hasCheckout = Boolean(checkoutUrlGbp && checkoutUrlUsd);
 				<form method="dialog" class="journal-checkout-form">
 					<header class="journal-checkout-head">
 						<p class="journal-checkout-kicker">Secure checkout</p>
-						<h2 id={`${dialogId}-title`}>Choose your currency</h2>
-						<p class="journal-checkout-lede">
-							Select how you'd like to pay for the <strong>{title}</strong>.
-							You'll complete checkout securely on Stripe.
-						</p>
+						<h2 id={`${dialogId}-title`}>{dialogTitle}</h2>
+						<p class="journal-checkout-lede">{dialogLede}</p>
 					</header>
 
 					<div class="journal-checkout-options">
-						<a
-							class="journal-checkout-option"
-							href={checkoutUrlGbp}
-							target="_blank"
-							rel="noopener noreferrer"
-						>
-							<span class="journal-checkout-flag" aria-hidden="true">£</span>
-							<span class="journal-checkout-option-copy">
-								<strong>British pounds</strong>
-								<span>{priceGbp}</span>
-							</span>
-						</a>
-						<a
-							class="journal-checkout-option"
-							href={checkoutUrlUsd}
-							target="_blank"
-							rel="noopener noreferrer"
-						>
-							<span class="journal-checkout-flag" aria-hidden="true">$</span>
-							<span class="journal-checkout-option-copy">
-								<strong>US dollars</strong>
-								<span>{priceUsd}</span>
-							</span>
-						</a>
+						{hasGbp && (
+							<a
+								class="journal-checkout-option"
+								href={checkoutUrlGbp!}
+								target="_blank"
+								rel="noopener noreferrer"
+							>
+								<span class="journal-checkout-flag" aria-hidden="true">£</span>
+								<span class="journal-checkout-option-copy">
+									<strong>British pounds</strong>
+									<span>{priceGbp}</span>
+								</span>
+							</a>
+						)}
+						{hasUsd && (
+							<a
+								class="journal-checkout-option"
+								href={checkoutUrlUsd!}
+								target="_blank"
+								rel="noopener noreferrer"
+							>
+								<span class="journal-checkout-flag" aria-hidden="true">$</span>
+								<span class="journal-checkout-option-copy">
+									<strong>US dollars</strong>
+									<span>{priceUsd}</span>
+								</span>
+							</a>
+						)}
 					</div>
 
 					<footer class="journal-checkout-foot">

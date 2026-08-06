@@ -14,6 +14,30 @@ const findingCalmWhatsInside = [
 	"Simple ways to reconnect with yourself",
 	"Practical emotional support tools",
 ];
+
+const anxietyLooksLike = [
+	"Constant overthinking or analysing everything",
+	"Finding it difficult to relax or switch off",
+	"Feeling responsible for everyone else",
+	"Always expecting the worst",
+	"Struggling to make decisions",
+	"Feeling overwhelmed by everyday tasks",
+	"Difficulty sleeping because your mind won't stop",
+	"Feeling disconnected from yourself",
+	"Avoiding situations because they feel too much",
+	"Panic attacks or physical symptoms with no clear medical explanation",
+	"Feeling exhausted even after resting",
+];
+
+const anxietyApproach = [
+	"Exploring patterns of thinking and emotional responses",
+	"Understanding how past experiences influence the present",
+	"Developing awareness of the relationship between thoughts, emotions and the body",
+	"Learning ways to regulate your nervous system when anxiety feels overwhelming",
+	"Building self-compassion and reducing self-criticism",
+	"Strengthening emotional resilience",
+	"Helping you reconnect with your own values, needs and sense of self",
+];
 ---
 
 <Layout
@@ -23,60 +47,247 @@ const findingCalmWhatsInside = [
 	<SiteHeader navItems={navItems} />
 	<main>
 		<section class="anxiety-hero section">
-			<div class="hero-bg" aria-hidden="true"></div>
-			<div class="container hero-shell">
-				<p class="eyebrow">Anxiety Support</p>
-				<h1>
-					Anxiety Support When Your Mind Never Truly Slows Down
-				</h1>
-				<p class="subheadline">
-					Support for anxiety, overthinking, emotional overwhelm and nervous system
-					exhaustion through compassionate therapy, calming resources and gentle
-					emotional support.
-				</p>
-				<div class="cta-row">
-					<a class="cta cta-solid cta-guide" href={anxietyGuidePath}>
-						<span class="cta-guide-lead">Download the Free Guide —</span>
-						<span class="cta-guide-name">Finding Calm</span>
-					</a>
-					<a class="cta cta-outline" href="#support">Explore Anxiety Support</a>
+			<div class="container hero-grid">
+				<div class="hero-shell">
+					<p class="eyebrow">Anxiety Support</p>
+					<h1>
+						Anxiety Support When Your Mind Never Truly Slows Down
+					</h1>
+					<p class="subheadline">
+						Support for anxiety, overthinking, emotional overwhelm and nervous system
+						exhaustion through compassionate therapy, calming resources and gentle
+						emotional support.
+					</p>
+					<div class="cta-row">
+						<a class="cta cta-solid cta-guide" href={anxietyGuidePath}>
+							<span class="cta-guide-lead">Download the Free Guide —</span>
+							<span class="cta-guide-name">Finding Calm</span>
+						</a>
+						<a class="cta cta-outline" href="#support">Explore Anxiety Support</a>
+					</div>
+					<ul class="trust-strip" aria-label="Credentials">
+						<li>✔ Teacher · Counsellor &amp; Psychotherapist</li>
+						<li>✔ Nervous-System-Aware Support</li>
+						<li>✔ Online &amp; In-Person Sessions</li>
+					</ul>
 				</div>
-				<ul class="trust-strip" aria-label="Credentials">
-					<li>✔ Teacher · Counsellor &amp; Psychotherapist</li>
-					<li>✔ Nervous-System-Aware Support</li>
-					<li>✔ Online &amp; In-Person Sessions</li>
-				</ul>
+				<figure class="hero-media">
+					<img
+						src="/assets/images/finding-calm-hero-ally.png"
+						alt="Ally — counsellor and psychotherapist offering gentle anxiety support"
+						width="682"
+						height="1024"
+						loading="eager"
+						decoding="async"
+						fetchpriority="high"
+					/>
+				</figure>
 			</div>
 		</section>
 
-		<section class="emotional-connection section section-soft">
+		<section class="anxiety-support section" id="support">
 			<div class="container">
-				<div class="ec-inner">
-					<p class="section-kicker">Emotional Connection</p>
-					<h2>Anxiety Is More Than "Just Worrying"</h2>
+				<header class="as-head">
+					<p class="section-kicker">Anxiety Support</p>
+					<h2>When Your Mind Won't Switch Off</h2>
+				</header>
+
+				<div class="as-zigzag">
+					<article class="as-row">
+						<figure class="as-media">
+							<img
+								src="/assets/images/therapy-stones.png"
+								alt="Smooth stones stacked in still water — a quiet moment of grounding"
+								width="1024"
+								height="1024"
+								loading="lazy"
+								decoding="async"
+							/>
+							<figcaption>A quieter relationship with your nervous system is possible.</figcaption>
+						</figure>
+						<div class="as-copy">
+							<p class="as-lede">Anxiety can affect every part of life.</p>
+							<p>
+								It can leave you constantly thinking, worrying about what might happen,
+								replaying conversations, doubting yourself, or feeling as though you are
+								always waiting for something to go wrong. For some people it shows up as
+								racing thoughts. For others it feels like tension in the body, difficulty
+								sleeping, panic attacks, irritability, or a sense of always being on alert.
+							</p>
+							<p>
+								<strong>Whatever your experience, anxiety can be exhausting.</strong>
+							</p>
+							<p>
+								At Awaken Discovery, I don't believe anxiety is something that needs to be
+								fought against or simply "got rid of." Anxiety is often your mind and body
+								trying to protect you. Sometimes those protective responses have become so
+								familiar that they continue long after the original reason has passed.
+							</p>
+							<p>
+								Together, we begin to understand what your anxiety is trying to tell you
+								rather than simply trying to silence it.
+							</p>
+						</div>
+					</article>
+
+					<article class="as-row as-row-reverse">
+						<figure class="as-media">
+							<img
+								src="/assets/images/anxiety-mind-wont-switch-off.png"
+								alt="A person sitting on the edge of a bed at night in soft lamplight — restless, overthinking, unable to switch off"
+								width="768"
+								height="1024"
+								loading="lazy"
+								decoding="async"
+							/>
+							<figcaption>When the body wants rest, but the mind keeps watch.</figcaption>
+						</figure>
+						<div class="as-copy">
+							<h3>Anxiety Doesn't Always Look Like Anxiety</h3>
+							<p>
+								Many people live with anxiety without realising that's what they are
+								experiencing.
+							</p>
+							<p>You may recognise yourself in some of these experiences:</p>
+							<ul class="as-list">
+								{anxietyLooksLike.map((item) => <li>{item}</li>)}
+							</ul>
+							<p>
+								You don't have to experience all of these for anxiety to be affecting
+								your life.
+							</p>
+						</div>
+					</article>
+
+					<article class="as-row">
+						<figure class="as-media">
+							<img
+								src="/assets/images/therapy-forest.png"
+								alt="A quiet woodland path through soft green light — space to pause and understand"
+								width="1024"
+								height="1024"
+								loading="lazy"
+								decoding="async"
+							/>
+							<figcaption>Curiosity, not criticism, is often where change begins.</figcaption>
+						</figure>
+						<div class="as-copy">
+							<h3>Understanding Rather Than Managing</h3>
+							<p>
+								There are many strategies that can help reduce anxiety in the moment, and
+								these can be incredibly valuable.
+							</p>
+							<p>
+								In therapy, we also become curious about why anxiety has developed and
+								what keeps it going.
+							</p>
+							<p>Sometimes anxiety has grown from past experiences.</p>
+							<p>
+								Sometimes it has developed through years of carrying responsibility,
+								people-pleasing, perfectionism or always needing to be "strong."
+							</p>
+							<p>
+								Sometimes it has become a way of staying safe in a world that once felt
+								unpredictable.
+							</p>
+							<p>
+								Rather than judging these responses, we explore them with compassion.
+							</p>
+							<p class="as-emphasis">As understanding grows, change becomes possible.</p>
+						</div>
+					</article>
+
+					<article class="as-row as-row-reverse">
+						<figure class="as-media">
+							<img
+								src="/assets/images/ally-with-client.jpg"
+								alt="Ally in a calm therapy session — a safe space for anxiety support"
+								width="768"
+								height="1024"
+								loading="lazy"
+								decoding="async"
+							/>
+							<figcaption>Therapy shaped around you, not a formula.</figcaption>
+						</figure>
+						<div class="as-copy">
+							<h3>My Approach</h3>
+							<p>
+								I work integratively, drawing from a range of therapeutic approaches to
+								meet you as an individual.
+							</p>
+							<p>Our work may include:</p>
+							<ul class="as-list">
+								{anxietyApproach.map((item) => <li>{item}</li>)}
+							</ul>
+							<p>
+								There is no "one size fits all" approach. Therapy is shaped around you,
+								your experiences and what feels most helpful for your journey.
+							</p>
+						</div>
+					</article>
+
+					<article class="as-row">
+						<figure class="as-media">
+							<img
+								src="/assets/images/therapy-lake-sunset.png"
+								alt="A still lake at sunset — calm returning after a long day"
+								width="1024"
+								height="1024"
+								loading="lazy"
+								decoding="async"
+							/>
+							<figcaption>Towards a life that feels calmer and more like your own.</figcaption>
+						</figure>
+						<div class="as-copy">
+							<h3>You Don't Have to Face Anxiety Alone</h3>
+							<p>
+								Therapy offers a safe, confidential and non-judgemental space where you
+								don't have to hold everything together.
+							</p>
+							<p>
+								Whether anxiety has been part of your life for years or has appeared more
+								recently, we can work together to understand your experience, reduce its
+								impact, and help you move towards a life that feels calmer, more connected
+								and more like your own.
+							</p>
+							<p>
+								Taking the first step can often feel like the hardest part, but you don't
+								have to know exactly where to begin.
+							</p>
+							<p class="as-emphasis">We'll work it out together.</p>
+						</div>
+					</article>
+				</div>
+
+				<div class="as-ready">
+					<h3>Ready to Begin?</h3>
 					<p>
-						Anxiety can feel exhausting in ways that are difficult to explain to
-						other people.
-					</p>
-					<ul class="ec-bullets">
-						<li>The racing thoughts.</li>
-						<li>The constant overthinking.</li>
-						<li>The inability to fully relax.</li>
-						<li>
-							The feeling that your mind and body are always "on alert," even when
-							you desperately want to switch off.
-						</li>
-					</ul>
-					<p>
-						You may look like you are coping on the outside while quietly feeling
-						overwhelmed underneath it all. If this feels familiar, you are not broken
-						— and you are certainly not alone.
+						If you're ready to explore therapy, or simply want to ask a question
+						before deciding, I'd be happy to hear from you.
 					</p>
 					<p>
-						Sometimes anxiety is not a sign that something is wrong with you.
-						Sometimes it is the nervous system carrying too much for too long without
-						enough safety, support or rest.
+						Book an initial consultation or session today and take the first step
+						towards coming home to yourself.
 					</p>
+					<div class="as-ready-actions">
+						<a
+							class="cta cta-solid"
+							href={calendlyLinks.tasterSession}
+							target="_blank"
+							rel="noopener noreferrer"
+						>
+							Book a Free Consultation
+						</a>
+						<a
+							class="cta cta-outline"
+							href={calendlyLinks.individual.sixtyFaceToFace}
+							target="_blank"
+							rel="noopener noreferrer"
+						>
+							Book a Session
+						</a>
+						<a class="cta cta-outline" href="/contact">Ask a Question</a>
+					</div>
 				</div>
 			</div>
 		</section>
@@ -332,36 +543,15 @@ const findingCalmWhatsInside = [
 	}
 
 	.anxiety-hero {
-		position: relative;
-		padding-block: clamp(4rem, 9vh, 7rem);
-		overflow: hidden;
-		isolation: isolate;
+		padding-block: clamp(3.5rem, 8vh, 6rem);
+		background: linear-gradient(180deg, var(--color-white) 0%, #f6f8f6 100%);
 	}
 
-	.hero-bg {
-		position: absolute;
-		inset: 0;
-		z-index: -1;
-		background:
-			linear-gradient(
-				160deg,
-				rgb(234 240 234 / 92%) 0%,
-				rgb(246 248 246 / 78%) 55%,
-				rgb(244 236 234 / 78%) 100%
-			),
-			radial-gradient(
-				ellipse at 70% 30%,
-				rgb(0 94 71 / 14%),
-				transparent 60%
-			),
-			url("/assets/images/begin-journey-sunrise.png");
-		background-size: cover;
-		background-position: center 30%;
-		background-repeat: no-repeat;
-	}
-
-	.hero-shell {
-		max-width: 760px;
+	.hero-grid {
+		display: grid;
+		grid-template-columns: 1.1fr 0.9fr;
+		gap: clamp(2rem, 4vw, 4rem);
+		align-items: center;
 	}
 
 	.eyebrow {
@@ -376,16 +566,16 @@ const findingCalmWhatsInside = [
 	h1 {
 		margin: 0.7rem 0 1rem;
 		font-family: var(--font-serif);
-		font-size: clamp(2rem, 4.6vw, 3.3rem);
+		font-size: clamp(1.9rem, 4.4vw, 3.1rem);
 		font-weight: 500;
-		line-height: 1.14;
+		line-height: 1.16;
 		text-wrap: balance;
 	}
 
 	.subheadline {
 		margin: 0;
-		font-size: clamp(1.05rem, 2vw, 1.25rem);
-		line-height: 1.7;
+		font-size: clamp(1rem, 1.9vw, 1.2rem);
+		line-height: 1.75;
 		max-width: 60ch;
 	}
 
@@ -423,8 +613,28 @@ const findingCalmWhatsInside = [
 		opacity: 0.85;
 	}
 
-	.ec-inner {
-		max-width: 70ch;
+	.hero-media {
+		margin: 0;
+	}
+
+	.hero-media img {
+		width: 100%;
+		aspect-ratio: 4 / 5;
+		object-fit: cover;
+		object-position: 50% 30%;
+		border-radius: 1rem;
+		box-shadow: 0 14px 35px rgb(29 35 39 / 14%);
+	}
+
+	.anxiety-support {
+		scroll-margin-top: 5.5rem;
+		padding-block: clamp(2.5rem, 6vh, 4.5rem) clamp(3.5rem, 8vh, 5.5rem);
+		background: var(--color-white);
+	}
+
+	.as-head {
+		max-width: 40rem;
+		margin-bottom: clamp(2rem, 4vw, 3rem);
 	}
 
 	.section-kicker {
@@ -437,43 +647,188 @@ const findingCalmWhatsInside = [
 	}
 
 	h2 {
-		margin: 0.6rem 0 1rem;
+		margin: 0.6rem 0 0;
 		font-family: var(--font-serif);
 		font-size: clamp(1.7rem, 3.3vw, 2.4rem);
 		font-weight: 500;
 		text-wrap: balance;
 	}
 
-	.ec-inner p {
-		margin: 0 0 1rem;
-		line-height: 1.9;
-	}
-
-	.ec-bullets {
-		list-style: none;
-		padding: 0;
-		margin: 0 0 1.4rem;
+	.as-zigzag {
 		display: grid;
-		gap: 0.55rem;
+		gap: clamp(2.5rem, 6vw, 4.5rem);
 	}
 
-	.ec-bullets li {
-		position: relative;
-		padding-left: 1.6rem;
-		line-height: 1.7;
+	.as-row {
+		display: grid;
+		grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+		gap: clamp(1.6rem, 4vw, 3.5rem);
+		align-items: center;
+	}
+
+	.as-row-reverse {
+		grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+	}
+
+	.as-row-reverse .as-media {
+		order: 2;
+	}
+
+	.as-row-reverse .as-copy {
+		order: 1;
+	}
+
+	.as-media {
+		margin: 0;
+		display: flex;
+		flex-direction: column;
+		gap: 0.7rem;
+	}
+
+	.as-media img {
+		width: 100%;
+		aspect-ratio: 3 / 4;
+		object-fit: cover;
+		border-radius: 1rem;
+		box-shadow: 0 18px 36px rgb(0 94 71 / 14%);
+	}
+
+	.as-media figcaption {
+		font-family: var(--font-serif);
+		font-style: italic;
+		font-size: 0.95rem;
+		line-height: 1.45;
+		color: var(--color-dark-slate-gray);
+		text-align: center;
+		text-wrap: balance;
+	}
+
+	.as-copy {
+		max-width: 60ch;
+	}
+
+	.as-copy p {
+		margin: 0 0 1rem;
+		font-size: 1rem;
+		line-height: 1.8;
 		color: var(--ink-soft);
 	}
 
-	.ec-bullets li::before {
+	.as-lede {
+		font-family: var(--font-serif);
+		font-size: clamp(1.15rem, 2vw, 1.35rem);
+		font-weight: 500;
+		line-height: 1.55;
+		color: var(--color-dark-gray) !important;
+	}
+
+	.as-copy h3 {
+		margin: 0 0 0.9rem;
+		font-family: var(--font-serif);
+		font-size: clamp(1.3rem, 2.4vw, 1.6rem);
+		font-weight: 500;
+		color: var(--brand-deep);
+	}
+
+	.as-list {
+		list-style: none;
+		padding: 0;
+		margin: 0 0 1.2rem;
+		display: grid;
+		gap: 0.5rem;
+	}
+
+	.as-list li {
+		position: relative;
+		padding-left: 1.55rem;
+		line-height: 1.65;
+		font-size: 0.96rem;
+		color: var(--ink-soft);
+	}
+
+	.as-list li::before {
 		content: "";
 		position: absolute;
-		left: 0.35rem;
+		left: 0.3rem;
 		top: 0.7em;
 		width: 0.45rem;
 		height: 0.45rem;
 		border-radius: 50%;
 		background: var(--brand);
 		opacity: 0.7;
+	}
+
+	.as-emphasis {
+		color: var(--color-dark-gray) !important;
+		font-weight: 500;
+	}
+
+	.as-placeholder {
+		display: grid;
+		gap: 0.7rem;
+		align-content: center;
+		aspect-ratio: 3 / 4;
+		padding: 1.3rem 1.35rem;
+		border-radius: 1rem;
+		border: 1.5px dashed rgb(0 94 71 / 35%);
+		background:
+			repeating-linear-gradient(
+				-45deg,
+				rgb(0 94 71 / 4%),
+				rgb(0 94 71 / 4%) 8px,
+				transparent 8px,
+				transparent 16px
+			),
+			#f6f8f6;
+		box-shadow: 0 18px 36px rgb(0 94 71 / 10%);
+	}
+
+	.as-placeholder-label {
+		margin: 0 !important;
+		font-family: var(--font-body);
+		font-size: 0.72rem;
+		font-weight: 600;
+		letter-spacing: 0.12em;
+		text-transform: uppercase;
+		color: var(--brand);
+	}
+
+	.as-placeholder-prompt {
+		margin: 0 !important;
+		font-family: var(--font-body);
+		font-size: 0.86rem;
+		line-height: 1.55;
+		color: var(--ink-soft);
+	}
+
+	.as-ready {
+		margin-top: clamp(2.5rem, 5vw, 3.5rem);
+		padding: 1.5rem 1.6rem;
+		border-radius: 1rem;
+		border-left: 4px solid var(--brand);
+		background: #f6f8f6;
+	}
+
+	.as-ready h3 {
+		margin: 0 0 0.85rem;
+		font-family: var(--font-serif);
+		font-size: clamp(1.25rem, 2.4vw, 1.55rem);
+		font-weight: 500;
+		color: var(--brand-deep);
+	}
+
+	.as-ready p {
+		margin: 0 0 1rem;
+		font-size: 0.98rem;
+		line-height: 1.7;
+		color: var(--ink-soft);
+	}
+
+	.as-ready-actions {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.7rem;
+		margin-top: 0.35rem;
 	}
 
 	/* ---------- MEET ALLY ---------- */
@@ -486,7 +841,7 @@ const findingCalmWhatsInside = [
 		display: grid;
 		grid-template-columns: 0.85fr 1.15fr;
 		gap: clamp(1.6rem, 4vw, 3.5rem);
-		align-items: start;
+		align-items: center;
 	}
 
 	.ma-figure {
@@ -766,6 +1121,33 @@ const findingCalmWhatsInside = [
 
 	/* ---------- RESPONSIVE ---------- */
 	@media (max-width: 900px) {
+		.hero-grid {
+			grid-template-columns: 1fr;
+		}
+
+		.hero-media {
+			max-width: 420px;
+			margin-inline: auto;
+			order: -1;
+		}
+
+		.as-row,
+		.as-row-reverse {
+			grid-template-columns: 1fr;
+		}
+
+		.as-row-reverse .as-media,
+		.as-row-reverse .as-copy {
+			order: unset;
+		}
+
+		.as-media {
+			position: static;
+			max-width: 420px;
+			margin-inline: auto;
+			width: 100%;
+		}
+
 		.ma-inner {
 			grid-template-columns: 1fr;
 		}

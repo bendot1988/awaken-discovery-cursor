@@ -110,6 +110,7 @@ const developingProducts = [
 					</p>
 					<p class="product-price">
 						<strong>{anxietyReflectionJournal.priceGbp}</strong>
+						{" "}
 						<span class="product-price-alt">
 							({anxietyReflectionJournal.priceUsd} for international buyers)
 						</span>
@@ -167,6 +168,7 @@ const developingProducts = [
 					</p>
 					<p class="product-price">
 						<strong>{teacherRealignmentSystem.priceGbp}</strong>
+						{" "}
 						<span class="product-price-alt">
 							({teacherRealignmentSystem.priceUsd} for international buyers)
 						</span>
@@ -196,21 +198,46 @@ const developingProducts = [
 
 		<section class="affiliate-band section section-soft">
 			<div class="container affiliate-inner">
-				<div>
+				<div class="affiliate-copy">
 					<p class="section-kicker">Partner recommendation</p>
 					<h2>My Grounded Wellness Link</h2>
 					<p>
 						Alongside my own resources, I sometimes recommend products from
 						Grounded Wellness — gentle wellbeing tools I trust and use myself.
 					</p>
+					<a
+						class="cta cta-outline"
+						href={groundedWellnessAffiliateUrl}
+						target="_blank"
+						rel="noopener noreferrer sponsored"
+					>
+						Visit Grounded Wellness
+					</a>
 				</div>
+
 				<a
-					class="cta cta-outline"
+					class="affiliate-preview"
 					href={groundedWellnessAffiliateUrl}
 					target="_blank"
 					rel="noopener noreferrer sponsored"
+					aria-label="Visit Grounded Wellness (opens in a new tab)"
 				>
-					Visit Grounded Wellness
+					<span class="affiliate-preview-frame" aria-hidden="true">
+						<span class="affiliate-preview-chrome">
+							<span class="affiliate-dot"></span>
+							<span class="affiliate-dot"></span>
+							<span class="affiliate-dot"></span>
+							<span class="affiliate-preview-url">groundedwellness.co.uk</span>
+						</span>
+						<img
+							src="/assets/images/grounded-wellness-preview.jpg"
+							alt="Grounded Wellness website — Summer Wellness Sale with grounding and wellbeing products"
+							width="960"
+							height="501"
+							loading="lazy"
+							decoding="async"
+						/>
+					</span>
 				</a>
 			</div>
 		</section>
@@ -219,10 +246,13 @@ const developingProducts = [
 			<div class="container">
 				<header class="products-section-head">
 					<p class="section-kicker">In development</p>
-					<h2>More wellbeing resources are being shaped.</h2>
+					<h2>Supporting you beyond the therapy room.</h2>
 					<p>
-						These are part of the wider Awaken Discovery roadmap and will be
-						added as soon as the content and checkout flow are ready.
+						Alongside counselling and psychotherapy, a growing library of
+						wellbeing resources are being created to help you reconnect with
+						yourself, build emotional resilience and continue your journey at
+						your own pace. New resources will be added here as they become
+						available.
 					</p>
 				</header>
 
@@ -366,6 +396,7 @@ const developingProducts = [
 	}
 
 	.product-price-alt {
+		margin-left: 0.15em;
 		font-size: 0.92rem;
 		font-weight: 400;
 		color: var(--ink-soft);
@@ -386,15 +417,117 @@ const developingProducts = [
 
 	.affiliate-inner {
 		display: grid;
-		grid-template-columns: 1fr auto;
-		gap: 1.5rem;
+		grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+		gap: clamp(1.5rem, 4vw, 2.75rem);
 		align-items: center;
-		padding: 1.6rem clamp(1.4rem, 3vw, 2rem);
-		background: var(--color-white);
+		padding: clamp(1.4rem, 3vw, 2rem);
+		background:
+			radial-gradient(ellipse 70% 80% at 100% 0%, rgb(0 94 71 / 7%), transparent 55%),
+			var(--color-white);
 		border: 1px solid rgb(0 94 71 / 16%);
 		border-left: 4px solid var(--brand);
-		border-radius: 0.9rem;
+		border-radius: 1.1rem;
 		box-shadow: 0 12px 28px rgb(0 94 71 / 8%);
+		overflow: hidden;
+	}
+
+	.affiliate-copy {
+		display: grid;
+		gap: 0.85rem;
+		justify-items: start;
+	}
+
+	.affiliate-copy h2,
+	.affiliate-copy p {
+		margin: 0;
+	}
+
+	.affiliate-copy p {
+		color: var(--ink-soft);
+		line-height: 1.7;
+		max-width: 38ch;
+	}
+
+	.affiliate-preview {
+		display: block;
+		justify-self: end;
+		width: min(100%, 28rem);
+		text-decoration: none;
+	}
+
+	.affiliate-preview-frame {
+		display: block;
+		border-radius: 0.85rem;
+		overflow: hidden;
+		background: #1d2327;
+		border: 1px solid rgb(0 94 71 / 18%);
+		box-shadow:
+			0 18px 40px rgb(29 35 39 / 16%),
+			0 4px 12px rgb(0 94 71 / 10%);
+		transform: rotate(1.5deg);
+		transition: transform 0.35s ease, box-shadow 0.35s ease;
+	}
+
+	.affiliate-preview:hover .affiliate-preview-frame,
+	.affiliate-preview:focus-visible .affiliate-preview-frame {
+		transform: rotate(0deg) translateY(-4px);
+		box-shadow:
+			0 24px 48px rgb(29 35 39 / 18%),
+			0 8px 18px rgb(0 94 71 / 12%);
+	}
+
+	.affiliate-preview:focus-visible {
+		outline: none;
+	}
+
+	.affiliate-preview-chrome {
+		display: flex;
+		align-items: center;
+		gap: 0.35rem;
+		padding: 0.55rem 0.75rem;
+		background: linear-gradient(180deg, #2a3136 0%, #1d2327 100%);
+	}
+
+	.affiliate-dot {
+		width: 0.55rem;
+		height: 0.55rem;
+		border-radius: 999px;
+		background: #5c656b;
+	}
+
+	.affiliate-dot:nth-child(1) {
+		background: #e27c6a;
+	}
+
+	.affiliate-dot:nth-child(2) {
+		background: #e0b45a;
+	}
+
+	.affiliate-dot:nth-child(3) {
+		background: #6ea87a;
+	}
+
+	.affiliate-preview-url {
+		margin-left: 0.55rem;
+		flex: 1;
+		padding: 0.2rem 0.65rem;
+		border-radius: 999px;
+		background: rgb(255 255 255 / 8%);
+		color: rgb(255 255 255 / 62%);
+		font-size: 0.68rem;
+		letter-spacing: 0.02em;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
+
+	.affiliate-preview img {
+		width: 100%;
+		height: auto;
+		display: block;
+		aspect-ratio: 960 / 501;
+		object-fit: cover;
+		object-position: top center;
 	}
 
 	.products-section-head {
@@ -447,6 +580,26 @@ const developingProducts = [
 
 		.affiliate-inner {
 			grid-template-columns: 1fr;
+		}
+
+		.affiliate-preview {
+			justify-self: stretch;
+			width: 100%;
+			max-width: 26rem;
+			margin-inline: auto;
+		}
+
+		.affiliate-preview-frame {
+			transform: none;
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.affiliate-preview-frame,
+		.affiliate-preview:hover .affiliate-preview-frame,
+		.affiliate-preview:focus-visible .affiliate-preview-frame {
+			transition: none;
+			transform: none;
 		}
 	}
 </style>

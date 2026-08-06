@@ -1,0 +1,111 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import SiteHeader from "../../components/SiteHeader.astro";
+import SiteFooter from "../../components/SiteFooter.astro";
+import { locations, navItems } from "../../data/site";
+import {
+	anxietyReflectionJournal,
+	teacherRealignmentSystem,
+} from "../../data/products";
+
+const productKey = (Astro.url.searchParams.get("product") || "")
+	.trim()
+	.toLowerCase();
+
+const copyByProduct = {
+	teacher: {
+		title: "Thank You · Teacher Realignment System",
+		description:
+			"Your Teacher Realignment System purchase is confirmed — check your email for the PDF.",
+		kicker: "Purchase confirmed",
+		heading: "Your Teacher Realignment System is on its way",
+		productName: teacherRealignmentSystem.title,
+		lede: "Payment received. We’re emailing your PDF to the address you used at checkout — usually within a minute or two.",
+	},
+	anxiety: {
+		title: "Thank You · Anxiety Reflection Journal",
+		description:
+			"Your Anxiety Reflection Journal purchase is confirmed — check your email for the PDF.",
+		kicker: "Purchase confirmed",
+		heading: "Your Anxiety Reflection Journal is on its way",
+		productName: anxietyReflectionJournal.title,
+		lede: "Payment received. We’re emailing your PDF to the address you used at checkout — usually within a minute or two.",
+	},
+};
+
+const copy =
+	copyByProduct[productKey] ||
+	{
+		title: "Thank You · Awaken Discovery",
+		description:
+			"Your purchase is confirmed — check your email for your PDF download.",
+		kicker: "Purchase confirmed",
+		heading: "Thank you — your download is on its way",
+		productName: "your PDF",
+		lede: "Payment received. We’re emailing your file to the address you used at checkout — usually within a minute or two.",
+	};
+---
+
+<Layout title={copy.title} description={copy.description} noindex={true}>
+	<SiteHeader navItems={navItems} />
+	<main class="pt-page">
+		<section class="section">
+			<div class="container pt-inner">
+				<p class="section-kicker">{copy.kicker}</p>
+				<h1>{copy.heading}</h1>
+				<p class="pt-lede">{copy.lede}</p>
+				<p class="pt-copy">
+					Look for an email from Awaken Discovery with
+					<strong>{copy.productName}</strong> attached. If it isn’t there
+					within a few minutes, check spam/junk — and mark it as not spam so
+					future messages get through.
+				</p>
+				<p class="pt-copy">
+					Keep your Stripe receipt for your records. If anything looks wrong,
+					email Ally and she’ll sort it quickly.
+				</p>
+				<div class="pt-actions">
+					<a class="cta cta-solid" href="/products">Back to products</a>
+					<a class="cta cta-outline" href="/contact">Contact Ally</a>
+				</div>
+			</div>
+		</section>
+	</main>
+	<SiteFooter
+		locations={locations}
+		tagline="Gentle tools for teachers, anxiety, and everyday overwhelm."
+	/>
+</Layout>
+
+<style>
+	.pt-page {
+		--brand-deep: #004836;
+		--muted: #5b656b;
+	}
+
+	.pt-inner {
+		max-width: 36rem;
+		padding-block: 2rem 4rem;
+	}
+
+	.pt-lede,
+	.pt-copy {
+		margin: 0.85rem 0 0;
+		font-size: 1.05rem;
+		line-height: 1.65;
+		color: var(--muted);
+	}
+
+	.pt-lede strong,
+	.pt-copy strong {
+		color: var(--brand-deep);
+		font-weight: 600;
+	}
+
+	.pt-actions {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.75rem;
+		margin-top: 1.75rem;
+	}
+</style>
