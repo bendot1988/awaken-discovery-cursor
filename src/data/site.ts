@@ -74,7 +74,8 @@ export const teacherGuidePath = "/finding-calm-teachers";
 export const anxietyGuidePath = "/finding-calm-anxiety";
 export const freeResourcesPath = "/free-resources";
 export const sundayResetPath = "/sunday-reset";
-export const sundayResetBookingUrl = "https://forms.gle/ceJYAUBeZNg9kvXY6";
+export const sundayResetBookingUrl =
+	"https://docs.google.com/forms/d/e/1FAIpQLSfGFDyX1kET9vBMHlYhaOM7RGgenRzIiMLOP1EhaYARjkRJCA/viewform";
 
 export type FreeResource = {
 	title: string;
