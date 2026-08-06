@@ -8,62 +8,65 @@ import {
 	teacherRealignmentSystem,
 } from "../../data/products";
 
-const productKey = (Astro.url.searchParams.get("product") || "")
-	.trim()
-	.toLowerCase();
-
-const copyByProduct = {
-	teacher: {
-		title: "Thank You · Teacher Realignment System",
-		description:
-			"Your Teacher Realignment System purchase is confirmed — check your email for the PDF.",
-		kicker: "Purchase confirmed",
+/**
+ * Static build can't read ?product= at request time, so all variants are
+ * rendered and a tiny inline script reveals the matching one.
+ */
+const variants = [
+	{
+		key: "teacher",
 		heading: "Your Teacher Realignment System is on its way",
 		productName: teacherRealignmentSystem.title,
 		lede: "Payment received. We’re emailing your PDF to the address you used at checkout — usually within a minute or two.",
 	},
-	anxiety: {
-		title: "Thank You · Anxiety Reflection Journal",
-		description:
-			"Your Anxiety Reflection Journal purchase is confirmed — check your email for the PDF.",
-		kicker: "Purchase confirmed",
+	{
+		key: "anxiety",
 		heading: "Your Anxiety Reflection Journal is on its way",
 		productName: anxietyReflectionJournal.title,
 		lede: "Payment received. We’re emailing your PDF to the address you used at checkout — usually within a minute or two.",
 	},
-};
-
-const copy =
-	copyByProduct[productKey] ||
 	{
-		title: "Thank You · Awaken Discovery",
-		description:
-			"Your purchase is confirmed — check your email for your PDF download.",
-		kicker: "Purchase confirmed",
+		key: "default",
 		heading: "Thank you — your download is on its way",
 		productName: "your PDF",
 		lede: "Payment received. We’re emailing your file to the address you used at checkout — usually within a minute or two.",
-	};
+	},
+];
 ---
 
-<Layout title={copy.title} description={copy.description} noindex={true}>
+<Layout
+	title="Thank You · Awaken Discovery"
+	description="Your purchase is confirmed — check your email for your PDF download."
+	noindex={true}
+>
 	<SiteHeader navItems={navItems} />
 	<main class="pt-page">
-		<section class="section">
-			<div class="container pt-inner">
-				<p class="section-kicker">{copy.kicker}</p>
-				<h1>{copy.heading}</h1>
-				<p class="pt-lede">{copy.lede}</p>
-				<p class="pt-copy">
-					Look for an email from Awaken Discovery with
-					<strong>{copy.productName}</strong> attached. If it isn’t there
-					within a few minutes, check spam/junk — and mark it as not spam so
-					future messages get through.
-				</p>
-				<p class="pt-copy">
-					Keep your Stripe receipt for your records. If anything looks wrong,
-					email Ally and she’ll sort it quickly.
-				</p>
+		<section class="pt-hero">
+			<div class="container pt-hero-inner" data-product-thanks>
+				{
+					variants.map((copy) => (
+						<div
+							class="pt-variant"
+							data-product={copy.key}
+							hidden={copy.key !== "default"}
+						>
+							<p class="pt-eyebrow">Purchase confirmed</p>
+							<h1>{copy.heading}</h1>
+							<p class="pt-lede">{copy.lede}</p>
+							<p class="pt-copy">
+								Look for an email from Awaken Discovery with{" "}
+								<strong>{copy.productName}</strong> attached. If it isn’t
+								there within a few minutes, check spam/junk — and mark it as
+								not spam so future messages get through.
+							</p>
+							<p class="pt-aside">
+								Keep your Stripe receipt for your records. If anything looks
+								wrong, <a href="/contact">email Ally</a> and she’ll sort it
+								quickly.
+							</p>
+						</div>
+					))
+				}
 				<div class="pt-actions">
 					<a class="cta cta-solid" href="/products">Back to products</a>
 					<a class="cta cta-outline" href="/contact">Contact Ally</a>
@@ -77,35 +80,118 @@ const copy =
 	/>
 </Layout>
 
+<script is:inline>
+	(function () {
+		var root = document.querySelector("[data-product-thanks]");
+		if (!root) return;
+		var param = new URLSearchParams(window.location.search)
+			.get("product")
+			?.trim()
+			.toLowerCase();
+		var variants = root.querySelectorAll("[data-product]");
+		var matched = false;
+		variants.forEach(function (el) {
+			var isMatch = el.getAttribute("data-product") === param;
+			el.hidden = !isMatch;
+			if (isMatch) matched = true;
+		});
+		if (!matched) {
+			var fallback = root.querySelector('[data-product="default"]');
+			if (fallback) fallback.hidden = false;
+		}
+	})();
+</script>
+
 <style>
 	.pt-page {
+		--ink: var(--color-dark-gray);
+		--brand: var(--color-dark-slate-gray);
 		--brand-deep: #004836;
-		--muted: #5b656b;
+		--cream: #fbf9f5;
+		--cream-deep: #f3eee5;
+		color: var(--ink);
+		background: var(--cream);
 	}
 
-	.pt-inner {
-		max-width: 36rem;
-		padding-block: 2rem 4rem;
+	.pt-hero {
+		padding-block: clamp(3.5rem, 10vh, 7rem) clamp(4rem, 12vh, 8rem);
+		background: linear-gradient(180deg, var(--cream) 0%, var(--cream-deep) 100%);
 	}
 
-	.pt-lede,
+	.pt-hero-inner {
+		max-width: 40rem;
+	}
+
+	.pt-eyebrow {
+		margin: 0;
+		font-family: var(--font-body);
+		font-size: 0.78rem;
+		font-weight: 600;
+		letter-spacing: 0.1em;
+		text-transform: uppercase;
+		color: var(--brand);
+	}
+
+	.pt-hero h1 {
+		margin: 0.7rem 0 0;
+		font-family: var(--font-serif);
+		font-size: clamp(2.1rem, 4.6vw, 3.15rem);
+		font-weight: 500;
+		line-height: 1.16;
+		color: var(--ink);
+	}
+
+	.pt-lede {
+		margin: 1.15rem 0 0;
+		font-family: var(--font-body);
+		font-size: 1.12rem;
+		line-height: 1.7;
+		color: var(--ink);
+	}
+
 	.pt-copy {
-		margin: 0.85rem 0 0;
+		margin: 1rem 0 0;
+		font-family: var(--font-body);
 		font-size: 1.05rem;
-		line-height: 1.65;
-		color: var(--muted);
+		line-height: 1.7;
+		color: #3d474c;
 	}
 
-	.pt-lede strong,
 	.pt-copy strong {
 		color: var(--brand-deep);
 		font-weight: 600;
 	}
 
+	.pt-aside {
+		margin: 1.15rem 0 0;
+		font-family: var(--font-body);
+		font-size: 0.98rem;
+		font-style: italic;
+		line-height: 1.65;
+		color: #5b656b;
+	}
+
+	.pt-aside a {
+		color: var(--brand-deep);
+		font-style: normal;
+		font-weight: 500;
+		text-decoration: underline;
+		text-underline-offset: 0.15em;
+	}
+
+	.pt-aside a:hover {
+		color: var(--brand);
+	}
+
 	.pt-actions {
 		display: flex;
 		flex-wrap: wrap;
-		gap: 0.75rem;
-		margin-top: 1.75rem;
+		gap: 0.85rem;
+		margin-top: 2rem;
+	}
+
+	.pt-page :global(.cta) {
+		font-size: 1rem;
+		padding: 0.9rem 1.4rem;
 	}
 </style>
