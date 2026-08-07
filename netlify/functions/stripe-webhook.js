@@ -33,7 +33,17 @@ const PRODUCTS = [
 		paymentLinkEnv: "STRIPE_PAYMENT_LINK_TEACHER",
 		amounts: [
 			{ currency: "gbp", amountTotal: 3700 }, // £37.00
-			{ currency: "usd", amountTotal: 4700 }, // $47.00 (when USD link exists)
+		],
+	},
+	{
+		id: "anxiety",
+		title: "Anxiety Reflection Journal",
+		pdfRelativePath: "private/products/anxiety-reflection-journal.pdf",
+		pdfFilename: "anxiety-reflection-journal.pdf",
+		/** Optional: set STRIPE_PAYMENT_LINK_ANXIETY=plink_… in Netlify */
+		paymentLinkEnv: "STRIPE_PAYMENT_LINK_ANXIETY",
+		amounts: [
+			{ currency: "gbp", amountTotal: 1899 }, // £18.99
 		],
 	},
 ];

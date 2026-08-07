@@ -13,29 +13,22 @@ export type DigitalProduct = {
 	title: string;
 	format: string;
 	priceGbp: string;
-	priceUsd: string;
-	checkoutUrlGbp?: string | null;
-	checkoutUrlUsd?: string | null;
+	/** Single Stripe Payment Link (GBP). International buyers pay via Stripe conversion. */
+	checkoutUrl?: string | null;
 };
 
 export const anxietyReflectionJournal: DigitalProduct = {
 	title: "Anxiety Reflection Journal",
 	format: "PDF",
 	priceGbp: "£18.99",
-	priceUsd: "$24.99",
-	/** Stripe Payment Links — hosted checkout for the PDF journal. */
-	checkoutUrlGbp: "https://buy.stripe.com/cNi28rejZ7nO71q8rn8ww07",
-	checkoutUrlUsd: "https://buy.stripe.com/fZubJ12BheQgadCazv8ww08",
+	checkoutUrl: "https://buy.stripe.com/cNi28rejZ7nO71q8rn8ww07",
 };
 
 export const teacherRealignmentSystem: DigitalProduct = {
 	title: "The Teacher Realignment System",
 	format: "PDF",
 	priceGbp: "£37",
-	priceUsd: "$47",
-	/** Stripe Payment Links — USD link to add when Ally shares it. */
-	checkoutUrlGbp: "https://buy.stripe.com/8x2dR9dfV4bC99yazv8ww0n",
-	checkoutUrlUsd: null,
+	checkoutUrl: "https://buy.stripe.com/8x2dR9dfV4bC99yazv8ww0n",
 };
 
 /** Stripe Payment Link for a single £60 therapy session (pay without booking). */
@@ -103,4 +96,3 @@ export const bulkPackages: BulkPackage[] = [
 export function getBulkPackage(id: string | null | undefined): BulkPackage | undefined {
 	return bulkPackages.find((p) => p.id === id);
 }
-
