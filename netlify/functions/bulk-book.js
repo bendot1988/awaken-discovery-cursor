@@ -13,22 +13,22 @@ const ALLY_EMAIL = "awakendiscoverytherapy@gmail.com";
 
 const PACKAGES = {
 	"ind-10": {
-		label: "Individual — 10 × 60 min sessions (for the price of 9)",
+		label: "Individual — 10 × 60 min sessions — 10% off",
 		price: "£540",
 		stripeUrl: "https://buy.stripe.com/eVq7sL8ZF8rS5Xm5fb8ww0h",
 	},
 	"ind-6": {
-		label: "Individual — 6 × 60 min sessions (for the price of 5)",
+		label: "Individual — 6 × 60 min sessions — 10% off",
 		price: "£324",
 		stripeUrl: "https://buy.stripe.com/aFa8wP8ZFbE44Ti7nj8ww0i",
 	},
 	"cou-10": {
-		label: "Couples — 10 × 60 min sessions (for the price of 9)",
+		label: "Couples — 10 × 60 min sessions — 10% off",
 		price: "£810",
 		stripeUrl: "https://buy.stripe.com/28EcN57VBcI8fxW7nj8ww0l",
 	},
 	"cou-6": {
-		label: "Couples — 6 × 60 min sessions (for the price of 5)",
+		label: "Couples — 6 × 60 min sessions — 10% off",
 		price: "£486",
 		stripeUrl: "https://buy.stripe.com/14AeVdcbR37y85u8rn8ww0k",
 	},

@@ -65,28 +65,28 @@ export type BulkPackage = {
 export const bulkPackages: BulkPackage[] = [
 	{
 		id: "ind-10",
-		label: "Individual — 10 × 60 min sessions (for the price of 9)",
+		label: "Individual — 10 × 60 min sessions — 10% off",
 		priceGbp: "£540",
 		priceLabel: "540",
 		stripeUrl: "https://buy.stripe.com/eVq7sL8ZF8rS5Xm5fb8ww0h",
 	},
 	{
 		id: "ind-6",
-		label: "Individual — 6 × 60 min sessions (for the price of 5)",
+		label: "Individual — 6 × 60 min sessions — 10% off",
 		priceGbp: "£324",
 		priceLabel: "324",
 		stripeUrl: "https://buy.stripe.com/aFa8wP8ZFbE44Ti7nj8ww0i",
 	},
 	{
 		id: "cou-10",
-		label: "Couples — 10 × 60 min sessions (for the price of 9)",
+		label: "Couples — 10 × 60 min sessions — 10% off",
 		priceGbp: "£810",
 		priceLabel: "810",
 		stripeUrl: "https://buy.stripe.com/28EcN57VBcI8fxW7nj8ww0l",
 	},
 	{
 		id: "cou-6",
-		label: "Couples — 6 × 60 min sessions (for the price of 5)",
+		label: "Couples — 6 × 60 min sessions — 10% off",
 		priceGbp: "£486",
 		priceLabel: "486",
 		stripeUrl: "https://buy.stripe.com/14AeVdcbR37y85u8rn8ww0k",
