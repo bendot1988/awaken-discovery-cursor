@@ -7,7 +7,6 @@ interface Props {
 	buttonLabel?: string;
 	fallbackHref?: string;
 	fallbackLabel?: string;
-	/** Kept for call-site compatibility; unused now that checkout is a single link. */
 	dialogId?: string;
 }
 
@@ -17,24 +16,306 @@ const {
 	buttonLabel = "Buy now",
 	fallbackHref = "/contact",
 	fallbackLabel = "Request access",
+	dialogId = "product-checkout-dialog",
 } = Astro.props;
 
 const checkoutUrl = product.checkoutUrl || null;
+const titleId = `${dialogId}-title`;
 ---
 
 {
 	checkoutUrl ? (
-		<a
-			class={buttonClass}
-			href={checkoutUrl}
-			target="_blank"
-			rel="noopener noreferrer"
-		>
-			{buttonLabel}
-		</a>
+		<>
+			<button
+				type="button"
+				class={buttonClass}
+				data-product-checkout-open
+				aria-haspopup="dialog"
+				aria-controls={dialogId}
+			>
+				{buttonLabel}
+			</button>
+
+			<dialog
+				id={dialogId}
+				class="journal-checkout-dialog"
+				aria-labelledby={titleId}
+			>
+				<form method="dialog" class="journal-checkout-form">
+					<header class="journal-checkout-head">
+						<p class="journal-checkout-kicker">Before you pay</p>
+						<h2 id={titleId}>Thank you for choosing {product.title}</h2>
+						<p class="journal-checkout-lede">
+							Here’s what happens next — a quick look at the process before
+							you continue.
+						</p>
+						<button
+							type="submit"
+							class="journal-checkout-close"
+							aria-label="Close"
+						>
+							×
+						</button>
+					</header>
+
+					<ol class="journal-checkout-steps">
+						<li>
+							<strong>Continue to Stripe</strong>
+							<span>
+								Click the button below to open secure checkout (you’ll leave
+								this site briefly).
+							</span>
+						</li>
+						<li>
+							<strong>Enter your payment details</strong>
+							<span>
+								Pay {product.priceGbp} on Stripe. Your card details stay with
+								Stripe — we never see them.
+							</span>
+						</li>
+						<li>
+							<strong>Receive your download by email</strong>
+							<span>
+								After payment, we’ll email the PDF to the address you use at
+								checkout — usually within a minute or two.
+							</span>
+						</li>
+					</ol>
+
+					<div class="journal-checkout-actions">
+						<a
+							class="cta cta-solid journal-checkout-pay"
+							href={checkoutUrl}
+							target="_blank"
+							rel="noopener noreferrer"
+							data-product-checkout-continue
+						>
+							Continue to Stripe
+						</a>
+						<button type="submit" class="journal-checkout-cancel">
+							Cancel
+						</button>
+					</div>
+				</form>
+			</dialog>
+		</>
 	) : (
 		<a class={buttonClass} href={fallbackHref}>
 			{fallbackLabel}
 		</a>
 	)
 }
+
+<script>
+	function initProductCheckoutDialogs() {
+		document.querySelectorAll("[data-product-checkout-open]").forEach((button) => {
+			if (!(button instanceof HTMLElement)) return;
+			if (button.dataset.productCheckoutBound === "true") return;
+			button.dataset.productCheckoutBound = "true";
+
+			const controls = button.getAttribute("aria-controls");
+			const dialog =
+				controls &&
+				(document.getElementById(controls) as HTMLDialogElement | null);
+			if (!dialog) return;
+
+			button.addEventListener("click", () => {
+				if (typeof dialog.showModal === "function") dialog.showModal();
+				else dialog.setAttribute("open", "");
+			});
+
+			dialog.querySelectorAll("[data-product-checkout-continue]").forEach((link) => {
+				link.addEventListener("click", () => {
+					if (typeof dialog.close === "function") dialog.close();
+					else dialog.removeAttribute("open");
+				});
+			});
+
+			dialog.addEventListener("click", (event) => {
+				if (event.target === dialog) {
+					if (typeof dialog.close === "function") dialog.close();
+					else dialog.removeAttribute("open");
+				}
+			});
+		});
+	}
+
+	initProductCheckoutDialogs();
+	document.addEventListener("astro:page-load", initProductCheckoutDialogs);
+</script>
+
+<style>
+	button.cta {
+		cursor: pointer;
+		font: inherit;
+	}
+
+	.journal-checkout-dialog {
+		width: min(28rem, calc(100vw - 2rem));
+		max-width: none;
+		margin: auto;
+		padding: 0;
+		border: 1px solid rgb(0 94 71 / 18%);
+		border-radius: 1rem;
+		background: var(--color-white);
+		box-shadow: 0 24px 48px rgb(0 94 71 / 18%);
+		color: var(--color-dark-gray);
+	}
+
+	.journal-checkout-dialog::backdrop {
+		background: rgb(29 35 39 / 52%);
+		backdrop-filter: blur(2px);
+	}
+
+	.journal-checkout-dialog[open] {
+		animation: journal-checkout-in 0.24s cubic-bezier(0.2, 0.7, 0.2, 1);
+	}
+
+	@keyframes journal-checkout-in {
+		from {
+			opacity: 0;
+			transform: translateY(0.75rem) scale(0.98);
+		}
+
+		to {
+			opacity: 1;
+			transform: translateY(0) scale(1);
+		}
+	}
+
+	.journal-checkout-form {
+		display: grid;
+		gap: 0;
+		position: relative;
+	}
+
+	.journal-checkout-head {
+		padding: 1.5rem 2.75rem 1.25rem 1.5rem;
+		border-bottom: 1px solid rgb(0 94 71 / 12%);
+	}
+
+	.journal-checkout-kicker {
+		margin: 0;
+		font-size: 0.72rem;
+		font-weight: 600;
+		letter-spacing: 0.14em;
+		text-transform: uppercase;
+		color: var(--color-dark-slate-gray);
+	}
+
+	.journal-checkout-head h2 {
+		margin: 0.45rem 0 0.55rem;
+		font-family: var(--font-serif);
+		font-size: 1.35rem;
+		font-weight: 500;
+		line-height: 1.25;
+		color: #004836;
+	}
+
+	.journal-checkout-lede {
+		margin: 0;
+		font-size: 0.94rem;
+		line-height: 1.6;
+		color: rgb(29 35 39 / 78%);
+	}
+
+	.journal-checkout-close {
+		position: absolute;
+		top: 0.85rem;
+		right: 0.85rem;
+		width: 2rem;
+		height: 2rem;
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		border: none;
+		border-radius: 999px;
+		background: transparent;
+		color: rgb(29 35 39 / 55%);
+		font-size: 1.4rem;
+		line-height: 1;
+		cursor: pointer;
+	}
+
+	.journal-checkout-close:hover,
+	.journal-checkout-close:focus-visible {
+		color: #004836;
+		background: rgb(0 94 71 / 8%);
+		outline: none;
+	}
+
+	.journal-checkout-steps {
+		margin: 0;
+		padding: 1.25rem 1.5rem 0.5rem;
+		list-style: none;
+		display: grid;
+		gap: 1rem;
+		counter-reset: checkout-step;
+	}
+
+	.journal-checkout-steps li {
+		display: grid;
+		grid-template-columns: 2rem 1fr;
+		gap: 0.15rem 0.85rem;
+		align-items: start;
+		counter-increment: checkout-step;
+	}
+
+	.journal-checkout-steps li::before {
+		content: counter(checkout-step);
+		grid-row: 1 / span 2;
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		width: 2rem;
+		height: 2rem;
+		border-radius: 50%;
+		background: #004836;
+		color: var(--color-white);
+		font-family: var(--font-serif);
+		font-size: 0.95rem;
+		font-weight: 500;
+	}
+
+	.journal-checkout-steps strong {
+		font-size: 0.96rem;
+		color: #004836;
+	}
+
+	.journal-checkout-steps span {
+		font-size: 0.9rem;
+		line-height: 1.55;
+		color: rgb(29 35 39 / 78%);
+	}
+
+	.journal-checkout-actions {
+		display: grid;
+		gap: 0.65rem;
+		justify-items: stretch;
+		padding: 1.15rem 1.5rem 1.35rem;
+	}
+
+	.journal-checkout-pay {
+		text-align: center;
+		text-decoration: none;
+	}
+
+	.journal-checkout-cancel {
+		padding: 0.45rem 0.9rem;
+		border: none;
+		border-radius: 999px;
+		background: transparent;
+		color: rgb(29 35 39 / 72%);
+		font: inherit;
+		font-size: 0.9rem;
+		cursor: pointer;
+		justify-self: center;
+	}
+
+	.journal-checkout-cancel:hover,
+	.journal-checkout-cancel:focus-visible {
+		color: #004836;
+		outline: 2px solid rgb(0 94 71 / 24%);
+		outline-offset: 2px;
+	}
+</style>
