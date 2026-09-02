@@ -6,7 +6,7 @@
 > It's also `Disallow:`-ed in `public/robots.txt` as defence in depth.
 > The legacy `TODO.md` is now only a pointer to this file.
 >
-> Last updated: **18 Jun 2026**.
+> Last updated: **18 Jun 2026 (evening — launch wiring confirmed)**.
 
 ---
 
@@ -14,10 +14,10 @@
 
 | Status | Total |
 |---|---|
-| ✅ Done | 30 |
+| ✅ Done | 35 |
 | 🟡 Pending (code) | 1 |
-| 🔵 Pending (client decision) | 2 |
-| 🟣 Pending (external — Fillout/Mailchimp/domain) | 2 |
+| 🔵 Pending (client decision) | 0 |
+| 🟣 Pending (external — post-launch) | 1 |
 
 ---
 
@@ -189,6 +189,23 @@ Client confirmed via WhatsApp (15 Jun). Code changes:
 **Homepage Section 4b**
 - Ally couldn't recall "Areas of Emotional Support" — **left out** (flip cards remain; no change).
 
+### Audit (extra). Launch wiring confirmed — **done 18 Jun**
+Boby confirmed the remaining operational items below. No further code changes needed unless noted.
+
+**Fillout → Mailchimp (Audit #15)** — ✅ wired and tested OK.
+- Lead-magnet forms (anxiety `jXo5e7D8Hwus`, teachers `bzhC71AYFfus`) → correct Mailchimp audience, PDF delivery, thank-you redirect.
+- Contact (`t5xKDhCRfyus`) + DSAR (`wkUmW35GQous`) → direct email to Ally, not Mailchimp.
+
+**Final domain** — ✅ **`https://awakendiscovery.co.uk/`**
+- `siteMeta.canonicalOrigin` in `src/data/site.ts` already set to `https://awakendiscovery.co.uk`.
+- At DNS cutover: confirm Fillout PDF delivery URLs use `awakendiscovery.co.uk` (not Netlify preview) — quick post-launch check.
+
+**Double opt-in** — ✅ closed. Single opt-in; no action.
+
+**Cookie banner** — ✅ closed. Wording and categories approved (`CookieBanner.astro`).
+
+**Therapy Journal video music (Audit #13)** — ✅ closed. Out of scope for launch; video stays as-is.
+
 ### Audit #17. SEO titles & descriptions sweep — **done 15 Jun**
 Rewrote `<title>` and `<meta description>` across the 7 main pages so each one (i) leads with the brand or product, (ii) names Ally where helpful, (iii) fits Google's display limits (≤ 65 chars title, 140–160 chars description) and (iv) drops keyword-stuffing.
 - **`/` (siteMeta)** — was `"Therapy • Emotional Wellbeing • Teacher Support • Anxiety Help"` (no brand, no Ally, bullet-stuffed). Now: **"Counselling & Psychotherapy with Ally · Awaken Discovery"** + description naming Ally, MBACP/NCPS and York.
@@ -213,69 +230,44 @@ _None._ All `{{TODO}}` / `{{IMAGE PROMPT}}` / `{{PRICE}}` placeholders are gone 
 
 ## 🔵 Pending — client decision
 
-### Audit #13. Music on the Therapy Journal video
-- Video has no audio. Music + licence decision with the client. Not a blocker.
+_None._
 
-### Legacy — unanswered in Ally's reply
-- **Double opt-in** for Mailchimp (asked in launch message, no answer yet).
-- **Cookie banner** wording — quick eyes before go-live.
+## ✅ Client / ops decisions now closed
 
-## ✅ Client decisions now closed (15 Jun WhatsApp)
-
-| Topic | Ally's answer | Applied |
+| Topic | Decision | Date |
 |---|---|---|
-| Bundle pricing | Confirmed £540/£324, £810/£486 | ✅ already correct |
-| Bundle session length | 60-min only | ✅ copy on `/pricing` |
-| Payment mechanism | Stripe | ✅ `/pricing#book` step 3 |
-| Calendly couples | Separate durations, clear Book Now | ✅ slug split in `calendly.ts` |
-| Products visibility | Anxiety PDF live; teasers for Teachers Journal + Sunday Reset | ✅ `/products` |
-| Grounded Wellness | `?ref=ztu5yzm` | ✅ affiliate band |
-| Homepage Section 4b | "I can't even remember" | ✅ left out |
+| Bundle pricing | Confirmed £540/£324, £810/£486 | 15 Jun (Ally) |
+| Bundle session length | 60-min only | 15 Jun (Ally) |
+| Payment mechanism | Stripe | 15 Jun (Ally) |
+| Calendly couples | Separate durations, clear Book Now | 15 Jun (Ally) → applied 18 Jun |
+| Products visibility | Anxiety PDF live; Teachers Journal + Sunday Reset teasers | 15 Jun (Ally) |
+| Grounded Wellness | `?ref=ztu5yzm` | 15 Jun (Ally) |
+| Homepage Section 4b | Leave out | 15 Jun (Ally) |
+| Fillout → Mailchimp | Wired OK | 18 Jun (Boby) |
+| Final domain | `https://awakendiscovery.co.uk/` | 18 Jun (Boby) |
+| Double opt-in | Single opt-in (ignore) | 18 Jun (Boby) |
+| Cookie banner | Approved | 18 Jun (Boby) |
+| Therapy Journal video music | Out of scope | 18 Jun (Boby) |
 
-## 🔵 Removed from pending (was client decision, now done)
-- ~~Audit #11 in-development products~~ → resolved (see above)
-- ~~Audit #12 Grounded Wellness~~ → resolved
-- ~~Calendly duplicate slug~~ → resolved
-- ~~90-min bulk pricing~~ → bundles are 60-min only
-- ~~Confirm pricing values~~ → confirmed
-- ~~Bundle payment mechanism~~ → Stripe
-- ~~Section 4b homepage~~ → leave as is
+## 🟣 Pending — post-launch only
 
-## 🟣 Pending — external validations
+### Audit #14. Production smoke test (after DNS cutover)
+One final pass on **`https://awakendiscovery.co.uk/`**:
+- Calendly links (all 7 events in `src/data/calendly.ts`) open the correct duration;
+- Fillout embeds submit and deliver the right PDF;
+- PDFs load at `/assets/pdf/finding-calm-anxiety.pdf` and `/assets/pdf/finding-calm-teachers.pdf`;
+- Amazon, Grounded Wellness affiliate, findahelpline.com;
+- Privacy / Terms / cookie banner;
+- Redirects from old URLs if any.
 
-### Audit #14. Manual smoke test of external links
-Before going live, open each of these in production:
-- Calendly (`tasterSession`, `individual.*`, `couples.*` in `src/data/calendly.ts`);
-- Fillout embeds (4 IDs: `jXo5e7D8Hwus` anxiety, `bzhC71AYFfus` teachers, `t5xKDhCRfyus` contact, `wkUmW35GQous` DSAR/privacy);
-- Amazon (`/products` → "Therapy Journal for Couples");
-- Grounded Wellness affiliate (`/products`);
-- findahelpline.com (`/finding-calm-teachers`);
-- Internal Privacy / Terms;
-- PDFs at `/assets/pdf/finding-calm-anxiety.pdf` and `/assets/pdf/finding-calm-teachers.pdf`;
-- Netlify / final-domain redirects.
-
-### Audit #15. Fillout → Mailchimp wiring
-For each **lead-magnet** form (anxiety + teachers + general):
-- Form sends to the correct Mailchimp audience;
-- Correct PDF is delivered (anxiety vs teacher);
-- Correct redirect/thank-you after submit;
-- Audience tags (anxiety / teacher / general);
-- Decision on double opt-in.
-
-For `t5xKDhCRfyus` (contact) and `wkUmW35GQous` (DSAR/privacy): **does not** go to Mailchimp — just a direct email notification to Ally + simple thank-you/redirect.
-
-### PDF URLs in Fillout
-- Currently point to `awakendiscovery.netlify.app/assets/pdf/...`.
-- **Swap** to the final domain after cutover (`awakendiscovery.com` / `.co.uk`).
-
-### `siteMeta.canonicalOrigin`
-- `src/data/site.ts` points to `https://awakendiscovery.co.uk` — confirm the final domain before publishing.
-
-## 🟣 Removed from pending (was flagged, now fixed)
-- ~~Calendly slugs — couples duplicate~~ → split 18 Jun (see Ally Q&A entry above).
-
-### Cookie banner
-- `CookieBanner.astro` is already wired up. Confirm wording and categories with the client before go-live.
+## 🟣 Removed from pending (closed 18 Jun)
+- ~~Audit #15 Fillout → Mailchimp~~ → wired OK
+- ~~PDF URLs in Fillout~~ → covered by Mailchimp wiring + post-cutover smoke test
+- ~~`siteMeta.canonicalOrigin`~~ → confirmed `awakendiscovery.co.uk`
+- ~~Double opt-in~~ → single opt-in
+- ~~Cookie banner~~ → approved
+- ~~Audit #13 video music~~ → out of scope
+- ~~Calendly couples duplicate slug~~ → split 18 Jun
 
 ---
 
@@ -289,8 +281,8 @@ For `t5xKDhCRfyus` (contact) and `wkUmW35GQous` (DSAR/privacy): **does not** go 
 | 4 | Thank-you pages (journal/checkout) | ✅ done | Anxiety journal live at £18.99; teachers journal still "coming soon" |
 | 5 | Qualifications + CPD on `/about` | ✅ done | — |
 | 6 | Decide on "In development" products | ✅ done | Anxiety PDF live; Teachers Journal + Sunday Reset teasers (15 Jun Ally) |
-| 7 | Test Fillout → Mailchimp → PDF → thank-you | 🟣 | External pending |
-| 8 | Test external links + PDFs on final domain | 🟣 | Post-DNS cutover |
+| 7 | Test Fillout → Mailchimp → PDF → thank-you | ✅ done | Wired OK (18 Jun) |
+| 8 | Test external links + PDFs on final domain | 🟣 | Post-DNS smoke test on awakendiscovery.co.uk |
 | 9 | Noindex `/style-guide` | ✅ done | — |
 | 10 | Review alt texts (blog) + basic SEO | ✅ done | 10 `heroImageAlt` filled in (10 Jun); titles/descriptions sweep done (15 Jun) |
 | 11 | Therapy pricing toggle visibility (`#98`) | ✅ done | Two large CTA cards with icons + microcopy (15 Jun) |

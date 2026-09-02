@@ -17,6 +17,7 @@
  */
 
 import { createHash } from "node:crypto";
+import { shouldSilentlyDrop } from "./lib/spam-guard.js";
 
 const RESEND_API = "https://api.resend.com/emails";
 
@@ -440,6 +441,11 @@ export async function handler(event) {
 		payload = JSON.parse(event.body || "{}");
 	} catch {
 		return json(400, { error: "Invalid request body" });
+	}
+
+	if (shouldSilentlyDrop(payload)) {
+		console.warn("Subscribe: silent drop (honeypot or too fast)");
+		return json(200, { success: true });
 	}
 
 	const email = String(payload.email || "")

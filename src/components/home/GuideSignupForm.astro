@@ -24,6 +24,15 @@ const {
 	data-page-location={pageLocation}
 	novalidate
 >
+	<input
+		type="text"
+		name="company"
+		class="guide-hp"
+		tabindex="-1"
+		autocomplete="off"
+		aria-hidden="true"
+	/>
+
 	<label class="guide-field">
 		<span class="guide-label">Email Address</span>
 		<span class="guide-input-wrap">
@@ -75,6 +84,7 @@ const {
 			const form = formEl as HTMLFormElement;
 			if (form.dataset.bound === "true") return;
 			form.dataset.bound = "true";
+			const formStartedAt = Date.now();
 
 			const status = form.querySelector(
 				"[data-guide-status]",
@@ -98,6 +108,10 @@ const {
 
 				const email = emailInput?.value.trim() || "";
 				const consent = Boolean(consentInput?.checked);
+				const companyInput = form.elements.namedItem(
+					"company",
+				) as HTMLInputElement | null;
+				const company = companyInput?.value.trim() || "";
 
 				if (!status || !submit) return;
 
@@ -114,6 +128,8 @@ const {
 							email,
 							consent,
 							list,
+							company,
+							formStartedAt,
 							pagePath: `${window.location.pathname}${window.location.hash || ""}`,
 							pageUrl: window.location.href,
 							pageLocation,
@@ -159,6 +175,15 @@ const {
 		border-radius: 1rem;
 		border: 1px solid rgb(0 94 71 / 18%);
 		box-shadow: 0 10px 28px rgb(29 35 39 / 8%);
+	}
+
+	.guide-hp {
+		position: absolute;
+		left: -9999px;
+		width: 1px;
+		height: 1px;
+		opacity: 0;
+		pointer-events: none;
 	}
 
 	.guide-signup-form--plain {

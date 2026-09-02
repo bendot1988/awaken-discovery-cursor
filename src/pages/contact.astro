@@ -95,6 +95,15 @@ const faqs = [
 				<div class="ct-form-wrap">
 					<div class="ct-form-card">
 						<form class="ct-form" data-contact-form novalidate>
+							<input
+								type="text"
+								name="company"
+								class="ct-hp"
+								tabindex="-1"
+								autocomplete="off"
+								aria-hidden="true"
+							/>
+
 							<div class="ct-form-row">
 								<label class="ct-field">
 									<span class="ct-label">First name <abbr title="required">*</abbr></span>
@@ -461,6 +470,15 @@ const faqs = [
 		border: 1px solid rgb(0 94 71 / 12%);
 	}
 
+	.ct-hp {
+		position: absolute;
+		left: -9999px;
+		width: 1px;
+		height: 1px;
+		opacity: 0;
+		pointer-events: none;
+	}
+
 	.ct-form-row {
 		display: grid;
 		gap: 1rem;
@@ -743,6 +761,7 @@ const faqs = [
 		) as HTMLFormElement | null;
 		if (!form || form.dataset.bound === "true") return;
 		form.dataset.bound = "true";
+		const formStartedAt = Date.now();
 
 		const status = form.querySelector(
 			"[data-contact-status]",
@@ -770,6 +789,8 @@ const faqs = [
 				topics,
 				newsletter: fd.get("newsletter") === "yes",
 				privacy: fd.get("privacy") === "yes",
+				company: String(fd.get("company") || "").trim(),
+				formStartedAt,
 			};
 
 			status.hidden = false;

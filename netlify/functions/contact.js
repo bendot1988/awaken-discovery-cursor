@@ -5,6 +5,7 @@
  */
 
 import { createHash } from "node:crypto";
+import { shouldSilentlyDrop } from "./lib/spam-guard.js";
 
 const RESEND_API = "https://api.resend.com/emails";
 const ALLY_EMAIL = "awakendiscoverytherapy@gmail.com";
@@ -149,6 +150,11 @@ export async function handler(event) {
 		payload = JSON.parse(event.body || "{}");
 	} catch {
 		return json(400, { error: "Invalid request body" });
+	}
+
+	if (shouldSilentlyDrop(payload)) {
+		console.warn("Contact form: silent drop (honeypot or too fast)");
+		return json(200, { success: true });
 	}
 
 	const firstName = String(payload.firstName || "").trim();
