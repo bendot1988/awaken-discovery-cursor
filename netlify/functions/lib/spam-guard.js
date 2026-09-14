@@ -12,9 +12,10 @@ export function honeypotFilled(payload) {
 
 export function submittedTooFast(payload, minMs = 2500) {
 	const raw = payload?.formStartedAt ?? payload?.formTs;
-	if (raw === undefined || raw === null || raw === "") return false;
+	if (raw === undefined || raw === null || raw === "") return true;
 	const started = Number(raw);
-	if (!Number.isFinite(started) || started <= 0) return false;
+	if (!Number.isFinite(started) || started <= 0) return true;
+	if (started > Date.now()) return true;
 	return Date.now() - started < minMs;
 }
 

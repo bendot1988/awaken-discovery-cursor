@@ -30,6 +30,14 @@ const year = new Date().getFullYear();
 			<section class="footer-signup" aria-labelledby="footer-signup-heading">
 				<h2 id="footer-signup-heading">Stay in touch</h2>
 				<form class="footer-signup-form" data-footer-signup novalidate>
+					<input
+						type="text"
+						name="company"
+						class="footer-hp"
+						tabindex="-1"
+						autocomplete="off"
+						aria-hidden="true"
+					/>
 					<div class="footer-signup-row">
 						<label class="footer-field">
 							<span class="footer-label">First name</span>
@@ -211,6 +219,15 @@ const year = new Date().getFullYear();
 	.footer-signup-form {
 		display: grid;
 		gap: 0.75rem;
+	}
+
+	.footer-hp {
+		position: absolute;
+		left: -9999px;
+		width: 1px;
+		height: 1px;
+		opacity: 0;
+		pointer-events: none;
 	}
 
 	.footer-signup-row {
@@ -571,6 +588,7 @@ const year = new Date().getFullYear();
 			const form = formEl as HTMLFormElement;
 			if (form.dataset.bound === "true") return;
 			form.dataset.bound = "true";
+			const formStartedAt = Date.now();
 
 			const status = form.querySelector(
 				"[data-footer-status]",
@@ -606,6 +624,8 @@ const year = new Date().getFullYear();
 							firstName,
 							consent,
 							list,
+							company: String(fd.get("company") || "").trim(),
+							formStartedAt,
 							pagePath: window.location.pathname,
 							pageUrl: window.location.href,
 							pageLocation: "Site footer · Newsletter",
