@@ -152,8 +152,8 @@ export async function handler(event) {
 		return json(400, { error: "Invalid request body" });
 	}
 
-	if (shouldSilentlyDrop(payload)) {
-		console.warn("Contact form: silent drop (honeypot or too fast)");
+	if (shouldSilentlyDrop(payload, event)) {
+		console.warn("Contact form: silent drop (honeypot, timing, or untrusted origin)");
 		return json(200, { success: true });
 	}
 

@@ -8,6 +8,8 @@
  * - MAILCHIMP_AUDIENCE_ANXIETY  optional separate audience for the anxiety guide
  * - MAILCHIMP_SERVER_PREFIX    optional — auto-detected from API key if unset (us21, etc.)
  * - MAILCHIMP_STATUS           optional — "subscribed" (default) or "pending" for double opt-in
+ *                              Prefer "pending" while under bot attack: unconfirmed members
+ *                              never join the sending audience and cannot hurt reputation.
  * - RESEND_API_KEY             required to email the free PDF to the subscriber
  * - RESEND_FROM                verified from-address (not onboarding@resend.dev for real users)
  * - SITE_URL                   optional — PDF link origin (Netlify URL used if unset)
@@ -443,8 +445,8 @@ export async function handler(event) {
 		return json(400, { error: "Invalid request body" });
 	}
 
-	if (shouldSilentlyDrop(payload)) {
-		console.warn("Subscribe: silent drop (honeypot or too fast)");
+	if (shouldSilentlyDrop(payload, event)) {
+		console.warn("Subscribe: silent drop (honeypot, timing, or untrusted origin)");
 		return json(200, { success: true });
 	}
 
