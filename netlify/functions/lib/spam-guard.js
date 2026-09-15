@@ -37,7 +37,7 @@ export function honeypotFilled(payload) {
 	return trap.length > 0;
 }
 
-export function submittedTooFast(payload, minMs = 2500) {
+export function submittedTooFast(payload, minMs = 1500) {
 	const raw = payload?.formStartedAt ?? payload?.formTs;
 	if (raw === undefined || raw === null || raw === "") return true;
 	const started = Number(raw);

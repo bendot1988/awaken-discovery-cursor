@@ -362,6 +362,13 @@ async function sendGuideToSubscriber({ email, list, config }) {
 	return { ok: true, data, pdfUrl };
 }
 
+function mailchimpMemberStatus() {
+	const status = String(process.env.MAILCHIMP_STATUS || "subscribed")
+		.trim()
+		.toLowerCase();
+	return status === "pending" ? "pending" : "subscribed";
+}
+
 async function ensureInMailchimp({
 	apiKey,
 	server,
@@ -371,11 +378,7 @@ async function ensureInMailchimp({
 	firstName,
 	lastName,
 }) {
-	const status = String(process.env.MAILCHIMP_STATUS || "subscribed")
-		.trim()
-		.toLowerCase();
-	const allowed = new Set(["subscribed", "pending"]);
-	const memberStatus = allowed.has(status) ? status : "subscribed";
+	const memberStatus = mailchimpMemberStatus();
 
 	const url = `https://${server}.api.mailchimp.com/3.0/lists/${audienceId}/members/${subscriberHash(email)}`;
 	const auth = Buffer.from(`anystring:${apiKey}`).toString("base64");
@@ -384,6 +387,20 @@ async function ensureInMailchimp({
 	if (firstName) merge_fields.FNAME = firstName;
 	if (lastName) merge_fields.LNAME = lastName;
 
+	// Double opt-in: create as pending so Mailchimp sends the confirmation email.
+	// Do not force status:pending on existing subscribed members (API rejects / no resend).
+	const body = {
+		email_address: email,
+		status_if_new: memberStatus,
+		tags: tags || [],
+		...(Object.keys(merge_fields).length ? { merge_fields } : {}),
+	};
+	if (memberStatus === "subscribed") {
+		body.status = "subscribed";
+	} else {
+		body.status = "pending";
+	}
+
 	const response = await fetch(url, {
 		method: "PUT",
 		headers: {
@@ -391,19 +408,24 @@ async function ensureInMailchimp({
 			"Content-Type": "application/json",
 			Accept: "application/json",
 		},
-		body: JSON.stringify({
-			email_address: email,
-			status_if_new: memberStatus,
-			status: memberStatus,
-			tags: tags || [],
-			...(Object.keys(merge_fields).length ? { merge_fields } : {}),
-		}),
+		body: JSON.stringify(body),
 	});
 
 	const data = await response.json().catch(() => ({}));
 
 	if (response.ok) {
-		return { ok: true, data };
+		return { ok: true, data, memberStatus };
+	}
+
+	// Already subscribed — treat as success (no second confirmation email).
+	const title = String(data?.title || "");
+	if (
+		response.status === 400 &&
+		/member exists|already a list member|already subscribed/i.test(
+			`${title} ${mailchimpMessage(data)}`,
+		)
+	) {
+		return { ok: true, data, memberStatus, alreadyMember: true };
 	}
 
 	return {
@@ -551,7 +573,14 @@ export async function handler(event) {
 				`https://awakendiscovery.co.uk${pagePath || "/#signup"}`,
 		});
 
-		return json(200, { success: true });
+		const confirmationRequired =
+			result.memberStatus === "pending" && !result.alreadyMember;
+
+		return json(200, {
+			success: true,
+			confirmationRequired,
+			alreadyMember: Boolean(result.alreadyMember),
+		});
 	} catch (error) {
 		console.error("Mailchimp subscribe failed", error);
 		return json(500, {

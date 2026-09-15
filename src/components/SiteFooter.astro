@@ -588,7 +588,12 @@ const year = new Date().getFullYear();
 			const form = formEl as HTMLFormElement;
 			if (form.dataset.bound === "true") return;
 			form.dataset.bound = "true";
-			const formStartedAt = Date.now();
+			let formStartedAt = 0;
+			const markFormStarted = () => {
+				if (!formStartedAt) formStartedAt = Date.now();
+			};
+			form.addEventListener("focusin", markFormStarted);
+			form.addEventListener("input", markFormStarted);
 
 			const status = form.querySelector(
 				"[data-footer-status]",
@@ -601,6 +606,7 @@ const year = new Date().getFullYear();
 				event.preventDefault();
 				if (!status || !submit) return;
 				if (!form.reportValidity()) return;
+				markFormStarted();
 
 				const fd = new FormData(form);
 				const firstName = String(fd.get("firstName") || "").trim();
@@ -643,11 +649,18 @@ const year = new Date().getFullYear();
 					}
 
 					status.dataset.state = "ok";
-					status.textContent =
-						list === "newsletter"
-							? "You're signed up — welcome."
-							: "You're signed up. Check your inbox for your free guide.";
+					if (list === "newsletter") {
+						status.textContent = data.confirmationRequired
+							? "Thanks — check your inbox (and spam) for a confirmation email, then click to finish signing up."
+							: data.alreadyMember
+								? "You're already on the list — welcome back."
+								: "You're signed up — welcome.";
+					} else {
+						status.textContent =
+							"You're signed up. Check your inbox for your free guide.";
+					}
 					form.reset();
+					formStartedAt = 0;
 					submit.disabled = false;
 				} catch {
 					status.dataset.state = "error";
