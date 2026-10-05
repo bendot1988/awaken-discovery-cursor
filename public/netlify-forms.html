@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="robots" content="noindex, nofollow" />
+		<title>Netlify Forms (backup only)</title>
+	</head>
+	<body>
+		<!--
+			Hidden forms so Netlify detects fields for backup email notifications.
+			Posted by netlify/functions when Resend fails — not used by the live UI.
+		-->
+
+		<form name="contact" data-netlify="true" hidden>
+			<input type="hidden" name="form-name" value="contact" />
+			<input name="subject" type="text" />
+			<input name="notice" type="text" />
+			<input name="email_error" type="text" />
+			<input name="firstName" type="text" />
+			<input name="lastName" type="text" />
+			<input name="email" type="email" />
+			<input name="phone" type="text" />
+			<input name="topics" type="text" />
+			<input name="newsletter" type="text" />
+			<textarea name="message"></textarea>
+		</form>
+
+		<form name="subscribe" data-netlify="true" hidden>
+			<input type="hidden" name="form-name" value="subscribe" />
+			<input name="subject" type="text" />
+			<input name="notice" type="text" />
+			<input name="email_error" type="text" />
+			<input name="email" type="email" />
+			<input name="firstName" type="text" />
+			<input name="lastName" type="text" />
+			<input name="list" type="text" />
+			<input name="pageLocation" type="text" />
+			<input name="pageUrl" type="text" />
+			<input name="pagePath" type="text" />
+			<input name="consent" type="text" />
+		</form>
+
+		<form name="bulk-book" data-netlify="true" hidden>
+			<input type="hidden" name="form-name" value="bulk-book" />
+			<input name="subject" type="text" />
+			<input name="notice" type="text" />
+			<input name="email_error" type="text" />
+			<input name="reference" type="text" />
+			<input name="firstName" type="text" />
+			<input name="lastName" type="text" />
+			<input name="email" type="email" />
+			<input name="phone" type="text" />
+			<input name="preferredContact" type="text" />
+			<input name="address1" type="text" />
+			<input name="address2" type="text" />
+			<input name="city" type="text" />
+			<input name="county" type="text" />
+			<input name="postcode" type="text" />
+			<input name="country" type="text" />
+			<input name="returningCustomer" type="text" />
+			<input name="newsletter" type="text" />
+			<input name="packageId" type="text" />
+			<input name="packageLabel" type="text" />
+			<input name="payNow" type="text" />
+			<input name="howHeard" type="text" />
+			<textarea name="comments"></textarea>
+		</form>
+	</body>
+</html>
