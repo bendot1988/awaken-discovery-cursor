@@ -7,6 +7,13 @@
  */
 
 import { createHash, randomBytes } from "node:crypto";
+import {
+	connectBlobs,
+	markLeadEmail,
+	notifyPhone,
+	saveLeadBackup,
+	submitNetlifyForm,
+} from "../../src/utils/lead-backup.ts";
 
 const RESEND_API = "https://api.resend.com/emails";
 const ALLY_EMAIL = "awakendiscoverytherapy@gmail.com";
@@ -252,6 +259,37 @@ export async function handler(event) {
 			? "Yes — redirected to Stripe"
 			: "Yes — but Stripe link missing for this package (follow up manually)"
 		: "No — would like to speak first (shown Calendly)";
+	const allySubject = `Bulk enquiry ${reference}${pkg ? `: ${pkg.label}` : " (speak first)"}`;
+
+	connectBlobs(event);
+	const backup = await saveLeadBackup("bulk-book", {
+		reference,
+		firstName,
+		lastName,
+		email,
+		phone,
+		preferredContact,
+		address1,
+		address2,
+		city,
+		county,
+		postcode,
+		country,
+		returningCustomer,
+		newsletter,
+		packageId,
+		packageLabel: packageLine,
+		payNow,
+		howHeard,
+		comments,
+	});
+
+	let otherOk = Boolean(backup);
+
+	if (newsletter) {
+		const mc = await addToMailchimp(email, firstName, lastName);
+		if (mc?.ok) otherOk = true;
+	}
 
 	const allyHtml = `<!DOCTYPE html>
 <html lang="en"><body style="margin:0;padding:24px;background:#f3f6f4;font-family:Arial,Helvetica,sans-serif;color:#1d2327;">
@@ -298,28 +336,29 @@ export async function handler(event) {
 		`Comments: ${comments}`,
 	].join("\n");
 
-	const allyMail = await sendResend({
-		to: ALLY_EMAIL,
-		subject: `Bulk enquiry ${reference}${pkg ? `: ${pkg.label}` : " (speak first)"}`,
-		html: allyHtml,
-		text: allyText,
-		idempotencyKey: `bulk-ally/${reference}`,
-	});
+	let emailOk = false;
+	let emailError = "";
 
-	if (!allyMail.ok) {
-		return json(502, {
-			error: "We couldn't submit your form just now. Please try again.",
-			hint: allyMail.detail,
+	try {
+		const allyMail = await sendResend({
+			to: ALLY_EMAIL,
+			subject: allySubject,
+			html: allyHtml,
+			text: allyText,
+			idempotencyKey: `bulk-ally/${reference}`,
 		});
-	}
 
-	const customerNextStep = wantsPay && stripeUrl
-		? "You're being taken to secure Stripe checkout to complete payment. Please keep your reference number — it will also appear on the payment."
-		: wantsPay && !stripeUrl
-			? "Thanks for choosing to pay now. Ally will send you a secure payment link shortly for this package."
-			: "You've asked to speak first — please book a free consultation via Calendly if you haven't already. Ally will also be in touch.";
+		if (allyMail.ok) {
+			emailOk = true;
 
-	const customerHtml = `<!DOCTYPE html>
+			const customerNextStep =
+				wantsPay && stripeUrl
+					? "You're being taken to secure Stripe checkout to complete payment. Please keep your reference number — it will also appear on the payment."
+					: wantsPay && !stripeUrl
+						? "Thanks for choosing to pay now. Ally will send you a secure payment link shortly for this package."
+						: "You've asked to speak first — please book a free consultation via Calendly if you haven't already. Ally will also be in touch.";
+
+			const customerHtml = `<!DOCTYPE html>
 <html lang="en"><body style="margin:0;padding:24px;background:#f3f6f4;font-family:Arial,Helvetica,sans-serif;color:#1d2327;">
   <table width="100%" style="max-width:560px;margin:0 auto;background:#fff;border:1px solid rgba(0,94,71,.16);border-radius:16px;overflow:hidden;">
     <tr><td style="padding:24px;background:#004836;color:#fff;">
@@ -336,22 +375,66 @@ export async function handler(event) {
   </table>
 </body></html>`;
 
-	await sendResend({
-		to: email,
-		subject: `Your bulk session request (${reference})`,
-		html: customerHtml,
-		text: `Hi ${firstName},\n\nWe've received your bulk session request.\nReference: ${reference}\n${pkg ? `Package: ${pkg.label} — ${pkg.price}\n` : ""}\nAlly · Awaken Discovery`,
-		idempotencyKey: `bulk-customer/${reference}`,
-	});
-
-	if (newsletter) {
-		await addToMailchimp(email, firstName, lastName);
+			await sendResend({
+				to: email,
+				subject: `Your bulk session request (${reference})`,
+				html: customerHtml,
+				text: `Hi ${firstName},\n\nWe've received your bulk session request.\nReference: ${reference}\n${pkg ? `Package: ${pkg.label} — ${pkg.price}\n` : ""}\nAlly · Awaken Discovery`,
+				idempotencyKey: `bulk-customer/${reference}`,
+			});
+		} else {
+			emailError = allyMail.detail || "Email failed";
+		}
+	} catch (err) {
+		emailError = err instanceof Error ? err.message : "Email failed";
+		console.error("Bulk-book Resend threw", err);
 	}
 
-	return json(200, {
-		success: true,
-		reference,
-		stripeUrl,
-		thankYouUrl: `${siteOrigin()}/pricing/bulk-thank-you?ref=${encodeURIComponent(reference)}`,
+	if (!emailOk) {
+		const netlifyOk = await submitNetlifyForm("bulk-book", {
+			subject: `Backup email: ${allySubject}`,
+			email_error: emailError || "Resend failed",
+			reference,
+			firstName,
+			lastName,
+			email,
+			phone,
+			preferredContact,
+			address1,
+			address2,
+			city,
+			county,
+			postcode,
+			country,
+			returningCustomer,
+			newsletter: newsletter ? "Yes" : "No",
+			packageId,
+			packageLabel: packageLine,
+			payNow,
+			howHeard,
+			comments,
+		});
+		if (netlifyOk) otherOk = true;
+	}
+
+	await markLeadEmail(
+		backup,
+		emailOk ? "sent" : "failed",
+		emailOk ? undefined : emailError || "Resend failed",
+	);
+	await notifyPhone("bulk-book", emailOk);
+
+	if (emailOk || otherOk) {
+		return json(200, {
+			success: true,
+			reference,
+			stripeUrl,
+			thankYouUrl: `${siteOrigin()}/pricing/bulk-thank-you?ref=${encodeURIComponent(reference)}`,
+		});
+	}
+
+	return json(502, {
+		error: "We couldn't submit your form just now. Please try again.",
+		hint: emailError || "All delivery methods failed",
 	});
 }

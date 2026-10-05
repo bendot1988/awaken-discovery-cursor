@@ -1,14 +1,23 @@
 /**
  * Contact form → email Ally via Resend, optional Mailchimp newsletter opt-in.
+ * Blobs + ntfy + Netlify Forms backup when Resend is down.
  *
  * Env: RESEND_API_KEY, RESEND_FROM, MAILCHIMP_API_KEY, MAILCHIMP_AUDIENCE_ID
  */
 
 import { createHash } from "node:crypto";
 import { shouldSilentlyDrop } from "./lib/spam-guard.js";
+import {
+	connectBlobs,
+	markLeadEmail,
+	notifyPhone,
+	saveLeadBackup,
+	submitNetlifyForm,
+} from "../../src/utils/lead-backup.ts";
 
 const RESEND_API = "https://api.resend.com/emails";
 const ALLY_EMAIL = "awakendiscoverytherapy@gmail.com";
+const FORM_NAME = "contact";
 
 const HELP_OPTIONS = {
 	"couple-sessions": "Question regarding couple sessions",
@@ -192,6 +201,25 @@ export async function handler(event) {
 		? topicLabels.join("; ")
 		: "Not specified";
 	const idem = `contact/${email}/${Date.now()}`;
+	const allySubject = `Contact form: ${firstName} ${lastName}`;
+
+	connectBlobs(event);
+	const backup = await saveLeadBackup(FORM_NAME, {
+		firstName,
+		lastName,
+		email,
+		phone,
+		topics: topicsLine,
+		newsletter,
+		message,
+	});
+
+	let otherOk = Boolean(backup);
+
+	if (newsletter) {
+		const mc = await addToMailchimp(email, firstName, lastName);
+		if (mc?.ok) otherOk = true;
+	}
 
 	const allyHtml = `<!DOCTYPE html>
 <html lang="en"><body style="margin:0;padding:24px;background:#f3f6f4;font-family:Arial,Helvetica,sans-serif;color:#1d2327;">
@@ -221,26 +249,25 @@ export async function handler(event) {
 		`Message: ${message}`,
 	].join("\n");
 
-	const allyMail = await sendResend({
-		to: ALLY_EMAIL,
-		replyTo: email,
-		subject: `Contact form: ${firstName} ${lastName}`,
-		html: allyHtml,
-		text: allyText,
-		idempotencyKey: `${idem}/ally`,
-	});
+	let emailOk = false;
+	let emailError = "";
 
-	if (!allyMail.ok) {
-		return json(502, {
-			error: "We couldn't send your message just now. Please try again.",
-			hint: allyMail.detail,
+	try {
+		const allyMail = await sendResend({
+			to: ALLY_EMAIL,
+			replyTo: email,
+			subject: allySubject,
+			html: allyHtml,
+			text: allyText,
+			idempotencyKey: `${idem}/ally`,
 		});
-	}
 
-	await sendResend({
-		to: email,
-		subject: "We've received your message · Awaken Discovery",
-		html: `<!DOCTYPE html>
+		if (allyMail.ok) {
+			emailOk = true;
+			await sendResend({
+				to: email,
+				subject: "We've received your message · Awaken Discovery",
+				html: `<!DOCTYPE html>
 <html lang="en"><body style="margin:0;padding:24px;background:#f3f6f4;font-family:Arial,Helvetica,sans-serif;color:#1d2327;">
   <table width="100%" style="max-width:560px;margin:0 auto;background:#fff;border:1px solid rgba(0,94,71,.16);border-radius:16px;overflow:hidden;">
     <tr><td style="padding:24px;background:#004836;color:#fff;">
@@ -253,13 +280,45 @@ export async function handler(event) {
     </td></tr>
   </table>
 </body></html>`,
-		text: `Hi ${firstName},\n\nI've received your message and aim to reply within one working day.\n\nAlly · Awaken Discovery`,
-		idempotencyKey: `${idem}/customer`,
-	});
-
-	if (newsletter) {
-		await addToMailchimp(email, firstName, lastName);
+				text: `Hi ${firstName},\n\nI've received your message and aim to reply within one working day.\n\nAlly · Awaken Discovery`,
+				idempotencyKey: `${idem}/customer`,
+			});
+		} else {
+			emailError = allyMail.detail || "Email failed";
+		}
+	} catch (err) {
+		emailError = err instanceof Error ? err.message : "Email failed";
+		console.error("Contact Resend threw", err);
 	}
 
-	return json(200, { success: true });
+	if (!emailOk) {
+		const netlifyOk = await submitNetlifyForm(FORM_NAME, {
+			subject: `Backup email: ${allySubject}`,
+			email_error: emailError || "Resend failed",
+			firstName,
+			lastName,
+			email,
+			phone,
+			topics: topicsLine,
+			newsletter: newsletter ? "Yes" : "No",
+			message,
+		});
+		if (netlifyOk) otherOk = true;
+	}
+
+	await markLeadEmail(
+		backup,
+		emailOk ? "sent" : "failed",
+		emailOk ? undefined : emailError || "Resend failed",
+	);
+	await notifyPhone(FORM_NAME, emailOk);
+
+	if (emailOk || otherOk) {
+		return json(200, { success: true });
+	}
+
+	return json(502, {
+		error: "We couldn't send your message just now. Please try again.",
+		hint: emailError || "All delivery methods failed",
+	});
 }

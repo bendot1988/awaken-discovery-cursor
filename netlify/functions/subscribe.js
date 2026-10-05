@@ -20,6 +20,13 @@
 
 import { createHash } from "node:crypto";
 import { shouldSilentlyDrop } from "./lib/spam-guard.js";
+import {
+	connectBlobs,
+	markLeadEmail,
+	notifyPhone,
+	saveLeadBackup,
+	submitNetlifyForm,
+} from "../../src/utils/lead-backup.ts";
 
 const RESEND_API = "https://api.resend.com/emails";
 
@@ -516,6 +523,27 @@ export async function handler(event) {
 		});
 	}
 
+	const pageLocationFinal = pageLocation || config.defaultLocation;
+	const pageUrlFinal =
+		pageUrl || `https://awakendiscovery.co.uk${pagePath || "/#signup"}`;
+	const allySubject = `New signup: ${config.offerTitle}`;
+
+	connectBlobs(event);
+	const backup = await saveLeadBackup("subscribe", {
+		email,
+		firstName,
+		lastName,
+		list,
+		pageLocation: pageLocationFinal,
+		pageUrl: pageUrlFinal,
+		pagePath,
+		consent,
+	});
+
+	let otherOk = Boolean(backup);
+	let confirmationRequired = false;
+	let alreadyMember = false;
+
 	try {
 		const result = await ensureInMailchimp({
 			apiKey,
@@ -527,62 +555,107 @@ export async function handler(event) {
 			lastName,
 		});
 
-		if (!result.ok) {
+		if (result.ok) {
+			otherOk = true;
+			confirmationRequired =
+				result.memberStatus === "pending" && !result.alreadyMember;
+			alreadyMember = Boolean(result.alreadyMember);
+		} else {
 			console.error("Mailchimp subscribe failed", {
 				email,
 				audienceId,
 				server,
 				result,
 			});
-
-			const unauthenticated = /api key|unauthorized|forbidden/i.test(
-				result.detail || "",
-			);
-			return json(502, {
-				error: unauthenticated
-					? "Mailchimp API key was rejected. Check MAILCHIMP_API_KEY in Netlify, then redeploy."
-					: "We couldn't complete your signup just now. Please try again.",
-				hint: result.detail,
-			});
 		}
 
-		if (config.pdfPath) {
-			const guideEmail = await sendGuideToSubscriber({
-				email,
+		let emailOk = true;
+		let emailError = "";
+
+		try {
+			if (config.pdfPath) {
+				const guideEmail = await sendGuideToSubscriber({
+					email,
+					list,
+					config,
+				});
+				if (!guideEmail.ok) {
+					emailOk = false;
+					emailError = guideEmail.detail || "Guide email failed";
+					console.error(
+						"Guide email failed after Mailchimp signup",
+						guideEmail,
+					);
+				}
+			}
+
+			const ally = await notifyAlly({
+				subscriberEmail: email,
 				list,
 				config,
+				pageLocation: pageLocationFinal,
+				pageUrl: pageUrlFinal,
 			});
-
-			if (!guideEmail.ok) {
-				console.error("Guide email failed after Mailchimp signup", guideEmail);
-				return json(502, {
-					error:
-						"You're on the list, but we couldn't email the guide just now. Please try again or contact us.",
-					hint: guideEmail.detail,
-				});
+			if (ally?.skipped || ally?.ok === false) {
+				emailOk = false;
+				if (!emailError) {
+					emailError = ally?.skipped
+						? "RESEND_API_KEY is missing."
+						: "Ally notification email failed";
+				}
 			}
+		} catch (err) {
+			emailOk = false;
+			emailError = err instanceof Error ? err.message : "Email failed";
+			console.error("Subscribe Resend threw", err);
 		}
 
-		await notifyAlly({
-			subscriberEmail: email,
-			list,
-			config,
-			pageLocation: pageLocation || config.defaultLocation,
-			pageUrl:
-				pageUrl ||
-				`https://awakendiscovery.co.uk${pagePath || "/#signup"}`,
-		});
+		if (!emailOk) {
+			const netlifyOk = await submitNetlifyForm("subscribe", {
+				subject: `Backup email: ${allySubject}`,
+				email_error: emailError || "Resend failed",
+				email,
+				firstName,
+				lastName,
+				list,
+				pageLocation: pageLocationFinal,
+				pageUrl: pageUrlFinal,
+				pagePath,
+				consent: consent ? "Yes" : "No",
+			});
+			if (netlifyOk) otherOk = true;
+		}
 
-		const confirmationRequired =
-			result.memberStatus === "pending" && !result.alreadyMember;
+		await markLeadEmail(
+			backup,
+			emailOk ? "sent" : "failed",
+			emailOk ? undefined : emailError || "Resend failed",
+		);
+		await notifyPhone("subscribe", emailOk);
 
-		return json(200, {
-			success: true,
-			confirmationRequired,
-			alreadyMember: Boolean(result.alreadyMember),
+		if (emailOk || otherOk) {
+			return json(200, {
+				success: true,
+				confirmationRequired,
+				alreadyMember,
+			});
+		}
+
+		return json(502, {
+			error: "We couldn't complete your signup just now. Please try again.",
+			hint: emailError || "All delivery methods failed",
 		});
 	} catch (error) {
 		console.error("Mailchimp subscribe failed", error);
+		await markLeadEmail(backup, "failed", "Unexpected error");
+		await notifyPhone("subscribe", false);
+		if (otherOk) {
+			return json(200, {
+				success: true,
+				confirmationRequired,
+				alreadyMember,
+			});
+		}
 		return json(500, {
 			error: "Something went wrong. Please try again in a moment.",
 		});
