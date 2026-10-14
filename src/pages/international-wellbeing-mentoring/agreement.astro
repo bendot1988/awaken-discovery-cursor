@@ -1,0 +1,690 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import SiteHeader from "../../components/SiteHeader.astro";
+import SiteFooter from "../../components/SiteFooter.astro";
+import {
+	locations,
+	navItems,
+	internationalWellbeingPath,
+	internationalWellbeingBookingUrl,
+} from "../../data/site";
+
+const lastUpdated = "August 2026";
+
+const toc = [
+	{ id: "wellbeing-mentoring", label: "Wellbeing mentoring" },
+	{ id: "what-this-is-not", label: "What this service is not" },
+	{ id: "who-for", label: "Who the service is for" },
+	{ id: "sessions", label: "Our sessions" },
+	{ id: "online", label: "Online sessions" },
+	{ id: "confidentiality", label: "Confidentiality" },
+	{ id: "privacy", label: "Your information and privacy" },
+	{ id: "ai", label: "AI and digital tools" },
+	{ id: "urgent", label: "Your wellbeing and urgent situations" },
+	{ id: "contact", label: "Contact between sessions" },
+	{ id: "fees", label: "Fees and payment" },
+	{ id: "cancellations", label: "Cancellations and missed sessions" },
+	{ id: "ending", label: "Ending the mentoring relationship" },
+	{ id: "international", label: "International clients and legal boundaries" },
+	{ id: "complaints", label: "Complaints" },
+	{ id: "agreement", label: "Agreement" },
+];
+---
+
+<Layout
+	title="International Wellbeing Mentoring Agreement · Awaken Discovery"
+	description="Agreement for Awaken Discovery International Wellbeing Mentoring — for adults outside the United Kingdom."
+>
+	<SiteHeader navItems={navItems} />
+	<main class="legal-page">
+		<section class="legal-hero section">
+			<div class="container legal-hero-inner">
+				<div class="legal-hero-copy">
+					<p class="section-kicker">Legal</p>
+					<h1>International Wellbeing Mentoring Agreement</h1>
+					<p class="legal-subtitle">
+						For adults outside the United Kingdom
+					</p>
+					<p class="legal-meta">
+						<span>Version</span>
+						<time datetime="2026-08">{lastUpdated}</time>
+					</p>
+					<p class="legal-intro">
+						Welcome to Awaken Discovery. This agreement explains what wellbeing
+						mentoring is, how we will work together, what you can expect from me
+						and what I need from you. Please read it before booking.
+					</p>
+					<p>
+						<a class="text-link" href={internationalWellbeingPath}>
+							← Back to International Wellbeing Mentoring
+						</a>
+					</p>
+				</div>
+			</div>
+		</section>
+
+		<section class="legal-body section">
+			<div class="container legal-body-inner">
+				<aside class="legal-toc" aria-label="Agreement sections">
+					<p class="legal-toc-title">Contents</p>
+					<ol class="legal-toc-list">
+						{
+							toc.map((item, i) => (
+								<li>
+									<a href={`#${item.id}`}>
+										<span class="legal-toc-num">
+											{String(i + 1).padStart(2, "0")}
+										</span>
+										<span>{item.label}</span>
+									</a>
+								</li>
+							))
+						}
+					</ol>
+				</aside>
+
+				<article class="legal-article">
+					<section aria-labelledby="wellbeing-mentoring" id="wellbeing-mentoring">
+						<h2>
+							<span class="legal-section-num">01</span>Wellbeing mentoring
+						</h2>
+						<p>
+							Wellbeing mentoring provides a supportive space to pause, reflect
+							and explore your wellbeing, personal development and changes you
+							may want to make in your life.
+						</p>
+						<p>
+							Sessions may include reflection, education, goal-setting,
+							self-awareness, self-connection, stress and overwhelm management,
+							grounding, confidence, boundaries, life transitions and practical
+							wellbeing approaches.
+						</p>
+						<p>
+							You remain responsible for your own choices and decisions. My role
+							is to support your exploration, offer information and
+							perspectives, and help you identify steps that are meaningful to
+							you.
+						</p>
+						<p>
+							My UK counselling and psychotherapy training forms part of my
+							professional background. However, when I work with you through
+							this international service, I am providing wellbeing mentoring and
+							not counselling or psychotherapy.
+						</p>
+					</section>
+
+					<section aria-labelledby="what-this-is-not" id="what-this-is-not">
+						<h2>
+							<span class="legal-section-num">02</span>What this service is not
+						</h2>
+						<p>
+							Wellbeing mentoring is not counselling, psychotherapy, diagnosis
+							or treatment of a mental or physical health condition, and it is
+							not a crisis or emergency service.
+						</p>
+						<p>
+							I will not diagnose a condition, prescribe medication, provide
+							medical treatment or act as your healthcare provider.
+						</p>
+						<p>
+							If your needs fall outside the scope of wellbeing mentoring, I may
+							recommend that you seek appropriate professional or healthcare
+							support in your country.
+						</p>
+					</section>
+
+					<section aria-labelledby="who-for" id="who-for">
+						<h2>
+							<span class="legal-section-num">03</span>Who the service is for
+						</h2>
+						<p>
+							This service is for adults aged 18 and over. You must be able to
+							make your own decision to enter into this agreement.
+						</p>
+						<p>
+							You must tell me the country in which you are physically located
+							when receiving the service. If you travel, move country or
+							regularly join sessions from another country, please tell me. I
+							may need to pause or end the service if the change creates a
+							legal, professional, insurance, safety or practical concern.
+						</p>
+						<p>
+							Awaken Discovery offers this service internationally, but no
+							wording in this agreement can override the laws or requirements of
+							the country in which you are located.
+						</p>
+					</section>
+
+					<section aria-labelledby="sessions" id="sessions">
+						<h2><span class="legal-section-num">04</span>Our sessions</h2>
+						<p>
+							Sessions are normally 60 minutes and take place online at an
+							agreed time. We will agree the focus of each session together. You
+							can bring what feels relevant to you and the focus can change as
+							your circumstances change.
+						</p>
+						<p>
+							The work is collaborative. I will offer questions, information,
+							perspectives and practical wellbeing approaches, but I will not
+							tell you what you should do. Your choices remain your own.
+						</p>
+						<p>
+							I aim to provide a respectful, welcoming and non-judgemental space
+							where you can be yourself. Your identity, values, experiences,
+							choices and circumstances will be respected.
+						</p>
+					</section>
+
+					<section aria-labelledby="online" id="online">
+						<h2><span class="legal-section-num">05</span>Online sessions</h2>
+						<ul>
+							<li>
+								Please make sure you have a reasonably private place where you
+								can speak freely.
+							</li>
+							<li>
+								You are responsible for having a suitable device and internet
+								connection.
+							</li>
+							<li>
+								Please do not record a session unless this has been discussed
+								and agreed in advance.
+							</li>
+							<li>
+								If technology fails, we will use an agreed alternative where
+								possible or rearrange the session.
+							</li>
+							<li>
+								Please let me know if you cannot maintain privacy during a
+								session.
+							</li>
+						</ul>
+					</section>
+
+					<section aria-labelledby="confidentiality" id="confidentiality">
+						<h2><span class="legal-section-num">06</span>Confidentiality</h2>
+						<p>
+							What you share with me is treated as confidential. I will not
+							normally share what you tell me without your permission.
+						</p>
+						<p>
+							Confidentiality is not absolute. Information may need to be shared
+							where required or authorised by law, or where there is a serious
+							concern about harm or another situation where disclosure is
+							legally or professionally justified. I will normally discuss this
+							with you first where it is safe and appropriate to do so.
+						</p>
+						<p>
+							Because you are receiving the service outside the UK, laws
+							relating to confidentiality and disclosure may differ depending on
+							where you are located. I cannot promise absolute confidentiality
+							where the law requires information to be disclosed.
+						</p>
+						<p>
+							I may discuss aspects of my professional work in supervision or
+							professional consultation. I take care to protect your identity
+							and only share information that is appropriate and necessary.
+						</p>
+					</section>
+
+					<section aria-labelledby="privacy" id="privacy">
+						<h2>
+							<span class="legal-section-num">07</span>Your information and
+							privacy
+						</h2>
+						<p>
+							I keep appropriate information needed to provide the service and
+							manage my practice, which may include your contact details,
+							booking and payment information and relevant notes from our work.
+						</p>
+						<p>
+							Your information is handled in accordance with applicable UK
+							data-protection requirements, including the UK GDPR and Data
+							Protection Act 2018, together with any other requirements that
+							apply to the way I provide the service.
+						</p>
+						<p>
+							Further information about what I collect, why I use it, how it is
+							stored, who may have access to it, international data transfers
+							and your rights is set out in the
+							<a href="/privacy">Awaken Discovery Privacy Notice</a>, available
+							through the website footer or on request.
+						</p>
+						<p>
+							I keep information securely and only for as long as there is a
+							professional, legal, insurance or other legitimate reason to do
+							so. When information is no longer required, it will be securely
+							deleted or destroyed where appropriate.
+						</p>
+					</section>
+
+					<section aria-labelledby="ai" id="ai">
+						<h2>
+							<span class="legal-section-num">08</span>AI and digital tools
+						</h2>
+						<p>
+							I use a small number of digital tools to support the running of
+							Awaken Discovery, including Microsoft Word, OneDrive, Microsoft
+							Copilot and ChatGPT. These may be used for general writing,
+							administration, business activities, education and professional
+							development.
+						</p>
+						<p>
+							Your confidentiality is important to me. I do not put your
+							personal information, anything you share with me, notes from our
+							work or other identifiable client information into AI tools to
+							analyse, summarise, rewrite or create content from it. AI is not
+							used to make decisions about your wellbeing mentoring.
+						</p>
+						<p>
+							AI does not replace professional judgement, supervision or our
+							work together. If you use AI yourself alongside wellbeing
+							mentoring, you are welcome to bring anything you have found or
+							created into a session and we can explore it together.
+						</p>
+					</section>
+
+					<section aria-labelledby="urgent" id="urgent">
+						<h2>
+							<span class="legal-section-num">09</span>Your wellbeing and urgent
+							situations
+						</h2>
+						<p>
+							This is not a crisis or emergency service and I do not provide
+							emergency monitoring between sessions.
+						</p>
+						<p>
+							You are responsible for knowing how to access urgent or emergency
+							support where you live. If you are in immediate danger, seriously
+							unwell, at risk of harming yourself or someone else, or need
+							urgent mental-health or medical help, contact the appropriate
+							emergency, crisis, medical or healthcare service in your country.
+						</p>
+						<p>
+							If I become concerned during a session that you need a level of
+							support that this service cannot safely provide, I may recommend
+							that you contact an appropriate local professional or service and
+							may pause or end the mentoring relationship.
+						</p>
+					</section>
+
+					<section aria-labelledby="contact" id="contact">
+						<h2>
+							<span class="legal-section-num">10</span>Contact between sessions
+						</h2>
+						<p>
+							Contact between sessions is normally limited to practical matters
+							such as appointments, payments and arrangements. I am not
+							available as an ongoing support or crisis contact between
+							sessions.
+						</p>
+						<p>
+							Telephone/text:
+							<a href="tel:+447944703250">07944 703250</a>
+							· Email:
+							<a href="mailto:awakendiscoverytherapy@gmail.com">
+								awakendiscoverytherapy@gmail.com
+							</a>
+						</p>
+						<p>
+							Usual contact hours are 8:30 a.m. to 6:00 p.m. UK time. I will
+							respond as soon as reasonably possible during those hours. Your
+							local time may be different.
+						</p>
+					</section>
+
+					<section aria-labelledby="fees" id="fees">
+						<h2><span class="legal-section-num">11</span>Fees and payment</h2>
+						<p>
+							The fee, session length and currency will be confirmed before you
+							book. Payment is normally required in advance through the payment
+							method provided by Awaken Discovery.
+						</p>
+						<p>
+							Where payment is made through a card, bank or payment provider,
+							the provider may apply currency-conversion, international-transfer
+							or other charges. These are your responsibility unless otherwise
+							stated at the time of purchase.
+						</p>
+						<p>
+							If you purchase a package, the package price, number of sessions,
+							expiry or other conditions will be explained before payment.
+						</p>
+						<p>
+							Fees may be reviewed from time to time. Any change to the price of
+							future sessions will be communicated before you are asked to pay
+							the new price.
+						</p>
+						<p>
+							Nothing in this agreement is intended to remove or restrict any
+							consumer rights that apply to you under the law governing the
+							transaction.
+						</p>
+						<p>
+							Payment confirms your booking but does not remove any statutory
+							cancellation or consumer rights that apply to you.
+						</p>
+						<p>
+							Where a refund is due, it will normally be made using the original
+							payment method unless another arrangement is required or agreed.
+						</p>
+					</section>
+
+					<section aria-labelledby="cancellations" id="cancellations">
+						<h2>
+							<span class="legal-section-num">12</span>Cancellations and missed
+							sessions
+						</h2>
+						<p>
+							If you have already booked and decide that you no longer want the
+							service, you can cancel by letting me know as soon as possible.
+							Any statutory cancellation or refund rights that apply will still
+							apply.
+						</p>
+						<p>
+							For individual sessions, please give at least 48 hours' notice if
+							you need to cancel or rearrange.
+						</p>
+						<p>
+							If you cancel with less than 48 hours' notice, 50% of the session
+							fee will be retained. If you do not attend your session and do not
+							contact me, the full session fee will be retained.
+						</p>
+						<p>
+							If I need to cancel a session, I will give you as much notice as
+							possible and offer an alternative appointment or refund any
+							payment due for a session that has not taken place.
+						</p>
+						<p>
+							Package bookings are subject to the terms provided when you
+							purchase them.
+						</p>
+					</section>
+
+					<section aria-labelledby="ending" id="ending">
+						<h2>
+							<span class="legal-section-num">13</span>Ending the mentoring
+							relationship
+						</h2>
+						<p>
+							You can choose to end the service at any time. Where appropriate,
+							I encourage you to let me know so that we can bring the work to a
+							clear and useful ending.
+						</p>
+						<p>
+							I may end the service if I believe it is no longer appropriate,
+							your needs fall outside the scope of wellbeing mentoring, there
+							are concerns about safety or professional boundaries, or there is
+							another legitimate reason to do so. Where appropriate, I will
+							explain this and suggest more suitable support.
+						</p>
+					</section>
+
+					<section aria-labelledby="international" id="international">
+						<h2>
+							<span class="legal-section-num">14</span>International clients and
+							legal boundaries
+						</h2>
+						<p>
+							You are accessing this service while physically outside the United
+							Kingdom. Laws relating to wellbeing services, coaching or
+							mentoring, counselling, psychotherapy, healthcare, privacy, online
+							services and consumer protection can differ between countries.
+						</p>
+						<p>
+							This agreement is intended to make clear that the service provided
+							by Awaken Discovery is non-clinical wellbeing mentoring. It does
+							not turn the service into counselling, psychotherapy, healthcare
+							or treatment, and it cannot override the law of the country where
+							you are located.
+						</p>
+						<p>
+							I may decline or pause work with clients in particular locations
+							where I cannot reasonably establish that the service can be
+							provided within my professional, insurance, legal and practical
+							arrangements.
+						</p>
+						<p>
+							You are responsible for providing accurate information about your
+							location and for telling me if this changes.
+						</p>
+					</section>
+
+					<section aria-labelledby="complaints" id="complaints">
+						<h2><span class="legal-section-num">15</span>Complaints</h2>
+						<p>
+							If you have a concern about the service, please raise it with me
+							so that I have an opportunity to understand and address it. My
+							Complaints Procedure is available on request via
+							<a href="/contact">the contact form</a> or email.
+						</p>
+						<p>
+							You may also have rights under consumer or other applicable law in
+							your country.
+						</p>
+					</section>
+
+					<section aria-labelledby="agreement" id="agreement">
+						<h2><span class="legal-section-num">16</span>Agreement</h2>
+						<p>
+							By booking or signing for international wellbeing mentoring, you
+							confirm that you have read and understood this agreement and have
+							had an opportunity to ask questions before the service begins.
+						</p>
+						<p>
+							You understand that this service is wellbeing mentoring and is not
+							counselling, psychotherapy, medical care, diagnosis, mental-health
+							treatment or crisis support.
+						</p>
+						<p>
+							You confirm that you are 18 or over, are physically located
+							outside the United Kingdom when receiving the service, and have
+							provided accurate contact and location information.
+						</p>
+						<p>
+							This agreement should be read alongside the Awaken Discovery
+							<a href="/privacy">Privacy Notice</a> and Complaints Procedure.
+						</p>
+					</section>
+
+					<div class="legal-callout">
+						<p>
+							<strong>Owner:</strong> Allyson Donoghue, sole trader. This
+							agreement should be reviewed when the service, insurance,
+							technology, data arrangements or relevant legal requirements
+							materially change.
+						</p>
+						<p>
+							<a class="cta cta-solid" href={internationalWellbeingBookingUrl}>
+								Continue to enquiry / booking
+							</a>
+						</p>
+					</div>
+				</article>
+			</div>
+		</section>
+	</main>
+	<SiteFooter locations={locations} />
+</Layout>
+
+<style>
+	.legal-page {
+		color: var(--color-dark-gray);
+	}
+
+	.legal-hero {
+		padding-block: clamp(2.4rem, 6vh, 4rem) 1.5rem;
+		background: linear-gradient(
+			180deg,
+			rgb(0 94 71 / 8%) 0%,
+			transparent 100%
+		);
+	}
+
+	.legal-hero-copy {
+		max-width: 42rem;
+	}
+
+	.legal-hero h1 {
+		margin: 0.4rem 0 0.6rem;
+		font-family: var(--font-serif);
+		font-size: clamp(1.9rem, 3.8vw, 2.7rem);
+		font-weight: 500;
+		color: #004836;
+		text-wrap: balance;
+	}
+
+	.legal-subtitle {
+		margin: 0;
+		font-size: 1.05rem;
+		color: rgb(29 35 39 / 78%);
+	}
+
+	.legal-meta {
+		margin: 0.85rem 0 0;
+		font-size: 0.9rem;
+		color: var(--color-dark-slate-gray);
+	}
+
+	.legal-meta span {
+		margin-right: 0.4rem;
+		text-transform: uppercase;
+		letter-spacing: 0.08em;
+		font-size: 0.72rem;
+		font-weight: 600;
+	}
+
+	.legal-intro {
+		margin: 1.2rem 0 0;
+		font-size: 1.02rem;
+		line-height: 1.7;
+		color: rgb(29 35 39 / 82%);
+	}
+
+	.text-link {
+		color: #004836;
+		font-weight: 600;
+		text-underline-offset: 0.18em;
+	}
+
+	.legal-body {
+		padding-block: 1rem clamp(3rem, 7vh, 5rem);
+	}
+
+	.legal-body-inner {
+		display: grid;
+		grid-template-columns: minmax(12rem, 16rem) minmax(0, 1fr);
+		gap: clamp(1.5rem, 4vw, 3rem);
+		align-items: start;
+	}
+
+	.legal-toc {
+		position: sticky;
+		top: 5.5rem;
+		padding: 1.1rem 1.15rem;
+		border: 1px solid rgb(0 94 71 / 14%);
+		border-radius: 0.9rem;
+		background: rgb(0 94 71 / 4%);
+	}
+
+	.legal-toc-title {
+		margin: 0 0 0.7rem;
+		font-size: 0.72rem;
+		font-weight: 600;
+		letter-spacing: 0.12em;
+		text-transform: uppercase;
+		color: var(--color-dark-slate-gray);
+	}
+
+	.legal-toc-list {
+		margin: 0;
+		padding: 0;
+		list-style: none;
+		display: grid;
+		gap: 0.45rem;
+	}
+
+	.legal-toc-list a {
+		display: grid;
+		grid-template-columns: 1.6rem 1fr;
+		gap: 0.45rem;
+		text-decoration: none;
+		color: rgb(29 35 39 / 82%);
+		font-size: 0.88rem;
+		line-height: 1.35;
+	}
+
+	.legal-toc-list a:hover {
+		color: #004836;
+	}
+
+	.legal-toc-num {
+		font-family: var(--font-serif);
+		font-style: italic;
+		color: #004836;
+	}
+
+	.legal-article section {
+		scroll-margin-top: 5.5rem;
+		padding-bottom: 1.8rem;
+		margin-bottom: 1.4rem;
+		border-bottom: 1px solid rgb(0 94 71 / 10%);
+	}
+
+	.legal-article h2 {
+		margin: 0 0 0.9rem;
+		font-family: var(--font-serif);
+		font-size: clamp(1.25rem, 2.2vw, 1.55rem);
+		font-weight: 500;
+		color: #004836;
+	}
+
+	.legal-section-num {
+		display: inline-block;
+		margin-right: 0.55rem;
+		font-style: italic;
+		font-size: 0.92rem;
+		opacity: 0.75;
+	}
+
+	.legal-article p,
+	.legal-article li {
+		font-size: 0.98rem;
+		line-height: 1.7;
+		color: rgb(29 35 39 / 82%);
+	}
+
+	.legal-article p {
+		margin: 0 0 0.85rem;
+	}
+
+	.legal-article ul {
+		margin: 0 0 0.85rem;
+		padding-left: 1.2rem;
+		display: grid;
+		gap: 0.45rem;
+	}
+
+	.legal-callout {
+		margin-top: 1.5rem;
+		padding: 1.3rem 1.35rem;
+		border-radius: 0.9rem;
+		background: rgb(0 94 71 / 6%);
+		border: 1px solid rgb(0 94 71 / 14%);
+	}
+
+	.legal-callout .cta {
+		margin-top: 0.5rem;
+		display: inline-flex;
+	}
+
+	@media (max-width: 900px) {
+		.legal-body-inner {
+			grid-template-columns: 1fr;
+		}
+
+		.legal-toc {
+			position: static;
+		}
+	}
+</style>

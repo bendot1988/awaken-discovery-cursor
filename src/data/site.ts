@@ -77,6 +77,14 @@ export const sundayResetPath = "/sunday-reset";
 export const sundayResetBookingUrl =
 	"https://docs.google.com/forms/d/e/1FAIpQLSfGFDyX1kET9vBMHlYhaOM7RGgenRzIiMLOP1EhaYARjkRJCA/viewform";
 
+/** International wellbeing mentoring (adults outside the UK). */
+export const internationalWellbeingPath = "/international-wellbeing-mentoring";
+export const internationalWellbeingAgreementPath =
+	"/international-wellbeing-mentoring/agreement";
+/** Swap for Calendly/Stripe when Ally confirms the live booking URL. */
+export const internationalWellbeingBookingUrl = "/contact";
+export const internationalWellbeingEnquiryUrl = "/contact";
+
 export type FreeResource = {
 	title: string;
 	subtitle: string;
@@ -164,6 +172,11 @@ export const navItems: NavItem[] = [
 			{ label: "About Therapy", href: "/about-therapy", dividerAfter: true },
 			{ label: "For Teachers", href: "/teachers" },
 			{ label: "For Anxiety", href: "/anxiety", dividerAfter: true },
+			{
+				label: "International Wellbeing Mentoring",
+				href: internationalWellbeingPath,
+				dividerAfter: true,
+			},
 			{ label: "Single Session Pricing", href: "/pricing/individual" },
 			{ label: "Bundle Pricing", href: "/pricing" },
 		],
@@ -181,6 +194,7 @@ export const footerNavItems: NavItem[] = [
 	{ label: "Teachers", href: "/teachers" },
 	{ label: "Anxiety", href: "/anxiety" },
 	{ label: "Sunday Reset", href: "/sunday-reset" },
+	{ label: "International Wellbeing Mentoring", href: internationalWellbeingPath },
 	{ label: "Free Resources", href: "/free-resources" },
 	{ label: "Products", href: "/products" },
 	{ label: "Single Session Pricing", href: "/pricing/individual" },
