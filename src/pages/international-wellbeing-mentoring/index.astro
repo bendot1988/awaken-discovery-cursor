@@ -8,7 +8,11 @@ import {
 	internationalWellbeingAgreementPath,
 	internationalWellbeingBookingUrl,
 	internationalWellbeingEnquiryUrl,
+	internationalWellbeingPrice,
 } from "../../data/site";
+import { isExternalHref } from "../../data/calendly";
+
+const bookingIsExternal = isExternalHref(internationalWellbeingBookingUrl);
 
 const exploreThemes = [
 	{
@@ -113,17 +117,22 @@ const faqs = [
 						<li>Whole-person wellbeing</li>
 					</ul>
 					<div class="cta-row">
-						<a class="cta cta-solid" href={internationalWellbeingBookingUrl}>
+						<a
+							class="cta cta-solid"
+							href={internationalWellbeingBookingUrl}
+							target={bookingIsExternal ? "_blank" : undefined}
+							rel={bookingIsExternal ? "noopener noreferrer" : undefined}
+						>
 							Book now
 						</a>
-						<a class="cta cta-outline" href="#what-is">
-							Explore international wellbeing mentoring
+						<a class="cta cta-outline" href={internationalWellbeingEnquiryUrl}>
+							Arrange an initial conversation
 						</a>
 					</div>
 					<p class="hero-note">
-						Please note: International Wellbeing Mentoring is not counselling,
-						psychotherapy, medical care, psychological treatment or crisis
-						support.
+						Sessions are {internationalWellbeingPrice} per hour. Please note:
+						International Wellbeing Mentoring is not counselling, psychotherapy,
+						medical care, psychological treatment or crisis support.
 					</p>
 				</div>
 				<figure class="hero-media">
@@ -391,6 +400,33 @@ const faqs = [
 			</div>
 		</section>
 
+		<section class="iw-section section section-soft" id="pricing">
+			<div class="container iw-narrow iw-pricing">
+				<p class="section-kicker">Investment</p>
+				<h2>Session fee</h2>
+				<p class="iw-price">{internationalWellbeingPrice}</p>
+				<p class="iw-price-meta">per session / hour · online</p>
+				<p>
+					A single International Wellbeing Mentoring session is charged at{" "}
+					{internationalWellbeingPrice}. Payment is normally required in advance
+					when you book.
+				</p>
+				<div class="cta-row">
+					<a
+						class="cta cta-solid"
+						href={internationalWellbeingBookingUrl}
+						target={bookingIsExternal ? "_blank" : undefined}
+						rel={bookingIsExternal ? "noopener noreferrer" : undefined}
+					>
+						Book a session
+					</a>
+					<a class="cta cta-outline" href={internationalWellbeingAgreementPath}>
+						Read the agreement
+					</a>
+				</div>
+			</div>
+		</section>
+
 		<section class="iw-section section" id="before-booking">
 			<div class="container iw-narrow iw-before">
 				<p class="section-kicker">Before booking</p>
@@ -418,21 +454,148 @@ const faqs = [
 				<p>
 					You don't have to know exactly what you need. We can start with a
 					conversation about where you are now and what you would like from
-					wellbeing mentoring.
+					wellbeing mentoring. Sessions are {internationalWellbeingPrice} per
+					hour.
 				</p>
 				<div class="cta-row">
-					<a class="cta cta-solid" href={internationalWellbeingBookingUrl}>
+					<a
+						class="cta cta-solid"
+						href={internationalWellbeingBookingUrl}
+						target={bookingIsExternal ? "_blank" : undefined}
+						rel={bookingIsExternal ? "noopener noreferrer" : undefined}
+					>
 						Book now
 					</a>
 					<a class="cta cta-outline" href={internationalWellbeingEnquiryUrl}>
 						Arrange an initial conversation
 					</a>
+					<a
+						class="cta cta-outline"
+						href={internationalWellbeingAgreementPath}
+					>
+						Read the agreement
+					</a>
 				</div>
-				<p class="hero-note">
-					Booking links will point to Ally's confirmed appointment system once
-					ready. For now, use the contact form and mention international
-					wellbeing mentoring.
-				</p>
+			</div>
+		</section>
+
+		<section class="iw-section section section-soft" id="enquiry">
+			<div class="container iw-enquiry">
+				<header class="iw-head">
+					<p class="section-kicker">Initial conversation</p>
+					<h2>What's on your mind?</h2>
+					<p>
+						Perhaps you have a question, something you'd like support with, or
+						you're simply curious about what wellbeing mentoring could offer.
+						Whatever brings you here, you're welcome to drop me a message.
+					</p>
+				</header>
+
+				<form class="iw-form" data-iwm-enquiry-form novalidate>
+					<input
+						type="text"
+						name="company"
+						class="iw-hp"
+						tabindex="-1"
+						autocomplete="off"
+						aria-hidden="true"
+					/>
+					<input
+						type="hidden"
+						name="source"
+						value="international-wellbeing-mentoring"
+					/>
+					<input
+						type="hidden"
+						name="topics"
+						value="international-wellbeing-mentoring"
+					/>
+
+					<div class="iw-form-row">
+						<label class="iw-field">
+							<span class="iw-label"
+								>First name <abbr title="required">*</abbr></span
+							>
+							<input
+								type="text"
+								name="firstName"
+								autocomplete="given-name"
+								required
+							/>
+						</label>
+						<label class="iw-field">
+							<span class="iw-label"
+								>Last name <abbr title="required">*</abbr></span
+							>
+							<input
+								type="text"
+								name="lastName"
+								autocomplete="family-name"
+								required
+							/>
+						</label>
+					</div>
+
+					<div class="iw-form-row iw-form-row-phone">
+						<label class="iw-field">
+							<span class="iw-label"
+								>International dialling code <abbr title="required">*</abbr
+								></span
+							>
+							<input
+								type="text"
+								name="diallingCode"
+								autocomplete="tel-country-code"
+								placeholder="+1"
+								inputmode="tel"
+								required
+							/>
+						</label>
+						<label class="iw-field">
+							<span class="iw-label"
+								>Telephone number <abbr title="required">*</abbr></span
+							>
+							<input
+								type="tel"
+								name="phone"
+								autocomplete="tel-national"
+								required
+							/>
+						</label>
+					</div>
+
+					<label class="iw-field">
+						<span class="iw-label">Email <abbr title="required">*</abbr></span>
+						<input
+							type="email"
+							name="email"
+							autocomplete="email"
+							required
+						/>
+					</label>
+
+					<label class="iw-field">
+						<span class="iw-label"
+							>Tell me a little about what you're looking for… <abbr
+								title="required">*</abbr
+							></span
+						>
+						<textarea name="message" rows="5" required></textarea>
+					</label>
+
+					<label class="iw-check">
+						<input type="checkbox" name="privacy" value="yes" required />
+						<span>
+							I understand that the information provided by me is subject to the
+							<a href="/privacy">Privacy Policy</a>. <abbr title="required">*</abbr>
+						</span>
+					</label>
+
+					<button class="cta cta-solid iw-submit" type="submit">
+						Send message
+					</button>
+					<p class="iw-status" data-iwm-enquiry-status hidden></p>
+				</form>
 			</div>
 		</section>
 
@@ -737,6 +900,31 @@ const faqs = [
 		background: rgb(0 94 71 / 4%);
 	}
 
+	.iw-pricing {
+		text-align: center;
+	}
+
+	.iw-pricing .cta-row {
+		justify-content: center;
+	}
+
+	.iw-price {
+		margin: 0.4rem 0 0 !important;
+		font-family: var(--font-serif);
+		font-size: clamp(2.4rem, 5vw, 3.4rem) !important;
+		font-weight: 500;
+		line-height: 1.1;
+		color: var(--brand-deep, #004836) !important;
+	}
+
+	.iw-price-meta {
+		margin: 0.35rem 0 1.1rem !important;
+		font-size: 0.95rem !important;
+		letter-spacing: 0.04em;
+		text-transform: uppercase;
+		color: var(--color-dark-slate-gray) !important;
+	}
+
 	.iw-cta {
 		padding-block: clamp(3rem, 8vh, 5rem);
 		background: linear-gradient(160deg, #004836 0%, #005e47 100%);
@@ -760,6 +948,129 @@ const faqs = [
 
 	.iw-cta .hero-note {
 		color: rgb(255 255 255 / 78%);
+	}
+
+	.iw-enquiry {
+		max-width: 40rem;
+	}
+
+	.iw-form {
+		display: grid;
+		gap: 1rem;
+		margin-top: 0.5rem;
+		padding: 1.35rem 1.25rem 1.45rem;
+		border-radius: 0.9rem;
+		border: 1px solid rgb(0 94 71 / 14%);
+		background: var(--color-white, #fff);
+	}
+
+	.iw-hp {
+		position: absolute;
+		left: -9999px;
+		width: 1px;
+		height: 1px;
+		opacity: 0;
+		pointer-events: none;
+	}
+
+	.iw-form-row {
+		display: grid;
+		gap: 1rem;
+	}
+
+	@media (min-width: 560px) {
+		.iw-form-row {
+			grid-template-columns: 1fr 1fr;
+		}
+
+		.iw-form-row-phone {
+			grid-template-columns: minmax(8rem, 0.55fr) minmax(0, 1fr);
+		}
+	}
+
+	.iw-field {
+		display: grid;
+		gap: 0.4rem;
+	}
+
+	.iw-label {
+		font-size: 0.92rem;
+		font-weight: 600;
+		color: var(--color-dark-gray);
+	}
+
+	.iw-label abbr,
+	.iw-check abbr {
+		color: #b42318;
+		text-decoration: none;
+	}
+
+	.iw-field input,
+	.iw-field textarea {
+		width: 100%;
+		padding: 0.75rem 0.9rem;
+		border: 1px solid rgb(0 94 71 / 22%);
+		border-radius: 0.55rem;
+		background: #fff;
+		font: inherit;
+		color: var(--color-dark-gray);
+	}
+
+	.iw-field input:focus-visible,
+	.iw-field textarea:focus-visible {
+		outline: 2px solid var(--brand, #005e47);
+		outline-offset: 1px;
+	}
+
+	.iw-check {
+		display: flex;
+		align-items: flex-start;
+		gap: 0.65rem;
+		font-size: 0.95rem;
+		line-height: 1.45;
+		color: var(--color-dark-gray);
+		cursor: pointer;
+	}
+
+	.iw-check input {
+		margin-top: 0.2rem;
+		accent-color: var(--brand, #005e47);
+		flex-shrink: 0;
+	}
+
+	.iw-check a {
+		color: var(--brand, #005e47);
+		font-weight: 600;
+		text-decoration: underline;
+		text-underline-offset: 2px;
+	}
+
+	.iw-submit {
+		width: 100%;
+		justify-content: center;
+	}
+
+	.iw-submit:disabled {
+		opacity: 0.7;
+		cursor: wait;
+	}
+
+	.iw-status {
+		margin: 0;
+		font-size: 0.95rem;
+		line-height: 1.5;
+	}
+
+	.iw-status[data-state="pending"] {
+		color: rgb(29 35 39 / 72%);
+	}
+
+	.iw-status[data-state="error"] {
+		color: #b42318;
+	}
+
+	.iw-status[data-state="ok"] {
+		color: var(--brand-deep, #004836);
 	}
 
 	.iw-faq {
@@ -799,3 +1110,85 @@ const faqs = [
 		}
 	}
 </style>
+
+<script>
+	function initIwmEnquiryForm() {
+		const form = document.querySelector(
+			"[data-iwm-enquiry-form]",
+		) as HTMLFormElement | null;
+		if (!form || form.dataset.bound === "true") return;
+		form.dataset.bound = "true";
+		const formStartedAt = Date.now();
+
+		const status = form.querySelector(
+			"[data-iwm-enquiry-status]",
+		) as HTMLParagraphElement | null;
+		const submit = form.querySelector(
+			'button[type="submit"]',
+		) as HTMLButtonElement | null;
+
+		form.addEventListener("submit", async (event) => {
+			event.preventDefault();
+			if (!status || !submit) return;
+			if (!form.reportValidity()) return;
+
+			const fd = new FormData(form);
+			const topics = fd
+				.getAll("topics")
+				.map((v) => String(v))
+				.filter(Boolean);
+
+			const payload = {
+				firstName: String(fd.get("firstName") || "").trim(),
+				lastName: String(fd.get("lastName") || "").trim(),
+				diallingCode: String(fd.get("diallingCode") || "").trim(),
+				phone: String(fd.get("phone") || "").trim(),
+				email: String(fd.get("email") || "").trim(),
+				message: String(fd.get("message") || "").trim(),
+				topics,
+				source: String(fd.get("source") || "").trim(),
+				newsletter: false,
+				privacy: fd.get("privacy") === "yes",
+				company: String(fd.get("company") || "").trim(),
+				formStartedAt,
+			};
+
+			status.hidden = false;
+			status.dataset.state = "pending";
+			status.textContent = "Sending…";
+			submit.disabled = true;
+
+			try {
+				const response = await fetch("/api/contact", {
+					method: "POST",
+					headers: { "Content-Type": "application/json" },
+					body: JSON.stringify(payload),
+				});
+				const data = await response.json().catch(() => ({}));
+
+				if (!response.ok || !data.success) {
+					status.dataset.state = "error";
+					status.textContent =
+						(typeof data.error === "string" && data.error) ||
+						"Something went wrong. Please try again.";
+					submit.disabled = false;
+					return;
+				}
+
+				status.dataset.state = "ok";
+				status.textContent =
+					"Thank you — your message has been sent. Ally aims to reply within one working day.";
+				form.reset();
+				submit.disabled = false;
+			} catch {
+				status.dataset.state = "error";
+				status.textContent =
+					"Network error — please check your connection and try again.";
+				submit.disabled = false;
+			}
+		});
+	}
+
+	initIwmEnquiryForm();
+	document.addEventListener("astro:page-load", initIwmEnquiryForm);
+</script>

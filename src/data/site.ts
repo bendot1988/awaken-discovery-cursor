@@ -81,9 +81,13 @@ export const sundayResetBookingUrl =
 export const internationalWellbeingPath = "/international-wellbeing-mentoring";
 export const internationalWellbeingAgreementPath =
 	"/international-wellbeing-mentoring/agreement";
-/** Swap for Calendly/Stripe when Ally confirms the live booking URL. */
-export const internationalWellbeingBookingUrl = "/contact";
-export const internationalWellbeingEnquiryUrl = "/contact";
+/** Paid sessions — Calendly event confirmed by Ally ($80 USD). */
+export const internationalWellbeingBookingUrl =
+	calendlyLinks.internationalWellbeingMentoring;
+/** Initial conversation — on-page enquiry form (no Calendly). */
+export const internationalWellbeingEnquiryUrl = `${internationalWellbeingPath}#enquiry`;
+/** Display price for a single mentoring session / hour. */
+export const internationalWellbeingPrice = "$80 USD";
 
 export type FreeResource = {
 	title: string;
@@ -172,14 +176,13 @@ export const navItems: NavItem[] = [
 			{ label: "About Therapy", href: "/about-therapy", dividerAfter: true },
 			{ label: "For Teachers", href: "/teachers" },
 			{ label: "For Anxiety", href: "/anxiety", dividerAfter: true },
-			{
-				label: "International Wellbeing Mentoring",
-				href: internationalWellbeingPath,
-				dividerAfter: true,
-			},
 			{ label: "Single Session Pricing", href: "/pricing/individual" },
 			{ label: "Bundle Pricing", href: "/pricing" },
 		],
+	},
+	{
+		label: "International Wellbeing Mentoring",
+		href: internationalWellbeingPath,
 	},
 	{ label: "Products", href: "/products" },
 	{ label: "Blog", href: "/blog" },

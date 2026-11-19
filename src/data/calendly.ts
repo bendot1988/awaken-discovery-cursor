@@ -18,6 +18,9 @@ export const calendlyLinks = {
 	/** Free 30-minute taster / consultation. Use this for "Enquire" / "Book a chat" CTAs. */
 	tasterSession: `${CALENDLY_BASE}/20min`,
 
+	/** Paid International Wellbeing Mentoring session (adults outside the UK) — $80 USD. */
+	internationalWellbeingMentoring: `${CALENDLY_BASE}/international-wellbeing-mentoring`,
+
 	individual: {
 		/** 60-minute individual session, face-to-face — £60 */
 		sixtyFaceToFace: `${CALENDLY_BASE}/60-minutes-individual-face-to-face`,
