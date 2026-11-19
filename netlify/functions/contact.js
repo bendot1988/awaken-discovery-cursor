@@ -24,6 +24,8 @@ const HELP_OPTIONS = {
 	"bulk-pricing": "Question regarding bulk pricing",
 	"free-session": "Question regarding free session",
 	hello: "Saying hello / have a question",
+	"international-wellbeing-mentoring":
+		"International Wellbeing Mentoring — arrange an initial conversation",
 };
 
 function json(statusCode, body) {
@@ -168,11 +170,13 @@ export async function handler(event) {
 
 	const firstName = String(payload.firstName || "").trim();
 	const lastName = String(payload.lastName || "").trim();
+	const diallingCode = String(payload.diallingCode || "").trim();
 	const phone = String(payload.phone || "").trim();
 	const email = String(payload.email || "").trim().toLowerCase();
 	const message = String(payload.message || "").trim();
 	const privacy = Boolean(payload.privacy);
 	const newsletter = Boolean(payload.newsletter);
+	const source = String(payload.source || "").trim();
 	const topicsRaw = Array.isArray(payload.topics) ? payload.topics : [];
 	const topics = topicsRaw
 		.map((t) => String(t || "").trim())
@@ -200,16 +204,26 @@ export async function handler(event) {
 	const topicsLine = topicLabels.length
 		? topicLabels.join("; ")
 		: "Not specified";
+	const phoneDisplay = diallingCode ? `${diallingCode} ${phone}` : phone;
+	const isIwmEnquiry = source === "international-wellbeing-mentoring";
 	const idem = `contact/${email}/${Date.now()}`;
-	const allySubject = `Contact form: ${firstName} ${lastName}`;
+	const allySubject = isIwmEnquiry
+		? `International Wellbeing Mentoring enquiry: ${firstName} ${lastName}`
+		: `Contact form: ${firstName} ${lastName}`;
+	const emailHeading = isIwmEnquiry
+		? "New International Wellbeing Mentoring enquiry"
+		: "New contact form message";
+	const topicsLabel = isIwmEnquiry ? "Enquiry about" : "How can I help?";
 
 	connectBlobs(event);
 	const backup = await saveLeadBackup(FORM_NAME, {
 		firstName,
 		lastName,
 		email,
-		phone,
+		diallingCode: diallingCode || undefined,
+		phone: phoneDisplay,
 		topics: topicsLine,
+		source: source || undefined,
 		newsletter,
 		message,
 	});
@@ -226,13 +240,14 @@ export async function handler(event) {
   <table width="100%" style="max-width:640px;margin:0 auto;background:#fff;border:1px solid rgba(0,94,71,.16);border-radius:16px;overflow:hidden;">
     <tr><td style="padding:24px;background:#004836;color:#fff;">
       <p style="margin:0 0 6px;font-size:12px;letter-spacing:.14em;text-transform:uppercase;opacity:.85;">Awaken Discovery</p>
-      <h1 style="margin:0;font-size:24px;font-weight:500;">New contact form message</h1>
+      <h1 style="margin:0;font-size:24px;font-weight:500;">${escapeHtml(emailHeading)}</h1>
     </td></tr>
     <tr><td style="padding:24px;font-size:14px;line-height:1.55;">
       ${row("Name", `${firstName} ${lastName}`)}
       ${row("Email", email)}
-      ${row("Phone", phone)}
-      ${row("How can I help?", topicsLine)}
+      ${diallingCode ? row("International dialling code", diallingCode) : ""}
+      ${row("Phone", phoneDisplay)}
+      ${row(topicsLabel, topicsLine)}
       ${row("Newsletter", newsletter ? "Yes — added to Mailchimp" : "No")}
       ${row("Message", message)}
     </td></tr>
@@ -240,14 +255,17 @@ export async function handler(event) {
 </body></html>`;
 
 	const allyText = [
-		"New contact form message",
+		emailHeading,
 		`Name: ${firstName} ${lastName}`,
 		`Email: ${email}`,
-		`Phone: ${phone}`,
+		diallingCode ? `International dialling code: ${diallingCode}` : null,
+		`Phone: ${phoneDisplay}`,
 		`Topics: ${topicsLine}`,
 		`Newsletter: ${newsletter ? "Yes" : "No"}`,
 		`Message: ${message}`,
-	].join("\n");
+	]
+		.filter(Boolean)
+		.join("\n");
 
 	let emailOk = false;
 	let emailError = "";
@@ -298,8 +316,10 @@ export async function handler(event) {
 			firstName,
 			lastName,
 			email,
-			phone,
+			diallingCode: diallingCode || "",
+			phone: phoneDisplay,
 			topics: topicsLine,
+			source: source || "",
 			newsletter: newsletter ? "Yes" : "No",
 			message,
 		});

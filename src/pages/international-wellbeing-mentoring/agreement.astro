@@ -7,9 +7,12 @@ import {
 	navItems,
 	internationalWellbeingPath,
 	internationalWellbeingBookingUrl,
+	internationalWellbeingEnquiryUrl,
 } from "../../data/site";
+import { isExternalHref } from "../../data/calendly";
 
 const lastUpdated = "August 2026";
+const bookingIsExternal = isExternalHref(internationalWellbeingBookingUrl);
 
 const toc = [
 	{ id: "wellbeing-mentoring", label: "Wellbeing mentoring" },
@@ -494,11 +497,19 @@ const toc = [
 							technology, data arrangements or relevant legal requirements
 							materially change.
 						</p>
-						<p>
-							<a class="cta cta-solid" href={internationalWellbeingBookingUrl}>
-								Continue to enquiry / booking
+						<div class="legal-cta-row">
+							<a
+								class="cta cta-solid"
+								href={internationalWellbeingBookingUrl}
+								target={bookingIsExternal ? "_blank" : undefined}
+								rel={bookingIsExternal ? "noopener noreferrer" : undefined}
+							>
+								Book now
 							</a>
-						</p>
+							<a class="cta cta-outline" href={internationalWellbeingEnquiryUrl}>
+								Arrange an initial conversation
+							</a>
+						</div>
 					</div>
 				</article>
 			</div>
@@ -673,8 +684,14 @@ const toc = [
 		border: 1px solid rgb(0 94 71 / 14%);
 	}
 
+	.legal-cta-row {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.7rem;
+		margin-top: 0.75rem;
+	}
+
 	.legal-callout .cta {
-		margin-top: 0.5rem;
 		display: inline-flex;
 	}
 
